@@ -1,0 +1,21 @@
+div.note-style{
+    display: none;
+}
+div.note-fontname{
+    display: none;
+}
+div.note-color{
+    display: none;
+}
+div.note-insert{
+    display: none;
+}
+div.note-view{
+    display: none;
+}
+div.note-table{
+    display: none;
+}
+div.note-para>div{
+    display: none;
+}
