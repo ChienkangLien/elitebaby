@@ -1,5 +1,6 @@
 package com.tibame.web.dao.impl;
 
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,10 +14,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.google.gson.Gson;
 import com.tibame.web.dao.VistDAO_interface;
 import com.tibame.web.vo.VisitVO;
 
-public class VistDAO implements VistDAO_interface {
+public class VisitDAO implements VistDAO_interface {
 	
 	private static DataSource ds = null;
 	static {
@@ -31,7 +33,7 @@ public class VistDAO implements VistDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO ROOM_VISIT (`USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE ROOM_VISIT SET USER_NAME=?, PHONE_NUMBER=?,EMAIL=?, CONTECT_TIME=?, DUE_DATE=?, KIDS=?, VISIT_TIME=?, REMARK=? WHERE VISIT_ID=? AND USER_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM ROOM_VISIT WHERE VISIT_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT VISIT_ID, USER_ID, USER_NAME, PHONE_NUMBER, CONTECT_TIME, DUE_DATE,EMAIL, KIDS, VISIT_TIME, REMARK FROM ROOM_VISIT ORDER BY USER_ID";
+	private static final String GET_ALL_STMT = "SELECT VISIT_ID, USER_ID, USER_NAME, PHONE_NUMBER, CONTECT_TIME, DUE_DATE,EMAIL, KIDS, VISIT_TIME, REMARK ,CREATE_TIME FROM ROOM_VISIT ORDER BY USER_ID";
 	private static final String GET_ONE_STMT = "SELECT `USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK` FROM ROOM_VISIT WHERE VISIT_ID = ?";
 	
 	@Override
@@ -231,7 +233,10 @@ public class VistDAO implements VistDAO_interface {
 	            visitVO.setKids(rs.getInt("kids"));
 	            visitVO.setVisitTime(rs.getDate("visit_Time"));
 	            visitVO.setRemark(rs.getString("remark"));
+	            visitVO.setCreateTime(rs.getTimestamp("create_Time"));
 	            list.add(visitVO);
+	            
+	            
 	        }
 
 	    } catch (SQLException se) {

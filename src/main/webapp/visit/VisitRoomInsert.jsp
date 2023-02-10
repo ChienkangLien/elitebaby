@@ -50,8 +50,8 @@
 <body bgcolor='white'>
 
 
-<h3>新增預約參訪:</h3>
-
+<h3>新增預約參訪:</h3><br>
+<h4><a href="<%=request.getContextPath()%>/visit/VisitFrontPage.jsp">回首頁</a></h4>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/VisitController" name="form1">
 
 <table>

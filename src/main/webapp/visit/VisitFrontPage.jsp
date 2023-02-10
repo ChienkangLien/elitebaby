@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,26 +30,26 @@
 </head>
 <body>
 <ul>
-  <li><a href='VistroomGetAll.jsp'></a>全部預約參訪表單<br><br></li>
+  <a href='<%=request.getContextPath()%>/visit/VistroomGetAll.jsp'>全部預約參訪表單</a><br><br>
   
   
   <li>
-    <FORM METHOD="post" ACTION="emp.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/VisitController" >
         <b>輸入信件編號 (如1,2,3):</b>
-        <input type="text" name="empno">
+        <input type="text" name="visitid">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+  <jsp:useBean id="visitDao" scope="page" class="com.tibame.web.dao.impl.VisitDAO" />
    
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/VisitController" >
        <b>選擇會員編號:</b>
        <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+         <c:forEach var="visitVO" items="${visitDao.all}" > 
+          <option value="${visitVO.userId}">${visitVO.userId}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -61,7 +62,7 @@
 <h3>======================================</h3>
 
 <ul>
-  <li><a href='addEmp.jsp'>Add</a> 新增預約表單</li>
+  <li><a href='VisitRoomInsert.jsp'>Add</a> 新增預約表單</li>
 </ul>
 </body>
 </html>

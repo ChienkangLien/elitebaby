@@ -13,6 +13,7 @@ public class VisitVO implements java.io.Serializable {
 	private Integer kids;
 	private Date visitTime;
 	private String remark;
+	private java.util.Date createTime;
 	
 	
 	public Integer getVisitId() {
@@ -74,6 +75,12 @@ public class VisitVO implements java.io.Serializable {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public java.sql.Timestamp getCreateTime() {
+		return (Timestamp) createTime;
+	}
+	public void setCreateTime(java.sql.Timestamp createTime) {
+		this.createTime = createTime;
 	}
 	
 	

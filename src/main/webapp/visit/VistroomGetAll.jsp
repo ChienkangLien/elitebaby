@@ -7,7 +7,7 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    VistDAO dao = new VistDAO();
+	VisitDAO dao = new VisitDAO();
     List<VisitVO> list = dao.getAll();       // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
     pageContext.setAttribute("list",list); // 將上一行的list變數(物件)存入當前頁面pageContext，再由底下的第83行由JSTL的forEach列印出結果
 %>
@@ -53,8 +53,8 @@
 </head>
 <body bgcolor='white'>
 
-<h4>預約參訪信件</h4>
-
+<h4>預約參訪信件</h4> <br>
+<h4><a href="<%=request.getContextPath()%>/visit/VisitFrontPage.jsp">回首頁</a></h4>
 <a href="<%=request.getContextPath()%>/visit/VisitRoomInsert.jsp">新增參訪表單</a>
 
 <table>
@@ -85,6 +85,7 @@
 			<td>${VisitVO.kids}</td>
 			<td>${VisitVO.visitTime}</td>
 			<td>${VisitVO.remark}</td>
+			<td>${VisitVO.createTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/VisitController" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
