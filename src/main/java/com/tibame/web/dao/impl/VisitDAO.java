@@ -2,6 +2,7 @@ package com.tibame.web.dao.impl;
 
 import java.io.Writer;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,9 +51,9 @@ public class VisitDAO implements VistDAO_interface {
 	        pstmt.setString(3, visitVO.getPhoneNumber());
 	        pstmt.setString(4, visitVO.getEmail());
 	        pstmt.setString(5, visitVO.getContectTime());
-	        pstmt.setDate(6, visitVO.getDueDate());
+	        pstmt.setDate(6,visitVO.getDueDate());
 	        pstmt.setInt(7, visitVO.getKids());
-	        pstmt.setDate(8, visitVO.getVisitTime());
+	        pstmt.setDate(8, (Date) visitVO.getVisitTime());
 	        pstmt.setString(9, visitVO.getRemark());
 
 	        pstmt.executeUpdate();
@@ -89,9 +90,9 @@ public class VisitDAO implements VistDAO_interface {
 		    pstmt.setString(2, visitVO.getPhoneNumber());
 		    pstmt.setString(3, visitVO.getEmail());
 		    pstmt.setString(4, visitVO.getContectTime());
-		    pstmt.setDate(5, visitVO.getDueDate());
+		    pstmt.setDate(5, (Date) visitVO.getDueDate());
 		    pstmt.setInt(6, visitVO.getKids());
-		    pstmt.setDate(7, visitVO.getVisitTime());
+		    pstmt.setDate(7, (Date) visitVO.getVisitTime());
 		    pstmt.setString(8, visitVO.getRemark());
 		    pstmt.setInt(9, visitVO.getVisitId());
 		    pstmt.setInt(10, visitVO.getUserId());
@@ -234,6 +235,7 @@ public class VisitDAO implements VistDAO_interface {
 	            visitVO.setVisitTime(rs.getDate("visit_Time"));
 	            visitVO.setRemark(rs.getString("remark"));
 	            visitVO.setCreateTime(rs.getTimestamp("create_Time"));
+	            visitVO.setStrCreateTime(String.valueOf(visitVO.getCreateTime()));
 	            list.add(visitVO);
 	            
 	            

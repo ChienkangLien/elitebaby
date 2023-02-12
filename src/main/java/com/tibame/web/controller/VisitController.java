@@ -63,7 +63,7 @@ public class VisitController extends HttpServlet {
 
 			request.setAttribute("visitVO", visitVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/visit/VistroomGetAll.jsp";
-			RequestDispatcher successView = request.getRequestDispatcher(url); 
+			RequestDispatcher successView = request.getRequestDispatcher(url); 	
 			successView.forward(request, response);
 
 		};
