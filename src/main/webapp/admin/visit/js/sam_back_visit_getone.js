@@ -34,8 +34,8 @@ fetch("http://localhost:8080/elitebaby/VisitGetOneUpdate",
 
 
 document.querySelector("#visitsubmit").addEventListener("click", function() {
-
-
+ confirm("是否確定修改")
+if(confirm!=true){
 fetch('http://localhost:8080/elitebaby/VisitRoomUpdate',{
         method: 'POST',
         headers: {
@@ -55,13 +55,18 @@ fetch('http://localhost:8080/elitebaby/VisitRoomUpdate',{
         })
     })
     .then(resp => resp.json())
-    .then(body => {
+    .then(data => {
 	
-      alert("送出")
+	if(data!=null){
+      alert("修改成功");     
+                location.href="GetAllVisit.html"
+	}
+	
     });
 
+                
 
-
+}
 });
 
 

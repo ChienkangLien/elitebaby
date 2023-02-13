@@ -1,6 +1,7 @@
 package com.tibame.web.controller;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -30,6 +31,7 @@ public class VisitRoomUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 		
 		Gson gson = new Gson();
 		VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
@@ -38,8 +40,10 @@ public class VisitRoomUpdate extends HttpServlet {
 		visitVO.setDueDate(duedate);
 		visitVO.setVisitTime(visittime);
 		VisitDAO visitDAO = new VisitDAO();
-		visitDAO.update(visitVO);
-		response.sendRedirect("admin/visit/GetAllVisit.html");
+		visitDAO.update(visitVO);			
+		Writer writer = response.getWriter();			
+		writer.write(gson.toJson(visitVO));
+
 	}
 
 }
