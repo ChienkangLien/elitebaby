@@ -35,7 +35,9 @@ public class VisitRoomDelete extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		response.setContentType("application/json");
 		
-		Integer visitid = Integer.valueOf(request.getParameter("visitid"));
+		Gson gson = new Gson();
+		VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
+		Integer visitid = visitVO.getVisitId();
 		System.out.print(visitid);
 		VisitRoomService service = new VisitRoomServiceImpl();
 		String resultStr = service.deleteOneVisit(visitid);

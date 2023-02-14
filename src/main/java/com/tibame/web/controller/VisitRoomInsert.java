@@ -20,16 +20,14 @@ import com.tibame.web.vo.VisitVO;
  * Servlet implementation class VisitInsertController
  */
 @WebServlet("/visitInsert")
-public class VisitInsertServlet extends HttpServlet {
+public class VisitRoomInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		doPost(req, resp);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("UTF-8");
@@ -54,7 +52,6 @@ public class VisitInsertServlet extends HttpServlet {
 
 			System.out.println(resultStr);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
