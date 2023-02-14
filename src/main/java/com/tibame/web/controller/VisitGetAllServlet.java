@@ -14,38 +14,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.tibame.web.dao.impl.VisitDAO;
+import com.tibame.web.service.VisitRoomService;
+import com.tibame.web.service.impl.VisitRoomServiceImpl;
 import com.tibame.web.vo.VisitVO;
 
 /**
  * Servlet implementation class VisitCJson
  */
-@WebServlet("/VisitCJson")
-public class VisitCJson extends HttpServlet {
+@WebServlet("/visitGetAll")
+public class VisitGetAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1123L;
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/json");
 		request.setCharacterEncoding("UTF-8");
-		String start = request.getParameter("action"); // 收到的請求是什麼 ex:新增,修改,刪除
 
-		
+		final String start = request.getParameter("action");
 
-		if("JSON".equals(start)) {
-			VisitDAO dao = new VisitDAO();
-			List<VisitVO> list = dao.getAll();
-			response.setContentType("text/html;charset=utf-8");
-			response.setContentType("application/json");
-			Gson gson = new Gson();				
+		if ("GETALL_VISIT".equals(start)) {
+
+			VisitRoomService service = new VisitRoomServiceImpl();
+			List<VisitVO> list = service.getAllInfo();
+			Gson gson = new Gson();
 			Writer writer = response.getWriter();
 			writer.write(gson.toJson(list));
 
 		}
-		
-		
-		
+
 	}
 }

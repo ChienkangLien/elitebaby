@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/elitebaby/VisitGetOneUpdate",
+fetch("/elitebaby/visit/getOneUpdate",
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visitone => {
@@ -34,9 +34,9 @@ fetch("http://localhost:8080/elitebaby/VisitGetOneUpdate",
 
 
 document.querySelector("#visitsubmit").addEventListener("click", function() {
- confirm("是否確定修改")
-if(confirm!=true){
-fetch('http://localhost:8080/elitebaby/VisitRoomUpdate',{
+ var result = confirm("是否確定修改");
+if(result){
+fetch('/elitebaby/visit/update',{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -57,9 +57,13 @@ fetch('http://localhost:8080/elitebaby/VisitRoomUpdate',{
     .then(resp => resp.json())
     .then(data => {
 	
-	if(data!=null){
-      alert("修改成功");     
-                location.href="GetAllVisit.html"
+	alert(`successful: ${data.successful}
+                      message: ${data.message}`)
+	
+	if(data.successful){
+                location.href="getall_visit.html"
+	}else{
+		        location.reload();
 	}
 	
     });

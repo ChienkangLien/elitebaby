@@ -38,7 +38,7 @@ public class VisitDAO implements VistDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT `USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK` FROM ROOM_VISIT WHERE VISIT_ID = ?";
 	
 	@Override
-	public void insert(VisitVO visitVO) {
+	public int insert(VisitVO visitVO) {
 		Connection con = null;
 	    PreparedStatement pstmt = null;
 
@@ -56,7 +56,7 @@ public class VisitDAO implements VistDAO_interface {
 	        pstmt.setDate(8, (Date) visitVO.getVisitTime());
 	        pstmt.setString(9, visitVO.getRemark());
 
-	        pstmt.executeUpdate();
+	        return  pstmt.executeUpdate();
 	    } catch (SQLException se) {
 	        throw new RuntimeException("A database error occured. " + se.getMessage());
 	    } finally {
@@ -75,10 +75,11 @@ public class VisitDAO implements VistDAO_interface {
 	            }
 	        }
 	    }
+	
 		
 	}
 	@Override
-	public void update(VisitVO visitVO) {
+	public int update(VisitVO visitVO) {
 		Connection con = null;
 		  PreparedStatement pstmt = null;
 		  
@@ -96,8 +97,9 @@ public class VisitDAO implements VistDAO_interface {
 		    pstmt.setString(8, visitVO.getRemark());
 		    pstmt.setInt(9, visitVO.getVisitId());
 		    pstmt.setInt(10, visitVO.getUserId());
+		   
 		    
-		    pstmt.executeUpdate();
+		    return pstmt.executeUpdate();
 		  } catch (SQLException se) {
 		    throw new RuntimeException("A database error occured. " + se.getMessage());
 		  } finally {
@@ -116,10 +118,11 @@ public class VisitDAO implements VistDAO_interface {
 		      }
 		    }
 		  }
+	
 		
 	}
 	@Override
-	public void delete(Integer visitId) {
+	public int delete(Integer visitId) {
 		    Connection con = null;
 	        PreparedStatement pstmt = null;
 
@@ -129,7 +132,7 @@ public class VisitDAO implements VistDAO_interface {
 
 	            pstmt.setInt(1, visitId);
 
-	            pstmt.executeUpdate();
+	           return pstmt.executeUpdate();
 	        } catch (SQLException se) {
 	            throw new RuntimeException("A database error occured. " + se.getMessage());
 	        } finally {
