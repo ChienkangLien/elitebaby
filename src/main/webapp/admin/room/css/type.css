@@ -1,21 +1,45 @@
-div.note-style{
-    display: none;
+div.note-style {
+  display: none;
 }
-div.note-fontname{
-    display: none;
+div.note-fontname {
+  display: none;
 }
-div.note-color{
-    display: none;
+div.note-color {
+  display: none;
 }
-div.note-insert{
-    display: none;
+div.note-insert {
+  display: none;
 }
-div.note-view{
-    display: none;
+div.note-view {
+  display: none;
 }
-div.note-table{
-    display: none;
+div.note-table {
+  display: none;
 }
-div.note-para>div{
-    display: none;
+div.note-para > div {
+  display: none;
+}
+img.preview {
+  width: 200px;
+  margin-bottom: 10px;
+}
+ul.picture_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.picture_list > li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+ul.edit_picture_list {
+  list-style: none;
+}
+ul.ori_picture_list {
+  list-style: none;
+}
+
+li.-hide {
+  display: none;
 }

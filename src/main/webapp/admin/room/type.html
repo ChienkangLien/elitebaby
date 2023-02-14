@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="../../css/official.css" />
     <link rel="stylesheet" href="../../css/background_navbar.css" />
     <!-- datatable引用 -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
-    />
+    /> -->
     <!-- summernote引用 -->
     <link
       href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
@@ -199,47 +199,49 @@
               <div class="modal-body">
                 <form>
                   <div class="mb-3">
-                    <label for="roomTypeName" class="col-form-label"
+                    <label for="createRoomTypeName" class="col-form-label"
                       >房型名稱</label
                     >
                     <input
                       type="text"
                       class="form-control"
                       name="roomTypeName"
-                      id="roomTypeName"
+                      id="createRoomTypeName"
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="roomQuantity" class="col-form-label"
+                    <label for="createRoomQuantity" class="col-form-label"
                       >房數</label
                     >
                     <input
                       type="number"
                       class="form-control"
                       name="roomQuantity"
-                      id="roomQuantity"
+                      id="createRoomQuantity"
                       min="1"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomPrice" class="col-form-label"
+                    <label for="createRoomPrice" class="col-form-label"
                       >房間單價</label
                     >
                     <input
                       type="number"
                       class="form-control"
                       name="roomPrice"
-                      id="roomPrice"
+                      id="createRoomPrice"
                       min="1"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomStatus" class="col-form-label">狀態</label>
-                    <select name="roomStatus" id="roomStatus">
-                      <option value="上架">上架</option>
+                    <label for="createRoomStatus" class="col-form-label"
+                      >狀態</label
+                    >
+                    <select name="roomStatus" id="createRoomStatus">
                       <option value="下架">下架</option>
+                      <!-- <option value="上架">上架</option> -->
                     </select>
                   </div>
 
@@ -251,52 +253,58 @@
                       type="file"
                       class="form-control"
                       name="roomPhoto"
-                      id="roomPhoto"
+                      id="createRoomPhoto"
                       multiple
                       accept="image/*"
                     />
                   </div>
+                  <ul class="picture_list"></ul>
 
                   <div class="mb-3">
-                    <label for="roomDescription" class="col-form-label"
+                    <label for="createRoomDescription" class="col-form-label"
                       >房型描述</label
                     >
-                    <textarea
+                    <div
                       class="form-control remark"
-                      id="roomDescription"
+                      id="createRoomDescription"
                       name="roomDescription"
-                    ></textarea>
+                    ></div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn"
+                  data-bs-dismiss="modal"
+                  id="cancel"
+                >
                   取消
                 </button>
-                <button type="button" class="btn" data-bs-dismiss="modal">
+                <button type="button" class="btn" id="createRoomType">
                   確定
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <table id="table_id" class="display">
+        <table class="table table-bordered align-middle">
           <thead>
             <tr>
-              <th>房型名稱</th>
-              <th>房數</th>
-              <th>房間單價</th>
-              <th>房型描述</th>
-              <th>房型建立時間</th>
-              <th>房型修改時間</th>
-              <th>房型狀態</th>
-              <th>照片</th>
-              <th>編輯</th>
+              <th scope="col">名稱</th>
+              <th scope="col">房數</th>
+              <th scope="col">單價</th>
+              <th scope="col">房型描述</th>
+              <th scope="col">房型建立時間</th>
+              <th scope="col">房型修改時間</th>
+              <th scope="col">狀態</th>
+              <th scope="col">照片</th>
+              <th scope="col">房型修改</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>尊爵房</td>
+          <tbody id="target">
+            <!-- <tr>
+              <th scope="row">尊爵房</th>
               <td>5</td>
               <td>3000</td>
               <td>
@@ -328,20 +336,20 @@
                   編輯
                 </button>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
-        <div
+        <!-- <div
           class="modal fade"
           id="exampleModal2"
           tabindex="-1"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="exampleModalLabel2"
           aria-hidden="true"
         >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">編輯房型</h5>
+                <h5 class="modal-title" id="exampleModalLabel2">編輯房型</h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -352,59 +360,64 @@
               <div class="modal-body">
                 <form>
                   <div class="mb-3">
-                    <label for="roomTypeName" class="col-form-label"
+                    <label for="editRoomTypeName" class="col-form-label"
                       >房型名稱</label
                     >
                     <input
                       type="text"
                       class="form-control"
                       name="roomTypeName"
-                      id="roomTypeName"
+                      id="editRoomTypeName"
+                      value="尊爵房"
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="roomQuantity" class="col-form-label"
+                    <label for="editRoomQuantity" class="col-form-label"
                       >房數</label
                     >
                     <input
                       type="number"
                       class="form-control editRoomQuantity"
                       name="roomQuantity"
-                      id="roomQuantity"
+                      id="editRoomQuantity"
                       min="1"
+                      value="5"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomPrice" class="col-form-label"
+                    <label for="editRoomPrice" class="col-form-label"
                       >房間單價</label
                     >
                     <input
                       type="number"
                       class="form-control"
                       name="roomPrice"
-                      id="roomPrice"
+                      id="editRoomPrice"
                       min="1"
+                      value="3000"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomStatus" class="col-form-label">狀態</label>
-                    <select name="roomStatus" id="roomStatus">
-                      <option value="上架">上架</option>
+                    <label for="editRoomStatus" class="col-form-label"
+                      >狀態</label
+                    >
+                    <select name="roomStatus" id="editRoomStatus">
+                      <option value="上架" selected>上架</option>
                       <option value="下架">下架</option>
                     </select>
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomPhoto" class="col-form-label"
+                    <label for="editRoomPhoto" class="col-form-label"
                       >房型照片</label
                     >
                     <input
                       type="file"
                       class="form-control"
                       name="roomPhoto"
-                      id="roomPhoto"
+                      id="editRoomPhoto"
                       multiple
                       accept="image/*"
                     />
@@ -414,11 +427,30 @@
                     <label for="roomDescription" class="col-form-label"
                       >房型描述</label
                     >
-                    <textarea
+                    <div
                       class="form-control remark"
-                      id="roomDescription"
-                      name="roomDescription"
-                    ></textarea>
+                      id="createRoomDescription"
+                      name="editRoomDescription"
+                    >
+                      <p>后樂大VIP房 / 親子房 / 18坪</p>
+                      <p>一房一廳設計 / 雙玄關設計 / 送餐檯與送餐燈</p>
+                      <p>QUEEN SIZE獨立筒舒適乳膠床墊 / 防螨抗菌寢具組</p>
+                      <p>TOTO衛浴設備 / 五合一暖風機 / 乾濕分離淋浴間</p>
+                      <p>大金全熱交換系統 / 獨立變頻冷暖空調</p>
+                      <p>雙人哺乳型沙發 / COTEX哺乳枕</p>
+                      <p>
+                        奶瓶蒸氣烘乾消毒鍋 / 雙邊電動吸乳器(AVENT、貝瑞克、美樂)
+                      </p>
+                      <p>全館UV過濾殺菌淨水設備</p>
+                      <p>
+                        100%純棉哺乳衣 / 歐洲進口齊葉雅天然橄欖沐浴膠、洗髮精組
+                        / 白因子潔手慕斯
+                      </p>
+                      <p>LG大白智能空氣清淨機。</p>
+                      <p>
+                        親子遊樂設施、兒童餐具、兒童床、安全床圍、浴室防滑凳
+                      </p>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -432,7 +464,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -446,9 +478,9 @@
     <!-- 下載bootstrap引用 -->
     <!-- <script src="../../vendors/bootstrap/bootstrap.bundle.min.js"></script> -->
     <!-- datatable引用 -->
-    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
     <!-- summernote引用 -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="js/type.js"></script>
+    <script src="./js/type.js"></script>
   </body>
 </html>
