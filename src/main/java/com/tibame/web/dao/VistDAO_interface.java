@@ -10,5 +10,6 @@ public interface VistDAO_interface {
     public int delete(Integer empno);
     public VisitVO findByPrimaryKey(Integer empno);
     public List<VisitVO> getAll();
+    List<VisitVO> getOneAll(Integer userId);
 	
 }

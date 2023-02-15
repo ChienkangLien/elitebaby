@@ -25,7 +25,7 @@ public class EmailDAOImpl implements EmailDAO {
 	public List<EmailVO> slectAll() {
 		
 		
-		return this.getSession();
+		return null;
 	}
 
 

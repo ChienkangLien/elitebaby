@@ -120,4 +120,11 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 
 	}
 
+	@Override
+	public List<VisitVO> getOneAll(Integer userId) {
+
+		return userId != null ? dao.getOneAll(userId) : null;
+
+	}
+
 }

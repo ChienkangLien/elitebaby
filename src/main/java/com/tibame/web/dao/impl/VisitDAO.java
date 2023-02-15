@@ -32,11 +32,11 @@ public class VisitDAO implements VistDAO_interface {
 	}
 
 	private static final String INSERT_STMT = "INSERT INTO ROOM_VISIT (`USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = "UPDATE ROOM_VISIT SET USER_NAME=?, PHONE_NUMBER=?,EMAIL=?, CONTECT_TIME=?, DUE_DATE=?, KIDS=?, VISIT_TIME=?, REMARK=? WHERE VISIT_ID=? AND USER_ID = ? ";
+	private static final String UPDATE_STMT = "UPDATE ROOM_VISIT SET USER_NAME=?, PHONE_NUMBER=?,EMAIL=?, CONTECT_TIME=?, DUE_DATE=?, KIDS=?, VISIT_TIME=?, REMARK=? ,VISIT_STATUS=?, CONTACT_STATUS=?  WHERE VISIT_ID=? AND USER_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM ROOM_VISIT WHERE VISIT_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT VISIT_ID, USER_ID, USER_NAME, PHONE_NUMBER, CONTECT_TIME, DUE_DATE,EMAIL, KIDS, VISIT_TIME, REMARK ,CREATE_TIME FROM ROOM_VISIT ORDER BY USER_ID";
-	private static final String GET_ONE_STMT = "SELECT `USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK` FROM ROOM_VISIT WHERE VISIT_ID = ?";
-	
+	private static final String GET_ALL_STMT = "SELECT VISIT_ID, USER_ID, USER_NAME, PHONE_NUMBER, CONTECT_TIME, DUE_DATE,EMAIL, KIDS, VISIT_TIME, REMARK ,VISIT_STATUS,CONTACT_STATUS,CREATE_TIME FROM ROOM_VISIT ORDER BY USER_ID";
+	private static final String GET_ONE_STMT = "SELECT `USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`,`VISIT_STATUS`,`CONTACT_STATUS` FROM ROOM_VISIT WHERE VISIT_ID = ?";
+	private static final String GET_ONE_ALL = "SELECT `VISIT_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`,`VISIT_STATUS`,`CONTACT_STATUS` FROM ROOM_VISIT WHERE USER_ID = ?";
 	@Override
 	public int insert(VisitVO visitVO) {
 		Connection con = null;
@@ -95,8 +95,10 @@ public class VisitDAO implements VistDAO_interface {
 		    pstmt.setInt(6, visitVO.getKids());
 		    pstmt.setDate(7, (Date) visitVO.getVisitTime());
 		    pstmt.setString(8, visitVO.getRemark());
-		    pstmt.setInt(9, visitVO.getVisitId());
-		    pstmt.setInt(10, visitVO.getUserId());
+		    pstmt.setInt(9, visitVO.getVisitStatus());
+		    pstmt.setInt(10, visitVO.getContactSatus());
+		    pstmt.setInt(11, visitVO.getVisitId());
+		    pstmt.setInt(12, visitVO.getUserId());
 		   
 		    
 		    return pstmt.executeUpdate();
@@ -181,6 +183,8 @@ public class VisitDAO implements VistDAO_interface {
 				visitVO.setKids(rs.getInt("KIDS"));
 				visitVO.setVisitTime(rs.getDate("VISIT_TIME"));
 				visitVO.setRemark(rs.getString("REMARK"));
+				visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
+				visitVO.setVisitStatus(rs.getInt("VISIT_STATUS"));
 			}
 
 		} catch (SQLException se) {
@@ -239,6 +243,9 @@ public class VisitDAO implements VistDAO_interface {
 	            visitVO.setRemark(rs.getString("remark"));
 	            visitVO.setCreateTime(rs.getTimestamp("create_Time"));
 	            visitVO.setStrCreateTime(String.valueOf(visitVO.getCreateTime()));
+	            visitVO.setStrVisitTime(String.valueOf(visitVO.getVisitTime()));
+	            visitVO.setVisitStatus(rs.getInt("VISIT_STATUS"));
+	            visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
 	            list.add(visitVO);
 	            
 	            
@@ -271,6 +278,71 @@ public class VisitDAO implements VistDAO_interface {
 	    }
 	    return list;
 	}
+	
+	
+	@Override
+	public List<VisitVO> getOneAll(Integer userId) {
+		List<VisitVO> list = new ArrayList<VisitVO>();
+	    VisitVO visitVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+	        pstmt = con.prepareStatement(GET_ONE_ALL);
+
+
+			pstmt.setInt(1, userId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				visitVO = new VisitVO();
+				visitVO.setUserId(userId);
+				visitVO.setVisitId(rs.getInt("VISIT_ID"));
+				visitVO.setUserName(rs.getString("USER_NAME"));
+				visitVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
+				visitVO.setEmail(rs.getString("EMAIL"));
+				visitVO.setContectTime(rs.getString("CONTECT_TIME"));
+				visitVO.setDueDate(rs.getDate("DUE_DATE"));
+				visitVO.setKids(rs.getInt("KIDS"));
+				visitVO.setVisitTime(rs.getDate("VISIT_TIME"));
+				visitVO.setRemark(rs.getString("REMARK"));
+				visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
+//				visitVO.setStrCreateTime(visitVO.ge);
+				list.add(visitVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+
+	}
+	
 	
 	
 
