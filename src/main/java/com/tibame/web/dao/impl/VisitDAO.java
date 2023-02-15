@@ -305,12 +305,12 @@ public class VisitDAO implements VistDAO_interface {
 				visitVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
 				visitVO.setEmail(rs.getString("EMAIL"));
 				visitVO.setContectTime(rs.getString("CONTECT_TIME"));
-				visitVO.setDueDate(rs.getDate("DUE_DATE"));
+				visitVO.setStrDueDate(String.valueOf(rs.getDate("DUE_DATE")));
 				visitVO.setKids(rs.getInt("KIDS"));
-				visitVO.setVisitTime(rs.getDate("VISIT_TIME"));
+				visitVO.setStrVisitTime(String.valueOf(rs.getDate("VISIT_TIME")));
 				visitVO.setRemark(rs.getString("REMARK"));
 				visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
-//				visitVO.setStrCreateTime(visitVO.ge);
+				visitVO.setStrCreateTime(String.valueOf(rs.getDate("CREATE_TIME")));
 				list.add(visitVO);
 			}
 
