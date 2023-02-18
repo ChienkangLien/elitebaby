@@ -21,11 +21,11 @@ public class MealDAOImpl implements MealDAO {
 	public int insert(MealVO meal) {
 		String sql = "insert into MEAL (MEAL_NAME, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE) values (?,?,?,?);";
 
-//		try {
-//		Class.forName(driver);
-//	} catch (ClassNotFoundException e1) {
-//		e1.printStackTrace();
-//	}
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 
 		try (Connection con = DriverManager.getConnection(url, username, password);
 				PreparedStatement ps = con.prepareStatement(sql)) {
@@ -44,11 +44,11 @@ public class MealDAOImpl implements MealDAO {
 	public int update(MealVO meal) {
 		String sql = "UPDATE Meal set MEAl_NAME=?, MEAL_QUANTITY=?, MEAL_PRICE=?,RESERVE_PRICE=?  where meal_Id = ?";
 
-//		try {
-//		Class.forName(driver);
-//	} catch (ClassNotFoundException e1) {
-//		e1.printStackTrace();
-//	}
+		try {
+		Class.forName(driver);
+	} catch (ClassNotFoundException e1) {
+		e1.printStackTrace();
+	}
 
 		try (Connection con = DriverManager.getConnection(url, username, password);
 				PreparedStatement ps = con.prepareStatement(sql)) {
@@ -73,11 +73,11 @@ public class MealDAOImpl implements MealDAO {
 	public int delete(MealVO meal) {
 		String sql = "delete from MEAL where MEAL_ID = ?;";
 
-//		try {
-//			Class.forName(driver);
-//		} catch (ClassNotFoundException e1) {
-//			e1.printStackTrace();
-//		}
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 
 		try (Connection con = DriverManager.getConnection(url, username, password);
 				PreparedStatement ps = con.prepareStatement(sql)) {
@@ -93,11 +93,11 @@ public class MealDAOImpl implements MealDAO {
 	public MealVO findByPrimaryKey(MealVO meal) {
 		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL WHERE MEAL_ID = ?;";
 
-//		try {
-//			Class.forName(driver);
-//		} catch (ClassNotFoundException e1) {
-//			e1.printStackTrace();
-//		}
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 
 		try (Connection con = DriverManager.getConnection(url, username, password);
 				PreparedStatement ps = con.prepareStatement(sql);) {
@@ -132,7 +132,11 @@ public class MealDAOImpl implements MealDAO {
 	public List<MealVO> getAll() {
 		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL;";
 		List<MealVO> list = new ArrayList<MealVO>();
-
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		try (Connection con = DriverManager.getConnection(url, username, password);
 				PreparedStatement ps = con.prepareStatement(sql);) {
 			try (ResultSet rs = ps.executeQuery()) {
@@ -145,8 +149,8 @@ public class MealDAOImpl implements MealDAO {
 					Integer mealprice = rs.getInt(5);
 					Integer reserverprice = rs.getInt(6);
 					Integer mealstatus = rs.getInt(7);
-					System.out.println(mealId + ", " + mealname + ", " + mealpic + ", " + mealquantity + ", "
-							+ mealprice + ", " + reserverprice + ", " + mealstatus);
+//					System.out.println(mealId + ", " + mealname + ", " + mealpic + ", " + mealquantity + ", "
+//							+ mealprice + ", " + reserverprice + ", " + mealstatus);
 
 					meal.setMealId(mealId);
 					meal.setMealName(mealname);
@@ -165,26 +169,26 @@ public class MealDAOImpl implements MealDAO {
 	}
 
 	public static void main(String[] args) {
-		MealDAO dao = new MealDAOImpl();
 		// 測試 getAll()
-//		meal.getAll();
-//		System.out.println(meal);
+		MealDAO dao = new MealDAOImpl();
+		List<MealVO> list =dao.getAll();
+		System.out.println(list.size());
 		
 		// 測試 insert()
 //		MealVO meal1 = new MealVO("TEST",22,300,100);
 //		dao.getAll();
 //		System.out.println(dao);
 //		dao.insert(meal1);
-		dao.getAll();
-		System.out.println(dao);
+//		dao.getAll();
+//		System.out.println(dao);
 		
 		//測試update()
 //		MealVO meal2 = new MealVO(6, "TEST111", null, 22, 300, 100, 0);
 //		dao.update(meal2);
 //		System.out.println(dao.getAll());
-		MealVO meal = new MealVO();
-		meal.setMealId(1);
-		System.out.println(dao.findByPrimaryKey(meal));
+//		MealVO meal = new MealVO();
+//		meal.setMealId(1);
+//		System.out.println(dao.findByPrimaryKey(meal));
 		
 	}
 }
