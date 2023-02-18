@@ -36,18 +36,23 @@ public class VisitSetOneUpdate extends HttpServlet {
 
 		final String start = request.getParameter("action");
 
-		if ("getOne_For_Update".equals(start)) {
+		Integer visitid = Integer.valueOf(request.getParameter("visitid"));
 
-			Integer visitid = Integer.valueOf(request.getParameter("visitid"));
-
-			if (visitid != null) {
-				HttpSession session = request.getSession();
-				VisitRoomService service = new VisitRoomServiceImpl();
-				VisitVO visitVO = service.getOneInfo(visitid);
-				session.setAttribute("visitVO", visitVO);
-
+		if (visitid != null) {
+			HttpSession session = request.getSession();
+			VisitRoomService service = new VisitRoomServiceImpl();
+			VisitVO visitVO = service.getOneInfo(visitid);
+			session.setAttribute("visitVO", visitVO);
+			//後台可以更新
+			if ("getOne_For_Update".equals(start)) {
+					
 				response.sendRedirect("/elitebaby/admin/visit/update_visit.html");
+				
+			}
+			//前台不能更新
+			if ("getOne_NO_Update".equals(start)) {
 
+				response.sendRedirect("/elitebaby/visit/VisitRoomFrontViewOne.html");
 			}
 
 		}

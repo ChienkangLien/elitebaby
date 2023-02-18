@@ -33,7 +33,7 @@ fetch('/elitebaby/visit/getOneALL', {
                      <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">
 			     		<input type="hidden" name="visitid"  value="${resData[i].visitId}">
-			     		<input type="hidden" name="action"	value="getOne_For_Update">
+			     		<input type="hidden" name="action"	value="getOne_NO_Update">
 			  		</FORM>
                     </td>
 					`;
@@ -53,7 +53,7 @@ fetch('/elitebaby/visit/getOneALL', {
                      <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">
 			     		<input type="hidden" name="visitid"  value="${resData[i].visitId}">
-			     		<input type="hidden" name="action"	value="getOne_For_Update">
+			     		<input type="hidden" name="action"	value="getOne_NO_Update">
 			  		</FORM>
                     </td>
 					`;
