@@ -12,6 +12,14 @@ public class MealVO {
 	public MealVO() {	
 	};
 	
+	public MealVO(String mealName, Integer mealQuantity, Integer mealPrice,
+			Integer reservePrivce) {
+		this.mealName = mealName;
+		this.mealQuantity = mealQuantity;
+		this.mealPrice = mealPrice;
+		this.reserverPrivce = reservePrivce;
+	}
+	
 	public MealVO(Integer mealId, String mealName, byte[] mealPic, Integer mealQuantity, Integer mealPrice,
 			Integer reservePrivce, Integer mealStatus) {
 		super();
@@ -82,7 +90,7 @@ public class MealVO {
 	
 	@Override
 	public String toString() {
-		return "MealVO [mealId=" + mealId + ", mealname=" + mealName + ", mealQuantity=" + mealQuantity
+		return "MealVO [mealId=" + mealId + ", mealname=" + mealName +", mealpic="+ mealPic +", mealQuantity=" + mealQuantity
 				+", mealPrice="+ mealPrice +", reservePrivce="+reserverPrivce+", mealStatus"+mealStatus+ "]";
 	}
 
