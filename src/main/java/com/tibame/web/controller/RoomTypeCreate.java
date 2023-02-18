@@ -22,22 +22,24 @@ import com.tibame.web.vo.RoomTypeVO;
 @WebServlet("/admin/room/RoomTypeCreate")
 public class RoomTypeCreate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private RoomTypeService service;
 
+	public RoomTypeCreate() {
+		service = new RoomTypeServiceImpl();
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 		Gson gson = new Gson();
 		JsonElement root = gson.fromJson(request.getReader(), JsonElement.class);
 
 		JsonArray array = root.getAsJsonArray();
 		RoomTypeVO roomType = gson.fromJson(array.get(0), RoomTypeVO.class);
 		JsonArray photoArray = array.get(1).getAsJsonArray();
-
-		
-		RoomTypeService service = new RoomTypeServiceImpl();
 		
 		String resultStr;
-		if(photoArray.size()==0) {
+		if(photoArray.size()==0 || photoArray==null) {
 			resultStr = service.createRoomType(roomType);
 		}else {
 			List<RoomPhotoVO> roomPhotos = new ArrayList<>();

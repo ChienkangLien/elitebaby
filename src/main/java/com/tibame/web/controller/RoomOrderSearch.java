@@ -11,28 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.tibame.web.service.RoomTypeService;
-import com.tibame.web.service.impl.RoomTypeServiceImpl;
-import com.tibame.web.vo.RoomTypeVO;
+import com.tibame.web.service.RoomOrderService;
+import com.tibame.web.service.impl.RoomOrderServiceImpl;
+import com.tibame.web.vo.RoomOrderVO;
 
-@WebServlet("/admin/room/RoomTypeSearch")
-public class RoomTypeSearch extends HttpServlet {
+@WebServlet("/admin/room/RoomOrderSearch")
+public class RoomOrderSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private RoomTypeService service;
+	private RoomOrderService service;
 
-	public RoomTypeSearch() {
-		service = new RoomTypeServiceImpl();
+	public RoomOrderSearch() {
+		service = new RoomOrderServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		final List<RoomTypeVO> list = service.getAllTypes();
+		final List<RoomOrderVO> list = service.getAllOrders();
 
-		response.setContentType("application/json");
 		Gson gson = new Gson();
-		
 		if (list.size() == 0 || list == null) {
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 		} else {

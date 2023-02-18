@@ -7,7 +7,7 @@ import com.tibame.web.vo.RoomTypeVO;
 
 public interface RoomTypeDAO {
 	public int insert(RoomTypeVO type);
-	public int update(RoomTypeVO type);
+	public String update(RoomTypeVO type);
 	public int delete(RoomTypeVO type);
 	public RoomTypeVO findByPrimaryKey(RoomTypeVO type);
 	public RoomTypeVO findByRoomTypeName(RoomTypeVO type);
