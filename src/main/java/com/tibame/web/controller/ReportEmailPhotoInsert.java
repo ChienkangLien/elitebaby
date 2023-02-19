@@ -1,7 +1,7 @@
 package com.tibame.web.controller;
 
 import java.io.IOException;
-import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import javax.servlet.ServletException;
@@ -15,16 +15,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.ReportEmailService;
 import com.tibame.web.service.impl.ReportEmailServiceImpl;
-import com.tibame.web.util.GetAuthCode;
-import com.tibame.web.vo.EmailVO;
+
 import com.tibame.web.vo.ReportImageVO;
 
-
 /**
- * Servlet implementation class ReportEmailInsert
+ * Servlet implementation class ReporTEmailPhotoInsert
  */
-@WebServlet("/report/emailInsert")
-public class ReportEmailInsert extends HttpServlet {
+@WebServlet("/report/emailPhotoInsert")
+public class ReportEmailPhotoInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,23 +35,28 @@ public class ReportEmailInsert extends HttpServlet {
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setContentType("application/json");
 
-		final String authCode = GetAuthCode.genAuthCode();
 		HttpSession session = req.getSession();
-		session.setAttribute("authCode", authCode);
+		String authCode = (String) session.getAttribute("authCode");
 		Gson gson = new Gson();
-		EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-		emailVO.setAuthCode(authCode);
+		ReportImageVO reportImage = gson.fromJson(req.getReader(), ReportImageVO.class);
+		reportImage.setAuthCode(authCode);
+		String[] arryBase64 = reportImage.getArryBase64();
+		String resultStr = null;
 
-		
-		ReportEmailService service = new ReportEmailServiceImpl();
-		final String resultStr= service.insertEamil(emailVO);
+		for (int i = 0; i < arryBase64.length; i++) {
 
-					
-			JsonObject respbody = new JsonObject();
-			respbody.addProperty("successful", resultStr.equals("文字新增成功"));
-			respbody.addProperty("message", resultStr);
-			resp.getWriter().append(respbody.toString());		
-		
+			reportImage.setAuthCode(authCode);
+			byte[] base64Byte = Base64.getMimeDecoder().decode(arryBase64[i]);
+			reportImage.setReportImage(base64Byte);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			resultStr = service.insertPhoto(reportImage);
+
+		}
+
+		JsonObject respbody = new JsonObject();
+		respbody.addProperty("successful", resultStr.equals("信件全部新增成功"));
+		respbody.addProperty("message", resultStr);
+		resp.getWriter().append(respbody.toString());
 
 	}
 

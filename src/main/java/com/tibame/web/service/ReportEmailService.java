@@ -9,7 +9,7 @@ public interface ReportEmailService {
 
 	List<EmailVO> getAllInfo();
 	
-	int insertEamil(EmailVO emailVO);
+	String insertEamil(EmailVO emailVO);
 	
 	String insertPhoto (ReportImageVO reportImg);
 }

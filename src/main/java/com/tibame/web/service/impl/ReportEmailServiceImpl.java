@@ -27,9 +27,12 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 	}
 
 	@Override
-	public int insertEamil(EmailVO emailVO) {
-
-		return emailVO != null ? dao.insert(emailVO) : null;
+	public String insertEamil(EmailVO emailVO) {
+		
+		if(emailVO != null) {
+			return dao.insert(emailVO) >=1 ?"文字新增成功":"文字新增失敗";
+		}
+		return "沒收到文字";
 	}
 
 	@Override
@@ -38,10 +41,10 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 			ReportImageDAO photoDao = new ReportImageDAOImpl();
 			int countPhoto = photoDao.insertPhoto(reportImg);
 			if (countPhoto >= 1) {
-				return "信件新增成功";
+				return "信件全部新增成功";
 			}
 		}
-		return "信件新增失敗";
+		return "照片新增失敗";
 
 	}
 }

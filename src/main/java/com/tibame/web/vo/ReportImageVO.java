@@ -1,10 +1,12 @@
 package com.tibame.web.vo;
 
+
 public class ReportImageVO {
 	private Integer rimgId;
 	private String authCode;
 	private byte[] reportImage;
 	private String strBase64;
+	private String[]  arryBase64;
 
 	public Integer getRimgId() {
 		return rimgId;
@@ -37,6 +39,14 @@ public class ReportImageVO {
 
 	public void setAuthCode(String authCode) {
 		this.authCode = authCode;
+	}
+
+	public String[] getArryBase64() {
+		return arryBase64;
+	}
+
+	public void setArryBase64(String[] arryBase64) {
+		this.arryBase64 = arryBase64;
 	}
 
 }
