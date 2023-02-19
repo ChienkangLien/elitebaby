@@ -302,7 +302,6 @@ $(document).ready(function () {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
-          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify([
           {
@@ -483,7 +482,6 @@ $(document).on("dblclick", "img.fromDatabase", function () {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json;charset=UTF-8",
-//         "Access-Control-Allow-Origin": "*",
 //       },
 //       body: JSON.stringify(result),
 //     })
@@ -521,7 +519,6 @@ $(document).on("click", "button.confirmPhotoEditbtn", function () {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
-      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify([result, deletePhotoId]),
   })
@@ -658,7 +655,6 @@ $(document).on("click", "button.confirmRoomQuantityEditbtn", function () {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify([newData, oriData]),
     })
@@ -724,7 +720,6 @@ $(document).on("click", "button.confirmTypeEditbtn", function () {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         roomTypeId: roomTypeId,
@@ -756,7 +751,6 @@ $(document).on("click", "button.getSingleType", function () {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
-      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       roomTypeId: roomTypeId,
