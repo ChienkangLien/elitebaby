@@ -44,6 +44,8 @@ public class EmailVO {
 	@Column(name = "ANSWER_TITLE")
 	private String answerTitle;
 	
+	private String strPreportCreateTime;
+	
 	private String authCode;
 	
 	private String strBase64;
@@ -150,6 +152,14 @@ public class EmailVO {
 
 	public void setStrBase64(String strBase64) {
 		this.strBase64 = strBase64;
+	}
+
+	public String getStrPreportCreateTime() {
+		return strPreportCreateTime;
+	}
+
+	public void setStrPreportCreateTime(String strPreportCreateTime) {
+		this.strPreportCreateTime = strPreportCreateTime;
 	}
 
 }

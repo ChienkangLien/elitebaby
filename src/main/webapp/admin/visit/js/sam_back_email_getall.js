@@ -15,8 +15,8 @@ fetch("/elitebaby/email/getAll?action=GETALL_EMAIL",
                     <td>${resData[i].userId}</td>
                     <td>${resData[i].adminId}</td>
                     <td>${resData[i].reportTile}</td>
-                    <td>${resData[i].preportCreateTime}</td>
-                    <td>有回覆</td>
+                    <td>${resData[i].strPreportCreateTime}</td>
+                    <td><div class="visit_status" style="background-color:green"><input type="hidden" name="visit_status" id="status1" ></div></td>
                      <td>
                      <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
@@ -38,8 +38,8 @@ fetch("/elitebaby/email/getAll?action=GETALL_EMAIL",
                     <td>${resData[i].userId}</td>
                     <td>${resData[i].adminId}</td>
                     <td>${resData[i].reportTile}</td>
-                    <td>${resData[i].preportCreateTime}</td>
-                    <td>未回覆</td>
+                    <td>${resData[i].strPreportCreateTime}</td>
+                    <td><div class="visit_status"><input type="hidden" name="visit_status" id="status1"></div></td>
                       <td>
                      <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		

@@ -24,7 +24,7 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 	}
 
 	@Override
-	public List<EmailVO> getAllInfo() {
+	public List<EmailVO> getAllInfo() {		
 		return dao.getAll();
 	}
 
@@ -59,27 +59,32 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 
 	@Override
 	public ReportImageVO getOneAllPhoto(String authCode) {
-		
-		if(authCode!=null) {
+
+		if (authCode != null) {
 			ReportImageDAO photoDao = new ReportImageDAOImpl();
 			ReportImageVO reportImageVO = new ReportImageVO();
 			List<ReportImageVO> getOneAllPhoto = photoDao.getOneAllPhoto(authCode);
-			
-			if(getOneAllPhoto!=null) {
+
+			if (getOneAllPhoto != null) {
 				String[] base64Array = new String[3];
-				System.out.print(getOneAllPhoto.size());
-				for(int i = 0 ; i<getOneAllPhoto.size();i++ ) {
-									
+				for (int i = 0; i < getOneAllPhoto.size(); i++) {
+
 					byte[] base64 = getOneAllPhoto.get(i).getReportImage();
 					String base64Str = Base64.getMimeEncoder().encodeToString(base64);
 					base64Array[i] = base64Str;
-					
+
 				}
 				reportImageVO.setTestBase64(base64Array);
 				return reportImageVO;
 			}
-			
+
 		}
 		return null;
+	}
+
+	@Override
+	public String getOneAnswer(EmailVO emailVO) {
+		
+		return dao.update(emailVO) >= 1 ? "回覆成功" : "回覆失敗";
 	}
 }

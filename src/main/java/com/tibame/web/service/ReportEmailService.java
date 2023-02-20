@@ -8,12 +8,14 @@ import com.tibame.web.vo.ReportImageVO;
 public interface ReportEmailService {
 
 	List<EmailVO> getAllInfo();
-	
+
 	String insertEamil(EmailVO emailVO);
-	
-	String insertPhoto (ReportImageVO reportImg);
-	
-	EmailVO getOneEmail (Integer mailId);
-	
-	ReportImageVO getOneAllPhoto (String authCode);
+
+	String insertPhoto(ReportImageVO reportImg);
+
+	EmailVO getOneEmail(Integer mailId);
+
+	ReportImageVO getOneAllPhoto(String authCode);
+
+	String getOneAnswer(EmailVO emailVO);
 }

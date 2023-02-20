@@ -34,7 +34,7 @@ public class ReportEmailSetOne extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		
-
+		
 		final String authCode = request.getParameter("authCode");
 		final Integer mailId = Integer.valueOf(request.getParameter("mailId"));
 		if (mailId != null && authCode != null) {
