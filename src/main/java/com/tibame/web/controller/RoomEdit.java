@@ -15,18 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.tibame.web.service.RoomPhotoService;
-import com.tibame.web.service.impl.RoomPhotoServiceImpl;
-import com.tibame.web.vo.RoomPhotoVO;
+import com.tibame.web.service.RoomService;
+import com.tibame.web.service.impl.RoomServiceImpl;
+import com.tibame.web.vo.RoomVO;
 
-@WebServlet("/admin/room/RoomPhotoEdit")
-public class RoomPhotoEdit extends HttpServlet {
+@WebServlet("/admin/room/RoomEdit")
+public class RoomEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private RoomService service;
 
-	private RoomPhotoService service;
-
-	public RoomPhotoEdit() {
-		service = new RoomPhotoServiceImpl();
+	public RoomEdit() {
+		service = new RoomServiceImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,39 +33,40 @@ public class RoomPhotoEdit extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		Gson gson = new Gson();
-		Type listType = new TypeToken<List<List<Map<String, Object>>>>() {
-		}.getType();
 		String resultStr = null;
 
+		Type listType = new TypeToken<List<List<Map<String, Object>>>>() {
+		}.getType();
 		List<List<Map<String, Object>>> allData = gson.fromJson(request.getReader(), listType);
+		System.out.println(allData);
 		List<Map<String, Object>> data1 = allData.get(0);
 		List<Map<String, Object>> data2 = allData.get(1);
 
 		if (data1 == null || data2 == null) {
 			resultStr = "編輯內容有誤";
 		} else {
-
-			List<RoomPhotoVO> newPhotoList = new ArrayList<>();
+			List<RoomVO> newRoomList = new ArrayList<>();
 			for (Map<String, Object> map : data1) {
-				RoomPhotoVO photo = new RoomPhotoVO();
-				photo.setRoomPhoto((String) map.get("roomPhoto"));
-				photo.setRoomTypeId(Integer.parseInt((String) map.get("roomTypeId")));
-				newPhotoList.add(photo);
+				RoomVO room = new RoomVO();
+				room.setRoomName((String) map.get("roomName"));
+				room.setRoomTypeId(Integer.parseInt((String) map.get("roomTypeId")));
+				newRoomList.add(room);
 			}
 
-			List<RoomPhotoVO> removePhotoList = new ArrayList<>();
+			List<RoomVO> updateRoomList = new ArrayList<>();
 			for (Map<String, Object> map : data2) {
-				RoomPhotoVO photo = new RoomPhotoVO();
-				photo.setRoomPhotoId(Integer.parseInt((String) map.get("roomPhotoId")));
-				removePhotoList.add(photo);
+				RoomVO room = new RoomVO();
+				room.setRoomName((String) map.get("roomName"));
+				room.setRoomId(Integer.parseInt((String) map.get("roomId")));
+				updateRoomList.add(room);
 			}
-			resultStr = service.editRoomTypePhoto(newPhotoList, removePhotoList);
+
+			resultStr = service.editRoom(newRoomList, updateRoomList);
 		}
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("message", resultStr);
 
 		response.getWriter().append(jsonObject.toString());
-
 	}
 
 }
