@@ -8,5 +8,5 @@ import com.tibame.web.vo.RoomTypeVO;
 public interface RoomPhotoService {
 	List<RoomPhotoVO> getAllPhotos(Integer id);
 //	String editRoomTypePhoto(List<RoomPhotoVO>  inserRoomPhotoVOList);
-	String editRoomTypePhoto(List<RoomPhotoVO>  inserRoomPhotoVOList,List<RoomPhotoVO>  deleteRoomPhotoVOList);
+	String editRoomTypePhoto(List<RoomPhotoVO>  insertRoomPhotoVOList,List<RoomPhotoVO>  deleteRoomPhotoVOList);
 }
