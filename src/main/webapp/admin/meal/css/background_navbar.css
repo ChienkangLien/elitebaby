@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+  }
+  a {
+    text-decoration: none;
+  }
+  #navbar {
+    width: 18%;
+    height: 100vh;
+    position: fixed;
+    box-shadow: 3px 0px 2px rgb(41, 26, 26, 0.1);
+    z-index: 1;
+  }
+
+  #header {
+    height: 60px;
+    position: fixed;
+    width: 82%;
+    margin-left: 18%;
+  }
+  #header > p {
+    margin-left: 45%;
+    line-height: 60px;
+  }
+  #main_div {
+    width: 82%;
+    margin-left: 18%;
+  }
+  #blank_area {
+    height: 60px;
+  }
+  #title {
+    padding: 10px 30px;
+  }
