@@ -1,17 +1,15 @@
-package com.tibame.web.vo;
+package login;
+import lombok.Data;
+@Data
 
 public class User {
     private int userId;
     private String userName;
     private String password;
-
+    public User() {
+    }
     public User(int userId, String userName, String password) {
         this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-    }
-
-    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
@@ -38,14 +36,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
