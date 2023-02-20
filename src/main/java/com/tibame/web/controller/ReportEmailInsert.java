@@ -19,7 +19,6 @@ import com.tibame.web.util.GetAuthCode;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
 
-
 /**
  * Servlet implementation class ReportEmailInsert
  */
@@ -37,23 +36,51 @@ public class ReportEmailInsert extends HttpServlet {
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setContentType("application/json");
 
+		String resultStr = null;
 		final String authCode = GetAuthCode.genAuthCode();
+		JsonObject respbody = new JsonObject();
 		HttpSession session = req.getSession();
 		session.setAttribute("authCode", authCode);
 		Gson gson = new Gson();
-		EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-		emailVO.setAuthCode(authCode);
-
 		
-		ReportEmailService service = new ReportEmailServiceImpl();
-		final String resultStr= service.insertEamil(emailVO);
+		try {
+			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
 
-					
-			JsonObject respbody = new JsonObject();
+			final Integer userId = emailVO.getUserId();
+			if (userId == null) {
+				resultStr = "請先登入";
+			}
+
+			final Integer categoryId = emailVO.getCategoryId();
+			if (categoryId == null || categoryId == 0) {
+				resultStr = "請選擇類別";
+			}
+
+			final String reportTile = emailVO.getReportTile();
+			if (reportTile == null || reportTile.isEmpty()) {
+				resultStr = "請選擇類別";
+			}
+
+			final String reportContent = emailVO.getReportContent();
+			if (reportContent == null || reportContent.isEmpty()) {
+				resultStr = "請輸入回報內容";
+			}
+
+			emailVO.setAuthCode(authCode);
+
+			ReportEmailService service = new ReportEmailServiceImpl();
+			resultStr = service.insertEamil(emailVO);
+
 			respbody.addProperty("successful", resultStr.equals("文字新增成功"));
 			respbody.addProperty("message", resultStr);
-			resp.getWriter().append(respbody.toString());		
-		
+			resp.getWriter().append(respbody.toString());
+			
+		} catch (Exception e) {
+			resultStr = "請輸入內容";
+			respbody.addProperty("successful", resultStr.equals("文字新增成功"));
+			respbody.addProperty("message", resultStr);
+			resp.getWriter().append(respbody.toString());
+		}
 
 	}
 

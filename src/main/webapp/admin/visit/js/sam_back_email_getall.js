@@ -17,11 +17,17 @@ fetch("/elitebaby/email/getAll?action=GETALL_EMAIL",
                     <td>${resData[i].reportTile}</td>
                     <td>${resData[i].preportCreateTime}</td>
                     <td>有回覆</td>
+                     <td>
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne" style="margin-bottom: 0px;">
+			     		<input type="submit" value="詳細">			     		
+			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
+			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
+			  		</FORM>
+                    </td>
                     <td>  
-                    <div class = "div_delete" visitId="${resData[i].mailId}">              
+                    <div class = "div_delete" mailId="${resData[i].mailId}">              
                       	 <input type="button" id="delete" value="刪除">
                     </div>
-                    </FORM>
                     </td>
 					`;
 			} else {
@@ -34,11 +40,17 @@ fetch("/elitebaby/email/getAll?action=GETALL_EMAIL",
                     <td>${resData[i].reportTile}</td>
                     <td>${resData[i].preportCreateTime}</td>
                     <td>未回覆</td>
+                      <td>
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne" style="margin-bottom: 0px;">
+			     		<input type="submit" value="詳細">			     		
+			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
+			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
+			  		</FORM>
+                    </td>
                     <td>  
-                    <div class = "div_delete" visitId="${resData[i].mailId}">              
+                    <div class = "div_delete" mailId="${resData[i].mailId}">              
                       	 <input type="button" id="delete" value="刪除">
                     </div>
-                    </FORM>
                     </td>
 					`;
 
@@ -49,3 +61,37 @@ fetch("/elitebaby/email/getAll?action=GETALL_EMAIL",
 		}
 
 	});
+
+
+
+$(document).on("click", "input#getone", function() {
+
+
+	fetch("/elitebaby/report/emailSetOne", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}, body: JSON.stringify({
+
+			mailId: $(this).closest(".div_getone").attr("mailId"),
+			authCode: $(this).closest(".div_getone").attr("authCode"),
+
+		})
+
+	})
+		.then(resp => resp.json())
+		.then(data => {
+
+
+		});
+
+
+})
+
+
+
+$(document).on("click", "input#delete", function() {
+	alert("ok")
+
+
+})

@@ -57,7 +57,7 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 	@Override
 	public List<VisitVO> getAllInfo() {
 		List<VisitVO> list = dao.getAll();
-		return list;
+		return list != null ? list : null;
 	}
 
 	@Override

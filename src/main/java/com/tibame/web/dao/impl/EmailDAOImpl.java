@@ -39,6 +39,7 @@ public class EmailDAOImpl implements EmailDAO {
 	private static final String SELECT_SQL = "SELECT * FROM REPORT_MAIL WHERE MAIL_ID = ?";
 	private static final String SELECT_ALL_SQL = "SELECT * FROM REPORT_MAIL";
 
+
 	@Override
 	public int insert(EmailVO emailVO) {
 		int rowsAffected = 0;
@@ -144,6 +145,7 @@ public class EmailDAOImpl implements EmailDAO {
 				emailVO.setAnswerContent(rs.getString("ANSWER_CONTENT"));
 				emailVO.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
 				emailVO.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				emailVO.setAuthCode(rs.getString("AUTH_CODE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -189,6 +191,7 @@ public class EmailDAOImpl implements EmailDAO {
 				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
 				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
 				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
 				emailList.add(email);
 			}
 		} catch (SQLException e) {

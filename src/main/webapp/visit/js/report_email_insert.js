@@ -29,20 +29,34 @@ function readURL(input) {
 
 
 
-const userid = document.querySelector(".userId");
-
-const title = document.querySelector("#sam_input_emailtitle");
-
-const category = document.querySelector("#sam_input_emailcategory");
-
-const remark = document.querySelector(".visitremark");
 
 
 
 
 $("#sam_btn_submit").on("click", function() {
 
-	var img_base64_el = document.querySelector(".preview_img");
+
+	const userid = document.querySelector(".userId");
+	//	if (userid.value == null) {
+	//		alert("請先登入");
+	//	}
+
+	const title = document.querySelector("#sam_input_emailtitle");
+	//	if (title.value == null || title.value.trim() == "") {
+	//		alert("請輸入標題");
+	//	}
+
+	const category = document.querySelector("#sam_input_emailcategory");
+	//	if (category.value == null || category.value.trim() == "" || category.value == 0) {
+	//		alert("請選擇類別");
+	//	}
+
+	const remark = document.querySelector(".visitremark");
+	//	if (remark.value == null || remark.value.trim() == "" ) {
+	//		alert("請輸入回報內容");
+	//	}
+
+
 
 	var img_base64_el = document.querySelectorAll(".preview_img");
 
@@ -66,13 +80,21 @@ $("#sam_btn_submit").on("click", function() {
 		.then(resp => resp.json())
 		.then(data => {
 
-
+			console.log(img_base64_el.length > 0);
 			if (data.successful) {
-				if (img_base64_el) {
+
+				if (img_base64_el.length > 0) {
 					inserPhoto();
+				} else {
+					alert(`successful: ${data.successful}
+                      message: ${data.message}`)
+					location.href = "/elitebaby/admin/visit/getall_email.html"
 				}
+
 			} else {
-				aler("信件新增失敗");
+				alert(`successful: ${data.successful}
+                      message: ${data.message}`)
+				location.href = "/elitebaby/admin/visit/getall_email.html"
 			}
 
 
@@ -84,7 +106,7 @@ $("#sam_btn_submit").on("click", function() {
 
 		var dddasa = [];
 		for (var i = 0; i < img_base64_el.length; i++) {
-			 dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
+			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
 		fetch('/elitebaby/report/emailPhotoInsert', {
 			method: 'POST',
@@ -98,11 +120,18 @@ $("#sam_btn_submit").on("click", function() {
 		})
 			.then(resp => resp.json())
 			.then(data => {
-
-				alert(`successful: ${data.successful}
+				
+				if (data.successful) {
+					alert(`successful: ${data.successful}
                       message: ${data.message}`)
 
-				location.href = "/elitebaby/admin/visit/getall_email.html"
+					location.href = "/elitebaby/admin/visit/getall_email.html"
+					
+				} else {					
+					alert(`successful: ${data.successful}
+                      message: ${data.message}`)
+
+				}
 
 			});
 
@@ -110,10 +139,5 @@ $("#sam_btn_submit").on("click", function() {
 
 
 	}
-
-
-
-
-
 
 });

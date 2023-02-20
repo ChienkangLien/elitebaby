@@ -12,4 +12,8 @@ public interface ReportEmailService {
 	String insertEamil(EmailVO emailVO);
 	
 	String insertPhoto (ReportImageVO reportImg);
+	
+	EmailVO getOneEmail (Integer mailId);
+	
+	ReportImageVO getOneAllPhoto (String authCode);
 }

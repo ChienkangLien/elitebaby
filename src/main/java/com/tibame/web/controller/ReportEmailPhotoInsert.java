@@ -40,23 +40,26 @@ public class ReportEmailPhotoInsert extends HttpServlet {
 		Gson gson = new Gson();
 		ReportImageVO reportImage = gson.fromJson(req.getReader(), ReportImageVO.class);
 		reportImage.setAuthCode(authCode);
-		String[] arryBase64 = reportImage.getArryBase64();
+		ArrayList arryBase64 = reportImage.getArryBase64();
 		String resultStr = null;
 
-		for (int i = 0; i < arryBase64.length; i++) {
+		for (int i = 0; i < arryBase64.size(); i++) {
 
+			String str = (String) arryBase64.get(i);
 			reportImage.setAuthCode(authCode);
-			byte[] base64Byte = Base64.getMimeDecoder().decode(arryBase64[i]);
+			byte[] base64Byte = Base64.getMimeDecoder().decode(str);
 			reportImage.setReportImage(base64Byte);
 			ReportEmailService service = new ReportEmailServiceImpl();
 			resultStr = service.insertPhoto(reportImage);
 
 		}
 
+		if(resultStr!=null) {
 		JsonObject respbody = new JsonObject();
 		respbody.addProperty("successful", resultStr.equals("信件全部新增成功"));
 		respbody.addProperty("message", resultStr);
 		resp.getWriter().append(respbody.toString());
+		}
 
 	}
 
