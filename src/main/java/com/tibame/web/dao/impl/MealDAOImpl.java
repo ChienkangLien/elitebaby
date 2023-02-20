@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import com.tibame.web.dao.MealDAO;
 import com.tibame.web.vo.MealVO;
@@ -16,18 +19,22 @@ public class MealDAOImpl implements MealDAO {
 	String url = "jdbc:mysql://localhost:3306/elitebaby?useUnicode=yes&characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Taipei";
 	String username = "root";
 	String password = "password";
+	
+	private DataSource ds;
+	
+	public MealDAOImpl() {
+		try {
+			ds = (DataSource) new InitialContext().lookup("java:/comp/env/jdbc/example");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+	}
 
 	@Override
 	public int insert(MealVO meal) {
 		String sql = "insert into MEAL (MEAL_NAME, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE) values (?,?,?,?);";
 
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-
-		try (Connection con = DriverManager.getConnection(url, username, password);
+		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, meal.getMealName());
 			ps.setInt(2, meal.getMealQuantity());
@@ -44,13 +51,9 @@ public class MealDAOImpl implements MealDAO {
 	public int update(MealVO meal) {
 		String sql = "UPDATE Meal set MEAl_NAME=?, MEAL_QUANTITY=?, MEAL_PRICE=?,RESERVE_PRICE=?  where meal_Id = ?";
 
-		try {
-		Class.forName(driver);
-	} catch (ClassNotFoundException e1) {
-		e1.printStackTrace();
-	}
+		
 
-		try (Connection con = DriverManager.getConnection(url, username, password);
+		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, meal.getMealName());
@@ -73,13 +76,7 @@ public class MealDAOImpl implements MealDAO {
 	public int delete(MealVO meal) {
 		String sql = "delete from MEAL where MEAL_ID = ?;";
 
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-
-		try (Connection con = DriverManager.getConnection(url, username, password);
+		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, meal.getMealId());
 			return ps.executeUpdate();
@@ -93,13 +90,8 @@ public class MealDAOImpl implements MealDAO {
 	public MealVO findByPrimaryKey(MealVO meal) {
 		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL WHERE MEAL_ID = ?;";
 
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
 
-		try (Connection con = DriverManager.getConnection(url, username, password);
+		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setInt(1, meal.getMealId());
 			try (ResultSet rs = ps.executeQuery()) {
@@ -132,12 +124,8 @@ public class MealDAOImpl implements MealDAO {
 	public List<MealVO> getAll() {
 		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_QUANTITY, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL;";
 		List<MealVO> list = new ArrayList<MealVO>();
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		try (Connection con = DriverManager.getConnection(url, username, password);
+		
+		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql);) {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
