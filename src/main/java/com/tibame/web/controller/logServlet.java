@@ -1,7 +1,7 @@
 package com.tibame.web.controller;
 
 import com.tibame.web.dao.UserDao;
-import com.tibame.web.vo.User;
+import forum.pojo.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,9 +14,9 @@ public class logServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("user_name");
+        String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-
+        System.out.println("logServlet: " +userName+password);
         User user = userDao.login(userName, password);
         if (user != null) {
             HttpSession session = request.getSession();
@@ -25,7 +25,7 @@ public class logServlet extends HttpServlet {
             Cookie cookie = new Cookie("sessionId", session.getId());
             cookie.setMaxAge(60 * 60 * 24 * 7);
             response.addCookie(cookie);
-            response.sendRedirect("http://localhost:8080/elitebaby/自行設定");
+            response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
             System.out.println("登入成功");
         } else {
             System.out.println("登入失敗");

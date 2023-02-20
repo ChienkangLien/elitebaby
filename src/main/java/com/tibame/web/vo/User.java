@@ -1,6 +1,6 @@
 package com.tibame.web.vo;
 
-public class User {
+public class User extends forum.pojo.User {
     private int userId;
     private String userName;
     private String password;
