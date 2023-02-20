@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "REPORT_MAIL")
 public class EmailVO {
+
 	@Id
 	@Column(name = "MAIL_ID")
 	private Integer mailId;
@@ -25,19 +28,33 @@ public class EmailVO {
 	private String reportTile;
 
 	@Column(name = "REPORT_CONTENT")
+	@Type(type = "text")
 	private String reportContent;
 
 	@Column(name = "REPORT_CREATE_TIME")
 	private java.sql.Timestamp preportCreateTime;
 
 	@Column(name = "ANSWER_CONTENT")
+	@Type(type = "text")
 	private String answerContent;
 
 	@Column(name = "ANSWER_CREATE_TIME")
 	private java.sql.Timestamp ansertCreateTime;
 
 	@Column(name = "ANSWER_TITLE")
-	private Integer answerTitle;
+	private String answerTitle;
+	
+	private String authCode;
+	
+	private String strBase64;
+
+	@Override
+	public String toString() {
+		return "EmailVO [mailId=" + mailId + ", userId=" + userId + ", categoryId=" + categoryId + ", adminId="
+				+ adminId + ", reportTile=" + reportTile + ", reportContent=" + reportContent + ", preportCreateTime="
+				+ preportCreateTime + ", answerContent=" + answerContent + ", ansertCreateTime=" + ansertCreateTime
+				+ ", answerTitle=" + answerTitle + "]";
+	}
 
 	public Integer getMailId() {
 		return mailId;
@@ -111,12 +128,28 @@ public class EmailVO {
 		this.ansertCreateTime = ansertCreateTime;
 	}
 
-	public Integer getAnswerTitle() {
+	public String getAnswerTitle() {
 		return answerTitle;
 	}
 
-	public void setAnswerTitle(Integer answerTitle) {
+	public void setAnswerTitle(String answerTitle) {
 		this.answerTitle = answerTitle;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	public String getStrBase64() {
+		return strBase64;
+	}
+
+	public void setStrBase64(String strBase64) {
+		this.strBase64 = strBase64;
 	}
 
 }

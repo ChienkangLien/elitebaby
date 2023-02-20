@@ -60,12 +60,12 @@ if (userid.value.trim() != "" && name.value.trim() != "" && email.value.trim() !
 		})
 			.then(resp => resp.json())
 			.then(data => {
-				const str = "預約成功";
+
 				alert(`successful: ${data.successful}
                       message: ${data.message}`)
 
 				
-					location.href = "/elitebaby/admin/visit/getall_visit.html"
+					location.href = "/elitebaby/visit/VisitRoomFrontGetAll.html"
 
 				
 			});

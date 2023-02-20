@@ -13,3 +13,19 @@
       padding: 5px;
       text-align: center;
     }
+    
+     div.visit_status{
+      border: 1px solid black;
+      background-color: red;
+      width: 30px;
+      height: 30px;
+      margin: auto;
+     }
+
+     div.contact_status{
+      border: 1px solid black;
+      background-color: red;
+      width: 30px;
+      height: 30px;
+      margin: auto;
+     }

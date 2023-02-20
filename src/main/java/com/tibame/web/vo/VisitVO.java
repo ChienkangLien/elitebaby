@@ -15,6 +15,8 @@ public class VisitVO implements java.io.Serializable {
 	private Date visitTime;
 	private String remark;
 	private java.util.Date createTime;
+	private Integer visitStatus;
+	private Integer contactSatus;
 	private String strDueDate;
 	private String strVisitTime;
 	private String strCreateTime;
@@ -129,6 +131,22 @@ public class VisitVO implements java.io.Serializable {
 
 	public void setStrCreateTime(String strCreateTime) {
 		this.strCreateTime = strCreateTime;
+	}
+
+	public Integer getContactSatus() {
+		return contactSatus;
+	}
+
+	public void setContactSatus(Integer contactSatus) {
+		this.contactSatus = contactSatus;
+	}
+
+	public Integer getVisitStatus() {
+		return visitStatus;
+	}
+
+	public void setVisitStatus(Integer visitStatus) {
+		this.visitStatus = visitStatus;
 	}
 
 }

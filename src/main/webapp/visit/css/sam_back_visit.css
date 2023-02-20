@@ -1,0 +1,15 @@
+@charset "UTF-8";
+ table.visit_table {
+    width: 850px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 100px;
+    }
+    table.visit_table, th, td {
+      border: 1px solid #CCCCFF;
+    }
+    table.visit_table,th, td {
+      padding: 5px;
+      text-align: center;
+    }

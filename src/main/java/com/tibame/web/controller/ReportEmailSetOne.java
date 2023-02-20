@@ -1,8 +1,6 @@
 package com.tibame.web.controller;
 
 import java.io.IOException;
-import java.io.Writer;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.tibame.web.dao.impl.VisitDAO;
+import com.tibame.web.service.ReportEmailService;
 import com.tibame.web.service.VisitRoomService;
+import com.tibame.web.service.impl.ReportEmailServiceImpl;
 import com.tibame.web.service.impl.VisitRoomServiceImpl;
+import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.ReportImageVO;
 import com.tibame.web.vo.VisitVO;
 
 /**
- * Servlet implementation class VisitSetOneUpdate
+ * Servlet implementation class ReportEmailGetOne
  */
-@WebServlet("/visit/setOneUpdate")
-public class VisitSetOneUpdate extends HttpServlet {
+@WebServlet("/report/emailSetOne")
+public class ReportEmailSetOne extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,29 +33,24 @@ public class VisitSetOneUpdate extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=utf-8");
-		response.setContentType("application/json");
+		
 
-		final String start = request.getParameter("action");
+		final String authCode = request.getParameter("authCode");
+		final Integer mailId = Integer.valueOf(request.getParameter("mailId"));
+		if (mailId != null && authCode != null) {
 
-		Integer visitid = Integer.valueOf(request.getParameter("visitid"));
-
-		if (visitid != null) {
 			HttpSession session = request.getSession();
-			VisitRoomService service = new VisitRoomServiceImpl();
-			VisitVO visitVO = service.getOneInfo(visitid);
-			session.setAttribute("visitVO", visitVO);
-			//後台可以更新
-			if ("getOne_For_Update".equals(start)) {
-					
-				response.sendRedirect("/elitebaby/admin/visit/update_visit.html");
-				
+			ReportEmailService emailService = new ReportEmailServiceImpl();
+			
+			EmailVO emailVO = emailService.getOneEmail(mailId);
+			session.setAttribute("emailVO", emailVO);
+			
+			
+			ReportImageVO reportImageVO = emailService.getOneAllPhoto(authCode);
+			if (reportImageVO != null) {	
+				session.setAttribute("reportImageVO", reportImageVO);
 			}
-			//前台不能更新
-			if ("getOne_NO_Update".equals(start)) {
-
-				response.sendRedirect("/elitebaby/visit/VisitRoomFrontViewOne.html");
-			}
-
+			response.sendRedirect("/elitebaby/admin/visit/getone_email.html");
 		}
 
 	}

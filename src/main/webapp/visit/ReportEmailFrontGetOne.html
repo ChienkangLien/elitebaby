@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="../css/official.css" />
 <link rel="stylesheet" href="../css/front_navbar.css">
 <link rel="stylesheet" href="css/room.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/sam_email.css" rel="stylesheet" type="text/css"
+	media="all" />
 <!--stylesheet-css-->
 
 
@@ -113,86 +114,49 @@
 		<!-- 此處留空 -->
 	</div>
 
-
+	<label>會員id:</label>
+	<input type="text" class="userId">
 	<center>
-		<h1>預約參觀</h1>
+		<h1>回報信件</h1>
 	</center>
-	<center>
-		<label>會員ID</label> <input type="text" name="userid" class="userid"
-			>
-	</center>
-	<div class="w3l-main">
-		<div class="w3l-from">
-			<form action="#" method="post">
-				<div class="w3l-user">
-					<label class="head">名字<span class="w3l-star"> * </span></label> <input
-						type="text" name="Username" placeholder="預設名字" class="visitname">
-				</div>
-				<div class="w3l-mail">
-					<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-						type="email" name="email" placeholder="預設信箱" class="visitemail">
-				</div>
-				<div class="clear"></div>
-				<div class="w3l-details1">
-					<div class="w3l-num">
-						<label class="head">電話<span class="w3l-star"> * </span></label> <input
-							type="text" name="phone" placeholder="預設電話" class="visitphone">
-					</div>
-					<div class="w3l-date">
-						<label class="head">預約參訪時間<span class="w3l-star"> *
-						</span></label>
-						<div class="styled-input">
-							<input class="visitdate" id="datepicker" name="visitdate"
-								type="date">
-						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="w3l-details3">
-						<div class="w3l-options1">
-							<label class="head">方便聯絡時間<span class="w3l-star">
-									* </span></label> <select class="contacttime" name="contacttime">
-								<option>早上9點-12點</option>
-								<option>下午1點-6點</option>
-								<option>晚上7點-9點</option>
-							</select>
-						</div>
-					</div>
-					<div class="w3l-options2">
-						<label class="head">預產期<span class="w3l-star"> * </span></label>
-						<input class="duedate" type="date" name="duedate">
-					</div>
-					<div class="gender">
-						<label class="head">胎次<span class="w3l-star"> * </span></label> <select
-							class="kids" name="kids">
-							<option value="1">第一胎</option>
-							<option value="2">第二胎</option>
-							<option value="3">第三胎</option>
-							<option value="4">第四胎</option>
-							<option value="5">第五胎</option>
-							<option value="6">第六胎</option>
-							<option value="7">第七胎</option>
-							<option value="8">第八胎</option>
-							<option value="9">第九胎</option>
-							<option value="10">第十胎</option>
-						</select>
-					</div>
+	<hr>
 
-				</div>
-				<div class="clear"></div>
+	<div class="sam_div_form">
+		<form>
 
-				<div class="w3l-rem">
-					<div class="w3l-right">
-						<label class="w3l-set2">備註</label>
-						<textarea class="visitremark" name="remark"></textarea>
-					</div>
+			<div class="sam_div_emailtilte">
+				<label id="sam_label_emailtitle">標題:</label> <input type="text"
+					id="sam_input_emailtitle" value="" disabled>
+			</div>
 
-					<div class="visitbutton">
-						<button type="button" id="visitsubmit">送出</button>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</form>
-		</div>
+			<div class="sam_div_emailcategory">
+				<label id="sam_label_emailcategory">回報類別:</label> <select
+					id="sam_input_emailcategory" disabled>
+					<option value="0">請選擇回報類別</option>
+					<option value="1">訂房</option>
+					<option value="2">參訪</option>
+					<option value="3">訂餐</option>
+					<option value="4">試吃</option>
+					<option value="5">文章</option>
+					<option value="6">消息</option>
+					<option value="7">會員</option>
+					<option value="8">其他</option>
+				</select>
+			</div>
+
+			<div id="sam_div_emailcontent">
+				<label id="sam_label_emailcontent">內容:</label>
+				<textarea class="visitremark" name="remark"
+					id="sam_input_emailcontent" disabled></textarea>
+			</div>
+
+			
+			<div id="preview">
+				<span class="text">預覽圖</span>
+			</div>
+
+
+		</form>
 	</div>
 
 
@@ -214,7 +178,7 @@
 	>
 	</script>
 	<script src="../js/front_navbar.js"></script>
-	<script src="./js/VisitInsertJson.js"></script>
+	<script src="./js/sam_back_email_getone.s"></script>
 
 
 
