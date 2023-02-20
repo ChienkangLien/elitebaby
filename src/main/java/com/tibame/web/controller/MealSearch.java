@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.tibame.web.dao.MealDAO;
-import com.tibame.web.dao.impl.MealDAOImpl;
+import com.tibame.web.service.MealService;
+import com.tibame.web.serviceimpl.MealServiceImpl;
 import com.tibame.web.vo.MealVO;
 
 
@@ -28,6 +27,7 @@ public class MealSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
 		Gson gson = new Gson();
 		MealVO jsonObject = gson.fromJson(request.getReader(), MealVO.class);
 		Integer id = jsonObject.getMealId();
@@ -37,8 +37,8 @@ public class MealSearch extends HttpServlet {
 //	    response.getWriter().write(gson.toJson(list));
 		if(id!=null) {
 //			RoomPhotoService service = new RoomPhotoServiceImpl();
-			MealDAO dao = new MealDAOImpl();
-			List<MealVO> list =dao.getAll();
+			MealService service = new MealServiceImpl();
+			List<MealVO> list = service.getAllMeal();
 			System.out.println(list.size());
 			
 			if (list.size() == 0) {

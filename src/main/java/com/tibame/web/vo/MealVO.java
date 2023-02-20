@@ -6,7 +6,7 @@ public class MealVO {
 	private byte[] mealPic;
 	private Integer mealQuantity;
 	private Integer mealPrice;
-	private Integer reserverPrivce;
+	private Integer reserverPrice;
 	private Integer mealStatus;
 	
 	public MealVO() {	
@@ -17,7 +17,7 @@ public class MealVO {
 		this.mealName = mealName;
 		this.mealQuantity = mealQuantity;
 		this.mealPrice = mealPrice;
-		this.reserverPrivce = reservePrivce;
+		this.reserverPrice = reservePrivce;
 	}
 	
 	public MealVO(Integer mealId, String mealName, byte[] mealPic, Integer mealQuantity, Integer mealPrice,
@@ -28,7 +28,7 @@ public class MealVO {
 		this.mealPic = mealPic;
 		this.mealQuantity = mealQuantity;
 		this.mealPrice = mealPrice;
-		this.reserverPrivce = reservePrivce;
+		this.reserverPrice = reservePrivce;
 		this.mealStatus = mealStatus;
 	}
 
@@ -73,11 +73,11 @@ public class MealVO {
 	}
 
 	public Integer getReserverPrice() {
-		return reserverPrivce;
+		return reserverPrice;
 	}
 
 	public void setReservePrivce(Integer reservePrivce) {
-		this.reserverPrivce = reservePrivce;
+		this.reserverPrice = reservePrivce;
 	}
 
 	public Integer getMealStatus() {
@@ -91,7 +91,7 @@ public class MealVO {
 	@Override
 	public String toString() {
 		return "MealVO [mealId=" + mealId + ", mealname=" + mealName +", mealpic="+ mealPic +", mealQuantity=" + mealQuantity
-				+", mealPrice="+ mealPrice +", reservePrivce="+reserverPrivce+", mealStatus"+mealStatus+ "]";
+				+", mealPrice="+ mealPrice +", reservePrivce="+reserverPrice+", mealStatus"+mealStatus+ "]";
 	}
 
 }
