@@ -1,0 +1,112 @@
+div.sam_div_form{
+    border: 1px solid black;
+    display: inline-block;
+    width: 1000x;
+    min-height: 600x;
+    position: relative;
+    margin-left: 250px;
+    margin-top: 20px;
+    background-color: pink;
+    
+}
+
+div.sam_div_emailtilte,#sam_div_emailfile{
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    width: 200px;
+    background-color: white;
+    display : inline-block    
+}
+
+div.sam_div_emailcategory{
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-left: 295px;
+    margin-bottom: 20px;
+    width: 200px;
+    background-color: white;
+    display : inline-block
+}
+
+#sam_label_emailcategory,#sam_label_emailtitle{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+#sam_label_emailcontent{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#sam_div_emailcontent{
+    border: 1px solid black;
+    width: 700px;
+    min-height: 200px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: white;
+
+}
+
+#sam_input_emailcontent{
+    border: 1px solid black;
+    width: 650px;
+    min-height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;   
+    margin-left: 22px;  
+    background-color: #80808042;     
+}
+
+#sam_btn_submit{
+    margin-left: 300px;
+}
+
+#sam_btn_submit{
+    background-color: aquamarine;
+}
+#sam_btn_cancle{
+    background-color: indianred;
+}
+#sam_input_emailcategory,#sam_input_emailtitle{
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #80808042;
+}
+#sam_btn_cancle{
+    margin-left: 20px;
+    width: 50px;
+    height: 25px;
+}
+#sam_btn_submit{
+    width: 50px;
+    height: 25px;
+}
+
+#preview{
+    margin: auto;
+    border: 1px solid pink;
+    display: inline-block;
+    width: 350px;
+    min-height: 100px;
+    
+  }
+  #preview span.text{
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    color: rgb(19, 18, 18);
+  }
+  #preview img.preview_img{
+    width: 100%;
+    display: inline-block;
+  }
+  .my_bton{
+    margin-left: 350px;
+    margin-bottom: 20px;
+  }
+

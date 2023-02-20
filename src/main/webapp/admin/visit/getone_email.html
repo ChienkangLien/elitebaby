@@ -25,7 +25,7 @@
       href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
       rel="stylesheet"
     />
-	<link rel="stylesheet" href="../visit/css/sam_back_visit.css" />
+	<link rel="stylesheet" href="css/sam_email.css" />
 	
 
     <title>菁英後台管理系統</title>
@@ -168,28 +168,50 @@
     </div>
     <div id="main_div">
       <div id="blank_area">此處留空</div>
-      <center><div class="t2" id="title" style="margin-top:30px">回報信件</div></center>
+<label>會員id:</label>
+	<input type="text" class="userId">
+	<center>
+		<h1>回報信件</h1>
+	</center>
+	<hr>
 
-        <hr>
-        <table class="visit_table">
-        <thead>
-            <tr>
-                <th>信件編號</th>
-                <th>回報類別</th>
-                <th>會員ID</th>
-                <th>會員姓名</th>
-                <th>標題</th>
-                <th>回報時間</th>
-                <th>是否回覆</th>
-                <th>詳細</th>
-                <th>刪除</th>
-            </tr>
-        </thead>
-        <tbody class="getall_tb">
-           
-        </tbody>  
-        </table>
-    </div>
+	<div class="sam_div_form">
+		<form>
+
+			<div class="sam_div_emailtilte">
+				<label id="sam_label_emailtitle">標題:</label> <input type="text"
+					id="sam_input_emailtitle" value="" disabled>
+			</div>
+
+			<div class="sam_div_emailcategory">
+				<label id="sam_label_emailcategory">回報類別:</label> <select
+					id="sam_input_emailcategory" disabled>
+					<option value="0">請選擇回報類別</option>
+					<option value="1">訂房</option>
+					<option value="2">參訪</option>
+					<option value="3">訂餐</option>
+					<option value="4">試吃</option>
+					<option value="5">文章</option>
+					<option value="6">消息</option>
+					<option value="7">會員</option>
+					<option value="8">其他</option>
+				</select>
+			</div>
+
+			<div id="sam_div_emailcontent">
+				<label id="sam_label_emailcontent">內容:</label>
+				<textarea class="visitremark" name="remark"
+					id="sam_input_emailcontent" disabled></textarea>
+			</div>
+
+			
+			<div id="preview">
+				<span class="text">預覽圖</span>
+			</div>
+
+
+		</form>
+	</div>
     
 
     <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
@@ -205,6 +227,6 @@
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <!-- summernote引用 -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="js/sam_back_email_getall.js"></script>
+    <script src="js/sam_back_email_getone.js"></script>
   </body>
 </html>

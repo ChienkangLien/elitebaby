@@ -16,4 +16,6 @@ public interface VisitRoomService {
 	
 	String deleteOneVisit(Integer visitId);
 	
+	List<VisitVO> getOneAll(Integer userId);
+	
 }

@@ -220,6 +220,7 @@ select.kids {
 }
 .gender {
     width: 48%;
+    display: inline-block;
 }
 .w3l-sym {
     float: right;
@@ -420,8 +421,3 @@ footer a:hover {
 .ui-datepicker table {
 	    background-color: #c74184 !important;
 }
-/*-- //input-effect --*/
-
-
-
-/*--/responsive--*/

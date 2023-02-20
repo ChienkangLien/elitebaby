@@ -57,7 +57,7 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 	@Override
 	public List<VisitVO> getAllInfo() {
 		List<VisitVO> list = dao.getAll();
-		return list;
+		return list != null ? list : null;
 	}
 
 	@Override
@@ -117,6 +117,13 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 			return countrow > 0 ? "刪除成功" : "刪除失敗";
 		}
 		return "找不到信件";
+
+	}
+
+	@Override
+	public List<VisitVO> getOneAll(Integer userId) {
+
+		return userId != null ? dao.getOneAll(userId) : null;
 
 	}
 
