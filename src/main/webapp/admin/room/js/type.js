@@ -765,7 +765,7 @@ $(document).on("click", "button.getSingleType", function () {
     })
     .then((body) => {
       try {
-        if (body.length != null) {
+        if (body != null) {
           let html = `<div class="mb-3">
       <label for="editRoomTypeName" class="col-form-label"
         >房型名稱</label
