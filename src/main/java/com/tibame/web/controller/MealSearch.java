@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.tibame.web.service.MealService;
-import com.tibame.web.serviceimpl.MealServiceImpl;
+import com.tibame.web.service.impl.MealServiceImpl;
 import com.tibame.web.vo.MealVO;
 
 
