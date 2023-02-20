@@ -7,7 +7,7 @@ public class MsgLikeDao extends DaoId{
 
     public void generator() {
         String sql = "insert into msg_like(msg_id, user_id) values (?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (int i = 0; i < 50; i++) {
                 ps.setInt(1, (int) (Math.random() * 19) + 1);
@@ -22,7 +22,7 @@ public class MsgLikeDao extends DaoId{
 
     public void clean() {
         String sql = "delete from msg_like where 1=1;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.execute();
         } catch (SQLException e) {
@@ -32,7 +32,7 @@ public class MsgLikeDao extends DaoId{
 
     public void insert(int msgId, int userId) {
         String sql = "insert into msg_like(msg_id, user_id) values (?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ps.setInt(2, userId);
@@ -44,7 +44,7 @@ public class MsgLikeDao extends DaoId{
 
     public void delete(int msgId, int userId) {
         String sql = "delete from msg_like where msg_id = ? and user_id = ?;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ps.setInt(2, userId);
@@ -56,7 +56,7 @@ public class MsgLikeDao extends DaoId{
 
     public boolean check(int msgId, int userId) {
         String sql = "select * from msg_like where msg_id = ? and user_id = ?;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ps.setInt(2, userId);
@@ -75,7 +75,7 @@ public class MsgLikeDao extends DaoId{
         String sql = "select msg_id, count(*) as mlike from msg_like\n" +
                 "where msg_id = ?\n" +
                 "group by msg_id;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ResultSet rs = ps.executeQuery();

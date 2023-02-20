@@ -20,7 +20,7 @@ public class MsgDao extends DaoId {
                 "order by msg_id asc;";
         ArrayList<Msg> msgs = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, postId);
             ResultSet rs = ps.executeQuery();
@@ -51,7 +51,7 @@ public class MsgDao extends DaoId {
                 "group by msg.msg_id;";
 
         Msg msg = null;
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ResultSet rs = ps.executeQuery();
@@ -75,7 +75,7 @@ public class MsgDao extends DaoId {
     public int insert(Msg msg) {
         int key = -1;
         String sql = "insert into msg(user_id, post_id, content) values (?,?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, msg.getUserId());
             ps.setInt(2, msg.getPostId());
@@ -97,7 +97,7 @@ public class MsgDao extends DaoId {
         int length = ids.size();
         int begin = ids.get(0);
         String sql = "insert into msg (user_id, post_id, content) values (?,?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (int j = 0; j < length; j++) {
                 for (int i = 1; i <= 3; i++) {

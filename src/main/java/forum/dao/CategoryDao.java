@@ -11,7 +11,7 @@ public class CategoryDao extends DaoId {
         String sql = "select * from category;";
         ArrayList<Category> categories = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -33,7 +33,7 @@ public class CategoryDao extends DaoId {
     public Category selectById(int id) {
         String sql = "select * from category where id = ?;";
         Category category = null;
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class CategoryDao extends DaoId {
         String sql = "select * from category join collection_category cc on category.id = cc.category_id\n" +
                 "where user_id = ?";
         ArrayList<Category> categories = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();

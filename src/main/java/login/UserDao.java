@@ -2,25 +2,29 @@ package login;
 
 import forum.dao.DaoId;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private String URL = "jdbc:mysql://localhost:3306/elitebaby";
-    private String USER = DaoId.USER;
-    private String PASSWORD = DaoId.PASSWORD;
 
+    private static DataSource ds = null;
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            Context ctx = new InitialContext();
+            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/example");
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
     }
 
     public User login(String userName, String password) {
         String sql = "select * from member where user_name = ? and user_password = ?;";
         User user = null;
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        System.out.println("UserDao" + userName + password);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, userName);
             ps.setString(2, password);
@@ -31,6 +35,7 @@ public class UserDao {
                         rs.getString("user_name"),
                         rs.getString("user_password"));
             }
+            System.out.println("UserDao-user: " + user);
             return user;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -40,7 +45,7 @@ public class UserDao {
     public String userNameById(int userId) {
         String userName = null;
         String sql = "select user_name from member where USER_ID = ?;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();

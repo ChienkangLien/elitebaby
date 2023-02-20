@@ -14,7 +14,7 @@ import java.util.Base64;
 public class PostImgDao extends DaoId {
     public ArrayList<Post> selectAll(ArrayList<Post> posts) {
         String sql = "select * from post_imgs where post_id = ?";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (Post post : posts) {
                 int postId = post.getPostId();
@@ -37,7 +37,7 @@ public class PostImgDao extends DaoId {
 
     public Post selectById(Post post) {
         String sql = "select * from post_imgs where post_id = ?";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             int postId = post.getPostId();
             ps.setInt(1, postId);
@@ -58,7 +58,7 @@ public class PostImgDao extends DaoId {
 
     public void insert(int postId, ArrayList<InputStream> ins) {
         String sql = "insert into post_imgs (post_id, img) values(?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (InputStream in : ins) {
                 System.out.println("in:"+in);

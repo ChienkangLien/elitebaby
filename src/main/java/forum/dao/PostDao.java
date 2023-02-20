@@ -32,7 +32,7 @@ public class PostDao extends DaoId {
                 "order by p.post_id desc";
         ArrayList<Post> posts = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -63,7 +63,7 @@ public class PostDao extends DaoId {
                 "order by plike desc;";
         ArrayList<Post> posts = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -93,7 +93,7 @@ public class PostDao extends DaoId {
                 "where p.post_id = ?\n" +
                 "group by l.post_id;";
         Post post = null;
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, postId);
             ResultSet rs = ps.executeQuery();
@@ -118,7 +118,7 @@ public class PostDao extends DaoId {
     public int insert(Post post) {
         int key = -1;
         String sql = "insert into post(USER_ID, CATEGORY, TOPIC, CONTENT) values  (?,?,?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection =ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, post.getUserId());
             ps.setString(2, post.getCategory());
@@ -140,7 +140,7 @@ public class PostDao extends DaoId {
     //posts生成器
     public void postGenerator(ArrayList<String> categoryName) {
         String sql = "insert into post (user_id, category, topic, content) VALUES (?,?,?,?);";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (int c = 0; c < categoryName.size(); c++) {
                 for (int i = 1; i <= 1; i++) {
@@ -161,7 +161,7 @@ public class PostDao extends DaoId {
     public ArrayList<Integer> getPostIds() {
         ArrayList<Integer> ids = new ArrayList<>();
         String sql = "select post_id from post;";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
