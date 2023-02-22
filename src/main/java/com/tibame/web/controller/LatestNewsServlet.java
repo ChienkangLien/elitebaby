@@ -39,7 +39,7 @@ public class LatestNewsServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/project/selectLatestNews.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/admin/news/selectLatestNews.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -52,7 +52,7 @@ public class LatestNewsServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/project/selectLatestNews.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/admin/news/selectLatestNews.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -65,14 +65,14 @@ public class LatestNewsServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/project/selectLatestNews.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/admin/news/selectLatestNews.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("latestNewsVO", latestNewsVO); // 資料庫取出的empVO物件,存入req
-			String url = "/project/listOneLatestNews.jsp";
+			String url = "/admin/news/listOneLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -93,7 +93,7 @@ public class LatestNewsServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("latestNewsVO", latestNewsVO); // 資料庫取出的empVO物件,存入req
-			String url = "/project/updateLatestNews.jsp";
+			String url = "/admin/news/updateLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -158,7 +158,7 @@ public class LatestNewsServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("latestNewsVO", latestNewsVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/project/updateLatestNews.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/admin/news/updateLatestNews.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -170,7 +170,7 @@ public class LatestNewsServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("latestNewsVO", latestNewsVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/project/listOneLatestNews.jsp";
+			String url = "/admin/news/listOneLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -234,7 +234,7 @@ public class LatestNewsServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("latestNewsVO", latestNewsVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/project/addLatestNews.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/admin/news/addLatestNews.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -244,7 +244,7 @@ public class LatestNewsServlet extends HttpServlet {
 			latestNewsVO = newsSvc.addEmp(sortId,  adminId, newsIntro, publishedTime, onNews, offNews, postTitle);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/project/listAllLatestNews.jsp";
+			String url = "/admin/news/listAllLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -264,7 +264,7 @@ public class LatestNewsServlet extends HttpServlet {
 			newsSvc.deleteEmp(newsId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/project/listAllLatestNews.jsp";
+			String url = "/admin/news/listAllLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

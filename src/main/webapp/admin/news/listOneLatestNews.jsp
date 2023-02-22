@@ -31,7 +31,7 @@
 
 <body class="c2">
  <div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="<%=request.getContextPath()%>/project/selectLatestNews.jsp"><img
+		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
 			src="images/logo.jpg" style="width: 30px" /> <span
 			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
 			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
@@ -179,7 +179,7 @@
 
 			<tr>
 				<td><img src=""></td>
-					<td>${latestNewsVO.newsId}${latestNewsVO.sortId}${latestNewsVO.adminId}</td>
+					<td>${latestNewsVO.newsId}/${latestNewsVO.sortId}/${latestNewsVO.adminId}</td>
 					<td>${latestNewsVO.postTitle}</td>
 					<td>${latestNewsVO.newsIntro}</td>
 					<td>${latestNewsVO.onNews}</td>
