@@ -1,6 +1,7 @@
 package com.tibame.web.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tibame.web.vo.RoomVO;
 
@@ -13,4 +14,6 @@ public interface RoomDAO {
 	public RoomVO findByPrimaryKey(Integer roomId);
 	public List<RoomVO> getAll();	
 	public List<RoomVO> getAllByType(RoomVO room);	
+	public List<RoomVO> getAvaByDate(Map<String, String> map);
+	public String getAvaByRoomId(Map<String, String> map);
 }

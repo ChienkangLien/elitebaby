@@ -10,5 +10,9 @@ public interface RoomOrderDAO {
 	public int update(RoomOrderVO order);
 	public int updateStatus(RoomOrderVO order);
 	public int delete(RoomOrderVO order);
-	public List<RoomOrderVO> getAll();
+	public List<RoomOrderVO> getAll(String status, Integer limit);
+	public List<RoomOrderVO> getByRoomId(Integer roomId);
+	public List<RoomOrderVO> getByUserId(Integer userId);
+	public RoomOrderVO getByOrderId(Integer orderId);
+	
 }

@@ -1,6 +1,7 @@
 package com.tibame.web.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tibame.web.dao.RoomDAO;
 import com.tibame.web.dao.impl.RoomDAOImpl;
@@ -49,12 +50,29 @@ public class RoomServiceImpl implements RoomService {
 //			}
 //		}
 //		return result == 1 ? "修改成功" : "修改失敗";
-		if (insertRoomVOList != null && !insertRoomVOList.isEmpty() || updateRoomVOList != null
-				&& !updateRoomVOList.isEmpty()) {
+		if (insertRoomVOList != null && !insertRoomVOList.isEmpty()
+				|| updateRoomVOList != null && !updateRoomVOList.isEmpty()) {
 			result = roomDao.updateRooms(insertRoomVOList, updateRoomVOList);
-			return result ;
+			return result;
 		}
-		return result=="" ? "沒有資料異動" : "操作失敗";
+		return result == "" ? "沒有資料異動" : "操作失敗";
+	}
+
+	@Override
+	public List<RoomVO> getRoomsByDate(Map<String, String> map) {
+		if (map.get("startDate") != null && map.get("endDate") != null && map.get("typeId") != null) {
+			return roomDao.getAvaByDate(map);
+		}
+		return null;
+	}
+
+	@Override
+	public String checkAva(Map<String, String> map) {
+		if (map.get("startDate") != null && map.get("endDate") != null && map.get("orderId") != null
+				&& map.get("roomId") != null) {
+			return roomDao.getAvaByRoomId(map);
+		}
+		return null;
 	}
 
 }
