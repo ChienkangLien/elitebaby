@@ -133,7 +133,7 @@ div.sam_div_adminId{
     z-index: -1;
     color: rgb(19, 18, 18);
   }
-  #preview_back img.preview_img{
+  #preview_back img.preview_img_answer{
     width: 100%;
     display: inline-block;
   }

@@ -15,10 +15,16 @@
 <!-- <link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../css/official.css" />
 <link rel="stylesheet" href="../css/front_navbar.css">
-<link rel="stylesheet" href="css/room.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!--stylesheet-css-->
-
+<link rel="stylesheet" href="css/sam_back_visit.css">
+<style>
+div.contact_status {
+	border: 1px solid black;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	margin: auto;
+}
+</style>
 
 <title>菁英產後護理之家</title>
 </head>
@@ -108,92 +114,42 @@
 			</div>
 		</nav>
 	</div>
-
+	<div id="book_visit">
+		<a href="VisitRoomFrontInsert.html"> <img class="img-responsive"
+			src="./img/book_visit.png" />
+		</a>
+	</div>
 	<div id="blank_area">
 		<!-- 此處留空 -->
 	</div>
-
-
 	<center>
-		<h1>預約參觀</h1>
+		<div class="t2" id="title" style="margin-top: 30px">寄信匣</div>
 	</center>
+
+	<hr>
 	<center>
-		<label>會員ID</label> <input type="text" name="userid" class="userid"
-			>
+		<input class="userIdTest" type="text" value=""><input
+			type="button" class="sserchId" value="會員搜尋">
 	</center>
-	<div class="w3l-main">
-		<div class="w3l-from">
-			<form action="#" method="post">
-				<div class="w3l-user">
-					<label class="head">名字<span class="w3l-star"> * </span></label> <input
-						type="text" name="Username" placeholder="預設名字" class="visitname" onblur="validate(this)">
-				</div>
-				<div class="w3l-mail">
-					<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-						type="email" name="email" placeholder="預設信箱" class="visitemail">
-				</div>
-				<div class="clear"></div>
-				<div class="w3l-details1">
-					<div class="w3l-num">
-						<label class="head">電話<span class="w3l-star"> * </span></label> <input
-							type="text" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10">
-					</div>
-					<div class="w3l-date">
-						<label class="head" for="visitdate">預約參訪時間<span class="w3l-star"> *
-						</span></label>
-							<input class="visitdate" id="datepicker" name="visitdate"
-								type="date">
-						
-					</div>
-					<div class="clear"></div>
-					<div class="w3l-details3">
-						<div class="w3l-options1">
-							<label class="head">方便聯絡時間<span class="w3l-star">
-									* </span></label> <select class="contacttime" name="contacttime">
-								<option>早上9點-12點</option>
-								<option>下午1點-6點</option>
-								<option>晚上7點-9點</option>
-							</select>
-						</div>
-					</div>
-					<div class="w3l-options2">
-						<label class="head">預產期<span class="w3l-star"> * </span></label>
-						<input class="duedate" type="date" name="duedate" id="duedateId">
-					</div>
-					<div class="gender">
-						<label class="head">胎次<span class="w3l-star"> * </span></label> <select
-							class="kids" name="kids">
-							<option value="1">第一胎</option>
-							<option value="2">第二胎</option>
-							<option value="3">第三胎</option>
-							<option value="4">第四胎</option>
-							<option value="5">第五胎</option>
-							<option value="6">第六胎</option>
-							<option value="7">第七胎</option>
-							<option value="8">第八胎</option>
-							<option value="9">第九胎</option>
-							<option value="10">第十胎</option>
-						</select>
-					</div>
+	
+	<center>
+		<table class="visit_table">
+			<thead>
+				<tr>
+					<th>信件編號</th>
+					<th>標題</th>
+					<th>類別</th>
+					<th>發送日期</th>
+					<th>是否回覆</th>
+					<th>詳細</th>
+					<th>刪除</th>
+				</tr>
+			</thead>
+			<tbody class="getall_tb">
 
-				</div>
-				<div class="clear"></div>
-
-				<div class="w3l-rem">
-					<div class="w3l-right">
-						<label class="w3l-set2">備註</label>
-						<textarea class="visitremark" name="remark"  maxlength="300" ></textarea>
-					</div>
-
-					<div class="visitbutton">
-						<button type="button" id="visitsubmit">送出</button>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</form>
-		</div>
-	</div>
-
+			</tbody>
+		</table>
+	</center>
 
 
 	<div>
@@ -213,7 +169,7 @@
 	>
 	</script>
 	<script src="../js/front_navbar.js"></script>
-	<script src="./js/VisitInsertJson.js"></script>
+	<script src="./js/report_email_getone.js"></script>
 
 
 

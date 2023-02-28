@@ -17,10 +17,14 @@ public class EmailVO {
 
 	@Column(name = "USER_ID")
 	private Integer userId;
+	
+	private String userName;
 
 	@Column(name = "CATEGORY_ID")
 	private Integer categoryId;
 
+	private String reportCategory;
+	
 	@Column(name = "ADMIN_ID")
 	private Integer adminId;
 
@@ -44,19 +48,14 @@ public class EmailVO {
 	@Column(name = "ANSWER_TITLE")
 	private String answerTitle;
 	
+	private String determine;
+	
 	private String strPreportCreateTime;
 	
 	private String authCode;
 	
 	private String strBase64;
 
-	@Override
-	public String toString() {
-		return "EmailVO [mailId=" + mailId + ", userId=" + userId + ", categoryId=" + categoryId + ", adminId="
-				+ adminId + ", reportTile=" + reportTile + ", reportContent=" + reportContent + ", preportCreateTime="
-				+ preportCreateTime + ", answerContent=" + answerContent + ", ansertCreateTime=" + ansertCreateTime
-				+ ", answerTitle=" + answerTitle + "]";
-	}
 
 	public Integer getMailId() {
 		return mailId;
@@ -160,6 +159,30 @@ public class EmailVO {
 
 	public void setStrPreportCreateTime(String strPreportCreateTime) {
 		this.strPreportCreateTime = strPreportCreateTime;
+	}
+
+	public String getReportCategory() {
+		return reportCategory;
+	}
+
+	public void setReportCategory(String reportCategory) {
+		this.reportCategory = reportCategory;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getDetermine() {
+		return determine;
+	}
+
+	public void setDetermine(String determine) {
+		this.determine = determine;
 	}
 
 }

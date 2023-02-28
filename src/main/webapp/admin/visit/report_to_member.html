@@ -141,21 +141,30 @@
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
 		<center>
-			<h1>回報信件</h1>
+			<h1>回報信件給使用者</h1>
 		</center>
+		<label>管理員id</label>
+        <input type="text" class="admintest">
 		<hr>
 
-		<div class="sam_div_form">
-			<form>
+		
 
-				<div class="sam_div_emailtilte">
+		<div class="sam_div_form">
+			<form class="inserthere">
+
+				<div class="sam_div_emailtilte" >
 					<label id="sam_label_emailtitle">標題:</label> <input type="text"
-						id="sam_input_emailtitle" value="" disabled>
+						id="sam_input_emailtitle" value="" >
 				</div>
 
-				<div class="sam_div_emailcategory">
+				<div class="sam_div_adminId" style="display: inline-block; margin-left: 45px;">
+					<label id="sam_label_emailtitle">會員ID:</label> <input
+						type="text" class="sam_adminId_anwser">
+				</div>
+
+                <div class="sam_div_emailcategory"  style="display: inline-block; margin-left: 45px;">
 					<label id="sam_label_emailcategory">回報類別:</label> <select
-						id="sam_input_emailcategory" disabled>
+						id="sam_input_emailcategory" >
 						<option value="0">請選擇回報類別</option>
 						<option value="1">訂房</option>
 						<option value="2">參訪</option>
@@ -168,34 +177,6 @@
 					</select>
 				</div>
 
-				<div id="sam_div_emailcontent">
-					<label id="sam_label_emailcontent">內容:</label>
-					<textarea class="visitremark" name="remark"
-						id="sam_input_emailcontent" disabled></textarea>
-				</div>
-
-
-				<div id="preview">
-				    <input class="one_authcode" value="" type="hidden">
-					<span class="text">預覽圖</span>
-				</div>
-
-
-			</form>
-		</div>
-
-		<div class="sam_div_form">
-			<form class="inserthere">
-
-				<div class="sam_div_emailtilte">
-					<label id="sam_label_emailtitle">標題:</label> <input type="text"
-						id="sam_input_emailtitle_anwser" value="" >
-				</div>
-
-				<div class="sam_div_adminId">
-					<label id="sam_label_emailtitle">後台管理員ID:</label> <input
-						type="text" class="sam_adminId_anwser">
-				</div>
 
 				<div id="sam_div_emailcontent">
 					<label id="sam_label_emailcontent">內容:</label>
@@ -208,7 +189,7 @@
 					<label id="sam_label_emailfile">上傳圖片</label> <input type="file"
 						id="sam_input_emailfile" value="" multiple>
 				</div>
-				<div id="preview_back">
+				<div id="preview">
 					<span class="text">預覽圖</span>
 				</div>
 
@@ -234,6 +215,6 @@
 		<!-- summernote引用 -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-		<script src="js/sam_back_email_getone.js"></script>
+		<script src="js/back_reportemail_fromback.js"></script>
 </body>
 </html>

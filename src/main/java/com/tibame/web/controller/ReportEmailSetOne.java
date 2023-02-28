@@ -33,24 +33,44 @@ public class ReportEmailSetOne extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=utf-8");
-		
-		
+
 		final String authCode = request.getParameter("authCode");
 		final Integer mailId = Integer.valueOf(request.getParameter("mailId"));
+		final String action = request.getParameter("action");
 		if (mailId != null && authCode != null) {
 
-			HttpSession session = request.getSession();
-			ReportEmailService emailService = new ReportEmailServiceImpl();
-			
-			EmailVO emailVO = emailService.getOneEmail(mailId);
-			session.setAttribute("emailVO", emailVO);
-			
-			
-			ReportImageVO reportImageVO = emailService.getOneAllPhoto(authCode);
-			if (reportImageVO != null) {	
-				session.setAttribute("reportImageVO", reportImageVO);
+			if (action.equals("get_back_oneall")) {
+
+				HttpSession session = request.getSession();
+				ReportEmailService emailService = new ReportEmailServiceImpl();
+
+				EmailVO emailVO = emailService.getOneEmail(mailId);
+				session.setAttribute("emailVO", emailVO);
+
+				ReportImageVO reportImageVO = emailService.getOneAllPhoto(authCode);
+				if (reportImageVO != null) {
+					session.setAttribute("reportImageVO", reportImageVO);
+				}
+				response.sendRedirect("/elitebaby/admin/visit/getone_email.html");
+
 			}
-			response.sendRedirect("/elitebaby/admin/visit/getone_email.html");
+
+			if (action.equals("get_front_oneall")) {
+
+
+				HttpSession session = request.getSession();
+				ReportEmailService emailService = new ReportEmailServiceImpl();
+
+				EmailVO emailVO = emailService.getOneEmail(mailId);
+				session.setAttribute("emailVO", emailVO);
+
+				ReportImageVO reportImageVO = emailService.getOneAllPhoto(authCode);
+				if (reportImageVO != null) {
+					session.setAttribute("reportImageVO", reportImageVO);
+				}
+				response.sendRedirect("/elitebaby/visit/ReportEmailFrontGetOne.html");
+				
+			}
 		}
 
 	}

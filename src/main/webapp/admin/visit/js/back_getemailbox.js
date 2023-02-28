@@ -12,7 +12,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_COUNT`,
 		resData = visit;
 		 allcount = 0;
 		 for (let i = 0; i < resData.length; i++) {
-				if(resData[i].determine === "會員"){
+				if(resData[i].determine === "後台"){
 					allcount +=1 ;
 				}
 
@@ -28,7 +28,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_COUNT`,
 
 
 
-fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_ADMIN&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -36,7 +36,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
 
-			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="會員") {
+			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>
@@ -59,7 +59,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
                     </div>
                     </td>
 					`;
-			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="會員") {
+			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>
@@ -132,7 +132,7 @@ $(document).on("click","input.last_page",function(){
     page -= 1;
 	let offset = (page - 1) * pageSize;
 	document.querySelector(".getall_tb").innerHTML = "";
-	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_ADMIN&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -140,7 +140,7 @@ $(document).on("click","input.last_page",function(){
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
 
-			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="會員") {
+			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>
@@ -163,7 +163,7 @@ $(document).on("click","input.last_page",function(){
                     </div>
                     </td>
 					`;
-			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="會員") {
+			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>
@@ -224,7 +224,7 @@ $(document).on("click","input.next_page",function(){
 	page += 1;
 	let offset = (page - 1) * pageSize;
 	document.querySelector(".getall_tb").innerHTML = "";
-	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_ADMIN&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -232,7 +232,7 @@ $(document).on("click","input.next_page",function(){
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
 
-			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="會員") {
+			if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>
@@ -255,7 +255,7 @@ $(document).on("click","input.next_page",function(){
                     </div>
                     </td>
 					`;
-			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="會員") {
+			} else if (typeof (resData[i].answerContent) != "string" && resData[i].determine ==="後台") {
 
 				document.querySelector(".getall_tb").innerHTML += `
                     <td>${resData[i].mailId}</td>

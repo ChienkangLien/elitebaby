@@ -114,8 +114,7 @@
 		<!-- 此處留空 -->
 	</div>
 
-	<label>會員id:</label>
-	<input type="text" class="userId">
+
 	<center>
 		<h1>回報信件</h1>
 	</center>
@@ -150,8 +149,9 @@
 					id="sam_input_emailcontent" disabled></textarea>
 			</div>
 
-			
+
 			<div id="preview">
+			    <input class="one_authcode" value="" type="hidden">
 				<span class="text">預覽圖</span>
 			</div>
 
@@ -159,8 +159,39 @@
 		</form>
 	</div>
 
+	<div class="sam_div_form">
+		<form class="inserthere">
+
+			<div class="sam_div_emailtilte">
+				<label id="sam_label_emailtitle">標題:</label> <input type="text"
+					id="sam_input_emailtitle_anwser" value="" >
+			</div>
+
+			
+
+			<div id="sam_div_emailcontent">
+				<label id="sam_label_emailcontent">內容:</label>
+				<textarea class="visitremark" name="remark"
+					id="sam_input_emailcontent_anwser" ></textarea>
+			</div>
 
 
+			<div id="sam_div_emailfile">
+				<label id="sam_label_emailfile">上傳圖片</label> <input type="file"
+					id="sam_input_emailfile" value="" multiple>
+			</div>
+			<div id="preview_back">
+				<span class="text">預覽圖</span>
+			</div>
+
+			<div class="my_bton">
+				<input class="one_emailId" value="" type="hidden">
+				<button type="button" id="sam_btn_submit" >送出</button>
+				<button type="button" id="sam_btn_cancle">取消</button>
+			</div>
+
+		</form>
+	</div>
 	<div>
 		<p class="text-center">10488 台北市中山區南京東路三段219號5樓｜TEL :
 			02-2712-0589｜FAX : 02-2794-0123｜E-mail : service@shinebc.com.tw</p>
@@ -178,7 +209,7 @@
 	>
 	</script>
 	<script src="../js/front_navbar.js"></script>
-	<script src="./js/sam_back_email_getone.s"></script>
+	<script src="./js/report_email_viewone.js"></script>
 
 
 
