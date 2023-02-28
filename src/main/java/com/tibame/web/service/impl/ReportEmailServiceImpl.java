@@ -110,7 +110,7 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 			List<AnswerImageVO> getOneAllPhoto = photoDao.getOneAllAnswerPhoto(authCode);
 
 			if (getOneAllPhoto != null) {
-				String[] base64Array = new String[3];
+				String[] base64Array = new String[5];
 				for (int i = 0; i < getOneAllPhoto.size(); i++) {
 
 					byte[] base64 = getOneAllPhoto.get(i).getAnswerImage();

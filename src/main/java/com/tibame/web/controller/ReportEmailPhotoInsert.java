@@ -79,13 +79,15 @@ public class ReportEmailPhotoInsert extends HttpServlet {
 				ReportEmailService service = new ReportEmailServiceImpl();
 				resultStr = service.insertAnswerPhoto(answerImageVO);
 
+			}
+
+			if (resultStr != null) {
 				JsonObject respbody = new JsonObject();
 				respbody.addProperty("successful", resultStr.equals("回覆全部新增成功"));
 				respbody.addProperty("message", resultStr);
 				resp.getWriter().append(respbody.toString());
 
 			}
-
 		}
 
 	}
