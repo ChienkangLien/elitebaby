@@ -146,7 +146,8 @@
 		</ul>
 	</c:if>
 <ul style="margin-left:500px">
-  <li><a href='/elitebaby/admin/news/listAllLatestNews.jsp'>List</a> all Emps.  <br><br></li>
+
+  <li><a href='/elitebaby/admin/news/listAllLatestNews.jsp'>表單</a><br><br></li>
 	<li>
 		<FORM METHOD="post" ACTION="/elitebaby/Latestnews.do">
 			<b>輸入最新消息編號 (如1):</b> <input type="text" name="newsId"> <input
@@ -156,7 +157,7 @@
 	</li>
 
 	<ul>
-		<li><a href='/elitebaby/admin/news/addLatestNews.jsp'>Add</a> a new Emp.</li>
+		<li><a href='/elitebaby/admin/news/addLatestNews.jsp'>新增</a></li>
 	</ul>
 </ul>
 	<!-- bootstrap引用cdn -->

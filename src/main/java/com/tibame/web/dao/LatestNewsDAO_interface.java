@@ -12,5 +12,4 @@ import com.tibame.web.vo.LatestNewsVO;
         public void delete(Integer newsId);
         public LatestNewsVO findByPrimaryKey(Integer newsId);
         public List<LatestNewsVO> getAll();
-
     }

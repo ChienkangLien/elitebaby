@@ -5,8 +5,8 @@
 <%@ page import="com.tibame.web.vo.*"%>
 
 <%
-LatestNewsService newsSvc = new LatestNewsService();
-List<LatestNewsVO> list = newsSvc.getAll();
+NewsPhotoService photoSvc = new NewsPhotoService();
+List<NewsPhotoVO> list = photoSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -32,10 +32,10 @@ pageContext.setAttribute("list", list);
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp">
-		<img src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> 
-			<a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		<a href="/elitebaby/admin/news/selectNewsPhoto.jsp"><img
+			src="images/logo.jpg" style="width: 30px" /> <span
+			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
+			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 		</a> <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
@@ -92,8 +92,8 @@ pageContext.setAttribute("list", list);
             aria-expanded="false"
           >
             討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 -->
-           <a href="#" class="btn bkbtn">討論區</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
+					class="btn bkbtn">討論區</a>
 				</li>
 				<!-- ================預約參觀============= -->
 				<li class="mb-1">
@@ -105,7 +105,7 @@ pageContext.setAttribute("list", list);
           >
             預約參觀
           </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
-          <a href="#" class="btn bkbtn">預約參觀</a>
+          <a href="#class="btn bkbtn">預約參觀</a>
 				</li>
 				<!-- =============最新消息============ -->
 				<li class="mb-1">
@@ -159,46 +159,39 @@ pageContext.setAttribute("list", list);
 			<!-- 表提欄位內容 -->
 			<thead>
 				<tr>
-					<th>圖片</th>
-					<th>最新消息編號/種類編號/管理員編號</th>
-					<th>標題名稱</th>
-					<th>內容描述</th>
-					<th>排程時間</th>
-					<th>上架日期</th>
-					<th>下架時間</th>
+					<th>照片編號</th>
+					<th>最新消息編號</th>
+					<th>消息照片</th>
 					<th>修改</th>
 					<th>刪除</th>
 				</tr>
 				</tr>
 				<%@ include file="page1.file"%>
-				<c:forEach var="latestNewsVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>">
+				<c:forEach var="newsPhotoVO" items="${list}" begin="<%=pageIndex%>"
+				end="<%=pageIndex+rowsPerPage-1%>">
 			</thead>
 
 			<tbody>
 				<tr>
-					<td><img src="./images/10.png"></td>
-					<td>${latestNewsVO.newsId}/${latestNewsVO.sortId}/${latestNewsVO.adminId}</td>
-					<td>${latestNewsVO.postTitle}</td>
-					<td>${latestNewsVO.newsIntro}</td>
-					<td>${latestNewsVO.publishedTime}</td>
-					<td>${latestNewsVO.onNews}</td>
-					<td>${latestNewsVO.offNews}</td>
+					<td>${newsPhotoVO.photoId}</td>
+					<td>${newsPhotoVO.newsId}</td>
+					<td><img class="figure-img img-fluid rounded" src="NewsPhotoServlet?photoId=${newsPhotoVO.photoId}"></td> 
+				
 					<td>
 						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/Latestnews.do"
+							ACTION="<%=request.getContextPath()%>/NewsPhoto.do"
 							style="margin-bottom: 0px;">
 							<input type="submit" class="btn btn-Revise" value="修改"> 
-							<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
+							<input type="hidden" name="photoId" value=${newsPhotoVO.photoId}>
 							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
 					<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/Latestnews.do"
+						ACTION="<%=request.getContextPath()%>/NewsPhoto.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" class="btn btn-delete" value="刪除"> 
-						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
+						<input type="hidden" name="photoId" value=${newsPhotoVO.photoId}>
 						<input type="hidden" name="action" value="delete">
 					</FORM>
 					</td>

@@ -10,25 +10,27 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.tibame.web.dao.LatestNewsDAO_interface;
+import com.tibame.web.dao.NewsSortDAO_interface;
 import com.tibame.web.vo.LatestNewsVO;
+import com.tibame.web.vo.NewsSortVO;
 
-public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
+public class NewsSortJDBCDAO implements NewsSortDAO_interface {
+
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/elitebaby?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT_STMT = "INSERT INTO LATEST_NEWS (SORT_ID,ADMIN_ID,NEWS_INTRO,PUBLISHED_TIME,ON_NEWS,OFF_NEWS,POST_TITLE) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS,OFF_NEWS,POST_TITLE,PUBLISHED_TIME FROM LATEST_NEWS order by NEWS_ID";
-	private static final String GET_ONE_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS,OFF_NEWS,POST_TITLE,PUBLISHED_TIME FROM LATEST_NEWS where NEWS_ID = ?";
-//	private static final String GET_Emps_ByDeptno_STMT = 
-//			"SELECT SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS_ID,OFF_NEWS_ID,POST_TITLE,PUBLISHED_TIME FROM LATEST_NEWS where deptno = ? order by empno";
-
-	private static final String DELETE = "DELETE FROM LATEST_NEWS where NEWS_ID = ?";
-	private static final String UPDATE = "UPDATE LATEST_NEWS  set SORT_ID=?, ADMIN_ID=?,NEWS_INTRO=?,ON_NEWS=?,OFF_NEWS=?,PUBLISHED_TIME=?,POST_TITLE=?where NEWS_ID = ?";
-
-	public void insert(LatestNewsVO latestNewsVo) {
+	private static final String INSERT_STMT = "INSERT INTO NEWS_SORT (SORT_NAME) VALUES (?)";
+	private static final String GET_ALL_STMT = "SELECT SORT_ID,SORT_NAME FROM NEWS_SORT order by SORT_ID";
+	private static final String GET_ONE_STMT = "SELECT SORT_ID,SORT_NAME FROM NEWS_SORT where SORT_ID=?";
+	private static final String GET_LATEST_NEWS_BySortID_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS,OFF_NEWS,POST_TITLE,PUBLISHED_TIME FROM LATEST_NEWS where SORT_ID = ? order by SORT_ID";
+	private static final String DELETE_LATEST_NEWS = "DELETE FROM LATEST_NEWS where NEWS_ID = ?";
+	private static final String DELETE_SORT = "DELETE FROM NEWS_SORT where SORT_ID = ?";
+	private static final String UPDATE = "UPDATE NEWS_SORT set SORT_NAME=? where SORT_ID =?";
+	
+	@Override
+	public void insert(NewsSortVO newsSortVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -39,17 +41,10 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
+			
 //pstmt對應sql語法,把資料匯進mysql裡面對應
-			pstmt.setInt(1, latestNewsVo.getSortId());
-			pstmt.setInt(2, latestNewsVo.getAdminId());
-			pstmt.setString(3, latestNewsVo.getNewsIntro());
-			pstmt.setDate(4, latestNewsVo.getPublishedTime());
-			pstmt.setDate(5, latestNewsVo.getOnNews());
-			pstmt.setDate(6, latestNewsVo.getOffNews());
-			pstmt.setString(7, latestNewsVo.getPostTitle());
-
+			pstmt.setString(1, newsSortVO.getSortName());
 			pstmt.executeUpdate();
-
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -76,7 +71,7 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 
 	}
 
-	public void update(LatestNewsVO latestNewsVO) {
+	public void update(NewsSortVO newsSortVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -86,14 +81,8 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-		pstmt.setInt(1, latestNewsVO.getSortId());
-			pstmt.setInt(2, latestNewsVO.getAdminId());
-			pstmt.setString(3, latestNewsVO.getNewsIntro());
-			pstmt.setDate(4, latestNewsVO.getPublishedTime());
-			pstmt.setDate(5, latestNewsVO.getOnNews());
-			pstmt.setDate(6, latestNewsVO.getOffNews());
-			pstmt.setString(7, latestNewsVO.getPostTitle());
-			pstmt.setInt(8, latestNewsVO.getNewsId());
+			pstmt.setInt(1, newsSortVO.getSortId());
+			pstmt.setString(2, newsSortVO.getSortName());
 			
 			pstmt.executeUpdate();
 
@@ -120,11 +109,10 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 				}
 			}
 		}
-
 	}
 
-	public void delete(Integer newsid) {
-
+	public void delete(Integer sortId) {
+		int updateCount_LATEST_NEWS= 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -132,17 +120,36 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.setInt(1, newsid);
-
+			// 先刪消息
+			pstmt = con.prepareStatement(DELETE_LATEST_NEWS);
+			pstmt.setInt(1, sortId);
 			pstmt.executeUpdate();
-
+			// 再刪種類
+			pstmt = con.prepareStatement(DELETE_SORT);
+			pstmt.setInt(1, sortId);
+			pstmt.executeUpdate();
+			
+			// 2●設定於 pstm.executeUpdate()之後
+						con.commit();
+						con.setAutoCommit(true);
+						System.out.println("刪除消息" +sortId + "時,共有消息" + updateCount_LATEST_NEWS
+								+ "消息同時被刪除");
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -164,9 +171,9 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 
 	}
 
-	public LatestNewsVO findByPrimaryKey(Integer newsId) {
+	public NewsSortVO findByPrimaryKey(Integer sortId) {
 
-		LatestNewsVO latestNewsVO = null;
+		NewsSortVO newsSortVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -177,21 +184,15 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, newsId);
+			pstmt.setInt(1, sortId);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// deptVO 也稱為 Domain objects
-				latestNewsVO = new LatestNewsVO();
-				latestNewsVO.setNewsId(rs.getInt("NEWS_ID"));
-				latestNewsVO.setSortId(rs.getInt("SORT_ID"));
-				latestNewsVO.setAdminId(rs.getInt("ADMIN_ID"));
-				latestNewsVO.setNewsIntro(rs.getString("NEWS_INTRO"));
-				latestNewsVO.setPublishedTime(rs.getDate("PUBLISHED_TIME"));
-				latestNewsVO.setOnNews(rs.getDate("ON_NEWS"));
-				latestNewsVO.setOffNews(rs.getDate("OFF_NEWS"));
-				latestNewsVO.setPostTitle(rs.getString("POST_TITLE"));
+				newsSortVO = new NewsSortVO();
+				newsSortVO.setSortId(rs.getInt("SORT_ID"));
+				newsSortVO.setSortName(rs.getString("Sort_Name"));
 			}
 
 			// Handle any driver errors
@@ -224,12 +225,13 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 				}
 			}
 		}
-		return latestNewsVO;
+		return newsSortVO;
 	}
-
-	public List<LatestNewsVO> getAll() {
-		List<LatestNewsVO> list = new ArrayList<LatestNewsVO>();
-		LatestNewsVO latestNewsVO = null;
+	
+	@Override
+	public List<NewsSortVO> getAll() {
+		List<NewsSortVO> list = new ArrayList<NewsSortVO>();
+		NewsSortVO newsSortVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -241,18 +243,12 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				latestNewsVO = new LatestNewsVO();
-				latestNewsVO.setNewsId(rs.getInt("NEWS_ID"));
-				latestNewsVO.setSortId(rs.getInt("SORT_ID"));
-				latestNewsVO.setAdminId(rs.getInt("ADMIN_ID"));
-				latestNewsVO.setNewsIntro(rs.getString("NEWS_INTRO"));
-				latestNewsVO.setPublishedTime(rs.getDate("PUBLISHED_TIME"));
-				latestNewsVO.setOnNews(rs.getDate("ON_NEWS"));
-				latestNewsVO.setOffNews(rs.getDate("OFF_NEWS"));
-				latestNewsVO.setPostTitle(rs.getString("POST_TITLE")); // Store the row in the list
-				list.add(latestNewsVO);
+				newsSortVO = new NewsSortVO();
+				newsSortVO.setSortId(rs.getInt("SORT_ID"));
+				newsSortVO.setSortName(rs.getString("SORT_NAME")); // Store the row in the list
+				list.add(newsSortVO);
 			}
 
 			// Handle any driver errors
@@ -287,7 +283,71 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 		}
 		return list;
 	}
+
+
+	@Override
+	public Set<LatestNewsVO> getLatestNewsBySortId(Integer sortId) {
+		Set<LatestNewsVO> set = new LinkedHashSet<LatestNewsVO>();
+		LatestNewsVO latestNewsVO = null;
 	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_LATEST_NEWS_BySortID_STMT);
+			pstmt.setInt(1,sortId);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				latestNewsVO = new LatestNewsVO();
+				latestNewsVO.setNewsId(rs.getInt("NEWS_ID"));
+				latestNewsVO.setSortId(rs.getInt("SORT_ID"));
+				latestNewsVO.setAdminId(rs.getInt("ADMIN_ID"));
+				latestNewsVO.setNewsIntro(rs.getString("NEWS_INTRO"));
+				latestNewsVO.setPublishedTime(rs.getDate("PUBLISHED_TIME"));
+				latestNewsVO.setOnNews(rs.getDate("ON_NEWS"));
+				latestNewsVO.setOffNews(rs.getDate("OFF_NEWS"));
+				latestNewsVO.setPostTitle(rs.getString("POST_TITLE")); // Store the row in the list
+				set.add(latestNewsVO);
+			}
+	
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
 	public static void main(String[] args) {
 
 		LatestNewsJDBCDAO dao = new LatestNewsJDBCDAO();

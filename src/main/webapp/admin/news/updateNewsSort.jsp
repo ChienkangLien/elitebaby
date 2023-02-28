@@ -133,7 +133,7 @@
 	</div>
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
-		<div class="t2" id="title">最新消息管理-修改</div>  
+		<div class="t2" id="title">消息種類管理</div>  
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -144,63 +144,23 @@
 <!-- 	</ul> -->
 </c:if>
      
-<FORM METHOD="post" ACTION="/elitebaby/LatestNews.do" name="form1">
+<FORM METHOD="post" ACTION="/elitebaby/NewsSort.do" name="form1">
 <table>
     <tr>
-		<td>最新消息編號:</td>
-<%-- 		<td>${latestNewsVO.newsId}</td> --%>
-	</tr>
-	
-	<jsp:useBean id="sortSvc" scope="page"
-					class="com.tibame.web.service.NewsSortService" />
-				<tr>
-					<td>種類:
-<!-- 					<font color=red><b>*</b></font></td> -->
-					<td><select size="1" name="sortId">
-							<c:forEach var="newsSortVO" items="${sortSvc.all}">
-								<option value="${newsSortVO.sortId}"
-									${(param.sortId==newsSortVO.sortId)? 'selected':'' }>${newsSortVO.sortName}
-							</c:forEach>
-					</select></td>
-				</tr>
-	<tr>
-		<td>管理員編號:</td>
-		<td><input type="TEXT" name="adminId" size="45" 
-			 value="${latestNewsVO.adminId}"/></td>
-<%-- 			 <td>${latestNewsVO.adminId}</td> --%>
+		<td>種類編號:<font color=red><b>*</b></font></td>
+<%-- 		<td>${newsSortVO.sortId}</td> --%>
 	</tr>
 	<tr>
-		<td>消息內容:</td>
-		<td><input type="TEXT" name="newsIntro" size="45" 
-			 value="${latestNewsVO.newsIntro}"/></td>
-<%-- 			 <td>${latestNewsVO.newsIntro}</td> --%>
-	</tr>
-	<tr>
-		<td>排程時間:</td>
-		<td><input name="publishedTime" id="f_date1" type="text"/></td>
-<%-- 		<td>${latestNewsVO.publishedTime}</td> --%>
-	</tr>
-	<tr>
-		<td>上架時間:</td>
-		<td><input name="onNews" id="f_date1" type="text"/></td>
-<%-- 		<td>${latestNewsVO.onNews}</td> --%>
-	</tr>
-	<tr>
-		<td>下架時間:</td>
-		<td><input name="offNews" id="f_date1" type="text"/></td>
-<%-- 		<td>${latestNewsVO.offNews}</td> --%>
-	</tr>
-	<tr>
-		<td>標題名稱:</td>
-		<td><input type="TEXT" name="postTitle" size="45"
-			 value="${latestNewsVO.postTitle}"/></td>
-<%-- 			 <td>${latestNewsVO.postTitle}</td> --%>
+		<td>種類名稱:</td>
+		<td><input type="TEXT" name="sortName" size="45"
+			 value="${newsSortVO.sortName}"/></td>
+<%-- 			 <td>${newsSortVO.sortName}</td> --%>
 	</tr>
 	
 	</table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="newsId" value="${latestNewsVO.newsId}">
+<input type="hidden" name="sortId" value="${newsSortVO.sortId}">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -219,74 +179,7 @@
   }
 </style>
 
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${param.publishedTime}', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-        	<style>
-        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	           width:  300px;   /* width:  300px; */
-        	  }
-        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	           height: 151px;   /* height:  151px; */
-        	  }
-        	</style>
-
-        	<script>
-        	        $.datetimepicker.setLocale('zh');
-        	        $('#f_date1').datetimepicker({
-        	           theme: '',              //theme: 'dark',
-        	 	       timepicker:false,       //timepicker:true,
-        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	 		   value: '${param.onNews}', // value:   new Date(),
-        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	           //startDate:	            '2017/07/10',  // 起始日
-        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        });
-        	        
-        	        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-        	        	<style>
-        	        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	        	           width:  300px;   /* width:  300px; */
-        	        	  }
-        	        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	        	           height: 151px;   /* height:  151px; */
-        	        	  }
-        	        	</style>
-
-        	        	<script>
-        	        	        $.datetimepicker.setLocale('zh');
-        	        	        $('#f_date1').datetimepicker({
-        	        	           theme: '',              //theme: 'dark',
-        	        	 	       timepicker:false,       //timepicker:true,
-        	        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	        	 		   value: '${param.offNews}', // value:   new Date(),
-        	        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	        	           //startDate:	            '2017/07/10',  // 起始日
-        	        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        	        });
   <!-- bootstrap引用cdn -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

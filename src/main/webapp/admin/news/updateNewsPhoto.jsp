@@ -1,0 +1,174 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.tibame.web.service.*"%>
+<%@ page import="com.tibame.web.vo.*"%>
+ 
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- cdn的引用 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <!-- 下載bootstrap引用 -->
+  <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
+  <link rel="stylesheet" href="css\official.css" />
+  <link rel="stylesheet" href="./css/updateLatestNews.css" />
+
+  <title>菁英產後護理之家</title>
+</head>
+<body class="c2">
+	<div class="flex-shrink-0 p-3 c1" id="navbar">
+		<a href="/elitebaby/admin/news/selectNewsPhoto.jsp"><img
+			src="images/logo.jpg" style="width: 30px" /> <span
+			class="fs-5 fw-semibold">菁英產後護理之家</span>
+			 <a href="#"class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		</a> <!-- =======按鍵======== -->
+
+			<ul class="list-unstyled ps-0">
+				<li class="mb-1">
+					<button
+						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+						data-bs-toggle="collapse" data-bs-target="#home-collapse"
+						aria-expanded="true">會員中心</button>
+					<div class="collapse" id="home-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" class="link-dark rounded">用戶資料管理</a></li>
+							<li><a href="#" class="link-dark rounded">查詢會員</a></li>
+							<li><a href="#" class="link-dark rounded">編輯會員資訊</a></li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- ================膳食管理============== -->
+
+				<li class="mb-1">
+					<button
+						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
+						aria-expanded="false">膳食管理</button>
+					<div class="collapse" id="orders-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" class="link-dark rounded">訂餐管理</a></li>
+							<li><a href="#" class="link-dark rounded">預約試吃管理</a></li>
+							<li><a href="#" class="link-dark rounded">商品管理</a></li>
+							<li><a href="#" class="link-dark rounded">購物車</a></li>
+						</ul>
+					</div>
+				</li>
+				<!-- ===============房間管理============= -->
+				<li class="mb-1">
+					<button
+						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+						data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
+						aria-expanded="false">房間管理</button>
+					<div class="collapse" id="dashboard-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" class="link-dark rounded">房型維護</a></li>
+							<li><a href="#" class="link-dark rounded">房間訂單</a></li>
+							<li><a href="#" class="link-dark rounded">房況管理</a></li>
+						</ul>
+					</div>
+				</li>
+				<!-- =================討論區================ -->
+				<li class="mb-1">
+					<!-- <button
+            class="btn btn-toggle align-items-center rounded collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#texts-collapse"
+            aria-expanded="false"
+          >
+            討論區
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
+					class="btn bkbtn">討論區</a>
+				</li>
+				<!-- ================預約參觀============= -->
+				<li class="mb-1">
+					<!-- <button
+            class="btn btn-toggle align-items-center rounded collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#orders-collapse1"
+            aria-expanded="false"
+          >
+            預約參觀
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
+					class="btn bkbtn">預約參觀</a>
+				</li>
+				<!-- =============最新消息============ -->
+				<li class="mb-1">
+					<button
+						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+						data-bs-toggle="collapse" data-bs-target="#orders-collapse2"
+						aria-expanded="false">消息區管理</button>
+					<div class="collapse" id="orders-collapse2">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" class="link-dark rounded">留言管理</a></li>
+							<li><a href="#" class="link-dark rounded">新增消息種類</a></li>
+							<li><a href="#" class="link-dark rounded">發佈消息</a></li>
+						</ul>
+					</div>
+				</li>
+				<!-- ===================問題回報================== -->
+				<li class="mb-1">
+					<button
+						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+						data-bs-toggle="collapse" data-bs-target="#account-collapse"
+						aria-expanded="false">問題回報</button>
+					<div class="collapse" id="account-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" class="link-dark rounded">回報信件</a></li>
+							<li><a href="#" class="link-dark rounded">發送信件</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+	</div>
+	<div class="c1" id="header">
+		<p class="t1">後台管理系統</p>
+	</div>
+	<div id="main_div">
+		<div id="blank_area">此處留空</div>
+		<div class="t2" id="title">消息照片管理</div>  
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+<!-- 	<ul> -->
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+<!-- 	</ul> -->
+</c:if>
+     
+<FORM METHOD="post" ACTION="/elitebaby/NewsPhoto.do" name="form1">
+<table>
+    <tr>
+		<td>照片編號:</td>
+<%-- 		<td>${newsPhotoVO.photoId}</td> --%>
+	</tr>
+	
+	<tr>
+		<td>消息編號:</td>
+		<td><input type="TEXT" name="newsId" size="45"
+			 value="${newsPhotoVO.newsId}"/></td>
+<%-- 			 <td>${newsPhotoVO.newsId}</td> --%>
+	</tr>
+	<tr>
+		<td>管理員編號:</td>
+		<td><input type="TEXT" name="newsPhoto" size="45" 
+			 value="${newsPhotoVO.newsPhoto}"/></td>
+<%-- 			 <td>${newsPhotoVO.newsPhoto}</td> --%>
+	</tr>
+	
+	
+	</table>
+<br>
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="photoId" value="${newsPhotoVO.photoId}">
+<input type="submit" value="送出修改"></FORM>
+</body>
+</html>

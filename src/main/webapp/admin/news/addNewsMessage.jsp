@@ -6,6 +6,7 @@
 <%@ page import="com.tibame.web.vo.*"%>
 
 <%
+String userId= "1" ;
 // LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 %>
 <%-- --<%= latestNewsVO==null %>--${latestNewsVO.sortId}-- --%>
@@ -32,7 +33,7 @@
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
+		<a href="/elitebaby/admin/news/selectNewsMessage.jsp"><img
 			src="images/logo.jpg" style="width: 30px" /> <span
 			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
 			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
@@ -141,7 +142,7 @@
 	</div>
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
-		<div class="t2" id="title">最新消息管理-新增</div>
+		<div class="t2" id="title">最新消息留言管理</div>
 
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
@@ -154,54 +155,56 @@
 		</c:if>
 
 		<FORM METHOD="post"
-			ACTION="<%=request.getContextPath()%>/Latestnews.do" name="form1">
+			ACTION="<%=request.getContextPath()%>/NewsMessage.do" name="form1">
 			<table>
 
 
-				<jsp:useBean id="sortSvc" scope="page"
-					class="com.tibame.web.service.NewsSortService" />
+<%-- 				<jsp:useBean id="sortSvc" scope="page" --%>
+<%-- 					class="com.tibame.web.service.NewsSortService" /> --%>
+<!-- 				<tr> -->
+<!-- 					<td>使用者編號: -->
+<!-- <!-- 					<font color=red><b>*</b></font></td> --> 
+<!-- 					<td><select size="1" name="sortId"> -->
+<%-- 							<c:forEach var="newsSortVO" items="${sortSvc.all}"> --%>
+<%-- 								<option value="${newsSortVO.sortId}" --%>
+<%-- 									${(param.sortId==newsSortVO.sortId)? 'selected':'' }>${newsSortVO.sortName} --%>
+<%-- 							</c:forEach> --%>
+<!-- 					</select></td> -->
+<!-- 				</tr> -->
+					<tr>
+									<td>使用者編號:<font color=red><b>*</b></font></td>
+									<td><select size="1" name="deptno">
+
+											<option value="1">
+											<option value="2">
+											<option value="3">
+									</select></td>
+								</tr>
 				<tr>
-					<td>種類:
+					<td>留言內容:</td>
+					<td><input type="TEXT" name="messageContent" size="45" value="" /></td>
+
+				</tr>
+
+				<tr>
+					<td>留言時間:</td>
+					<td><input type="TEXT" name="contentTime" size="45" value="" /></td>
+
+				</tr>
+
+				<jsp:useBean id="newsSvc" scope="page"
+					class="com.tibame.web.service.LatestNewsService" />
+				<tr>
+					<td>最新消息編號:
 <!-- 					<font color=red><b>*</b></font></td> -->
-					<td><select size="1" name="sortId">
-							<c:forEach var="newsSortVO" items="${sortSvc.all}">
-								<option value="${newsSortVO.sortId}"
-									${(param.sortId==newsSortVO.sortId)? 'selected':'' }>${newsSortVO.sortName}
+					<td><select size="1" name="newsId">
+							<c:forEach var="latestNewsVO" items="${newsSvc.all}">
+								<option value="${latestNewsVO.newsId}"
+									${(param.newsId==latestNewsVO.newsId)? 'selected':'' }>${latestNewsVO.newsId}
 							</c:forEach>
 					</select></td>
 				</tr>
-
-				<tr>
-					<td>標題名稱:</td>
-					<td><input type="TEXT" name="postTitle" size="45" value="" /></td>
-
-				</tr>
-
-				<tr>
-					<td>消息內容:</td>
-					<td><input type="TEXT" name="newsIntro" size="45" value="" /></td>
-
-				</tr>
-
-				<tr>
-					<td>排程時間:</td>
-					<td><input name="publishedTime" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.publishedTime}</td> --%>
-
-				</tr>
-				<tr>
-					<td>上架時間:</td>
-					<td><input name="onNews" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.onNews}</td> --%>
-
-				</tr>
-
-				<tr>
-					<td>下架時間:</td>
-					<td><input name="offNews" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.offNews}</td> --%>
-
-				</tr>
+				
 
 				<!-- 				<tr> -->
 				<!-- 					<td>種類:<font color=red><b>*</b></font></td> -->
@@ -215,118 +218,101 @@
 
 			</table>
 			<br> <input type="hidden" name="action" value="insert">
-			 <input	type="hidden" name="adminId" value="1"> 
-			 <input type="hidden" name="sortId" value="1">
+			 <input	type="hidden" name="userId" value="1"> 
+			 <input type="hidden" name="newsId" value="1">
 			  <input type="submit" value="送出新增">
 		</FORM>
 </body>
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<% 
-  java.sql.Date publishedTime = null;
-  try {
-	  publishedTime = java.sql.Date.valueOf(request.getParameter("publishedTime").trim());
-   } catch (Exception e) {
-	   publishedTime = new java.sql.Date(System.currentTimeMillis());
-   }
-%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="/elitebaby/datetimepicker/jquery.datetimepicker.css" />
+<script src="/elitebaby/datetimepicker/jquery.js"></script>
+<script src="/elitebaby/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
- 	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=publishedTime%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        <% 
-        java.sql.Date onNews = null;
-        try {
-        	onNews = java.sql.Date.valueOf(request.getParameter("onNews").trim());
-         } catch (Exception e) {
-        	 onNews = new java.sql.Date(System.currentTimeMillis());
-         }
-      %>
-      <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-      <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-      <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	$.datetimepicker.setLocale('zh');
+	$('#f_date1').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : false, //timepicker:true,
+		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d', //format:'Y-m-d H:i:s',
+		value : '2023-02-20', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
 
-      <style>
-        .xdsoft_datetimepicker .xdsoft_datepicker {
-                 width:  300px;   /* width:  300px; */
-        }
-        .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-                 height: 151px;   /* height:  151px; */
-        }
-      </style>
+	<link rel="stylesheet" type="text/css" href="/elitebaby/datetimepicker/jquery.datetimepicker.css" />
+	<script src="/elitebaby/datetimepicker/jquery.js">
+</script>
+<script src="/elitebaby/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-      <script>
-              $.datetimepicker.setLocale('zh');
-              $('#f_date1').datetimepicker({
-       	       theme: '',              //theme: 'dark',
-      	       timepicker:false,       //timepicker:true,
-      	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-      	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-      		   value: '<%=onNews%>', // value:   new Date(),
-                 //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-                 //startDate:	            '2017/07/10',  // 起始日
-                 //minDate:               '-1970-01-01', // 去除今日(不含)之前
-                 //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-              });
-              
-              <% 
-              java.sql.Date offNews = null;
-              try {
-            	  offNews = java.sql.Date.valueOf(request.getParameter("offNews").trim());
-               } catch (Exception e) {
-            	   offNews = new java.sql.Date(System.currentTimeMillis());
-               }
-            %>
-            <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-            <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-            <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
 
-            <style>
-              .xdsoft_datetimepicker .xdsoft_datepicker {
-                       width:  300px;   /* width:  300px; */
-              }
-              .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-                       height: 151px;   /* height:  151px; */
-              }
-            </style>
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
 
-            <script>
-                    $.datetimepicker.setLocale('zh');
-                    $('#f_date1').datetimepicker({
-             	       theme: '',              //theme: 'dark',
-            	       timepicker:false,       //timepicker:true,
-            	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-            	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-            		   value: '<%=offNews%>', // value:   new Date(),
-                       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-                       //startDate:	            '2017/07/10',  // 起始日
-                       //minDate:               '-1970-01-01', // 去除今日(不含)之前
-                       //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-                    });
+<script>
+	$.datetimepicker.setLocale('zh');
+	$('#f_date1').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : false, //timepicker:true,
+		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d', //format:'Y-m-d H:i:s',
+		value : '2023-02-20', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
+
+	<link rel="stylesheet" type="text/css" href="/elitebaby/datetimepicker/jquery.datetimepicker.css" />
+	<script src="/elitebaby/datetimepicker/jquery.js">
+</script>
+<script src="/elitebaby/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+<script>
+	$.datetimepicker.setLocale('zh');
+	$('#f_date1').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : false, //timepicker:true,
+		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d', //format:'Y-m-d H:i:s',
+		value : '2023-02-20', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
 </script>
 <!-- bootstrap引用cdn -->
 <script

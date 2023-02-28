@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tibame.web.dao.LatestNewsDAO;
 import com.tibame.web.service.LatestNewsService;
 import com.tibame.web.vo.LatestNewsVO;
 
@@ -119,8 +120,8 @@ public class LatestNewsServlet extends HttpServlet {
 			java.sql.Date publishedTime = null;
 			try {
 				publishedTime = java.sql.Date.valueOf(req.getParameter("publishedTime").trim());
-			} catch (Exception e) {
-				publishedTime = new java.sql.Date(System.currentTimeMillis());
+			} catch (IllegalArgumentException e) {
+//				publishedTime = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期時間!");
 			}
 
@@ -165,7 +166,7 @@ public class LatestNewsServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			LatestNewsService newsSvc = new LatestNewsService();
-			latestNewsVO = newsSvc.updateEmp(newsId, sortId, adminId, newsIntro, publishedTime, onNews, offNews,
+			latestNewsVO = newsSvc.updateLatestNewsEmp(newsId, sortId, adminId, newsIntro, publishedTime, onNews, offNews,
 					postTitle);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
@@ -197,7 +198,7 @@ public class LatestNewsServlet extends HttpServlet {
 			try {
 				publishedTime = java.sql.Date.valueOf(req.getParameter("publishedTime").trim());
 			} catch (IllegalArgumentException e) {
-				publishedTime = new java.sql.Date(System.currentTimeMillis());
+//				publishedTime = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期時間!");
 			}
 
@@ -205,7 +206,7 @@ public class LatestNewsServlet extends HttpServlet {
 			try {
 				onNews = java.sql.Date.valueOf(req.getParameter("onNews").trim());
 			} catch (IllegalArgumentException e) {
-				onNews = new java.sql.Date(System.currentTimeMillis());
+//				onNews = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期時間!");
 			}
 
@@ -241,7 +242,7 @@ public class LatestNewsServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			LatestNewsService newsSvc = new LatestNewsService();
-			latestNewsVO = newsSvc.addEmp(sortId,  adminId, newsIntro, publishedTime, onNews, offNews, postTitle);
+			latestNewsVO = newsSvc.addLatestNewsEmp(sortId,  adminId, newsIntro, publishedTime, onNews, offNews, postTitle);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/admin/news/listAllLatestNews.jsp";
@@ -261,13 +262,22 @@ public class LatestNewsServlet extends HttpServlet {
 
 			/*************************** 2.開始刪除資料 ***************************************/
 			LatestNewsService newsSvc = new LatestNewsService();
-			newsSvc.deleteEmp(newsId);
+			newsSvc.deleteLatestNewsEmp(newsId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			String url = "/admin/news/listAllLatestNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
+		if("search".equals(action)) {
+			String aaa=req.getParameter("select");
+			LatestNewsDAO  count= new LatestNewsDAO();
+			List<LatestNewsVO> sum =count.getAll1(aaa);
+			req.setAttribute("Msgs", sum);
+			RequestDispatcher successView = req.getRequestDispatcher("/admin/news/XXX.jsp");
+			successView.forward(req, res);
+			}
+		}
 	}
 
-}
+

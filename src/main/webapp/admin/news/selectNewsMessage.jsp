@@ -1,14 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.tibame.web.service.*"%>
-<%@ page import="com.tibame.web.vo.*"%>
 
-<%
-LatestNewsService newsSvc = new LatestNewsService();
-List<LatestNewsVO> list = newsSvc.getAll();
-pageContext.setAttribute("list", list);
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,17 +17,17 @@ pageContext.setAttribute("list", list);
 <!-- 下載bootstrap引用 -->
 <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="css\official.css" />
-<link rel="stylesheet" href="./css/bglistAllLatestnews.css" />
+<link rel="stylesheet" href="./css/selectLatestNews.css" />
 
 <title>菁英產後護理之家</title>
 </head>
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp">
-		<img src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> 
-			<a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		<a href="/elitebaby/admin/news/selectNewsMessage.jsp"><img
+			src="images/logo.jpg" style="width: 30px" /> <span
+			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
+			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 		</a> <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
@@ -92,8 +84,8 @@ pageContext.setAttribute("list", list);
             aria-expanded="false"
           >
             討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 -->
-           <a href="#" class="btn bkbtn">討論區</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
+					class="btn bkbtn">討論區</a>
 				</li>
 				<!-- ================預約參觀============= -->
 				<li class="mb-1">
@@ -104,8 +96,8 @@ pageContext.setAttribute("list", list);
             aria-expanded="false"
           >
             預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
-          <a href="#" class="btn bkbtn">預約參觀</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
+					class="btn bkbtn">預約參觀</a>
 				</li>
 				<!-- =============最新消息============ -->
 				<li class="mb-1">
@@ -141,82 +133,44 @@ pageContext.setAttribute("list", list);
 	</div>
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
-		<div class="t2" id="title">最新消息管理</div>
-		<!-- <h1>建立表格</h1> -->
+		<div class="t2" id="title">最新消息留言管理-搜尋</div>
+	</div>
+	
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+<ul style="margin-left:500px">
+  <li><a href='/elitebaby/admin/news/listAllNewsMessage.jsp'>表單</a>  <br><br></li>
+	<li>
+		<FORM METHOD="post" ACTION="/elitebaby/NewsMessage.do">
+			<b>輸入最新消息留言編號 (如1):</b> <input type="text" name="newsMessageId"> <input
+				type="hidden" name="action" value="getOne_For_Display"> <input
+				type="submit" value="送出">
+		</FORM>
+	</li>
 
-<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
-<!-- 			data-bs-target="#latestnews">新增</button> -->
-<!-- <td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/Latestnews.do" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" class="btn btn-add" value="新增">  -->
-<!-- 						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}> -->
-<!-- 						<input type="hidden" name="action" value="add"> -->
-<!-- 					</FORM> -->
-<!-- 					</td> -->
-		<table>
-			<!-- 表提欄位內容 -->
-			<thead>
-				<tr>
-					<th>圖片</th>
-					<th>最新消息編號/種類編號/管理員編號</th>
-					<th>標題名稱</th>
-					<th>內容描述</th>
-					<th>排程時間</th>
-					<th>上架日期</th>
-					<th>下架時間</th>
-					<th>修改</th>
-					<th>刪除</th>
-				</tr>
-				</tr>
-				<%@ include file="page1.file"%>
-				<c:forEach var="latestNewsVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>">
-			</thead>
-
-			<tbody>
-				<tr>
-					<td><img src="./images/10.png"></td>
-					<td>${latestNewsVO.newsId}/${latestNewsVO.sortId}/${latestNewsVO.adminId}</td>
-					<td>${latestNewsVO.postTitle}</td>
-					<td>${latestNewsVO.newsIntro}</td>
-					<td>${latestNewsVO.publishedTime}</td>
-					<td>${latestNewsVO.onNews}</td>
-					<td>${latestNewsVO.offNews}</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/Latestnews.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" class="btn btn-Revise" value="修改"> 
-							<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
-							<input type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/Latestnews.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" class="btn btn-delete" value="刪除"> 
-						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
-						<input type="hidden" name="action" value="delete">
-					</FORM>
-					</td>
-				</tr>
-				</c:forEach>
-		</table>
-		<%@ include file="page2.file"%>
-		<!-- bootstrap引用cdn -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-			crossorigin="anonymous"></script>
-		<!-- 下載bootstrap引用 -->
-		<!-- <script
+	<ul>
+		<li><a href='/elitebaby/admin/news/addNewsMessage.jsp'>新增</a></li>
+	</ul>
+</ul>
+	<!-- bootstrap引用cdn -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+		crossorigin="anonymous"></script>
+	<!-- 下載bootstrap引用 -->
+	<!-- <script
      src="./vendors/bootstrap/bootstrap.bundle.min.js"
      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
      crossorigin="anonymous"
    ></script> -->
+
 </body>
 
 </html>

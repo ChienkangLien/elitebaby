@@ -12,13 +12,12 @@ public class LatestNewsService {
 	
 	
 	private LatestNewsDAO_interface dao;
-//	private LatestNewsVo latestNewsVo;
 
 	public LatestNewsService() {
 		dao= new LatestNewsDAO();
 	}
 	
-	public LatestNewsVO addEmp(Integer sortId, Integer adminId,String newsIntro,
+	public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
 			java.sql.Date  publishedTime,java.sql.Date onNews, java.sql.Date offNews, String postTitle) {
 
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
@@ -35,7 +34,7 @@ public class LatestNewsService {
 		return latestNewsVO;
 	}
 
-	public LatestNewsVO updateEmp(Integer newsId, Integer sortId, Integer adminId,String newsIntro,
+	public LatestNewsVO updateLatestNewsEmp(Integer newsId, Integer sortId, Integer adminId,String newsIntro,
 			java.sql.Date  publishedTime,java.sql.Date onNews, java.sql.Date offNews, String postTitle) {
 
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
@@ -56,7 +55,7 @@ public class LatestNewsService {
 //	public void updateEmp(LatestNewsVO latestNewsVO) {
 //		dao.update(latestNewsVO);
 //	}
-	public void deleteEmp(Integer newsId) {
+	public void deleteLatestNewsEmp(Integer newsId) {
 		dao.delete(newsId);
 	}
 
