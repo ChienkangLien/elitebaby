@@ -1,0 +1,19 @@
+a {
+  color: #4a4a4a;
+}
+
+h2.fc-toolbar-title {
+  color: #4a4a4a;
+}
+
+#roomSelectdiv {
+  display: flex;
+}
+
+.toFloat {
+  margin-right: 5%;
+}
+
+.toFloat:nth-child(3) {
+  align-self: flex-end;
+}

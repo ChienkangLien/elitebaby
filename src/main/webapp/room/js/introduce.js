@@ -1,6 +1,6 @@
 //載入房型
 $(document).ready(function () {
-  fetch("/elitebaby/admin/room/RoomTypeSearch")
+  fetch("/elitebaby/admin/room/RoomTypeController?task=getAll")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -67,33 +67,33 @@ $(document).ready(function () {
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="orderStartDate" class="col-form-label">入住日</label>
-                            <input type="date" class="form-control order_start_date" name="orderStartDate" id="orderStartDate">
+                            <label for="orderStartDate${body[i].roomTypeId}" class="col-form-label">入住日</label>
+                            <input type="date" class="form-control order_start_date" name="orderStartDate" id="orderStartDate${body[i].roomTypeId}">
                         </div>
                         <div class="mb-3">
-                            <label for="orderEndDate" class="col-form-label">退房日</label>
-                            <input type="date" class="form-control order_end_date" name="orderEndDate" id="orderEndDate" readonly>
+                            <label for="orderEndDate${body[i].roomTypeId}" class="col-form-label">退房日</label>
+                            <input type="date" class="form-control order_end_date" name="orderEndDate" id="orderEndDate${body[i].roomTypeId}" readonly>
                         </div>
 
                         <div class="mb-3">
-                            <label for="orderResident" class="col-form-label">入住人</label>
-                            <select name="orderResident" id="orderResident">
+                            <label for="orderResident${body[i].roomTypeId}" class="col-form-label">入住人</label>
+                            <select name="orderResident" id="orderResident${body[i].roomTypeId}" class="resident">
                                 <option value="本人">本人</option>
                                 <option value="老婆">老婆</option>
                                 <option value="其他">其他</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="roomId" class="col-form-label">選擇房間</label>
+                            <label for="roomId${body[i].roomTypeId}" class="col-form-label">選擇房間</label>
                             <div  class="room_num">${body[i].roomTypeName}
-                                <select name="roomId" id="roomId" data-id="${body[i].roomTypeId}">
+                                <select class="roomSelect" name="roomId" id="roomId${body[i].roomTypeId}" data-id="${body[i].roomTypeId}">
                                     
                                 </select>
                             </div>
                            </div>
                         <div class="mb-3">
-                            <label for="orderRemark" class="col-form-label">備註</label>
-                            <textarea class="form-control remark" id="orderRemark" name="orderRemark" placeholder="入住人若選其他、可在此詳述"></textarea>
+                            <label for="orderRemark${body[i].roomTypeId}" class="col-form-label">備註</label>
+                            <textarea class="form-control remark" id="orderRemark${body[i].roomTypeId}" name="orderRemark" placeholder="入住人若選其他、可在此詳述"></textarea>
                         </div>
                         
                     </form>
@@ -101,7 +101,7 @@ $(document).ready(function () {
                 <div class="modal-footer">
                     <span class="t2" data-price="${body[i].roomPrice}" style="width:50%"></span>
                     <button type="button" class="btn cancelbtn" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn" data-id="${body[i].roomTypeId}">確定</button>
+                    <button type="button" class="btn createOrder" data-id="${body[i].roomTypeId}">確定</button>
                 </div>
             </div>
         </div>
@@ -120,15 +120,7 @@ $(document).ready(function () {
         roomTypeArr.push($(this).data("id-to-arr"));
       });
       for (let i = 0; i < roomTypeArr.length; i++) {
-        fetch("/elitebaby/admin/room/RoomPhotoSearch", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-          },
-          body: JSON.stringify({
-            id: roomTypeArr[i],
-          }),
-        })
+        fetch(`/elitebaby/admin/room/RoomPhotoController?id=${roomTypeArr[i]}`)
           .then((resp) => {
             if (resp.status === 204) {
               console.log("resp.status===" + resp.status);
@@ -211,13 +203,14 @@ $(document).ready(function () {
       .closest("div.modal-content")
       .find("span")
       .html(
-        `訂單總額為<span class="t2 orderPrice">NT$${
+        `時段金額為<span class="t2 orderPrice">NT$${
           isNaN(cost) ? "-" : cost
         }</span>`
       );
   });
 });
 
+//訂房時清空篩選欄位
 $(document).on("click", "button.room_type_btn", function () {
   // let order_start_date = document.querySelectorAll(".order_start_date");
   // let order_end_date = document.querySelectorAll(".order_end_date");
@@ -228,12 +221,129 @@ $(document).on("click", "button.room_type_btn", function () {
   // remark.value = "";
 
   $(".order_start_date").each(function () {
-    $(this).val("");
+    $(this).val("").removeAttr("min").removeAttr("max");
   });
   $(".order_end_date").each(function () {
-    $(this).val("").prop("readonly", true);
+    $(this).val("").prop("readonly", true).removeAttr("min").removeAttr("max");
   });
   $(".remark").each(function () {
     $(this).val("");
   });
+  $("select.roomSelect").each(function () {
+    $(this).empty();
+  });
+  $("select.resident").each(function () {
+    $(this).find("option[value='本人']").prop("selected", true);
+  });
+  $("span.t2").each(function () {
+    $(this).text("");
+  });
+});
+
+//查詢空房
+$(document).on(
+  "change",
+  "input.order_start_date, input.order_end_date",
+  function () {
+    const startDate = $(this)
+      .closest("form")
+      .find("input.order_start_date")
+      .val();
+    const endDate = $(this).closest("form").find("input.order_end_date").val();
+    const typeId = $(this).closest("div.modal-content").attr("data-id");
+
+    if (startDate != "" && endDate != "") {
+      $(this).closest("form").find("select.roomSelect").empty();
+      fetch(
+        `/elitebaby/admin/room/RoomController?task=available&startDate=${startDate}&endDate=${endDate}&typeId=${typeId}`
+      )
+        .then((resp) => {
+          if (resp.status === 204) {
+            console.log("resp.status===" + resp.status);
+            alert("目前時段此房型房間已被訂滿");
+          } else {
+            return resp.json();
+          }
+        })
+        .then((body) => {
+          try {
+            if (body.length != null) {
+              $(`select#${body[0].roomTypeId}`).empty();
+              console.log(body);
+              for (let i = 0; i < body.length; i++) {
+                let option_str = `<option data-room-id='${body[i].roomId}' value='${body[i].roomId}'>${body[i].roomName}</option>`;
+                $(`select[data-id='${body[i].roomTypeId}'`).append(option_str);
+              }
+            }
+          } catch (error) {
+            console.log(error + "，資料庫沒可用房間故後端沒回傳");
+          }
+        });
+    }
+  }
+);
+
+//新增訂單
+$(document).on("click", ".createOrder", function () {
+  const roomId = $(this).closest("div.modal-content").find(".roomSelect").val();
+  const orderRemark =
+    $(this).closest("div.modal-content").find(".remark").val().trim() == ""
+      ? null
+      : $(this).closest("div.modal-content").find(".remark").val().trim();
+  const orderStartDate = $(this)
+    .closest("div.modal-content")
+    .find(".order_start_date")
+    .val();
+  const orderEndDate = $(this)
+    .closest("div.modal-content")
+    .find(".order_end_date")
+    .val();
+  const orderResident = $(this)
+    .closest("div.modal-content")
+    .find(".resident")
+    .val();
+  const orderPrice = $(this)
+    .closest("div.modal-footer")
+    .find(".orderPrice")
+    .text()
+    .substring(3);
+  const orderStatus = "客訂單";
+  let hasError = false;
+  if (!orderEndDate) {
+    alert("結束日不能是空白");
+    hasError = true;
+  }
+  if (!orderStartDate) {
+    alert("開始日不能是空白");
+    hasError = true;
+  }
+  if (!roomId) {
+    alert("房間不能是空白");
+    hasError = true;
+  }
+
+  if (!hasError) {
+    fetch("/elitebaby/admin/room/RoomOrderController", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify({
+        orderRemark: orderRemark,
+        roomId: roomId,
+        orderStartDate: orderStartDate,
+        orderEndDate: orderEndDate,
+        orderStatus: orderStatus,
+        orderResident: orderResident,
+        orderPrice: orderPrice,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((body) => {
+        alert(`message: ${body.message}`);
+        if (body.message == "新增成功") {
+          $(this).closest("div.modal-footer").find(".cancelbtn").click();
+        }
+      });
+  }
 });

@@ -13,8 +13,12 @@
     />
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="../../vendors/bootstrap/bootstrap.min.css" /> -->
+    <!-- fullCalendar引用 -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+    <script src="js/zh-tw.global.js"></script>
     <link rel="stylesheet" href="../../css/official.css" />
     <link rel="stylesheet" href="../../css/background_navbar.css" />
+    <link rel="stylesheet" href="css/condition.css" />
 
     <title>菁英後台管理系統</title>
   </head>
@@ -202,87 +206,155 @@
     </div>
     <div id="main_div">
       <div id="blank_area">此處留空</div>
-      <div class="container" id="container1">
-        <div class="t2" id="title1">房型訂單查詢</div>
+      <div class="t2" id="title">房況管理</div>
+      <div class="container" id="container">
+        <button
+          class="btn"
+          style="margin-bottom: 1%"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          id="newRoom"
+        >
+          新增關房單
+        </button>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">新增維護狀態</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="roomTypeId" class="col-form-label"
+                      >選擇房型</label
+                    >
+                    <div class="roomType_num">
+                      <select
+                        class="roomTypeSelect"
+                        name="roomTypeId"
+                        id="roomTypeId"
+                      ></select>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="orderStartDate" class="col-form-label"
+                      >開始日</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control order_start_date"
+                      name="orderStartDate"
+                      id="orderStartDate"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="orderEndDate$" class="col-form-label"
+                      >結束日</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control order_end_date"
+                      name="orderEndDate"
+                      id="orderEndDate"
+                      readonly
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="roomId" class="col-form-label">選擇房間</label>
+                    <div class="room_num">
+                      <select
+                        class="roomSelect"
+                        name="roomId"
+                        id="roomId"
+                      ></select>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="orderRemark" class="col-form-label">備註</label>
+                    <textarea
+                      class="form-control remark"
+                      id="orderRemark"
+                      name="orderRemark"
+                      placeholder="請詳述維護原因"
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn"
+                  data-bs-dismiss="modal"
+                  id="cancel"
+                >
+                  取消
+                </button>
+                <button type="button" class="btn" id="createRoomType">
+                  確定
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="t2" id="title">關房單查詢</div>
         <table class="table table-bordered align-middle table-striped">
           <thead>
             <tr>
-              <th scope="col">訂單編號</th>
+              <th scope="col">關房單編號</th>
               <th scope="col">房型</th>
               <th scope="col">房間名稱</th>
-              <th scope="col">入住日期</th>
-              <th scope="col">退房日期</th>
+              <th scope="col">起始日期</th>
+              <th scope="col">結束日期</th>
               <th scope="col">建立時間</th>
               <th scope="col">修改時間</th>
-              <th scope="col">入住人</th>
-              <th scope="col">總額</th>
-              <th scope="col">會員名稱</th>
+              <th scope="col">員工名稱</th>
               <th scope="col">備註</th>
               <th scope="col">完成訂單</th>
             </tr>
           </thead>
-          <tbody id="target-undone">
-            <!-- <tr>
-              <th scope="row">尊爵房</th>
-              <td>5</td>
-              <td>3000</td>
-              <td>
-                <p>后樂大VIP房 / 親子房 / 18坪</p>
-                <p>一房一廳設計 / 雙玄關設計 / 送餐檯與送餐燈</p>
-                <p>QUEEN SIZE獨立筒舒適乳膠床墊 / 防螨抗菌寢具組</p>
-                <p>TOTO衛浴設備 / 五合一暖風機 / 乾濕分離淋浴間</p>
-                <p>大金全熱交換系統 / 獨立變頻冷暖空調</p>
-                <p>雙人哺乳型沙發 / COTEX哺乳枕</p>
-                <p>奶瓶蒸氣烘乾消毒鍋 / 雙邊電動吸乳器(AVENT、貝瑞克、美樂)</p>
-                <p>全館UV過濾殺菌淨水設備</p>
-                <p>
-                  100%純棉哺乳衣 / 歐洲進口齊葉雅天然橄欖沐浴膠、洗髮精組 /
-                  白因子潔手慕斯
-                </p>
-                <p>LG大白智能空氣清淨機。</p>
-                <p>親子遊樂設施、兒童餐具、兒童床、安全床圍、浴室防滑凳</p>
-              </td>
-              <td>2023-01-30</td>
-              <td>null</td>
-              <td>上架</td>
-              <td>3</td>
-              <td>
-                <button
-                  class="btn editBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal2"
-                >
-                  編輯
-                </button>
-              </td>
-            </tr> -->
-          </tbody>
+          <tbody id="target"></tbody>
         </table>
       </div>
       <hr />
       <div class="container" id="container2">
-        <div class="t2" id="title2">歷史查詢</div>
-        <table class="table table-bordered align-middle table-striped">
-          <thead>
-            <tr>
-              <th scope="col">訂單編號</th>
-              <th scope="col">房型</th>
-              <th scope="col">房間名稱</th>
-              <th scope="col">入住日期</th>
-              <th scope="col">退房日期</th>
-              <th scope="col">建立時間</th>
-              <th scope="col">修改時間</th>
-              <th scope="col">入住人</th>
-              <th scope="col">總額</th>
-              <th scope="col">會員名稱</th>
-              <th scope="col">備註</th>
-              <th scope="col">訂單狀態</th>
-            </tr>
-          </thead>
-          <tbody id="target-done"></tbody>
-        </table>
+        <div class="t2" id="title2">房間瀏覽</div>
+        <div id="roomSelectdiv">
+          <div class="mb-3 toFloat">
+            <label for="roomTypeId2" class="col-form-label">選擇房型</label>
+            <div class="roomType_num2">
+              <select
+                class="roomTypeSelect2"
+                name="roomTypeId"
+                id="roomTypeId2"
+              ></select>
+            </div>
+          </div>
+          <div class="mb-3 toFloat">
+            <label for="roomId2" class="col-form-label">選擇房間</label>
+            <div class="room_num2">
+              <select class="roomSelect2" name="roomId" id="roomId2"></select>
+            </div>
+          </div>
+          <div class="mb-3 toFloat">
+            <button class="btn" id="selectBtn">查詢</button>
+          </div>
+        </div>
+        <div id="calendar" style="height: 100%; width: 100%"></div>
       </div>
-      <div id="container3"></div>
     </div>
 
     <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
@@ -296,8 +368,6 @@
     <!-- <script src="../../vendors/bootstrap/bootstrap.bundle.min.js"></script> -->
     <!-- datatable引用 -->
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <!-- summernote引用 -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="js/order.js"></script>
+    <script src="js/condition.js"></script>
   </body>
 </html>

@@ -15,11 +15,6 @@
     <!-- <link rel="stylesheet" href="../../vendors/bootstrap/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="../../css/official.css" />
     <link rel="stylesheet" href="../../css/background_navbar.css" />
-    <!-- datatable引用 -->
-    <!-- <link
-      rel="stylesheet"
-      href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
-    /> -->
     <!-- summernote引用 -->
     <link
       href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
@@ -113,7 +108,13 @@
                   >房間訂單</a
                 >
               </li>
-              <li><a href="#" class="link-dark rounded">房況管理</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/room/condition.html"
+                  class="link-dark rounded"
+                  >房況管理</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -157,9 +158,21 @@
           </button>
           <div class="collapse" id="orders-collapse2">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">留言管理</a></li>
-              <li><a href="#" class="link-dark rounded">新增消息種類</a></li>
-              <li><a href="#" class="link-dark rounded">發佈消息</a></li>
+              <li>
+                <a href="/admin/bgmessage.html" class="link-dark rounded"
+                  >留言管理</a
+                >
+              </li>
+              <li>
+                <a href="/admin/bgnewssort.html" class="link-dark rounded"
+                  >新增消息種類</a
+                >
+              </li>
+              <li>
+                <a href="/admin/bglatestnews.html" class="link-dark rounded"
+                  >發佈消息</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -176,13 +189,15 @@
           <div class="collapse" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li>
+                <a href="#" class="link-dark rounded">回報信件</a>
+              </li>
+              <li>
                 <a
-                  href="/admin/visit/getall_email.html"
+                  href="/admin/visit/report_to_member.html"
                   class="link-dark rounded"
-                  >回報信件</a
+                  >發送信件</a
                 >
               </li>
-              <li><a href="#" class="link-dark rounded">發送信件</a></li>
             </ul>
           </div>
         </li>
@@ -193,8 +208,8 @@
     </div>
     <div id="main_div">
       <div id="blank_area">此處留空</div>
-      <div class="t2" id="title">房型維護</div>
       <div class="container">
+        <div class="t2" id="title">房型維護</div>
         <button
           class="btn"
           style="margin-bottom: 1%"
@@ -492,6 +507,7 @@
           </div>
         </div> -->
       </div>
+      <div id="container2"></div>
     </div>
 
     <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>

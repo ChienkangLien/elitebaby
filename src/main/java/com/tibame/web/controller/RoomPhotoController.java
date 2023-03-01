@@ -19,14 +19,34 @@ import com.tibame.web.service.RoomPhotoService;
 import com.tibame.web.service.impl.RoomPhotoServiceImpl;
 import com.tibame.web.vo.RoomPhotoVO;
 
-@WebServlet("/admin/room/RoomPhotoEdit")
-public class RoomPhotoEdit extends HttpServlet {
+@WebServlet("/admin/room/RoomPhotoController")
+public class RoomPhotoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private RoomPhotoService service;
 
-	public RoomPhotoEdit() {
+	public RoomPhotoController() {
 		service = new RoomPhotoServiceImpl();
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Gson gson = new Gson();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+//		JsonObject jsonObject = gson.fromJson(request.getReader(), JsonObject.class);
+//		Integer id = jsonObject.get("id").getAsInt();
+		Integer id = Integer.parseInt(request.getParameter("id"));
+
+		if (id != null) {
+			List<RoomPhotoVO> list = service.getAllPhotos(id);
+
+			if (list.size() == 0 || list == null) {
+				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			} else {
+				response.getWriter().write(gson.toJson(list));
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

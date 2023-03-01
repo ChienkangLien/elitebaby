@@ -1,6 +1,6 @@
 //函式宣告(載入既有房型)
 function loadRoomType() {
-  fetch("RoomTypeSearch")
+  fetch("RoomTypeController?task=getAll")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -11,6 +11,7 @@ function loadRoomType() {
     .then((body) => {
       try {
         if (body.length != null) {
+          $("#container2").empty();
           $("tbody").empty();
           for (let i = 0; i < body.length; i++) {
             let html = `<tr data-id=${body[i].roomTypeId}>
@@ -52,7 +53,7 @@ function loadRoomType() {
     </tr>`;
             $("#target").append(html);
 
-            $("div.container").append(`<div
+            $("#container2").append(`<div
     class="modal fade"
     id="exampleModal${i + 1}"
     tabindex="-1"
@@ -200,47 +201,6 @@ $(document).ready(function () {
 
   loadRoomType();
 
-  // 依照房數添加輸入框
-  // $("#createRoomQuantity").change(function () {
-  //   document.querySelectorAll(".roomName").forEach(function (e) {
-  //     e.closest("div").remove();
-  //   });
-  //   let num = $("#createRoomQuantity").val();
-  //   for (let i = 0; i < num; i++) {
-  //     $("#createRoomQuantity").closest("div").after(`<div class="mb-3">
-  //               <label for="roomName" class="col-form-label"
-  //                 >房間名稱${num - i}:</label
-  //               >
-  //               <input
-  //                 type="text"
-  //                 class="form-control roomName"
-  //                 name="roomName"
-  //                 id="roomName${i + 1}"
-  //               />
-  //             </div>`);
-  //   }
-  // });
-
-  // $("#editRoomQuantity").change(function () {
-  //   document.querySelectorAll("#roomName").forEach(function (e) {
-  //     e.closest("div").remove();
-  //   });
-  //   let num = $(".editRoomQuantity").val();
-  //   for (let i = 0; i < num; i++) {
-  //     $(".editRoomQuantity").closest("div").after(`<div class="mb-3">
-  //               <label for="roomName" class="col-form-label"
-  //                 >房間名稱${num - i}:</label
-  //               >
-  //               <input
-  //                 type="text"
-  //                 class="form-control"
-  //                 name="roomName"
-  //                 id="roomName"
-  //               />
-  //             </div>`);
-  //   }
-  // });
-
   // 再次點選新增房型，重置輸入框
   $("#newRoom").on("click", function () {
     $("#createRoomTypeName").val("");
@@ -277,14 +237,6 @@ $(document).ready(function () {
       alert("房型名稱不能是空白");
       hasError = true;
     }
-    // if (!roomQuantity.value) {
-    //   alert("房數不能是空白");
-    //   hasError = true;
-    // }
-    // if (roomQuantity.value <= 0 || roomQuantity.value % 1 !== 0) {
-    //   alert("房數必須是正整數且不能小於1");
-    //   hasError = true;
-    // }
     if (!roomPrice.value) {
       alert("房間單價不能是空白");
       hasError = true;
@@ -298,7 +250,7 @@ $(document).ready(function () {
       hasError = true;
     }
     if (!hasError) {
-      fetch("RoomTypeCreate", {
+      fetch("RoomTypeController", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
@@ -325,31 +277,6 @@ $(document).ready(function () {
     }
   });
 });
-
-//刪除房型
-// $(document).on("click", ".deletebtn", function () {
-//   if (confirm("確定刪除")) {
-//     let that = this;
-//     const roomTypeName = $(this).attr("name");
-//     fetch("RoomTypeRemove", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json;charset=UTF-8",
-//       },
-//       body: JSON.stringify({
-//         roomTypeName: roomTypeName,
-//       }),
-//     })
-//       .then((resp) => resp.json())
-//       .then((body) => {
-//         alert(`message: ${body.message}`);
-//         if (body.message == "刪除成功") {
-//           $(".cancelbtn").click();
-//           $("tr:has(th:contains('" + roomTypeName + "'))").remove();
-//         }
-//       });
-//   }
-// });
 
 //新增照片
 let imageList = [];
@@ -400,15 +327,7 @@ $(document).on("click", ".editPhotoBtn", function () {
     .closest("div")
     .find("input")
     .val("");
-  fetch("RoomPhotoSearch", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    body: JSON.stringify({
-      id: trId,
-    }),
-  })
+  fetch(`RoomPhotoController?id=${trId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -462,42 +381,6 @@ $(document).on("dblclick", "img.fromDatabase", function () {
   deletePhotoId.push({ roomPhotoId: $(this).attr("roomphotoid") });
 });
 
-//送出照片編輯
-// let result = [];
-// $(document).on("click", "button.confirmEditbtn", function () {
-//   console.log(deletePhotoId);
-//   if (reimageList.length > 0) {
-//     let id = $(this).attr("data-id");
-//     for (let i = 0; i < reimageList.length; i++) {
-//       let data = reimageList[i];
-//       let base64Code = data.split(",")[1];
-//       // base64Array.push(base64Code);
-
-//       result.push({ roomPhoto: base64Code, roomTypeId: id });
-//     }
-//     // let arrOfObjs = base64Array.map((roomPhoto) => ({ roomPhoto }));
-//     console.log(result);
-
-//     fetch("RoomPhotoEdit", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json;charset=UTF-8",
-//       },
-//       body: JSON.stringify(result),
-//     })
-//       .then((resp) => resp.json())
-//       .then((body) => {
-//         alert(`message: ${body.message}`);
-//         if (body.message == "加入成功") {
-//           // loadRoomType();
-//           $(".cancelbtn").click();
-//           // location.reload();
-//           result = [];
-//         }
-//       });
-//   }
-// });
-
 //送出照片編輯、加入刪除照片
 let result = [];
 $(document).on("click", "button.confirmPhotoEditbtn", function () {
@@ -515,7 +398,7 @@ $(document).on("click", "button.confirmPhotoEditbtn", function () {
     console.log(result);
     console.log(JSON.stringify([result, deletePhotoId]));
   }
-  fetch("RoomPhotoEdit", {
+  fetch("RoomPhotoController", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -549,15 +432,7 @@ $(document).on("click", "button.quantityCheck", function () {
 
   increaseNum = 1;
 
-  fetch("RoomSearch", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    body: JSON.stringify({
-      roomTypeId: trId,
-    }),
-  })
+  fetch(`RoomController?task=search&roomTypeId=${trId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -573,7 +448,7 @@ $(document).on("click", "button.quantityCheck", function () {
             console.log(body[i]);
             let html = `<div class="mb-3 putToOri">
     <label for="editRoomName${i + 1}" class="col-form-label"
-      >房型名稱${i + 1}</label
+      >房間名稱${i + 1}</label
     >
     <input
       type="text"
@@ -598,7 +473,7 @@ $(document).on("click", "button.quantityCheck", function () {
 $(document).on("click", "button.increaseRoom", function () {
   let html = `<div class="mb-3 putToNew">
   <label for="editRoomName${increaseNum}" class="col-form-label"
-    >新增房型名稱</label
+    >新增房間名稱</label
   >
   <input
     type="text"
@@ -651,7 +526,7 @@ $(document).on("click", "button.confirmRoomQuantityEditbtn", function () {
     newData = [];
     oriData = [];
   } else {
-    fetch("RoomEdit", {
+    fetch("RoomController", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -716,8 +591,8 @@ $(document).on("click", "button.confirmTypeEditbtn", function () {
     hasError = true;
   }
   if (!hasError) {
-    fetch("RoomTypeEdit", {
-      method: "POST",
+    fetch("RoomTypeController", {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
       },
@@ -745,17 +620,9 @@ $(document).on("click", "button.confirmTypeEditbtn", function () {
 //點擊房型修改、載入既有資料
 $(document).on("click", "button.getSingleType", function () {
   const roomTypeId = $(this).closest("tr").attr("data-id");
-  $("div.container").find(`div[data-id="${roomTypeId}"]`).find("form").empty();
+  $("div#container2").find(`div[data-id="${roomTypeId}"]`).find("form").empty();
 
-  fetch("RoomTypeSingleSearch", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    body: JSON.stringify({
-      roomTypeId: roomTypeId,
-    }),
-  })
+  fetch(`RoomTypeController?task=getSingle&roomTypeId=${roomTypeId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -818,7 +685,7 @@ $(document).on("click", "button.getSingleType", function () {
       >${body.roomDescription}
       </div>
     </div>`;
-          $("div.container")
+          $("div#container2")
             .find(`div[data-id="${roomTypeId}"]`)
             .find("form")
             .append(html);
