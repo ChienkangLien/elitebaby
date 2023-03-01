@@ -105,14 +105,21 @@ $(document).on("click", "button.editBtn", function () {
     .then((body) => {
       try {
         if (body != null) {
+          if (body.orderStatus == "完成單") {
+            alert("此訂單已完成、無法編輯");
+            $(`form[data-id='${orderId}'`)
+              .closest("div.modal-content")
+              .find("button.confirmEdit")
+              .remove();
+          }
           $(`form[data-id='${orderId}'`).empty();
-          let html = `<div class="mb-3">
+          let html = `<div class="mb-3 orderStatus">
             <label for="orderStartDate" class="col-form-label">入住日</label>
             <input type="date" data-date='${formatStartDate(
               body.orderStartDate
             )}' class="form-control order_start_date" name="orderStartDate" id="orderStartDate" value="${formatStartDate(
             body.orderStartDate
-          )}">
+          )}"${body.orderStatus == "完成單" ? "readonly" : ""}>
         </div>
         <div class="mb-3">
             <label for="orderEndDate" class="col-form-label">退房日</label>
@@ -120,12 +127,14 @@ $(document).on("click", "button.editBtn", function () {
               body.orderEndDate
             )}' class="form-control order_end_date" name="orderEndDate" id="orderEndDate" value="${formatStartDate(
             body.orderEndDate
-          )}">
+          )}"${body.orderStatus == "完成單" ? "readonly" : ""}>
         </div>
 
         <div class="mb-3">
             <label for="orderResident" class="col-form-label">入住人</label>
-            <select name="orderResident" class="orderResident">
+            <select name="orderResident" class="orderResident"${
+              body.orderStatus == "完成單" ? "disabled" : ""
+            }>
                 <option value="本人" ${
                   body.orderResident == "本人" ? "selected" : ""
                 }>本人</option>
@@ -139,9 +148,11 @@ $(document).on("click", "button.editBtn", function () {
         </div>
         <div class="mb-3">
             <label for="orderRemark" class="col-form-label">備註</label>
-            <textarea class="form-control remark" id="orderRemark" name="orderRemark" placeholder="入住人若選其他、可在此詳述">${
-              body.orderRemark == undefined ? "" : body.orderRemark
-            }</textarea>
+            <textarea class="form-control remark" id="orderRemark" name="orderRemark" placeholder="入住人若選其他、可在此詳述"${
+              body.orderStatus == "完成單" ? "readonly" : ""
+            }>${
+            body.orderRemark == undefined ? "" : body.orderRemark
+          }</textarea>
         </div>`;
           $(`form[data-id='${orderId}'`).append(html);
 

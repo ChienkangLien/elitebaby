@@ -239,7 +239,7 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 
 	@Override
 	public RoomOrderVO getByOrderId(Integer orderId) {
-		String sql = "SELECT  o.ORDER_START_DATE, o.ORDER_END_DATE, o.ORDER_RESIDENT, o.ORDER_REMARK, o.ORDER_PRICE FROM ROOM_ORDER o where o.ROOM_ORDER_ID = ?;";
+		String sql = "SELECT  o.ORDER_START_DATE, o.ORDER_END_DATE, o.ORDER_RESIDENT, o.ORDER_REMARK, o.ORDER_PRICE, o.ORDER_STATUS FROM ROOM_ORDER o where o.ROOM_ORDER_ID = ?;";
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setInt(1, orderId);
@@ -251,12 +251,14 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 					String orderResident = rs.getString(3);
 					String orderRemark = rs.getString(4);
 					Integer orderPrice = rs.getInt(5);
+					String orderStatus = rs.getString(6);
 
 					order.setOrderStartDate(orderStartDate);
 					order.setOrderEndDate(orderEndDate);
 					order.setOrderResident(orderResident);
 					order.setOrderRemark(orderRemark);
 					order.setOrderPrice(orderPrice);
+					order.setOrderStatus(orderStatus);
 					
 					return order;
 				}
