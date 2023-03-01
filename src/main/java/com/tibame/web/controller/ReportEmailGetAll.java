@@ -29,17 +29,15 @@ import com.tibame.web.vo.VisitVO;
 @WebServlet("/email/getAll")
 public class ReportEmailGetAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-	
-  
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  
-		
 		response.setContentType("text/html;charset=utf-8");
 		response.setContentType("application/json");
 		request.setCharacterEncoding("UTF-8");
@@ -48,14 +46,50 @@ public class ReportEmailGetAll extends HttpServlet {
 
 		if ("GETALL_EMAIL".equals(start)) {
 
+			Integer offset = Integer.valueOf(request.getParameter("offset"));
 			ReportEmailService service = new ReportEmailServiceImpl();
-			List<EmailVO> list = service.getAllInfo();
+			List<EmailVO> list = service.getAllInfo(offset);
+			Gson gson = new Gson();
+			Writer writer = response.getWriter();
+			writer.write(gson.toJson(list));
+
+		}
+
+		if (start.equals("get_byUserId")) {
+
+			Gson gson = new Gson();
+			EmailVO emailVO = gson.fromJson(request.getReader(), EmailVO.class);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> getOneList = service.getAllByUserId(emailVO.getUserId());
+			Writer writer = response.getWriter();
+			writer.write(gson.toJson(getOneList));
+
+		}
+
+		if ("GETALL_EMAIL_COUNT".equals(start)) {
+
+
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> list = service.getAllCount();
 			Gson gson = new Gson();
 			Writer writer = response.getWriter();
 			writer.write(gson.toJson(list));
 
 		}
 		
+		
+
+		if ("GETALL_EMAIL_ADMIN".equals(start)) {
+
+			Integer offset = Integer.valueOf(request.getParameter("offset"));
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> list = service.getAllInfoByAdmin(offset);
+			Gson gson = new Gson();
+			Writer writer = response.getWriter();
+			writer.write(gson.toJson(list));
+
+		}
+
 	}
 
 }

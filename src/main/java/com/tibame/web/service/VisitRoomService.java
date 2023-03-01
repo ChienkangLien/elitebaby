@@ -2,6 +2,7 @@ package com.tibame.web.service;
 
 import java.util.List;
 
+import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.VisitVO;
 
 public interface VisitRoomService {
@@ -18,4 +19,9 @@ public interface VisitRoomService {
 	
 	List<VisitVO> getOneAll(Integer userId);
 	
+	String checkVisitDate(java.sql.Date visitTime );
+	
+	List<VisitVO> getAllInfoPage(Integer offset);
+	
+	List<VisitVO> getAllInfoPageHistory(Integer offset);
 }

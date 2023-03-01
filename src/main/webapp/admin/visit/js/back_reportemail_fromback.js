@@ -35,11 +35,14 @@ function readURL(input) {
 
 $("#sam_btn_submit").on("click", function() {
 
+    const adminid = document.querySelector(".admintest");
 
-	const userid = document.querySelector(".userId");
+
+	const userid = document.querySelector(".sam_adminId_anwser");
 	//	if (userid.value == null) {
 	//		alert("請先登入");
 	//	}
+
 
 	const title = document.querySelector("#sam_input_emailtitle");
 	//	if (title.value == null || title.value.trim() == "") {
@@ -64,17 +67,19 @@ $("#sam_btn_submit").on("click", function() {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
 
-	fetch('/elitebaby/report/emailInsert?action=INSERT_FRONT', {
+	fetch('/elitebaby/report/emailInsert?action=INSERT_BACK', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
 			userId: userid.value,
+            adminId : adminid.value,
 			categoryId: category.value,
 			reportContent: remark.value,
 			reportTile: title.value,
-			determine : "會員"
+			determine : "後台"
+
 		})
 	})
 		.then(resp => resp.json())
@@ -88,13 +93,13 @@ $("#sam_btn_submit").on("click", function() {
 				} else {
 					alert(`successful: ${data.successful}
                       message: ${data.message}`)
-					location.href = "ReportEmailFrontGetAll.html"
+					location.href = "back_admin_mailbox.html"
 				}
 
 			} else {
 				alert(`successful: ${data.successful}
                       message: ${data.message}`)
-				location.href = "ReportEmailFrontGetAll.html"
+				location.href = "back_admin_mailbox.html"
 			}
 
 
@@ -125,7 +130,7 @@ $("#sam_btn_submit").on("click", function() {
 					alert(`successful: ${data.successful}
                       message: ${data.message}`)
 
-					location.href = "ReportEmailFrontGetAll.html"
+					location.href = "back_admin_mailbox.html"
 					
 				} else {					
 					alert(`successful: ${data.successful}

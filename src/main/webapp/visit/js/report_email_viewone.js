@@ -17,7 +17,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 
 
 
-		if (email.adminId != 0 && email.determine === "會員"  && typeof(email.answerContent) === "string") {
+		if (email.adminId != 0 && email.determine === "會員" && typeof(email.answerContent) === "string") {
 
 			document.querySelector(".inserthere").innerHTML =
 				`
@@ -55,19 +55,13 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 		}
 
 
-
-		if (email.adminId != 0 && email.determine === "後台"  && typeof(email.answerContent) === "string") {
+		if (email.adminId != 0 && email.determine === "後台" && typeof(email.answerContent) === "string") {
 
 			document.querySelector(".inserthere").innerHTML =
 				`
 			<div class="sam_div_emailtilte">
 					<label id="sam_label_emailtitle">標題:</label> <input type="text"
 						id="sam_input_emailtitle_anwser" value="" disabled >
-				</div>
-
-				<div class="sam_div_adminId">
-					<label id="sam_label_emailtitle">後台管理員ID:</label> <input
-						type="text" class="sam_adminId_anwser" disabled>
 				</div>
 
 				<div id="sam_div_emailcontent">
@@ -84,7 +78,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 
 
 
-			document.querySelector(".sam_adminId_anwser").value = email.adminId;
+			
 
 			document.querySelector("#sam_input_emailtitle_anwser").value = email.answerTitle;
 
@@ -94,12 +88,13 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 		}
 
 
-
-		if(email.determine === "後台" && typeof(email.answerContent) != "string"){
+		if(email.determine === "會員" && typeof (email.answerContent) != "string"){
 			
 			document.querySelector(".inserthere").innerHTML = ""
 
 		}
+
+	
 
 
 	});
@@ -212,7 +207,7 @@ function readURL(input) {
 
 $(document).on("click", "#sam_btn_submit", function() {
 
-	const adminId = document.querySelector(".sam_adminId_anwser");
+
 	const answer_title = document.querySelector("#sam_input_emailtitle_anwser");
 	const answer_remark = document.querySelector("#sam_input_emailcontent_anwser");
 	const emailID = document.querySelector(".one_emailId");
@@ -225,13 +220,12 @@ $(document).on("click", "#sam_btn_submit", function() {
 	}
 	var result = confirm("確認修改");
 	if (result) {
-		fetch("/elitebaby/report/emailGetOne?action=get_one_answer", {
+		fetch("/elitebaby/report/emailGetOne?action=get_one_user_answer", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			}, body: JSON.stringify({
 				mailId: emailID.value,
-				adminId: adminId.value,
 				answerTitle: answer_title.value,
 				answerContent: answer_remark.value,
 			})
@@ -250,7 +244,7 @@ $(document).on("click", "#sam_btn_submit", function() {
 						
 						alert(`successful: ${data.successful}
                       message: ${data.message}`)
-					location.href = "getall_email.html"
+					location.href = "ReportEmailFrontRSMail.html"
 					}
 
 				} else {
@@ -288,7 +282,7 @@ const authcode = document.querySelector(".one_authcode").value;
 					alert(`successful: ${data.successful}
                       message: ${data.message}`)
 
-					location.href = "getall_email.html"
+					location.href = "ReportEmailFrontRSMail.html"
 					
 				} else {					
 					alert(`successful: ${data.successful}

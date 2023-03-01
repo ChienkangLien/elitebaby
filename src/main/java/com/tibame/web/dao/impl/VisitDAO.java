@@ -37,6 +37,10 @@ public class VisitDAO implements VistDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT VISIT_ID, USER_ID, USER_NAME, PHONE_NUMBER, CONTECT_TIME, DUE_DATE,EMAIL, KIDS, VISIT_TIME, REMARK ,VISIT_STATUS,CONTACT_STATUS,CREATE_TIME FROM ROOM_VISIT ORDER BY USER_ID";
 	private static final String GET_ONE_STMT = "SELECT `USER_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`,`VISIT_STATUS`,`CONTACT_STATUS` FROM ROOM_VISIT WHERE VISIT_ID = ?";
 	private static final String GET_ONE_ALL = "SELECT `VISIT_ID`, `USER_NAME`, `PHONE_NUMBER`, `EMAIL`, `CONTECT_TIME`, `DUE_DATE`, `KIDS`, `VISIT_TIME`, `REMARK`,`VISIT_STATUS`,`CONTACT_STATUS`,CREATE_TIME FROM ROOM_VISIT WHERE USER_ID = ?";
+	private static final String CHECK_VISIT_DATE = "SELECT VISIT_TIME FROM ROOM_VISIT where VISIT_TIME = ?;";
+	private static final String GET_ALL_PAGE = "SELECT * FROM elitebaby.ROOM_VISIT where VISIT_STATUS = 0 limit 5 offset ?;";
+	private static final String GET_ALL_PAGE_HISTORY = "SELECT * FROM elitebaby.ROOM_VISIT where VISIT_STATUS = 1 limit 5 offset ?;";
+	
 	@Override
 	public int insert(VisitVO visitVO) {
 		Connection con = null;
@@ -312,6 +316,7 @@ public class VisitDAO implements VistDAO_interface {
 				visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
 				visitVO.setStrCreateTime(String.valueOf(rs.getDate("CREATE_TIME")));
 				list.add(visitVO);
+				
 			}
 
 		} catch (SQLException se) {
@@ -341,6 +346,187 @@ public class VisitDAO implements VistDAO_interface {
 		}
 		return list;
 
+	}
+	@Override
+	public List<VisitVO> checkVisitDate(Date visitTime) {
+		List<VisitVO> list = new ArrayList<VisitVO>();
+	    VisitVO visitVO = new VisitVO();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+	        pstmt = con.prepareStatement(CHECK_VISIT_DATE);
+
+
+			pstmt.setDate(1, visitTime);
+
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {			
+				visitVO.setVisitTime(rs.getDate("VISIT_TIME"));
+				list.add(visitVO);
+				
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<VisitVO> getAllPage(Integer offset) {
+		List<VisitVO> list = new ArrayList<VisitVO>();
+	    VisitVO visitVO = null;
+
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+
+	    try {
+
+	        con = ds.getConnection();
+	        pstmt = con.prepareStatement(GET_ALL_PAGE);
+	        pstmt.setInt(1, offset);
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            visitVO = new VisitVO();
+	            visitVO.setVisitId(rs.getInt("visit_Id"));
+	            visitVO.setUserId(rs.getInt("user_Id"));
+	            visitVO.setUserName(rs.getString("user_Name"));
+	            visitVO.setPhoneNumber(rs.getString("phone_Number"));
+	            visitVO.setContectTime(rs.getString("contect_Time"));
+	            visitVO.setDueDate(rs.getDate("due_Date"));
+	            visitVO.setEmail(rs.getString("email"));
+	            visitVO.setKids(rs.getInt("kids"));
+	            visitVO.setVisitTime(rs.getDate("visit_Time"));
+	            visitVO.setRemark(rs.getString("remark"));
+	            visitVO.setCreateTime(rs.getTimestamp("create_Time"));
+	            visitVO.setStrCreateTime(String.valueOf(visitVO.getCreateTime()));
+	            visitVO.setStrVisitTime(String.valueOf(visitVO.getVisitTime()));
+	            visitVO.setVisitStatus(rs.getInt("VISIT_STATUS"));
+	            visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
+	            list.add(visitVO);
+	            
+	            
+	        }
+
+	    } catch (SQLException se) {
+	        throw new RuntimeException("A database error occured. " + se.getMessage());
+	    } finally {
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (pstmt != null) {
+	            try {
+	                pstmt.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (con != null) {
+	            try {
+	                con.close();
+	            } catch (Exception e) {
+	                e.printStackTrace(System.err);
+	            }
+	        }
+	    }
+	    return list;
+	}
+	@Override
+	public List<VisitVO> getAllPageHistory(Integer offset) {
+		List<VisitVO> list = new ArrayList<VisitVO>();
+	    VisitVO visitVO = null;
+
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+
+	    try {
+
+	        con = ds.getConnection();
+	        pstmt = con.prepareStatement(GET_ALL_PAGE_HISTORY);
+	        pstmt.setInt(1, offset);
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            visitVO = new VisitVO();
+	            visitVO.setVisitId(rs.getInt("visit_Id"));
+	            visitVO.setUserId(rs.getInt("user_Id"));
+	            visitVO.setUserName(rs.getString("user_Name"));
+	            visitVO.setPhoneNumber(rs.getString("phone_Number"));
+	            visitVO.setContectTime(rs.getString("contect_Time"));
+	            visitVO.setDueDate(rs.getDate("due_Date"));
+	            visitVO.setEmail(rs.getString("email"));
+	            visitVO.setKids(rs.getInt("kids"));
+	            visitVO.setVisitTime(rs.getDate("visit_Time"));
+	            visitVO.setRemark(rs.getString("remark"));
+	            visitVO.setCreateTime(rs.getTimestamp("create_Time"));
+	            visitVO.setStrCreateTime(String.valueOf(visitVO.getCreateTime()));
+	            visitVO.setStrVisitTime(String.valueOf(visitVO.getVisitTime()));
+	            visitVO.setVisitStatus(rs.getInt("VISIT_STATUS"));
+	            visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
+	            list.add(visitVO);
+	            
+	            
+	        }
+
+	    } catch (SQLException se) {
+	        throw new RuntimeException("A database error occured. " + se.getMessage());
+	    } finally {
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (pstmt != null) {
+	            try {
+	                pstmt.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (con != null) {
+	            try {
+	                con.close();
+	            } catch (Exception e) {
+	                e.printStackTrace(System.err);
+	            }
+	        }
+	    }
+	    return list;
 	}
 	
 	

@@ -2,6 +2,9 @@ package com.tibame.web.controller;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.tibame.web.service.ReportEmailService;
+import com.tibame.web.service.impl.ReportEmailServiceImpl;
+import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
 import com.tibame.web.vo.VisitVO;
@@ -32,6 +39,7 @@ public class ReportEmailGetOne extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		response.setContentType("application/json");
+		request.setCharacterEncoding("UTF-8");
 
 		final String action = request.getParameter("action");
 		HttpSession session = request.getSession();
@@ -51,6 +59,58 @@ public class ReportEmailGetOne extends HttpServlet {
 			Gson gson = new Gson();
 			Writer writer = response.getWriter();
 			writer.write(gson.toJson(reportImageVO));
+		}
+
+		if (action.equals("get_one_answer")) {
+
+			Gson gson = new Gson();
+			EmailVO emailVO = gson.fromJson(request.getReader(), EmailVO.class);
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date date = new Date();
+			String strDate = sdFormat.format(date);
+			Timestamp timestampt = java.sql.Timestamp.valueOf(strDate);
+			emailVO.setAnsertCreateTime(timestampt);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			String resultStr = service.getOneAnswer(emailVO);
+
+			JsonObject respbody = new JsonObject();
+			respbody.addProperty("successful", resultStr.equals("回覆成功"));
+			respbody.addProperty("message", resultStr);
+			response.getWriter().append(respbody.toString());
+
+		}
+
+		if (action.equals("get_answerphoto")) {
+
+			Gson gson = new Gson();
+			AnswerImageVO answerImageVO = gson.fromJson(request.getReader(), AnswerImageVO.class);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			String authCode = answerImageVO.getAuthCode();
+			if(authCode!=null) {
+			answerImageVO = service.getAllAnswerPhoto(authCode);
+			Writer writer = response.getWriter();
+			writer.write(gson.toJson(answerImageVO));
+			}
+		}
+		
+		
+		if (action.equals("get_one_user_answer")) {
+
+			Gson gson = new Gson();
+			EmailVO emailVO = gson.fromJson(request.getReader(), EmailVO.class);
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date date = new Date();
+			String strDate = sdFormat.format(date);
+			Timestamp timestampt = java.sql.Timestamp.valueOf(strDate);
+			emailVO.setAnsertCreateTime(timestampt);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			String resultStr = service.getOneUserAnswer(emailVO);
+
+			JsonObject respbody = new JsonObject();
+			respbody.addProperty("successful", resultStr.equals("回覆成功"));
+			respbody.addProperty("message", resultStr);
+			response.getWriter().append(respbody.toString());
+
 		}
 
 	}

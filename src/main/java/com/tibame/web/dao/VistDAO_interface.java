@@ -11,5 +11,9 @@ public interface VistDAO_interface {
     public VisitVO findByPrimaryKey(Integer empno);
     public List<VisitVO> getAll();
     List<VisitVO> getOneAll(Integer userId);
+    List<VisitVO> checkVisitDate(java.sql.Date visitTime );
+    List<VisitVO> getAllPage(Integer offset);
+    List<VisitVO> getAllPageHistory(Integer offset);
+    
 	
 }

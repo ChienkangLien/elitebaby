@@ -21,20 +21,9 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
 	rel="stylesheet" />
-<link rel="stylesheet" href="../visit/css/sam_back_visit.css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!--stylesheet-css-->
-<style>
-.test11111{
-        display: inline-block;
-        margin-bottom: 20px;
-        margin-left: 50px; 
-      }
-      .contact_checkbox{
-        display: inline-block;
-        margin-left: 300px;
-      }
-</style>
+<link rel="stylesheet" href="css/sam_email.css" />
+
+
 <title>菁英後台管理系統</title>
 </head>
 
@@ -152,107 +141,67 @@
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
 		<center>
-			<h2 style="margin-top: 20px">
-				你的預約參觀
-				</h1>
+			<h1>回報信件給使用者</h1>
 		</center>
+		<label>管理員id</label>
+        <input type="text" class="admintest">
 		<hr>
-		<center>
-			<label>會員ID</label> <input type="text" name="userid" class="userid"
-				disabled>
-		</center>
-		<div class="w3l-main">
-			<div class="w3l-from">
-				<form action="#" method="post">
-					<div class="w3l-user">
-						<label class="head">名字<span class="w3l-star"> * </span></label> <input
-							type="text" name="Username" placeholder="預設名字" class="visitname">
-					</div>
-					<div class="w3l-mail">
-						<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-							type="email" name="email" placeholder="預設信箱" class="visitemail">
-					</div>
-					<div class="clear"></div>
-					<div class="w3l-details1">
-						<div class="w3l-num">
-							<label class="head">電話<span class="w3l-star"> * </span></label> <input
-								type="text" name="phone" placeholder="預設電話" class="visitphone">
-						</div>
-						<div class="w3l-date">
-							<label class="head">預約參訪時間<span class="w3l-star">
-									* </span></label>
-							<div class="styled-input">
-								<input class="visitdate" id="datepicker" name="visitdate"
-									type="date">
-							</div>
-						</div>
-						<div class="clear"></div>
-						<div class="w3l-details3">
-							<div class="w3l-options1">
-								<label class="head">方便聯絡時間<span class="w3l-star">
-										* </span></label> <select class="contacttime" name="contacttime">
-									<option>早上9點-12點</option>
-									<option>下午1點-6點</option>
-									<option>晚上7點-9點</option>
-								</select>
-							</div>
-						</div>
-						<div class="w3l-options2">
-							<label class="head">預產期<span class="w3l-star"> * </span></label>
-							<input class="duedate" type="date" name="duedate">
-						</div>
-						<div class="gender">
-							<label class="head">胎次<span class="w3l-star"> * </span></label> <select
-								class="kids" name="kids">
-								<option value="1">第一胎</option>
-								<option value="2">第二胎</option>
-								<option value="3">第三胎</option>
-								<option value="4">第四胎</option>
-								<option value="5">第五胎</option>
-								<option value="6">第六胎</option>
-								<option value="7">第七胎</option>
-								<option value="8">第八胎</option>
-								<option value="9">第九胎</option>
-								<option value="10">第十胎</option>
-							</select>
-						</div>
 
-						<div class="visit_checkbox" style="margin-top: 20px;">
+		
 
-							<div class="test11111" style="display: inline-block;">
-								<label class="head">參訪狀態</label> <label>是</label><input
-									type="radio" class="yes_visit" name="yesnovisit" value="1">
-								<label>否</label><input type="radio" class="no_visit"
-									name="yesnovisit" value="0" checked>
-							</div>
+		<div class="sam_div_form">
+			<form class="inserthere">
 
-							<div class="contact_checkbox" style="display: inline-block;">
-								<label class="head">接洽狀態</label> <label>是</label><input
-									type="radio" class="yes_contact" name="yesnocontact" value="1">
-								<label>否</label><input type="radio" class="no_contact"
-									name="yesnocontact" value="0" checked>
-							</div>
+				<div class="sam_div_emailtilte" >
+					<label id="sam_label_emailtitle">標題:</label> <input type="text"
+						id="sam_input_emailtitle" value="" >
+				</div>
 
-						</div>
-						<div class="w3l-rem">
-							<div class="w3l-right">
-								<label class="w3l-set2">備註</label>
-								<textarea class="visitremark" name="remark"></textarea>
-							</div>
-							<div class="visitbutton">
-								<button type="button" id="visitsubmit">確認更改</button>
-								<input type="hidden" name="action" value="update" id="update">
-								<input type="hidden" name="userid" value="" class="inputuserid">
-								<input type="hidden" name="visitid" value=""
-									class="inputvisitid">
-							</div>
-						</div>
-						<div class="clear"></div>
-				</form>
-			</div>
+				<div class="sam_div_adminId" style="display: inline-block; margin-left: 45px;">
+					<label id="sam_label_emailtitle">會員ID:</label> <input
+						type="text" class="sam_adminId_anwser">
+				</div>
+
+                <div class="sam_div_emailcategory"  style="display: inline-block; margin-left: 45px;">
+					<label id="sam_label_emailcategory">回報類別:</label> <select
+						id="sam_input_emailcategory" >
+						<option value="0">請選擇回報類別</option>
+						<option value="1">訂房</option>
+						<option value="2">參訪</option>
+						<option value="3">訂餐</option>
+						<option value="4">試吃</option>
+						<option value="5">文章</option>
+						<option value="6">消息</option>
+						<option value="7">會員</option>
+						<option value="8">其他</option>
+					</select>
+				</div>
+
+
+				<div id="sam_div_emailcontent">
+					<label id="sam_label_emailcontent">內容:</label>
+					<textarea class="visitremark" name="remark"
+						id="sam_input_emailcontent_anwser" ></textarea>
+				</div>
+
+
+				<div id="sam_div_emailfile">
+					<label id="sam_label_emailfile">上傳圖片</label> <input type="file"
+						id="sam_input_emailfile" value="" multiple>
+				</div>
+				<div id="preview">
+					<span class="text">預覽圖</span>
+				</div>
+
+				<div class="my_bton">
+					<input class="one_emailId" value="" type="hidden">
+					<button type="button" id="sam_btn_submit" >送出</button>
+					<button type="button" id="sam_btn_cancle">取消</button>
+				</div>
+
+			</form>
 		</div>
 
-		<script src="js/sam_back_visit.js"></script>
 		<script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
 		<!-- bootstrap引用cdn -->
 		<script
@@ -266,6 +215,6 @@
 		<!-- summernote引用 -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-		<script src="js/sam_back_visit_getone.js"></script>
+		<script src="js/back_reportemail_fromback.js"></script>
 </body>
 </html>

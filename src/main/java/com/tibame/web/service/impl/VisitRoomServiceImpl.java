@@ -2,6 +2,7 @@ package com.tibame.web.service.impl;
 
 import com.tibame.web.dao.impl.VisitDAO;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.tibame.web.dao.VistDAO_interface;
@@ -125,6 +126,31 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 
 		return userId != null ? dao.getOneAll(userId) : null;
 
+	}
+
+	@Override
+	public String checkVisitDate(Date visitTime) {
+
+		if (visitTime != null) {
+			List<VisitVO> list = dao.checkVisitDate(visitTime);
+			if (list.size() < 2 || list == null) {
+				return "可以預約";
+			}
+			return dao.checkVisitDate(visitTime).size() > 1 ? "當日預約已滿" : "可以預約";
+		}
+		return "沒收到日期";
+	}
+
+	@Override
+	public List<VisitVO> getAllInfoPage(Integer offset) {
+
+		return offset != null ? dao.getAllPage(offset) : null;
+	}
+
+	@Override
+	public List<VisitVO> getAllInfoPageHistory(Integer offset) {
+		// TODO Auto-generated method stub
+		return offset != null ? dao.getAllPageHistory(offset) : null;
 	}
 
 }

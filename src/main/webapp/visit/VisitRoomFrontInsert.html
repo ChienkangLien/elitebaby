@@ -51,7 +51,7 @@
 							</ul>
 						<li class="nav-item"><a class="nav-link" href="#">關於我們</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">環境介紹</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">房型介紹</a></li>
+						<li class="nav-item"><a class="nav-link" href="/room/introduce.html">房型介紹</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">月子膳食</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">討論區</a></li>
 
@@ -65,8 +65,8 @@
 
 								<li><a class="dropdown-item" href="#">編輯會員資料</a></li>
 								<li><a class="dropdown-item" href="#">查詢訂單</a></li>
-								<li><a class="dropdown-item" href="#">信箱</a></li>
-								<li><a class="dropdown-item" href="#">問題回報</a></li>
+								<li> <a class="dropdown-item" href="/visit/ReportEmailFrontGetAll.html">信箱</a> </li>
+                                <li> <a class="dropdown-item" href="/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
 							</ul></li>
 				</div>
 				<div id="login">
@@ -126,7 +126,7 @@
 			<form action="#" method="post">
 				<div class="w3l-user">
 					<label class="head">名字<span class="w3l-star"> * </span></label> <input
-						type="text" name="Username" placeholder="預設名字" class="visitname">
+						type="text" name="Username" placeholder="預設名字" class="visitname" onblur="validate(this)">
 				</div>
 				<div class="w3l-mail">
 					<label class="head">信箱<span class="w3l-star"> * </span></label> <input
@@ -136,15 +136,14 @@
 				<div class="w3l-details1">
 					<div class="w3l-num">
 						<label class="head">電話<span class="w3l-star"> * </span></label> <input
-							type="text" name="phone" placeholder="預設電話" class="visitphone">
+							type="text" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10">
 					</div>
 					<div class="w3l-date">
-						<label class="head">預約參訪時間<span class="w3l-star"> *
+						<label class="head" for="visitdate">預約參訪時間<span class="w3l-star"> *
 						</span></label>
-						<div class="styled-input">
 							<input class="visitdate" id="datepicker" name="visitdate"
 								type="date">
-						</div>
+						
 					</div>
 					<div class="clear"></div>
 					<div class="w3l-details3">
@@ -159,7 +158,7 @@
 					</div>
 					<div class="w3l-options2">
 						<label class="head">預產期<span class="w3l-star"> * </span></label>
-						<input class="duedate" type="date" name="duedate">
+						<input class="duedate" type="date" name="duedate" id="duedateId">
 					</div>
 					<div class="gender">
 						<label class="head">胎次<span class="w3l-star"> * </span></label> <select
@@ -183,7 +182,7 @@
 				<div class="w3l-rem">
 					<div class="w3l-right">
 						<label class="w3l-set2">備註</label>
-						<textarea class="visitremark" name="remark"></textarea>
+						<textarea class="visitremark" name="remark"  maxlength="300" ></textarea>
 					</div>
 
 					<div class="visitbutton">
