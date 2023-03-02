@@ -2,7 +2,6 @@ package com.tibame.web.controller;
 
 import java.io.IOException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +12,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.MemberService;
-import com.tibame.web.service.Impl.MemberServiceImpl;
+import com.tibame.web.service.impl.MemberServiceImpl;
 import com.tibame.web.vo.MemberVO;
-
 
 @WebServlet("/member/change")
 public class MemberUpdateServlet extends HttpServlet {
