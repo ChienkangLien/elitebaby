@@ -4,7 +4,7 @@ let offset = (page - 1) * pageSize;
 var allcount
 
 
-		fetch(`/elitebaby/visitGetAll?action=GETALL_VISIT`,
+		fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT`,
 			{ header: ("Content-type:application/json;charset=utf-8") })
 			.then(resp => resp.json())
 			.then(visit => {
@@ -26,7 +26,7 @@ var allcount
 			
 		
 		
-		fetch(`/elitebaby/visitGetAll?action=GETALL_VISIT_PAGE&offset=${offset}`,
+		fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT_PAGE&offset=${offset}`,
 			{ header: ("Content-type:application/json;charset=utf-8") })
 			.then(resp => resp.json())
 			.then(visit => {
@@ -42,7 +42,7 @@ var allcount
 							<td>${resData[i].strCreateTime}</td>
 							<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 							<td>            
-							 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+							 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 								 <input type="submit" value="修改">
 								 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 								 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -64,7 +64,7 @@ var allcount
 							<td>${resData[i].strCreateTime}</td>
 							<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 							<td>            
-							 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+							 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 								 <input type="submit" value="修改">
 								 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 								 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -91,7 +91,7 @@ $(document).on("click","input.last_page",function(){
 	let offset = (page - 1) * pageSize;
 	console.log(offset);
 
-	fetch(`/elitebaby/visitGetAll?action=GETALL_VISIT_PAGE&offset=${offset}`,
+	fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT_PAGE&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => {
 		
@@ -122,7 +122,7 @@ $(document).on("click","input.last_page",function(){
 					<td>${resData[i].strCreateTime}</td>
 					<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 						 <input type="submit" value="修改">
 						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 						 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -144,7 +144,7 @@ $(document).on("click","input.last_page",function(){
 					<td>${resData[i].strCreateTime}</td>
 					<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 						 <input type="submit" value="修改">
 						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 						 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -183,7 +183,7 @@ $(document).on("click","input.next_page",function(){
 	let offset = (page - 1) * pageSize;
 	console.log(offset);
 	document.querySelector(".getall_tb").innerHTML = "";
-	fetch(`/elitebaby/visitGetAll?action=GETALL_VISIT_PAGE&offset=${offset}`,
+	fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT_PAGE&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => {
 		
@@ -214,7 +214,7 @@ $(document).on("click","input.next_page",function(){
 					<td>${resData[i].strCreateTime}</td>
 					<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 						 <input type="submit" value="修改">
 						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 						 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -236,7 +236,7 @@ $(document).on("click","input.next_page",function(){
 					<td>${resData[i].strCreateTime}</td>
 					<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
 					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/setOneUpdate" style="margin-bottom: 0px;">
+					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
 						 <input type="submit" value="修改">
 						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
 						 <input type="hidden" name="action"	value="getOne_For_Update">
@@ -291,7 +291,7 @@ $(document).on("click", "input#delete", function() {
 
 	var result = confirm("是否確定刪除");
 	if (result) {
-		fetch("/elitebaby/visit/delete", {
+		fetch("/elitebaby/visit/servlet?action=DELETE_ONE_VISIT", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

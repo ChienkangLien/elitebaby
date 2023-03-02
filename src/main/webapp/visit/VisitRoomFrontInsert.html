@@ -51,7 +51,7 @@
 							</ul>
 						<li class="nav-item"><a class="nav-link" href="#">關於我們</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">環境介紹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/room/introduce.html">房型介紹</a></li>
+						<li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">月子膳食</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">討論區</a></li>
 
@@ -65,8 +65,9 @@
 
 								<li><a class="dropdown-item" href="#">編輯會員資料</a></li>
 								<li><a class="dropdown-item" href="#">查詢訂單</a></li>
-								<li> <a class="dropdown-item" href="/visit/ReportEmailFrontGetAll.html">信箱</a> </li>
-                                <li> <a class="dropdown-item" href="/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
+								<li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
+                                <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
+                                <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
 							</ul></li>
 				</div>
 				<div id="login">
@@ -118,25 +119,24 @@
 		<h1>預約參觀</h1>
 	</center>
 	<center>
-		<label>會員ID</label> <input type="text" name="userid" class="userid"
-			>
+		<label>會員ID</label> <input type="number" name="userid" class="userid" min="0"><input type="button" name="搜尋" class="getmember" value="搜尋">
 	</center>
 	<div class="w3l-main">
 		<div class="w3l-from">
 			<form action="#" method="post">
 				<div class="w3l-user">
 					<label class="head">名字<span class="w3l-star"> * </span></label> <input
-						type="text" name="Username" placeholder="預設名字" class="visitname" onblur="validate(this)">
+						type="text" name="Username" placeholder="預設名字" class="visitname" onchange="validate(this)">
 				</div>
 				<div class="w3l-mail">
 					<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-						type="email" name="email" placeholder="預設信箱" class="visitemail">
+						type="email" name="email" placeholder="預設信箱" class="visitemail" onchange="validateEmail()" required>
 				</div>
 				<div class="clear"></div>
 				<div class="w3l-details1">
 					<div class="w3l-num">
 						<label class="head">電話<span class="w3l-star"> * </span></label> <input
-							type="text" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10">
+							type="number" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)" min="0">
 					</div>
 					<div class="w3l-date">
 						<label class="head" for="visitdate">預約參訪時間<span class="w3l-star"> *

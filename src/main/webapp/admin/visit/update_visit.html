@@ -87,9 +87,9 @@
 					aria-expanded="false">房間管理</button>
 				<div class="collapse" id="dashboard-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="/admin/room/type.html" class="link-dark rounded">房型維護</a></li>
-						<li><a href="/admin/room/order.html" class="link-dark rounded">房間訂單</a></li>
-						<li><a href="/admin/room/condition/html" class="link-dark rounded">房況管理</a></li>
+						<li><a href="/elitebaby/admin/room/type.html" class="link-dark rounded">房型維護</a></li>
+						<li><a href="/elitebaby/admin/room/order.html" class="link-dark rounded">房間訂單</a></li>
+						<li><a href="/elitebaby/admin/room/condition/html" class="link-dark rounded">房況管理</a></li>
 					</ul>
 				</div>
 			</li>
@@ -114,7 +114,7 @@
             aria-expanded="false"
           >
             預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="/admin/visit/getall_visit.html"
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="/elitebaby/admin/visit/getall_visit.html"
 				class="btn bkbtn">預約參觀</a>
 			</li>
 			<!-- =============最新消息============ -->
@@ -139,8 +139,9 @@
 					aria-expanded="false">問題回報</button>
 				<div class="collapse" id="account-collapse">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="/admin/visit/getall_email.html" class="link-dark rounded">回報信件</a></li>
-						<li><a href="/admin/visit/report_to_member.html" class="link-dark rounded">發送信件</a></li>
+						<li><a href="/elitebaby/admin/visit/getall_email.html" class="link-dark rounded">收信匣</a></li>
+						<li><a href="/elitebaby/admin/visit/back_admin_mailbox.html" class="link-dark rounded">寄信匣</a></li>
+						<li><a href="/elitebaby/admin/visit/report_to_member.html" class="link-dark rounded">發送信件</a></li>
 					</ul>
 				</div>
 			</li>
@@ -166,17 +167,17 @@
 				<form action="#" method="post">
 					<div class="w3l-user">
 						<label class="head">名字<span class="w3l-star"> * </span></label> <input
-							type="text" name="Username" placeholder="預設名字" class="visitname">
+							type="text" name="Username" placeholder="預設名字" class="visitname" onblur="validate(this)">
 					</div>
 					<div class="w3l-mail">
 						<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-							type="email" name="email" placeholder="預設信箱" class="visitemail">
+							type="email" name="email" placeholder="預設信箱" class="visitemail" onchange="validateEmail()">
 					</div>
 					<div class="clear"></div>
 					<div class="w3l-details1">
 						<div class="w3l-num">
 							<label class="head">電話<span class="w3l-star"> * </span></label> <input
-								type="text" name="phone" placeholder="預設電話" class="visitphone">
+								type="text" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)" min="0">
 						</div>
 						<div class="w3l-date">
 							<label class="head">預約參訪時間<span class="w3l-star">
@@ -199,7 +200,7 @@
 						</div>
 						<div class="w3l-options2">
 							<label class="head">預產期<span class="w3l-star"> * </span></label>
-							<input class="duedate" type="date" name="duedate">
+							<input class="duedate" type="date" name="duedate" id="duedateId">
 						</div>
 						<div class="gender">
 							<label class="head">胎次<span class="w3l-star"> * </span></label> <select

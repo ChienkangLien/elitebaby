@@ -36,7 +36,7 @@ $(document).ready(function() {
     });
   
     // fetch 從資料庫中取得事件資料，然後加入 events 陣列
-    fetch(`/elitebaby/visitGetAll?action=GETALL_VISIT`,
+    fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT`,
 { header: ("Content-type:application/json;charset=utf-8") })
       .then(response => response.json())
       .then(data => {

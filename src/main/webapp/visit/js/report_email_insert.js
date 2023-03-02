@@ -34,28 +34,27 @@ function readURL(input) {
 
 
 $("#sam_btn_submit").on("click", function() {
-
+	var rstee = [];
 
 	const userid = document.querySelector(".userId");
-	//	if (userid.value == null) {
-	//		alert("請先登入");
-	//	}
+		if (userid.value == null || userid.value == 0 || userid.length == 0) {
+			rstee.push("請先登入\r");
+		}
 
 	const title = document.querySelector("#sam_input_emailtitle");
-	//	if (title.value == null || title.value.trim() == "") {
-	//		alert("請輸入標題");
-	//	}
+		if (title.value == null || title.value.trim() == "" || title.length == 0) {
+			rstee.push("請輸入標題\r");
+		}
 
 	const category = document.querySelector("#sam_input_emailcategory");
-	//	if (category.value == null || category.value.trim() == "" || category.value == 0) {
-	//		alert("請選擇類別");
-	//	}
+		if (category.value == null || category.value.trim() == "" || category.value == 0) {
+			rstee.push("請選擇類別\r");
+		}
 
 	const remark = document.querySelector(".visitremark");
-	//	if (remark.value == null || remark.value.trim() == "" ) {
-	//		alert("請輸入回報內容");
-	//	}
-
+		if (remark.value == null || remark.value.trim() == "" || remark.length == 0) {
+			rstee.push("請輸入回報內容\r");
+		}
 
 
 	var img_base64_el = document.querySelectorAll(".preview_img");
@@ -64,7 +63,8 @@ $("#sam_btn_submit").on("click", function() {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
 
-	fetch('/elitebaby/report/emailInsert?action=INSERT_FRONT', {
+if(rstee.length == 0){
+	fetch('/elitebaby/report/emailservlet?action=INSERT_FRONT', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -100,15 +100,22 @@ $("#sam_btn_submit").on("click", function() {
 
 		});
 
+}
 
+	if(rstee!=null && rstee.length != 0 ){
+		alert(rstee);
+		var emtyarry = [];
+		rstee = emtyarry;
+		
+	}
 
-	function inserPhoto() {
+function inserPhoto() {
 
 		var dddasa = [];
 		for (var i = 0; i < img_base64_el.length; i++) {
 			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
-		fetch('/elitebaby/report/emailPhotoInsert?action=insert_reportphoto', {
+		fetch('/elitebaby/report/emailservlet?action=insert_reportphoto', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -143,5 +150,15 @@ $("#sam_btn_submit").on("click", function() {
 
 
 
+
+$("#sam_btn_cancle").on("click", function() {
+
+	var result = confirm("確定取消")
+
+if(result){
+	location.href = "ReportEmailFrontGetAll.html"
+}
+
+})
 
 

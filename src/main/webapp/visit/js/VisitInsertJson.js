@@ -18,30 +18,76 @@ const visitremark = document.querySelector(".visitremark");
 
 
 
-document.querySelector('#visitsubmit').addEventListener('click', () => {
+document.querySelector('.getmember').addEventListener('click', () => {
 
-	if (userid.value.trim() == "") {
-		alert("會員id不可空白或空格")
+	fetch('/elitebaby/visit/servlet?action=GET_MEMBER_INFO', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			userId:  userid.value,
+		})
+	})
+		.then(resp => resp.json())
+		.then(data => {
+
+			if(data != null){
+
+				name.value = data.userName;
+				email.value = data.userEmail;
+				phone.value = data.phoneNumber;
+
+			}else{
+				alert("查無此會員")
+			}
+
+		})
+
+
+})
+
+
+function validateEmail() {
+	const email = document.querySelector('.visitemail').value;
+	const regex = /\S+@\S+\.\S+/;
+
+	if (regex.test(email)) {	
+
+	} else {
+
+		alert('請輸入正確的Email格式!');
+		return true;
+
+	}
+}
+document.querySelector('#visitsubmit').addEventListener('click', () => {
+	
+	var rstee = [];
+	
+	if (userid.value.trim() == ""||userid.value == 0) {
+		rstee.push("請先登入\r")
 	}
 	if (name.value.trim() == "") {
-		alert("名字不可空白或空格")
+		rstee.push("名字格式不正確\r")
 	}
-	if (email.value.trim() == "") {
-		alert("信箱不可空白或空格")
+	if (email.value.trim() == "" || validateEmail()) {
+		rstee.push("信箱格式不正確\r")
 	}
 	if (phone.value.trim() == "" || phone.value.length != 10 ) {
-		alert("電話不式部正確")
+		rstee.push("電話格式不正確\r")
 	}
 	if (visitdate.value.trim() == "") {
-		alert("預約日期不可空白或空格")
+		rstee.push("預約日期不可空白或空格\r")
 	}
 	if (duedate.value.trim() == "") {
-		alert("預產期不可空白或空格")
+		rstee.push("預產期不可空白或空格\r")
 	}
+	console.log(rstee.length);
 
-if (userid.value.trim() != "" && name.value.trim() != "" && email.value.trim() != "" && phone.value.trim() != "" && visitdate.value.trim() != "" && duedate.value.trim() != "") {
+	if(rstee.length == 0){
 
-		fetch('/elitebaby/visitInsert', {
+	fetch('/elitebaby/visit/servlet?action=MEMBER_INDERT_VISIT', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -61,19 +107,32 @@ if (userid.value.trim() != "" && name.value.trim() != "" && email.value.trim() !
 			.then(resp => resp.json())
 			.then(data => {
 
+				if(data.successful){
+
+
 				alert(`successful: ${data.successful}
                       message: ${data.message}`)
 
-				
 					location.href = "/elitebaby/visit/VisitRoomFrontGetAll.html"
 
+				}else{
+
+                alert(`successful: ${data.successful}
+                      message: ${data.message}`)
+					  
+				}
 				
 			});
+   }
 
+   
+	if(rstee !=null && rstee.length != 0 ){
 
-}
-
-
+		alert(rstee);
+		var emtyarry = [];
+		rstee = emtyarry;
+	
+		} 
 
 });
 
@@ -88,8 +147,9 @@ document.getElementById("duedateId").setAttribute("min",today);
 
 function validate(input) {
 	const chineseRegex = /^[\u4e00-\u9fa5]+$/; // 只允許中文字符
-	if (!chineseRegex.test(input.value)) {	  
-	  input.value = "請輸入中文字符";
+	if (!chineseRegex.test(input.value)) {	
+	  alert("請輸入中文");  
+	  input.value = "";
 	  input.focus();
 	}
   }
@@ -99,7 +159,7 @@ function validate(input) {
 
 	const checkdate = document.getElementById("datepicker").value;
 
-	fetch('/elitebaby/visitGetAll?action=check_visit', {
+	fetch('/elitebaby/visit/servlet?action=check_visit', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -123,3 +183,5 @@ function validate(input) {
 
 
 })
+
+

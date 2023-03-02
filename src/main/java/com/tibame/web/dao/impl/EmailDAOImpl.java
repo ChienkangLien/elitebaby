@@ -19,6 +19,7 @@ import org.hibernate.Transaction;
 import com.tibame.web.dao.EmailDAO;
 import com.tibame.web.util.HibernateUtil;
 import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.TestMemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public class EmailDAOImpl implements EmailDAO {
@@ -43,7 +44,7 @@ public class EmailDAOImpl implements EmailDAO {
 	private static final String SELECT_ALL_BY_MEMBER = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '會員' order by MAIL_ID limit 5 offset ? ;";
 	private static final String SELECT_ALL_BY_ADMIN = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '後台' order by MAIL_ID limit 5 offset ? ;";
 	private static final String INSERT_FROMBACK = "INSERT INTO REPORT_MAIL ( USER_ID, CATEGORY_ID, ADMIN_ID, REPORT_TITLE, REPORT_CONTENT,AUTH_CODE,DETERMINE) VALUES (?, ?, ?, ?,?,?,?)";
-
+	private static final String GET_ALL_MEMBER = "SELECT USER_ID,USER_EMAIL,USER_NAME,PHONE_NUMBER FROM elitebaby.MEMBER;";
 	@Override
 	public int insert(EmailVO emailVO) {
 		int rowsAffected = 0;
@@ -432,6 +433,59 @@ public class EmailDAOImpl implements EmailDAO {
 		}
 
 		return emailList;
+	}
+
+	@Override
+	public List<TestMemberVO> getAllMember() {
+		List<TestMemberVO> list = new ArrayList<TestMemberVO>();
+		TestMemberVO membertVO = null;
+
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+
+	    try {
+
+	        con = ds.getConnection();
+	        pstmt = con.prepareStatement(GET_ALL_MEMBER);
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            membertVO = new TestMemberVO();
+	            membertVO.setUserId(rs.getInt("USER_ID"));
+	            membertVO.setUserName(rs.getString("USER_NAME"));
+	            membertVO.setUserEmail(rs.getString("USER_EMAIL"));
+	            membertVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
+	            list.add(membertVO);
+	                        
+	        }
+
+	    } catch (SQLException se) {
+	        throw new RuntimeException("A database error occured. " + se.getMessage());
+	    } finally {
+	        if (rs != null) {
+	            try {
+	                rs.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (pstmt != null) {
+	            try {
+	                pstmt.close();
+	            } catch (SQLException se) {
+	                se.printStackTrace(System.err);
+	            }
+	        }
+	        if (con != null) {
+	            try {
+	                con.close();
+	            } catch (Exception e) {
+	                e.printStackTrace(System.err);
+	            }
+	        }
+	    }
+	    return list;
 	}
 
 }

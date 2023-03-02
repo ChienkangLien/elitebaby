@@ -5,7 +5,7 @@ document.querySelector(".getall_tb").innerHTML = ""	;
 const userid = document.querySelector(".userIdTest")
 
 
-fetch('/elitebaby/email/getAll?action=get_byUserId', {
+fetch('/elitebaby/report/emailservlet?action=get_byUserId', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ fetch('/elitebaby/email/getAll?action=get_byUserId', {
                     <td>${resData[i].preportCreateTime}</td>
                     <td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
                     <td>            
-                    <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_front_oneall" style="margin-bottom: 0px;">
+                    <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_front_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -46,7 +46,7 @@ fetch('/elitebaby/email/getAll?action=get_byUserId', {
                     <td>${resData[i].preportCreateTime}</td>
                     <td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
                     <td>            
-                    <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_front_oneall" style="margin-bottom: 0px;">
+                    <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_front_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">

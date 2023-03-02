@@ -15,6 +15,7 @@ import com.tibame.web.util.HibernateUtil;
 import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
+import com.tibame.web.vo.TestMemberVO;
 
 public class ReportEmailServiceImpl implements ReportEmailService {
 
@@ -157,6 +158,12 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 	public List<EmailVO> getAllInfoByAdmin(Integer offset) {
 		
 		return offset!=null ?  dao.getAllByAdmin(offset): null;
+	}
+
+	@Override
+	public List<TestMemberVO> getAllMemberInfo() {
+		List<TestMemberVO> list = dao.getAllMember();
+		return list != null ? list : null;
 	}
 
 }

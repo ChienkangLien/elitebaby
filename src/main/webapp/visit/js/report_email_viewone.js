@@ -1,4 +1,4 @@
-fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
+fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(email => {
@@ -100,7 +100,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 	});
 
 
-fetch(`/elitebaby/report/emailGetOne?action=getPhoto`,
+fetch(`/elitebaby/report/emailservlet?action=getPhoto`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(photo => {
@@ -127,7 +127,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getPhoto`,
 function getanswerphoto() {
 	
 	const ansertauthcode = document.querySelector(".one_authcode").value;
-	     fetch(`/elitebaby/report/emailGetOne?action=get_answerphoto`,{
+	     fetch(`/elitebaby/report/emailservlet?action=get_answerphoto`,{
 		            method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -207,9 +207,15 @@ function readURL(input) {
 
 $(document).on("click", "#sam_btn_submit", function() {
 
-
+	var rstee = [];
 	const answer_title = document.querySelector("#sam_input_emailtitle_anwser");
+	if (answer_title.value == null || answer_title.value.trim() == "" || answer_title.length == 0) {
+		rstee.push("請輸入標題\r");
+	}
 	const answer_remark = document.querySelector("#sam_input_emailcontent_anwser");
+	if (answer_remark.value == null || answer_remark.value.trim() == "" || answer_remark.length == 0) {
+		rstee.push("請輸入回報內容\r");
+	}
 	const emailID = document.querySelector(".one_emailId");
 	
 	var img_base64_el = document.querySelectorAll(".preview_img_answer");
@@ -218,9 +224,12 @@ $(document).on("click", "#sam_btn_submit", function() {
 	for (var i = 0; i < img_base64_el.length; i++) {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
+
+
+if(rstee.length == 0){
 	var result = confirm("確認修改");
 	if (result) {
-		fetch("/elitebaby/report/emailGetOne?action=get_one_user_answer", {
+		fetch("/elitebaby/report/emailservlet?action=get_one_user_answer", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -255,6 +264,13 @@ $(document).on("click", "#sam_btn_submit", function() {
 			});
 
 	}
+}
+
+	if(rstee!=null && rstee.length > 0 ){
+		alert(rstee);
+		var emtyarry = [];
+		rstee = emtyarry;
+		}
 
 
 
@@ -265,7 +281,7 @@ const authcode = document.querySelector(".one_authcode").value;
 		for (var i = 0; i < img_base64_el.length; i++) {
 			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
-		fetch('/elitebaby/report/emailPhotoInsert?action=insert_answerphoto', {
+		fetch('/elitebaby/report/emailservlet?action=insert_answerphoto', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -301,3 +317,13 @@ const authcode = document.querySelector(".one_authcode").value;
 
 
 })
+
+
+$("#sam_btn_cancle").on("click", function() {
+
+	var result = confirm("確定取消")
+	if(result){
+		location.href = "ReportEmailFrontRSMail.html"
+	}
+	
+	})

@@ -3,6 +3,7 @@ package com.tibame.web.dao;
 import java.util.List;
 
 import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.TestMemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public interface EmailDAO {
@@ -28,4 +29,6 @@ public interface EmailDAO {
 	public List<EmailVO> getAllFromback(Integer offset);
 
 	public int insertFromBack(EmailVO emailVO);
+	
+	public List<TestMemberVO> getAllMember();
 }

@@ -4,7 +4,7 @@ let offset = (page - 1) * pageSize;
 var allcount
 
 
-fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_COUNT`,
+fetch(`/elitebaby/report/emailservlet?action=GETALL_EMAIL_COUNT`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -28,7 +28,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL_COUNT`,
 
 
 
-fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+fetch(`/elitebaby/report/emailservlet?action=GETALL_EMAIL&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -47,7 +47,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status" style="background-color:green"><input type="hidden" name="visit_status" id="status1" ></div></td>
                      <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -70,7 +70,7 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status"><input type="hidden" name="visit_status" id="status1"></div></td>
                       <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -94,29 +94,29 @@ fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
 
 
 
-$(document).on("click", "input#getone", function() {
+// $(document).on("click", "input#getone", function() {
 
 
-	fetch("/elitebaby/report/emailSetOne", {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		}, body: JSON.stringify({
+// 	fetch("/elitebaby/report/emailSetOne", {
+// 		method: 'POST',
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		}, body: JSON.stringify({
 
-			mailId: $(this).closest(".div_getone").attr("mailId"),
-			authCode: $(this).closest(".div_getone").attr("authCode"),
+// 			mailId: $(this).closest(".div_getone").attr("mailId"),
+// 			authCode: $(this).closest(".div_getone").attr("authCode"),
 
-		})
+// 		})
 
-	})
-		.then(resp => resp.json())
-		.then(data => {
-
-
-		});
+// 	})
+// 		.then(resp => resp.json())
+// 		.then(data => {
 
 
-})
+// 		});
+
+
+// })
 
 
 
@@ -132,7 +132,7 @@ $(document).on("click","input.last_page",function(){
     page -= 1;
 	let offset = (page - 1) * pageSize;
 	document.querySelector(".getall_tb").innerHTML = "";
-	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+	fetch(`/elitebaby/report/emailservlet?action=GETALL_EMAIL&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -151,7 +151,7 @@ $(document).on("click","input.last_page",function(){
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status" style="background-color:green"><input type="hidden" name="visit_status" id="status1" ></div></td>
                      <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -174,7 +174,7 @@ $(document).on("click","input.last_page",function(){
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status"><input type="hidden" name="visit_status" id="status1"></div></td>
                       <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -224,7 +224,7 @@ $(document).on("click","input.next_page",function(){
 	page += 1;
 	let offset = (page - 1) * pageSize;
 	document.querySelector(".getall_tb").innerHTML = "";
-	fetch(`/elitebaby/email/getAll?action=GETALL_EMAIL&offset=${offset}`,
+	fetch(`/elitebaby/report/emailservlet?action=GETALL_EMAIL&offset=${offset}`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visit => {
@@ -243,7 +243,7 @@ $(document).on("click","input.next_page",function(){
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status" style="background-color:green"><input type="hidden" name="visit_status" id="status1" ></div></td>
                      <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">
@@ -266,7 +266,7 @@ $(document).on("click","input.next_page",function(){
                     <td>${resData[i].strPreportCreateTime}</td>
                     <td><div class="visit_status"><input type="hidden" name="visit_status" id="status1"></div></td>
                       <td>
-                     <FORM METHOD="post" ACTION="/elitebaby/report/emailSetOne?action=get_back_oneall" style="margin-bottom: 0px;">
+                     <FORM METHOD="post" ACTION="/elitebaby/report/emailservlet?action=get_back_oneall" style="margin-bottom: 0px;">
 			     		<input type="submit" value="詳細">			     		
 			     		<input type="hidden" name="authCode"  value="${resData[i].authCode}">
 			     		<input type="hidden" name="mailId"  value="${resData[i].mailId}">

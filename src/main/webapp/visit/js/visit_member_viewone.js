@@ -1,4 +1,4 @@
-fetch("/elitebaby/visit/getOneUpdate",
+fetch("/elitebaby/visit/servlet?action=GET_ONE_VISIT_DATA",
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visitone => {

@@ -1,3 +1,15 @@
+fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(visit => {
+		let resData = [];
+		resData = visit;
+		for (let i = 0; i < resData.length; i++) {
+			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+		}
+	})
+
+
 
 //==========================處理預覽圖=================================================
 var p_file_el = document.getElementById("sam_input_emailfile");
@@ -34,30 +46,35 @@ function readURL(input) {
 
 
 $("#sam_btn_submit").on("click", function() {
-
+	
+	var rstee = [];
     const adminid = document.querySelector(".admintest");
+			if(adminid.value == null || adminid.value == 0 || adminid.length == 0){
+				rstee.push("請先登入\r");
+			}
 
-
-	const userid = document.querySelector(".sam_adminId_anwser");
-	//	if (userid.value == null) {
-	//		alert("請先登入");
-	//	}
-
-
+	let reg = /[^0-9]/ig;
+	const userid = document.querySelector(".sam_adminId_anwser").value.replace(reg,"");
+			if (userid == null || userid <= 0 ) {
+				rstee.push("請選擇回報對象\r");
+			}
+			console.log(userid);
+			console.log(userid.length);
+	
 	const title = document.querySelector("#sam_input_emailtitle");
-	//	if (title.value == null || title.value.trim() == "") {
-	//		alert("請輸入標題");
-	//	}
-
+			if (title.value == null || title.value.trim() == "" || title.length == 0) {
+				rstee.push("請輸入標題\r");
+			}
+	
 	const category = document.querySelector("#sam_input_emailcategory");
-	//	if (category.value == null || category.value.trim() == "" || category.value == 0) {
-	//		alert("請選擇類別");
-	//	}
-
+			if (category.value == null || category.value.trim() == "" || category.value == 0) {
+				rstee.push("請選擇類別\r");
+			}
+	
 	const remark = document.querySelector(".visitremark");
-	//	if (remark.value == null || remark.value.trim() == "" ) {
-	//		alert("請輸入回報內容");
-	//	}
+			if (remark.value == null || remark.value.trim() == "" || remark.length == 0) {
+				rstee.push("請輸入回報內容\r");
+			}
 
 
 
@@ -67,53 +84,60 @@ $("#sam_btn_submit").on("click", function() {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
 
-	fetch('/elitebaby/report/emailInsert?action=INSERT_BACK', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			userId: userid.value,
-            adminId : adminid.value,
-			categoryId: category.value,
-			reportContent: remark.value,
-			reportTile: title.value,
-			determine : "後台"
-
+	if(rstee.length == 0 ){
+		fetch('/elitebaby/report/emailservlet?action=INSERT_BACK', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userId: userid,
+				adminId : adminid.value,
+				categoryId: category.value,
+				reportContent: remark.value,
+				reportTile: title.value,
+				determine : "後台"
+				
+			})
 		})
-	})
 		.then(resp => resp.json())
 		.then(data => {
-
+			
 			console.log(img_base64_el.length > 0);
 			if (data.successful) {
-
+				
 				if (img_base64_el.length > 0) {
 					inserPhoto();
 				} else {
 					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					message: ${data.message}`)
 					location.href = "back_admin_mailbox.html"
 				}
-
+				
 			} else {
 				alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-				location.href = "back_admin_mailbox.html"
+				message: ${data.message}`)
+				
 			}
-
-
+			
+			
 		});
+		
+	}
 
-
-
+	if(rstee!=null && rstee.length > 0 ){
+		alert(rstee);
+		var emtyarry = [];
+		rstee = emtyarry;
+		}
+	
 	function inserPhoto() {
 
 		var dddasa = [];
 		for (var i = 0; i < img_base64_el.length; i++) {
 			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
-		fetch('/elitebaby/report/emailPhotoInsert?action=insert_reportphoto', {
+		fetch('/elitebaby/report/emailservlet?action=insert_reportphoto', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -149,4 +173,11 @@ $("#sam_btn_submit").on("click", function() {
 
 
 
+$("#sam_btn_cancle").on("click", function() {
 
+	var result = confirm("確定取消")
+	if(result){
+		location.href = "back_admin_mailbox.html"
+	}
+	
+	})

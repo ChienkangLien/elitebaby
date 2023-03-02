@@ -5,6 +5,7 @@ import java.util.List;
 import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
+import com.tibame.web.vo.TestMemberVO;
 
 public interface ReportEmailService {
 
@@ -33,6 +34,8 @@ public interface ReportEmailService {
 	List<EmailVO> getAllCount();
 	
 	String insertEamilFromBack(EmailVO emailVO);
+	
+	List<TestMemberVO> getAllMemberInfo();
 	
 	
 	

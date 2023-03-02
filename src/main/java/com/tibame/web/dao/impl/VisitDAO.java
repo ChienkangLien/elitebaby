@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 import com.google.gson.Gson;
 import com.tibame.web.dao.VistDAO_interface;
+import com.tibame.web.vo.TestMemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public class VisitDAO implements VistDAO_interface {
@@ -40,7 +41,7 @@ public class VisitDAO implements VistDAO_interface {
 	private static final String CHECK_VISIT_DATE = "SELECT VISIT_TIME FROM ROOM_VISIT where VISIT_TIME = ?;";
 	private static final String GET_ALL_PAGE = "SELECT * FROM elitebaby.ROOM_VISIT where VISIT_STATUS = 0 limit 5 offset ?;";
 	private static final String GET_ALL_PAGE_HISTORY = "SELECT * FROM elitebaby.ROOM_VISIT where VISIT_STATUS = 1 limit 5 offset ?;";
-	
+	private static final String GET_ALL_MEMBER_ID = "SELECT USER_ID,USER_EMAIL,USER_NAME,PHONE_NUMBER FROM elitebaby.MEMBER WHERE USER_ID = ?;";
 	@Override
 	public int insert(VisitVO visitVO) {
 		Connection con = null;
@@ -59,7 +60,7 @@ public class VisitDAO implements VistDAO_interface {
 	        pstmt.setInt(7, visitVO.getKids());
 	        pstmt.setDate(8, (Date) visitVO.getVisitTime());
 	        pstmt.setString(9, visitVO.getRemark());
-
+	        
 	        return  pstmt.executeUpdate();
 	    } catch (SQLException se) {
 	        throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -527,6 +528,58 @@ public class VisitDAO implements VistDAO_interface {
 	        }
 	    }
 	    return list;
+	}
+	@Override
+	public TestMemberVO getMemeberInfo(Integer userId) {
+		TestMemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+	        pstmt = con.prepareStatement(GET_ALL_MEMBER_ID);
+
+
+			pstmt.setInt(1, userId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memberVO = new TestMemberVO();
+				memberVO.setUserId(rs.getInt("USER_ID"));
+				memberVO.setUserName(rs.getString("USER_NAME"));
+				memberVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
+				memberVO.setUserEmail(rs.getString("USER_EMAIL"));
+
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memberVO;
 	}
 	
 	
