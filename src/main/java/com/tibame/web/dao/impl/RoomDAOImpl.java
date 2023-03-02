@@ -292,7 +292,7 @@ public class RoomDAOImpl implements RoomDAO {
 
 	@Override
 	public String getAvaByRoomId(Map<String, String> map) {
-		String sql1 = "select count(*) from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE))";
+		String sql1 = "select count(*) from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql1);) {
 			ps.setInt(1, Integer.parseInt(map.get("roomId")));
 			ps.setString(2, map.get("startDate"));
@@ -302,6 +302,7 @@ public class RoomDAOImpl implements RoomDAO {
 			
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
+					System.out.println(rs.getInt(1));
 					if(rs.getInt(1)>1)
 					return "此期間已有其他房客入住、不得變更";
 				}
@@ -310,7 +311,7 @@ public class RoomDAOImpl implements RoomDAO {
 			e.printStackTrace();
 		}
 		
-		String sql2 = "select ROOM_ORDER_ID=? from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE))";
+		String sql2 = "select ROOM_ORDER_ID=? from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql2);) {
 			ps.setInt(1, Integer.parseInt(map.get("orderId")));
 			ps.setInt(2, Integer.parseInt(map.get("roomId")));
