@@ -1,4 +1,4 @@
-package com.tibame.web.service.Impl;
+package com.tibame.web.service.impl;
 
 import java.util.List;
 
