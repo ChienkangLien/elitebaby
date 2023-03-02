@@ -49,12 +49,14 @@ function loadNewRoomOrder() {
         }
       } catch (error) {
         console.log(error + "，資料庫沒訂單資料故後端沒回傳");
+        $("tbody#target-undone").empty();
       }
     });
 }
 //宣告函式(載入歷史訂單)
 function loadHistoryRoomOrder() {
   historyLimit = 0;
+  $("tbody#target-done").empty();
 
   fetch("RoomOrderController?status=history&limit=0")
     .then((resp) => {
@@ -69,7 +71,6 @@ function loadHistoryRoomOrder() {
       $("#container2 ul").remove();
       try {
         if (body.length != null) {
-          $("tbody#target-done").empty();
           $("#container3").empty();
           for (let i = 0; i < body.length; i++) {
             let html = `<tr data-id='${body[i].roomOrderId}'>
