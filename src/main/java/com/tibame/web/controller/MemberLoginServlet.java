@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.MemberService;
-import com.tibame.web.service.Impl.MemberServiceImpl;
+import com.tibame.web.service.impl.MemberServiceImpl;
 import com.tibame.web.vo.MemberVO;
 
 
