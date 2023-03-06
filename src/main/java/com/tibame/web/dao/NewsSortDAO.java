@@ -160,7 +160,6 @@ public class NewsSortDAO implements NewsSortDAO_interface {
 				}
 			}
 		}
-
 	}
 	
 	public NewsSortVO findByPrimaryKey(Integer sortId) {
@@ -288,9 +287,8 @@ public class NewsSortDAO implements NewsSortDAO_interface {
 				latestNewsVO.setSortId(rs.getInt("SORT_ID"));
 				latestNewsVO.setAdminId(rs.getInt("ADMIN_ID"));
 				latestNewsVO.setNewsIntro(rs.getString("NEWS_INTRO"));
-				latestNewsVO.setPublishedTime(rs.getDate("PUBLISHED_TIME"));
-				latestNewsVO.setOnNews(rs.getDate("ON_NEWS"));
-				latestNewsVO.setOffNews(rs.getDate("OFF_NEWS"));
+				latestNewsVO.setScheduledTime(rs.getDate("SCHEDULED_TIME"));
+				latestNewsVO.setOffShelfTime(rs.getDate("OFF_SHELF_TIME"));
 				latestNewsVO.setPostTitle(rs.getString("POST_TITLE")); // Store the row in the list
 				set.add(latestNewsVO);
 			}

@@ -31,10 +31,10 @@
 
 <body class="c2">
  <div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		<a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+		<img src="images/logo.jpg" style="width: 30px" /> <span
+			class="fs-5 fw-semibold">菁英產後護理之家</span> 
+			<a href="#"	class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
     </a>
 
     <!-- =======按鍵======== -->
@@ -164,13 +164,12 @@
 
 	<table>
 		<tr>
-			<th>圖片</th>
+			<th>消息照片</th>
 					<th>最新消息編號/種類編號/管理員編號</th>
 					<th>標題名稱</th>
 					<th>內容描述</th>
-					<th>排程時間</th>
-					<th>上架日期</th>
-					<th>下架時間</th>
+					<th>發佈時間</th>
+<!-- 					<th>下架時間</th> -->
 		</tr>
 <%-- 		<%@ include file="page1.file"%> --%>
 		
@@ -178,13 +177,12 @@
 <%-- 			end="<%=pageIndex+rowsPerPage-1%>" --%>
 
 			<tr>
-				<td><img src=""></td>
+					<td><img class="figure-img img-fluid rounded" src="<%=request.getContextPath()%>/LatestNewsServlet?newsId=${latestNewsVO.newsId}"></td>
 					<td>${latestNewsVO.newsId}/${latestNewsVO.sortId}/${latestNewsVO.adminId}</td>
 					<td>${latestNewsVO.postTitle}</td>
 					<td>${latestNewsVO.newsIntro}</td>
-					<td>${latestNewsVO.onNews}</td>
-					<td>${latestNewsVO.offNews}</td>
-					<td>${latestNewsVO.postTitle}</td>
+					<td>${latestNewsVO.scheduledTime}</td>
+<%-- 					<td>${latestNewsVO.offShelfTime}</td> --%>
 				
 			</tr>
 		

@@ -34,12 +34,12 @@ pageContext.setAttribute("list", list);
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectNewsSort.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+	<a href="/elitebaby/admin/news/listAllNewsSort.jsp">
+	<img src="images/logo.jpg" style="width: 30px" />
+	 <span class="fs-5 fw-semibold">菁英產後護理之家</span> 
+	 <a href="#"class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"></a>  <!-- =======按鍵======== -->
 
+<!-- =======按鍵======== -->
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
 					<button
@@ -94,8 +94,9 @@ pageContext.setAttribute("list", list);
             aria-expanded="false"
           >
             討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">討論區</a>
+          </button> -->
+           <!-- 若沒有子元素，單純給一個a標籤即可 -->
+            <a href="#" class="btn bkbtn">討論區</a>
 				</li>
 				<!-- ================預約參觀============= -->
 				<li class="mb-1">
@@ -106,8 +107,9 @@ pageContext.setAttribute("list", list);
             aria-expanded="false"
           >
             預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">預約參觀</a>
+          </button> --> 
+          <!-- 若沒有子元素，單純給一個a標籤即可 --> 
+          <a href="#" class="btn bkbtn">預約參觀</a>
 				</li>
 				<!-- =============最新消息============ -->
 				<li class="mb-1">

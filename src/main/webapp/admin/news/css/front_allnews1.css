@@ -94,7 +94,7 @@
  }
 
  section.sec1 div.flex_container div.flex_items img {
-     width: 100%;
+     width: 90%;
  }
 
  section.sec1 div.flex_container div.flex_items.-right {
@@ -117,7 +117,7 @@
 
  section.sec1.-type2 div.flex_container div.flex_items.-right p.para {
      text-align: center;
-     background-color: white;
+/*      background-color: white; */
  }
 
  /* ul.container-filter {

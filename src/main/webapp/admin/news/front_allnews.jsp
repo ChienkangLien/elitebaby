@@ -20,8 +20,7 @@
     <!-- css連結 -->
     <link rel="stylesheet" href="css\official.css" />
     <link rel="stylesheet" href="./css/front_allnews.css">
-    <!-- jquery ui連結-->
-    <script src="js/jquery-ui.js"></script>
+   
     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
@@ -109,7 +108,7 @@
     </div>
     <div id="book_visit">
         <a href="#">
-            <img class="img-responsive" src="/images/book_visit.png" />
+            <img class="img-responsive" src="images/book_visit.png" />
         </a>
     </div>
     <div id="blank_area">
@@ -117,13 +116,13 @@
     </div>
     <ul class="container-filter categories-filter">
         <li>
-            <a class="categories active" href="front_allnews.html">綜合</a>
+            <a class="categories active" href="/elitebaby/admin/news/front_allnews.jsp">綜合</a>
         </li>
         <li>
-            <a class="categories" href="front_allnormal.html">一般</a>
+            <a class="categories" href="/elitebaby/admin/news/front_allnormal.jsp">一般</a>
         </li>
         <li>
-            <a class="categories" href="/front_alldiscount.html">優惠</a>
+            <a class="categories" href="/elitebaby/admin/news/front_alldiscount.jsp">優惠</a>
         </li>
     </ul>
     <!-- 搜尋欄位 -->
@@ -135,8 +134,9 @@
                 <i class="fas fa-search"></i>
             </button>
         </form>
+        
         <c:forEach var="result" items="${Msgs}">
-              <div >${result.postTitle}</div>
+              <img src=${result.newsPhoto}></div>
   </c:forEach>
     </div>
     
@@ -156,15 +156,21 @@
         <div class="flex_container">
 
             <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
+                <a href="/elitebaby/admin/news/front_allnews_1.jsp">
+                    <img src="./images/營業時間.png">
                 </a>
             </div>
 
             <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
+                <a href="/elitebaby/admin/news/front_allnews_1.jsp">
+                    <h1 class="title1">春節營業時間</h1>
+                    <p class="para">櫃檯客服<br>
+                        正常營業 09:30 ~ 19:30<br>
+                        10F咖啡廳
+                        1/21(六) ~ 1/26(四)：公休
+                        1/27(五) 起正常營業<br>
+                        美麗人生預祝您
+                        鴻 兔 大 展 一 整 年</p>
                 </a>
             </div>
         </div>
@@ -174,15 +180,34 @@
         <div class="flex_container">
 
             <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
+                <a href="/elitebaby/admin/news/front_allnews_2.jsp">
+                    <img src="./images/公告.png">
                 </a>
             </div>
 
             <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
+                <a href="/elitebaby/admin/news/front_allnews_2.jsp">
+                    <h1 class="title1">新型冠狀病毒防疫公告</h1>
+                    <p class="para">各位來到美麗人生的爸比媽咪、大朋友小朋友，
+
+                        為了因應武漢肺炎的防疫與保護所有的媽咪與寶貝們，進入館前請配合以下幾點事項唷：
+
+                        ☑開放實體參觀。
+
+                        ☑入本機構須 實名制登記、體溫量測、酒精消毒及全程配戴口罩 。
+
+                        ☑會客時間10:00~18:00。
+                        訪客限制為一天兩次(每次限半小時)每次限三人(不限對象)，
+                        一律必須施打經政府核准合格之疫苗三劑(需出示小黃卡或健保APP查閱，大寶不在此限)，
+                        訪客時間僅限於嬰兒室外看寶寶(七歲以下不可至住房樓層)。
+
+                        ☑ 宿者如非先生者，一律比照訪客標準，必須施打三劑經政府核准合格之疫苗。
+
+                        ☑ 剃頭、新生兒攝影、泌乳師、美甲美睫、塑身衣及整椎廠商相關之業務暫停，僅提供洗頭服務。
+
+                        ☑ 十樓咖啡廳僅提供外帶服務。
+
+                        ❤ 請大家與美麗人生一起守護自己最愛的家人 ❤</p>
                 </a>
             </div>
         </div>
@@ -199,6 +224,8 @@
 
 	
  <script src="./vendors/jquery/jquery-3.6.3.min.js"></script>
+  <!-- jquery ui連結-->
+    <script src="js/jquery-ui.js"></script>
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">

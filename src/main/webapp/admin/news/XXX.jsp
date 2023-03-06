@@ -109,7 +109,7 @@
     </div>
     <div id="book_visit">
         <a href="#">
-            <img class="img-responsive" src="/images/book_visit.png" />
+            <img class="img-responsive" src="images/book_visit.png" />
         </a>
     </div>
     <div id="blank_area">
@@ -127,7 +127,44 @@
         </li>
     </ul>
     <!-- 搜尋欄位 -->
-    <div class="container">
+<!--     <div class="container"> -->
+<%--     <form method="post" action="<%=request.getContextPath()%>/Latestnews.do"> --%>
+<!--      <form method="post" action="/admin/news/Latestnews.do"> -->
+<!--             <input class="bar" id="tags" placeholder="搜尋..." name=select> -->
+<!--             <input type="hidden" name="action" value="search"> -->
+<!--             <button id="search" type="submit"> -->
+<!--                 <i class="fas fa-search"></i> -->
+<!--             </button> -->
+<!--         </form> -->
+<%--         <c:forEach var="result" items="${Msgs}"> --%>
+<%--   <a href="/admin/news/post.jsp?id=${result.postTitle}"> --%>
+<%--     <div>${result.postTitle}</div> --%>
+<!--   </a> -->
+<%-- </c:forEach> --%>
+
+<!--     </div> -->
+<!-- 方法2 -->
+<!--   <form method="post" action="/admin/news/Latestnews.do"> -->
+<!--   <input class="bar" id="tags" placeholder="搜尋..." name=select> -->
+<!--   <input type="hidden" name="action" value="search"> -->
+<!--   <button id="search" type="submit"> -->
+<!--     <i class="fas fa-search"></i> -->
+<!--   </button> -->
+<!-- </form> -->
+
+<!-- <div class="search-results"> -->
+<%--   <c:forEach var="result" items="${Msgs}"> --%>
+<%--     <a href="/admin/news/post.jsp?id=${result.postTitle}"> --%>
+    
+<%-- <%--       <div>${result.newsId}</div> --%> 
+<%--       <div>${result.postTitle}</div> --%>
+<%--    	 <div><img class="figure-img img-fluid rounded" src="<%=request.getContextPath()%>/LatestNewsServlet?newsId=${result.newsId}" /></div> --%>
+<%--       <div>${result.newsIntro}</div> --%>
+<!--     </a> -->
+<%--   </c:forEach> --%>
+<!-- </div> -->
+<!-- 測試 -->
+<div class="container">
     <form method="post" action="<%=request.getContextPath()%>/Latestnews.do">
             <input class="bar" id="tags" placeholder="搜尋..." name=select>
             <input type="hidden" name="action" value="search">
@@ -135,58 +172,35 @@
                 <i class="fas fa-search"></i>
             </button>
         </form>
+        
         <c:forEach var="result" items="${Msgs}">
-              <div >${result.postTitle}</div>
-  </c:forEach>
-    </div>
-    
-    
-<%-- <form method="post" action="<%=request.getContextPath()%>/Latestnews.do"> --%>
-<!-- 		<input class="bar" id="tags" placeholder="搜尋..." name=yyy> -->
-<!-- 		<input type="hidden" name="action" value="search"> -->
-<!-- 		<button id="search" type="submit"> -->
-<!-- 			<i class="fas fa-search"></i> -->
-<!-- 		</button> -->
-<!-- 	</form> -->
-<%-- 	<c:forEach var="result" items="${kkk}"> --%>
-<%--               <div >${result.postTitle}</div> --%>
+<!--               <img src=${result.newsPhoto}></div> -->
 <%--   </c:forEach> --%>
+    </div>
+  
+   
     <!-- 圖片內容 -->
     <section class="sec1 -type1">
         <div class="flex_container">
 
             <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
+             <a>
+<!--                 <a href="/elitebaby/admin/news/front_allnews_1.jsp"> -->
+                    <div><img class="figure-img img-fluid rounded" src="<%=request.getContextPath()%>/LatestNewsServlet?newsId=${result.newsId}" /></div>
                 </a>
             </div>
-
+<!-- 右邊文字標題及內容 -->
             <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
+             <a href="/admin/news/post.jsp?id=${result.postTitle}">
+<!--                 <a href="/elitebaby/admin/news/front_allnews_1.jsp"> -->
+                  <div>${result.postTitle}</div>
+                     <div>${result.newsIntro}</div>
                 </a>
+                </c:forEach>
             </div>
         </div>
     </section>
-
-    <section class="sec1 -type2">
-        <div class="flex_container">
-
-            <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
-                </a>
-            </div>
-
-            <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
-                </a>
-            </div>
-        </div>
-    </section>
+   
 
     <div>
         <p class="text-center">

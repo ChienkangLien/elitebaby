@@ -4,7 +4,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.tibame.web.service.*"%>
 <%@ page import="com.tibame.web.vo.*"%>
- 
+ <%
+LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
+%>
  <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +26,8 @@
 </head>
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
+		 <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+		 <img src="images/logo.jpg" style="width: 30px" /> <span
 			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
 			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 		</a> <!-- =======按鍵======== -->
@@ -144,8 +146,17 @@
 <!-- 	</ul> -->
 </c:if>
      
-<FORM METHOD="post" ACTION="/elitebaby/LatestNews.do" name="form1">
+<FORM METHOD="post" ACTION="/elitebaby/Latestnews.do" name="form1" enctype="multipart/form-data">
 <table>
+
+<tr>
+		<td>消息編號:</td>
+		<td><input type="file" class="form-control"name="newsPhoto" size="45" value="<%= (latestNewsVO==null)? "" : latestNewsVO.getNewsPhoto()%>" /></td>
+
+<%-- 			 value="${latestNewsVO.newsPhoto}"/></td> --%>
+<%-- 			 <td>${latestNewsVO.newsPhoto}</td> --%>
+	</tr>
+
     <tr>
 		<td>最新消息編號:</td>
 <%-- 		<td>${latestNewsVO.newsId}</td> --%>
@@ -175,21 +186,21 @@
 			 value="${latestNewsVO.newsIntro}"/></td>
 <%-- 			 <td>${latestNewsVO.newsIntro}</td> --%>
 	</tr>
-	<tr>
-		<td>排程時間:</td>
-		<td><input name="publishedTime" id="f_date1" type="text"/></td>
+<!-- 	<tr> -->
+<!-- 		<td>排程時間:</td> -->
+<!-- 		<td><input name="publishTime" id="f_date1" type="text"/></td> -->
 <%-- 		<td>${latestNewsVO.publishedTime}</td> --%>
-	</tr>
+<!-- 	</tr> -->
 	<tr>
-		<td>上架時間:</td>
-		<td><input name="onNews" id="f_date1" type="text"/></td>
+		<td>發佈時間:</td>
+		<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
 <%-- 		<td>${latestNewsVO.onNews}</td> --%>
 	</tr>
-	<tr>
-		<td>下架時間:</td>
-		<td><input name="offNews" id="f_date1" type="text"/></td>
+<!-- 	<tr> -->
+<!-- 		<td>下架時間:</td> -->
+<!-- 		<td><input name="offShelfTime" id="offShelfTime" type="text"/></td> -->
 <%-- 		<td>${latestNewsVO.offNews}</td> --%>
-	</tr>
+<!-- 	</tr> -->
 	<tr>
 		<td>標題名稱:</td>
 		<td><input type="TEXT" name="postTitle" size="45"
@@ -204,9 +215,10 @@
 <input type="submit" value="送出修改"></FORM>
 </body>
 
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+<!-- !-- =========================================以下為 datetimepicker 之相關設定========================================== --> 
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
@@ -218,79 +230,49 @@
            height: 151px;   /* height:  151px; */
   }
 </style>
-
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${param.publishedTime}', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+//         $.datetimepicker.setLocale('zh'); // kr ko ja en
+//         $('#f_date1').datetimepicker({
+//            theme: '',          //theme: 'dark',
+//            timepicker: true,   //timepicker: false,
+//            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+// 	       format: 'Y-m-d H:i:s',
+// 	       value: new Date(),
+//            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+//            //startDate:	        '2022/07/10',  // 起始日
+//            //minDate:           '-1970-01-01', // 去除今日(不含)之前
+//            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+//         });
 
-        	<style>
-        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	           width:  300px;   /* width:  300px; */
-        	  }
-        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	           height: 151px;   /* height:  151px; */
-        	  }
-        	</style>
-
-        	<script>
-        	        $.datetimepicker.setLocale('zh');
-        	        $('#f_date1').datetimepicker({
-        	           theme: '',              //theme: 'dark',
-        	 	       timepicker:false,       //timepicker:true,
-        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	 		   value: '${param.onNews}', // value:   new Date(),
-        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	           //startDate:	            '2017/07/10',  // 起始日
-        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        });
-        	        
-        	        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-        	        	<style>
-        	        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	        	           width:  300px;   /* width:  300px; */
-        	        	  }
-        	        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	        	           height: 151px;   /* height:  151px; */
-        	        	  }
-        	        	</style>
-
-        	        	<script>
-        	        	        $.datetimepicker.setLocale('zh');
-        	        	        $('#f_date1').datetimepicker({
-        	        	           theme: '',              //theme: 'dark',
-        	        	 	       timepicker:false,       //timepicker:true,
-        	        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	        	 		   value: '${param.offNews}', // value:   new Date(),
-        	        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	        	           //startDate:	            '2017/07/10',  // 起始日
-        	        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        	        });
-  <!-- bootstrap引用cdn -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-    crossorigin="anonymous"></script>
+$.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $('#scheduledTime').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#offShelfTime').val()?$('#offShelfTime').val():false
+	   })
+	  },
+	  timepicker:false
+	 });
+	 
+// 	 $('#offShelfTime').datetimepicker({
+// 	  format:'Y-m-d',
+// 	  onShow:function(){
+// 	   this.setOptions({
+// 	    minDate:$('#scheduledTime').val()?$('#scheduledTime').val():false
+// 	   })
+// 	  },
+// 	  timepicker:false
+// 	 });
+});
+</script>
+<!-- bootstrap引用cdn -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+	crossorigin="anonymous">
+	</script>
   <!-- 下載bootstrap引用 -->
   <!-- <script
      src="./vendors/bootstrap/bootstrap.bundle.min.js"

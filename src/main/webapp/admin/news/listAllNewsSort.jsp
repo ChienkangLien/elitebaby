@@ -18,25 +18,28 @@ pageContext.setAttribute("list", list);
 
 <!-- cdn的引用 -->
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
 	crossorigin="anonymous" />
 <!-- 下載bootstrap引用 -->
 <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="css\official.css" />
+<link rel="stylesheet" href="./css/official.css" />
 <link rel="stylesheet" href="./css/bglistAllLatestnews.css" />
-
+ <!-- jquery ui連結-->
+  <script src="js/jquery-ui.js"></script>
+   <!-- FontAwesom 連結 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <title>菁英產後護理之家</title>
 </head>
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectNewsSort.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+		<a href="/elitebaby/admin/news/listAllNewsSort.jsp">
+		<img src="images/logo.jpg" style="width: 30px" />
+		 <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+		  <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"></a> 
+		  
+		  <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
@@ -143,18 +146,18 @@ pageContext.setAttribute("list", list);
 		<div id="blank_area">此處留空</div>
 		<div class="t2" id="title">消息種類管理</div>
 		<!-- <h1>建立表格</h1> -->
-
-<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
-<!-- 			data-bs-target="#latestnews">新增</button> -->
-<!-- <td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/Latestnews.do" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" class="btn btn-add" value="新增">  -->
-<!-- 						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}> -->
-<!-- 						<input type="hidden" name="action" value="add"> -->
-<!-- 					</FORM> -->
-<!-- 					</td> -->
+	<div class="container">
+ 
+    <!-- 搜尋欄位 -->
+		<FORM METHOD="post" ACTION="/elitebaby/NewsSort.do">
+		 <button style="margin-left: 10px"class="btn btn-Revise"><a href='/elitebaby/admin/news/addNewsSort.jsp'>新增</a></button>
+<!-- 			<b>輸入種類編號 (如1):</b> -->
+			  <input class="bar" id="tags" placeholder="搜尋..." name="sortId">
+				<input type="hidden" name="action" value="getOne_For_Display"> 
+				 <button id="search" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+		</FORM>
 		<table>
 			<!-- 表提欄位內容 -->
 			<thead>
@@ -196,6 +199,7 @@ pageContext.setAttribute("list", list);
 				</tr>
 				</c:forEach>
 		</table>
+		</div>
 		<%@ include file="page2.file"%>
 		<!-- bootstrap引用cdn -->
 		<script

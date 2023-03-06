@@ -6,7 +6,7 @@
 <%@ page import="com.tibame.web.vo.*"%>
 
 <%
-// LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
+LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 %>
 <%-- --<%= latestNewsVO==null %>--${latestNewsVO.sortId}-- --%>
 <!DOCTYPE html>
@@ -32,11 +32,11 @@
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+		 <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+		 <img src="images/logo.jpg" style="width: 30px" /> 
+		 <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+		  <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"></a>
+		 <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
@@ -92,8 +92,8 @@
             aria-expanded="false"
           >
             討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">討論區</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
+          <a href="#" class="btn bkbtn">討論區</a>
 				</li>
 				<!-- ================預約參觀============= -->
 				<li class="mb-1">
@@ -104,8 +104,8 @@
             aria-expanded="false"
           >
             預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">預約參觀</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
+          <a href="#" class="btn bkbtn">預約參觀</a>
 				</li>
 				<!-- =============最新消息============ -->
 				<li class="mb-1">
@@ -154,12 +154,18 @@
 		</c:if>
 
 		<FORM METHOD="post"
-			ACTION="<%=request.getContextPath()%>/Latestnews.do" name="form1">
+			ACTION="<%=request.getContextPath()%>/Latestnews.do" name="form1" enctype="multipart/form-data">
 			<table>
 
 
 				<jsp:useBean id="sortSvc" scope="page"
 					class="com.tibame.web.service.NewsSortService" />
+					<tr>
+					<td>消息照片:
+					<td><input type="file" class="form-control"name="newsPhoto" size="45" value="<%= (latestNewsVO==null)? "" : latestNewsVO.getNewsPhoto()%>" /></td>
+
+				</tr>
+					
 				<tr>
 					<td>種類:
 <!-- 					<font color=red><b>*</b></font></td> -->
@@ -183,25 +189,24 @@
 
 				</tr>
 
+<!-- 				<tr> -->
+<!-- 					<td>排程時間:</td> -->
+<!-- 					<td><input name="publishTime" id="f_date1" type="text"/></td> -->
+<%-- 					<td>${errorMsgs.publishedTime}</td> --%> 
+
+<!-- 				</tr> -->
+								
 				<tr>
-					<td>排程時間:</td>
-					<td><input name="publishedTime" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.publishedTime}</td> --%>
+					<td>發佈日期:</td>
+					<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
+
 
 				</tr>
-				<tr>
-					<td>上架時間:</td>
-					<td><input name="onNews" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.onNews}</td> --%>
 
-				</tr>
-
-				<tr>
-					<td>下架時間:</td>
-					<td><input name="offNews" id="f_date1" type="text"/></td>
-<%-- 					<td>${errorMsgs.offNews}</td> --%>
-
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>下架時間:</td> -->
+<!-- 					<td><input name="offShelfTime" id="offShelfTime" type="text"/></td> -->
+<!-- 				</tr> -->
 
 				<!-- 				<tr> -->
 				<!-- 					<td>種類:<font color=red><b>*</b></font></td> -->
@@ -221,17 +226,11 @@
 		</FORM>
 </body>
 
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<% 
-  java.sql.Date publishedTime = null;
-  try {
-	  publishedTime = java.sql.Date.valueOf(request.getParameter("publishedTime").trim());
-   } catch (Exception e) {
-	   publishedTime = new java.sql.Date(System.currentTimeMillis());
-   }
-%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+ 
+
+<!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
@@ -243,96 +242,49 @@
            height: 151px;   /* height:  151px; */
   }
 </style>
-
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
- 	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=publishedTime%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        <% 
-        java.sql.Date onNews = null;
-        try {
-        	onNews = java.sql.Date.valueOf(request.getParameter("onNews").trim());
-         } catch (Exception e) {
-        	 onNews = new java.sql.Date(System.currentTimeMillis());
-         }
-      %>
-      <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-      <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-      <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+//         $.datetimepicker.setLocale('zh'); // kr ko ja en
+//         $('#f_date1').datetimepicker({
+//            theme: '',          //theme: 'dark',
+//            timepicker: true,   //timepicker: false,
+//            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+// 	       format: 'Y-m-d H:i:s',
+// 	       value: new Date(),
+//            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+//            //startDate:	        '2022/07/10',  // 起始日
+//            //minDate:           '-1970-01-01', // 去除今日(不含)之前
+//            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+//         });
 
-      <style>
-        .xdsoft_datetimepicker .xdsoft_datepicker {
-                 width:  300px;   /* width:  300px; */
-        }
-        .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-                 height: 151px;   /* height:  151px; */
-        }
-      </style>
-
-      <script>
-              $.datetimepicker.setLocale('zh');
-              $('#f_date1').datetimepicker({
-       	       theme: '',              //theme: 'dark',
-      	       timepicker:false,       //timepicker:true,
-      	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-      	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-      		   value: '<%=onNews%>', // value:   new Date(),
-                 //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-                 //startDate:	            '2017/07/10',  // 起始日
-                 //minDate:               '-1970-01-01', // 去除今日(不含)之前
-                 //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-              });
-              
-              <% 
-              java.sql.Date offNews = null;
-              try {
-            	  offNews = java.sql.Date.valueOf(request.getParameter("offNews").trim());
-               } catch (Exception e) {
-            	   offNews = new java.sql.Date(System.currentTimeMillis());
-               }
-            %>
-            <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-            <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-            <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-            <style>
-              .xdsoft_datetimepicker .xdsoft_datepicker {
-                       width:  300px;   /* width:  300px; */
-              }
-              .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-                       height: 151px;   /* height:  151px; */
-              }
-            </style>
-
-            <script>
-                    $.datetimepicker.setLocale('zh');
-                    $('#f_date1').datetimepicker({
-             	       theme: '',              //theme: 'dark',
-            	       timepicker:false,       //timepicker:true,
-            	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-            	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-            		   value: '<%=offNews%>', // value:   new Date(),
-                       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-                       //startDate:	            '2017/07/10',  // 起始日
-                       //minDate:               '-1970-01-01', // 去除今日(不含)之前
-                       //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-                    });
+$.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $('#scheduledTime').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#offShelfTime').val()?$('#offShelfTime').val():false
+	   })
+	  },
+	  timepicker:false
+	 });
+	 
+// 	 $('#offShelfTime').datetimepicker({
+// 	  format:'Y-m-d',
+// 	  onShow:function(){
+// 	   this.setOptions({
+// 	    minDate:$('#scheduledTime').val()?$('#scheduledTime').val():false
+// 	   })
+// 	  },
+// 	  timepicker:false
+// 	 });
+});
 </script>
 <!-- bootstrap引用cdn -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	</script>
 <!-- 下載bootstrap引用 -->
 <!-- <script
      src="./vendors/bootstrap/bootstrap.bundle.min.js"

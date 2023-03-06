@@ -17,36 +17,43 @@ public class LatestNewsService {
 		dao= new LatestNewsDAO();
 	}
 	
-	public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
-			java.sql.Date  publishedTime,java.sql.Date onNews, java.sql.Date offNews, String postTitle) {
+//	public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
+//			java.sql.Date scheduledTime, java.sql.Date offShelfTime, String postTitle,byte[] newsPhoto) {
 
+		public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
+				java.sql.Date scheduledTime, String postTitle,byte[] newsPhoto) {
+		
+		
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
 
 		latestNewsVO.setSortId(sortId);
 		latestNewsVO.setAdminId(adminId);
 		latestNewsVO.setNewsIntro(newsIntro);
-		latestNewsVO.setPublishedTime(publishedTime);
-		latestNewsVO.setOnNews(onNews);
-		latestNewsVO.setOffNews(offNews);
+		latestNewsVO.setScheduledTime(scheduledTime);
+//		latestNewsVO.setOffShelfTime(offShelfTime);
 		latestNewsVO.setPostTitle(postTitle);
+		latestNewsVO.setNewsPhoto(newsPhoto);
 		dao.insert(latestNewsVO);
 
 		return latestNewsVO;
 	}
 
-	public LatestNewsVO updateLatestNewsEmp(Integer newsId, Integer sortId, Integer adminId,String newsIntro,
-			java.sql.Date  publishedTime,java.sql.Date onNews, java.sql.Date offNews, String postTitle) {
+//	public LatestNewsVO updateLatestNews(Integer newsId, Integer sortId, Integer adminId,String newsIntro,
+//			java.sql.Date scheduledTime, java.sql.Date offShelfTime, String postTitle,byte[] newsPhoto) {
 
+		public LatestNewsVO addLatestNewsEmp(Integer newsId,Integer sortId, Integer adminId,String newsIntro,
+				java.sql.Date scheduledTime,  String postTitle,byte[] newsPhoto) {
+		
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
 		
 		latestNewsVO.setNewsId(newsId);
 		latestNewsVO.setSortId(sortId);
 		latestNewsVO.setAdminId(adminId);
 		latestNewsVO.setNewsIntro(newsIntro);
-		latestNewsVO.setPublishedTime(publishedTime);
-		latestNewsVO.setOnNews(onNews);
-		latestNewsVO.setOffNews(offNews);
+		latestNewsVO.setScheduledTime(scheduledTime);
+//		latestNewsVO.setOffShelfTime(offShelfTime);
 		latestNewsVO.setPostTitle(postTitle);
+		latestNewsVO.setNewsPhoto(newsPhoto);
 		dao.update(latestNewsVO);
 
 		return latestNewsVO;

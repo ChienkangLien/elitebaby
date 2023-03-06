@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.tibame.web.service.*"%>
@@ -13,161 +14,185 @@ pageContext.setAttribute("list", list);
 <html lang="en">
 
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- cdnªº¤Ş¥Î -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-	crossorigin="anonymous" />
-<!-- ¤U¸übootstrap¤Ş¥Î -->
-<!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="css\official.css" />
-<link rel="stylesheet" href="./css/bglistAllLatestnews.css" />
-
-<title>µ×­^²£«áÅ@²z¤§®a</title>
+  <!-- cdnçš„å¼•ç”¨ -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <!-- ä¸‹è¼‰bootstrapå¼•ç”¨ -->
+  <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
+  <link rel="stylesheet" href="./css/official.css" />
+  <link rel="stylesheet" href="./css/bglistAllLatestnews.css" />
+  <!-- jquery uié€£çµ-->
+  <script src="js/jquery-ui.js"></script>
+  <!-- FontAwesom é€£çµ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <title>èè‹±ç”¢å¾Œè­·ç†ä¹‹å®¶</title>
 </head>
 
 <body class="c2">
-	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp">
-		<img src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">µ×­^²£«áÅ@²z¤§®a</span> 
-			<a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======«öÁä======== -->
+  <div class="flex-shrink-0 p-3 c1" id="navbar">
+   <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+   <img src="images/logo.jpg" style="width: 30px" /> 
+   <span class="fs-5 fw-semibold">èè‹±ç”¢å¾Œè­·ç†ä¹‹å®¶</span>
+			 <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		</a>
 
-			<ul class="list-unstyled ps-0">
-				<li class="mb-1">
-					<button
-						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#home-collapse"
-						aria-expanded="true">·|­û¤¤¤ß</button>
-					<div class="collapse" id="home-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">¥Î¤á¸ê®ÆºŞ²z</a></li>
-							<li><a href="#" class="link-dark rounded">¬d¸ß·|­û</a></li>
-							<li><a href="#" class="link-dark rounded">½s¿è·|­û¸ê°T</a></li>
-						</ul>
-					</div>
-				</li>
+    <!-- =======æŒ‰éµ======== -->
 
-				<!-- ================¿¯­¹ºŞ²z============== -->
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1">
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#home-collapse" aria-expanded="true">
+          æœƒå“¡ä¸­å¿ƒ
+        </button>
+        <div class="collapse" id="home-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">ç”¨æˆ¶è³‡æ–™ç®¡ç†</a></li>
+            <li><a href="#" class="link-dark rounded">æŸ¥è©¢æœƒå“¡</a></li>
+            <li><a href="#" class="link-dark rounded">ç·¨è¼¯æœƒå“¡è³‡è¨Š</a></li>
+          </ul>
+        </div>
+      </li>
 
-				<li class="mb-1">
-					<button
-						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-						aria-expanded="false">¿¯­¹ºŞ²z</button>
-					<div class="collapse" id="orders-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">­qÀ\ºŞ²z</a></li>
-							<li><a href="#" class="link-dark rounded">¹w¬ù¸Õ¦YºŞ²z</a></li>
-							<li><a href="#" class="link-dark rounded">°Ó«~ºŞ²z</a></li>
-							<li><a href="#" class="link-dark rounded">ÁÊª«¨®</a></li>
-						</ul>
-					</div>
-				</li>
-				<!-- ===============©Ğ¶¡ºŞ²z============= -->
-				<li class="mb-1">
-					<button
-						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-						aria-expanded="false">©Ğ¶¡ºŞ²z</button>
-					<div class="collapse" id="dashboard-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">©Ğ«¬ºûÅ@</a></li>
-							<li><a href="#" class="link-dark rounded">©Ğ¶¡­q³æ</a></li>
-							<li><a href="#" class="link-dark rounded">©ĞªpºŞ²z</a></li>
-						</ul>
-					</div>
-				</li>
-				<!-- =================°Q½×°Ï================ -->
-				<li class="mb-1">
-					<!-- <button
+      <!-- ================è†³é£Ÿç®¡ç†============== -->
+
+      <li class="mb-1">
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#orders-collapse" aria-expanded="false">
+          è†³é£Ÿç®¡ç†
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">è¨‚é¤ç®¡ç†</a></li>
+            <li><a href="#" class="link-dark rounded">é ç´„è©¦åƒç®¡ç†</a></li>
+            <li><a href="#" class="link-dark rounded">å•†å“ç®¡ç†</a></li>
+            <li><a href="#" class="link-dark rounded">è³¼ç‰©è»Š</a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- ===============æˆ¿é–“ç®¡ç†============= -->
+      <li class="mb-1">
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#dashboard-collapse" aria-expanded="false">
+          æˆ¿é–“ç®¡ç†
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">æˆ¿å‹ç¶­è­·</a></li>
+            <li><a href="#" class="link-dark rounded">æˆ¿é–“è¨‚å–®</a></li>
+            <li><a href="#" class="link-dark rounded">æˆ¿æ³ç®¡ç†</a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- =================è¨è«–å€================ -->
+      <li class="mb-1">
+        <!-- <button
             class="btn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
             data-bs-target="#texts-collapse"
             aria-expanded="false"
           >
-            °Q½×°Ï
-          </button> --> <!-- ­Y¨S¦³¤l¤¸¯À¡A³æ¯Âµ¹¤@­Óa¼ĞÅÒ§Y¥i -->
-           <a href="#" class="btn bkbtn">°Q½×°Ï</a>
-				</li>
-				<!-- ================¹w¬ù°ÑÆ[============= -->
-				<li class="mb-1">
-					<!-- <button
+            è¨è«–å€
+          </button> -->
+        <!-- è‹¥æ²’æœ‰å­å…ƒç´ ï¼Œå–®ç´”çµ¦ä¸€å€‹aæ¨™ç±¤å³å¯ -->
+        <a href="#" class="btn bkbtn">è¨è«–å€</a>
+      </li>
+      <!-- ================é ç´„åƒè§€============= -->
+      <li class="mb-1">
+        <!-- <button
             class="btn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
             data-bs-target="#orders-collapse1"
             aria-expanded="false"
           >
-            ¹w¬ù°ÑÆ[
-          </button> --> <!-- ­Y¨S¦³¤l¤¸¯À¡A³æ¯Âµ¹¤@­Óa¼ĞÅÒ§Y¥i --> 
-          <a href="#" class="btn bkbtn">¹w¬ù°ÑÆ[</a>
-				</li>
-				<!-- =============³Ì·s®ø®§============ -->
-				<li class="mb-1">
-					<button
-						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#orders-collapse2"
-						aria-expanded="false">®ø®§°ÏºŞ²z</button>
-					<div class="collapse" id="orders-collapse2">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">¯d¨¥ºŞ²z</a></li>
-							<li><a href="#" class="link-dark rounded">·s¼W®ø®§ºØÃş</a></li>
-							<li><a href="#" class="link-dark rounded">µo§G®ø®§</a></li>
-						</ul>
-					</div>
-				</li>
-				<!-- ===================°İÃD¦^³ø================== -->
-				<li class="mb-1">
-					<button
-						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#account-collapse"
-						aria-expanded="false">°İÃD¦^³ø</button>
-					<div class="collapse" id="account-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">¦^³ø«H¥ó</a></li>
-							<li><a href="#" class="link-dark rounded">µo°e«H¥ó</a></li>
-						</ul>
-					</div>
-				</li>
-			</ul>
-	</div>
-	<div class="c1" id="header">
-		<p class="t1">«á¥xºŞ²z¨t²Î</p>
-	</div>
-	<div id="main_div">
-		<div id="blank_area">¦¹³B¯dªÅ</div>
-		<div class="t2" id="title">³Ì·s®ø®§ºŞ²z</div>
-		<!-- <h1>«Ø¥ßªí®æ</h1> -->
+            é ç´„åƒè§€
+          </button> -->
+        <!-- è‹¥æ²’æœ‰å­å…ƒç´ ï¼Œå–®ç´”çµ¦ä¸€å€‹aæ¨™ç±¤å³å¯ -->
+        <a href="#" class="btn bkbtn">é ç´„åƒè§€</a>
+      </li>
+      <!-- =============æœ€æ–°æ¶ˆæ¯============ -->
+      <li class="mb-1">
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#orders-collapse2" aria-expanded="false">
+          æ¶ˆæ¯å€ç®¡ç†
+        </button>
+        <div class="collapse" id="orders-collapse2">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">ç•™è¨€ç®¡ç†</a></li>
+            <li><a href="#" class="link-dark rounded">æ–°å¢æ¶ˆæ¯ç¨®é¡</a></li>
+            <li><a href="#" class="link-dark rounded">ç™¼ä½ˆæ¶ˆæ¯</a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- ===================å•é¡Œå›å ±================== -->
+      <li class="mb-1">
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#account-collapse" aria-expanded="false">
+          å•é¡Œå›å ±
+        </button>
+        <div class="collapse" id="account-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">å›å ±ä¿¡ä»¶</a></li>
+            <li><a href="#" class="link-dark rounded">ç™¼é€ä¿¡ä»¶</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="c1" id="header">
+    <p class="t1">å¾Œå°ç®¡ç†ç³»çµ±</p>
+  </div>
+  <div id="main_div">
+    <div id="blank_area">æ­¤è™•ç•™ç©º</div>
+    <div class="t2" id="title">
+      æœ€æ–°æ¶ˆæ¯ç®¡ç†
+    </div>
+    <!-- <h1>å»ºç«‹è¡¨æ ¼</h1> -->
+<div class="container">
+ 
+    <!-- æœå°‹æ¬„ä½ -->
+   <button style="margin-left: 10px"class="btn btn-Revise"><a href='/elitebaby/admin/news/addLatestNews.jsp'>æ–°å¢</a></button>
+   <FORM METHOD="post" ACTION="/elitebaby/Latestnews.do">
+<!-- 			<b>è¼¸å…¥æœ€æ–°æ¶ˆæ¯ç·¨è™Ÿ (å¦‚1):</b> -->
+			 <input class="bar" id="tags" placeholder="æœå°‹..." name="newsId">
+			  <input type="hidden" name="action" value="getOne_For_Display"> 
+<!-- 				<input  class="btn btn-Revise" type="submit" value="é€å‡º"> -->
+				 <button id="search" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+		</FORM>
+        
+<%--         <c:forEach var="result" items="${Msgs}"> --%>
+<%--               <div >${result.postTitle}</div> --%>
+<%--   </c:forEach> --%>
+ 
+		<!-- <h1>å»ºç«‹è¡¨æ ¼</h1> -->
 
 <!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
-<!-- 			data-bs-target="#latestnews">·s¼W</button> -->
+<!-- 			data-bs-target="#latestnews">æ–°å¢</button> -->
 <!-- <td> -->
 <!-- 					<FORM METHOD="post" -->
 <%-- 						ACTION="<%=request.getContextPath()%>/Latestnews.do" --%>
 <!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" class="btn btn-add" value="·s¼W">  -->
+<!-- 						<input type="submit" class="btn btn-add" value="æ–°å¢">  -->
 <!-- 						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}> -->
 <!-- 						<input type="hidden" name="action" value="add"> -->
 <!-- 					</FORM> -->
 <!-- 					</td> -->
 		<table>
-			<!-- ªí´£Äæ¦ì¤º®e -->
+			<!-- è¡¨ææ¬„ä½å…§å®¹ -->
 			<thead>
 				<tr>
-					<th>¹Ï¤ù</th>
-					<th>³Ì·s®ø®§½s¸¹/ºØÃş½s¸¹/ºŞ²z­û½s¸¹</th>
-					<th>¼ĞÃD¦WºÙ</th>
-					<th>¤º®e´y­z</th>
-					<th>±Æµ{®É¶¡</th>
-					<th>¤W¬[¤é´Á</th>
-					<th>¤U¬[®É¶¡</th>
-					<th>­×§ï</th>
-					<th>§R°£</th>
+					<th>æ¶ˆæ¯ç…§ç‰‡</th>
+					<th>æœ€æ–°æ¶ˆæ¯ç·¨è™Ÿ/ç¨®é¡ç·¨è™Ÿ/ç®¡ç†å“¡ç·¨è™Ÿ</th>
+					<th>æ¨™é¡Œåç¨±</th>
+					<th>å…§å®¹æè¿°</th>
+					<th>ç™¼ä½ˆæ™‚é–“</th>
+<!-- 					<th>ä¸‹æ¶æ™‚é–“</th> -->
+					<th>ä¿®æ”¹</th>
+					<th>åˆªé™¤</th>
 				</tr>
 				</tr>
 				<%@ include file="page1.file"%>
@@ -177,18 +202,17 @@ pageContext.setAttribute("list", list);
 
 			<tbody>
 				<tr>
-					<td><img src="./images/10.png"></td>
+					<td><img class="figure-img img-fluid rounded" src="<%=request.getContextPath()%>/LatestNewsServlet?newsId=${latestNewsVO.newsId}"></td>
 					<td>${latestNewsVO.newsId}/${latestNewsVO.sortId}/${latestNewsVO.adminId}</td>
 					<td>${latestNewsVO.postTitle}</td>
 					<td>${latestNewsVO.newsIntro}</td>
-					<td>${latestNewsVO.publishedTime}</td>
-					<td>${latestNewsVO.onNews}</td>
-					<td>${latestNewsVO.offNews}</td>
+					<td>${latestNewsVO.scheduledTime}</td>
+<%-- 					<td>${latestNewsVO.offShelfTime}</td> --%>
 					<td>
 						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/Latestnews.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" class="btn btn-Revise" value="­×§ï"> 
+							ACTION="<%=request.getContextPath()%>/Latestnews.do" enctype="multipart/form-data"
+							style="margin-bottom: 0px;"  >
+							<input type="submit" class="btn btn-Revise" value="ä¿®æ”¹"> 
 							<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
 							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
@@ -197,7 +221,7 @@ pageContext.setAttribute("list", list);
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/Latestnews.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" class="btn btn-delete" value="§R°£"> 
+						<input type="submit" class="btn btn-delete" value="åˆªé™¤"> 
 						<input type="hidden" name="newsId" value=${latestNewsVO.newsId}>
 						<input type="hidden" name="action" value="delete">
 					</FORM>
@@ -205,18 +229,18 @@ pageContext.setAttribute("list", list);
 				</tr>
 				</c:forEach>
 		</table>
+		</div>
 		<%@ include file="page2.file"%>
-		<!-- bootstrap¤Ş¥Îcdn -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-			crossorigin="anonymous"></script>
-		<!-- ¤U¸übootstrap¤Ş¥Î -->
-		<!-- <script
-     src="./vendors/bootstrap/bootstrap.bundle.min.js"
-     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-     crossorigin="anonymous"
-   ></script> -->
-</body>
+	 <script src="./vendors/jquery/jquery-3.6.3.min.js"></script>
+  <!-- bootstrapå¼•ç”¨cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+  <!-- ä¸‹è¼‰bootstrapå¼•ç”¨ -->
+  <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
+  ></script> -->
+  <script src="js/front_navbar.js"></script>
 
+
+</body>
 </html>
