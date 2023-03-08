@@ -24,18 +24,19 @@
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectNewsSort.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+	<a href="/elitebaby/admin/news/listAllNewsSort.jsp">
+	<img src="images/logo.jpg" style="width: 30px" />
+	 <span class="fs-5 fw-semibold">菁英產後護理之家</span> 
+	 <a href="#"class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"></a> 
+
+<!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
 					<button
 						class="btn bkbtn btn-toggle align-items-center rounded collapsed"
 						data-bs-toggle="collapse" data-bs-target="#home-collapse"
-						aria-expanded="true">會員中心</button>
+	  					aria-expanded="true">會員中心</button>
 					<div class="collapse" id="home-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li><a href="#" class="link-dark rounded">用戶資料管理</a></li>

@@ -4,33 +4,39 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.tibame.web.service.*"%>
 <%@ page import="com.tibame.web.vo.*"%>
- <%
+
+<%
 LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 %>
- <!DOCTYPE html>
+<%-- --<%= latestNewsVO==null %>--${latestNewsVO.sortId}-- --%>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- cdn的引用 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
-  <!-- 下載bootstrap引用 -->
-  <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
-  <link rel="stylesheet" href="css\official.css" />
-  <link rel="stylesheet" href="./css/updateLatestNews.css" />
+<!-- cdn的引用 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous" />
+<!-- 下載bootstrap引用 -->
+<!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
+<link rel="stylesheet" href="css\official.css" />
+<link rel="stylesheet" href="./css/bgaddlatestnews.css" />
 
-  <title>菁英產後護理之家</title>
+<title>菁英產後護理之家</title>
 </head>
+
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
 		 <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
-		 <img src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+		 <img src="images/logo.jpg" style="width: 30px" /> 
+		 <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+		  <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"></a>
+		 <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
@@ -86,8 +92,8 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
             aria-expanded="false"
           >
             討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">討論區</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
+          <a href="#" class="btn bkbtn">討論區</a>
 				</li>
 				<!-- ================預約參觀============= -->
 				<li class="mb-1">
@@ -98,8 +104,8 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
             aria-expanded="false"
           >
             預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-					class="btn bkbtn">預約參觀</a>
+          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> 
+          <a href="#" class="btn bkbtn">預約參觀</a>
 				</li>
 				<!-- =============最新消息============ -->
 				<li class="mb-1">
@@ -135,35 +141,31 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 	</div>
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
-		<div class="t2" id="title">最新消息管理-修改</div>  
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-<!-- 	<ul> -->
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-<!-- 	</ul> -->
-</c:if>
-     
-<FORM METHOD="post" ACTION="/elitebaby/Latestnews.do" name="form1" enctype="multipart/form-data">
-<table>
+		<div class="t2" id="title">最新消息管理-新增</div>
 
-<tr>
-		<td>消息編號:</td>
-		<td><input type="file" class="form-control"name="newsPhoto" size="45" value="<%= (latestNewsVO==null)? "" : latestNewsVO.getNewsPhoto()%>" /></td>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<!-- 	<ul> -->
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+			<!-- 	</ul> -->
+		</c:if>
 
-<%-- 			 value="${latestNewsVO.newsPhoto}"/></td> --%>
-<%-- 			 <td>${latestNewsVO.newsPhoto}</td> --%>
-	</tr>
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/Latestnews.do" name="form1" enctype="multipart/form-data">
+			<table>
 
-    <tr>
-		<td>最新消息編號:</td>
-<%-- 		<td>${latestNewsVO.newsId}</td> --%>
-	</tr>
-	
-	<jsp:useBean id="sortSvc" scope="page"
+
+				<jsp:useBean id="sortSvc" scope="page"
 					class="com.tibame.web.service.NewsSortService" />
+					<tr>
+					<td>消息照片:
+					<td><input type="file" class="form-control"name="newsPhoto" size="45" value="<%= (latestNewsVO==null)? "" : latestNewsVO.getNewsPhoto()%>" /></td>
+
+				</tr>
+					
 				<tr>
 					<td>種類:
 <!-- 					<font color=red><b>*</b></font></td> -->
@@ -174,48 +176,58 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 							</c:forEach>
 					</select></td>
 				</tr>
-	<tr>
-		<td>管理員編號:</td>
-		<td><input type="TEXT" name="adminId" size="45" 
-			 value="${latestNewsVO.adminId}"/></td>
-<%-- 			 <td>${latestNewsVO.adminId}</td> --%>
-	</tr>
-	<tr>
-		<td>消息內容:</td>
-		<td><input type="TEXT" name="newsIntro" size="45" 
-			 value="${latestNewsVO.newsIntro}"/></td>
-<%-- 			 <td>${latestNewsVO.newsIntro}</td> --%>
-	</tr>
-<!-- 	<tr> -->
-<!-- 		<td>排程時間:</td> -->
-<!-- 		<td><input name="publishTime" id="f_date1" type="text"/></td> -->
-<%-- 		<td>${latestNewsVO.publishedTime}</td> --%>
-<!-- 	</tr> -->
-	<tr>
-		<td>發佈時間:</td>
-		<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
-<%-- 		<td>${latestNewsVO.onNews}</td> --%>
-	</tr>
-<!-- 	<tr> -->
-<!-- 		<td>下架時間:</td> -->
-<!-- 		<td><input name="offShelfTime" id="offShelfTime" type="text"/></td> -->
-<%-- 		<td>${latestNewsVO.offNews}</td> --%>
-<!-- 	</tr> -->
-	<tr>
-		<td>標題名稱:</td>
-		<td><input type="TEXT" name="postTitle" size="45"
-			 value="${latestNewsVO.postTitle}"/></td>
-<%-- 			 <td>${latestNewsVO.postTitle}</td> --%>
-	</tr>
-	
-	</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="newsId" value="${latestNewsVO.newsId}">
-<input type="submit" value="送出修改"></FORM>
+
+				<tr>
+					<td>標題名稱:</td>
+					<td><input type="TEXT" name="postTitle" size="45" value="" /></td>
+
+				</tr>
+
+				<tr>
+					<td>消息內容:</td>
+					<td><input type="TEXT" name="newsIntro" size="45" value="" /></td>
+
+				</tr>
+
+<!-- 				<tr> -->
+<!-- 					<td>排程時間:</td> -->
+<!-- 					<td><input name="publishTime" id="f_date1" type="text"/></td> -->
+<%-- 					<td>${errorMsgs.publishedTime}</td> --%> 
+
+<!-- 				</tr> -->
+								
+				<tr>
+					<td>發佈日期:</td>
+					<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
+
+
+				</tr>
+
+<!-- 				<tr> -->
+<!-- 					<td>下架時間:</td> -->
+<!-- 					<td><input name="offShelfTime" id="offShelfTime" type="text"/></td> -->
+<!-- 				</tr> -->
+
+				<!-- 				<tr> -->
+				<!-- 					<td>種類:<font color=red><b>*</b></font></td> -->
+				<!-- 					<td><select size="1" name="deptno"> -->
+
+				<!-- 							<option value="1">一般 -->
+				<!-- 							<option value="2">優惠 -->
+				<!-- 							<option value="3">其他 -->
+				<!-- 					</select></td> -->
+				<!-- 				</tr> -->
+
+			</table>
+			<br> <input type="hidden" name="action" value="insert">
+			 <input	type="hidden" name="adminId" value="1"> 
+			 <input type="hidden" name="sortId" value="1">
+			  <input type="submit" value="送出新增">
+		</FORM>
 </body>
 
-<!-- !-- =========================================以下為 datetimepicker 之相關設定========================================== --> 
+
+ 
 
 <!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
 <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -273,13 +285,11 @@ $(function(){
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous">
 	</script>
-  <!-- 下載bootstrap引用 -->
-  <!-- <script
+<!-- 下載bootstrap引用 -->
+<!-- <script
      src="./vendors/bootstrap/bootstrap.bundle.min.js"
      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
      crossorigin="anonymous"
    ></script> -->
-
 </body>
-
 </html>

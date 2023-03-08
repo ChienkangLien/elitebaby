@@ -16,7 +16,7 @@
 	crossorigin="anonymous" />
 <!-- 下載bootstrap引用 -->
 <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="css\official.css" />
+<link rel="stylesheet" href="./css/official.css" />
 <link rel="stylesheet" href="./css/selectLatestNews.css" />
 
 <title>菁英產後護理之家</title>
@@ -24,11 +24,13 @@
 
 <body class="c2">
 	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="/elitebaby/admin/news/selectLatestNews.jsp"><img
-			src="images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span> <a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		</a> <!-- =======按鍵======== -->
+		 <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+		 <img src="images/logo.jpg" style="width: 30px" />
+		  <span	class="fs-5 fw-semibold">菁英產後護理之家</span>
+			 <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+		</a>
+		
+		 <!-- =======按鍵======== -->
 
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
@@ -147,18 +149,20 @@
 	</c:if>
 <ul style="margin-left:500px">
 
-  <li><a href='/elitebaby/admin/news/listAllLatestNews.jsp'>表單</a><br><br></li>
-	<li>
+ <button class="btn btn-Revise"><a href='/elitebaby/admin/news/listAllLatestNews.jsp'>表單</a></button>
+	
+	<td>
+	
 		<FORM METHOD="post" ACTION="/elitebaby/Latestnews.do">
 			<b>輸入最新消息編號 (如1):</b> <input type="text" name="newsId"> <input
-				type="hidden" name="action" value="getOne_For_Display"> <input
-				type="submit" value="送出">
+				type="hidden" name="action" value="getOne_For_Display"> 
+				<input  class="btn btn-Revise" type="submit" value="送出">
 		</FORM>
-	</li>
-
+	
 	<ul>
-		<li><a href='/elitebaby/admin/news/addLatestNews.jsp'>新增</a></li>
+		<button class="btn btn-Revise"><a href='/elitebaby/admin/news/addLatestNews.jsp'>新增</a></button>
 	</ul>
+</td>
 </ul>
 	<!-- bootstrap引用cdn -->
 	<script

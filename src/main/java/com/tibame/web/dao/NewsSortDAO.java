@@ -34,7 +34,7 @@ public class NewsSortDAO implements NewsSortDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT SORT_ID,SORT_NAME FROM NEWS_SORT order by SORT_ID";
 	private static final String GET_ONE_STMT = "SELECT SORT_ID,SORT_NAME FROM NEWS_SORT where SORT_ID=?";
 	private static final String GET_LATEST_NEWS_BySortID_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS,OFF_NEWS,POST_TITLE,PUBLISHED_TIME FROM LATEST_NEWS where SORT_ID = ? order by SORT_ID";
-	private static final String DELETE_LATEST_NEWS = "DELETE FROM LATEST_NEWS where NEWS_ID = ?";
+	private static final String DELETE_LATEST_NEWS = "DELETE FROM LATEST_NEWS where SORT_ID = ?";
 	private static final String DELETE_SORT = "DELETE FROM NEWS_SORT where SORT_ID = ?";
 	private static final String UPDATE = "UPDATE NEWS_SORT set SORT_NAME=? where SORT_ID =?";
 
@@ -128,20 +128,20 @@ public class NewsSortDAO implements NewsSortDAO_interface {
 			// 2●設定於 pstm.executeUpdate()之後
 						con.commit();
 						con.setAutoCommit(true);
-						System.out.println("刪除消息" +sortId + "時,共有消息" + updateCount_LATEST_NEWS
-								+ "消息同時被刪除");
+//						System.out.println("刪除消息" +sortId + "時,共有消息" + updateCount_LATEST_NEWS
+//								+ "消息同時被刪除");
 			
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			if (con != null) {
-				try {
-					// 3●設定於當有exception發生時之catch區塊內
-					con.rollback();
-				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
-				}
-			}
+//			if (con != null) {
+//				try {
+//					// 3●設定於當有exception發生時之catch區塊內
+//					con.rollback();
+//				} catch (SQLException excep) {
+//					throw new RuntimeException("rollback error occured. "
+//							+ excep.getMessage());
+//				}
+//			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -288,7 +288,7 @@ public class NewsSortDAO implements NewsSortDAO_interface {
 				latestNewsVO.setAdminId(rs.getInt("ADMIN_ID"));
 				latestNewsVO.setNewsIntro(rs.getString("NEWS_INTRO"));
 				latestNewsVO.setScheduledTime(rs.getDate("SCHEDULED_TIME"));
-				latestNewsVO.setOffShelfTime(rs.getDate("OFF_SHELF_TIME"));
+//				latestNewsVO.setOffShelfTime(rs.getDate("OFF_SHELF_TIME"));
 				latestNewsVO.setPostTitle(rs.getString("POST_TITLE")); // Store the row in the list
 				set.add(latestNewsVO);
 			}

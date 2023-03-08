@@ -148,9 +148,9 @@ pageContext.setAttribute("list", list);
 		<!-- <h1>建立表格</h1> -->
 	<div class="container">
  
+		 <button style="margin-left: 10px"class="btn btn-Revise"><a href='/elitebaby/admin/news/addNewsSort.jsp'>新增</a></button>
     <!-- 搜尋欄位 -->
 		<FORM METHOD="post" ACTION="/elitebaby/NewsSort.do">
-		 <button style="margin-left: 10px"class="btn btn-Revise"><a href='/elitebaby/admin/news/addNewsSort.jsp'>新增</a></button>
 <!-- 			<b>輸入種類編號 (如1):</b> -->
 			  <input class="bar" id="tags" placeholder="搜尋..." name="sortId">
 				<input type="hidden" name="action" value="getOne_For_Display"> 

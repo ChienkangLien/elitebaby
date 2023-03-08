@@ -19,9 +19,8 @@
 
     <!-- css連結 -->
     <link rel="stylesheet" href="css\official.css" />
-    <link rel="stylesheet" href="./css/front_allnews.css">
-    <!-- jquery ui連結-->
-    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./css/front_allnormal.css">
+   
     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
@@ -109,7 +108,7 @@
     </div>
     <div id="book_visit">
         <a href="#">
-            <img class="img-responsive" src="/images/book_visit.png" />
+            <img class="img-responsive" src="images/book_visit.png" />
         </a>
     </div>
     <div id="blank_area">
@@ -117,25 +116,25 @@
     </div>
     <ul class="container-filter categories-filter">
         <li>
-            <a class="categories active" href="front_allnews.html">綜合</a>
+            <a class="categories active" href="/elitebaby/admin/news/front_allnews.jsp">綜合</a>
         </li>
         <li>
-            <a class="categories" href="front_allnormal.html">一般</a>
+            <a class="categories" href="/elitebaby/admin/news/front_allnormal.jsp">一般</a>
         </li>
         <li>
-            <a class="categories" href="/front_alldiscount.html">優惠</a>
+            <a class="categories" href="/elitebaby/admin/news/front_alldiscount.jsp">優惠</a>
         </li>
     </ul>
     <!-- 搜尋欄位 -->
     <div class="container">
     <form method="post" action="<%=request.getContextPath()%>/Latestnews.do">
-            <input class="bar" id="tags" placeholder="搜尋..." name=yyy>
+            <input class="bar" id="tags" placeholder="搜尋..." name=select>
             <input type="hidden" name="action" value="search">
             <button id="search" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </form>
-        <c:forEach var="result" items="${kkk}">
+        <c:forEach var="result" items="${Msgs}">
               <div >${result.postTitle}</div>
   </c:forEach>
     </div>
@@ -156,15 +155,20 @@
         <div class="flex_container">
 
             <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
+                <a href="/elitebaby/admin/news/front_allnormal_1.jsp">
+                    <img src="./images/環境1.png">
                 </a>
             </div>
 
             <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
+                <a href="/elitebaby/admin/news/front_allnormal_1.jsp">
+                    <h1 class="title1">日式婦女節</h1>
+                    <p class="para">櫃檯客服<br>
+                        3/3是日本女兒節，3/8是婦女節，3/8在這裡有日式婦女節，西瓜和服和鳳梨和服，大飽眼福
+
+                        還有隱藏版的明星目前入住在館內喲!
+
+                        櫻花樹目前還在館內，賞櫻趁現在</p>
                 </a>
             </div>
         </div>
@@ -174,15 +178,15 @@
         <div class="flex_container">
 
             <div class="flex_items -left">
-                <a href="/front_allnews1.html">
-                    <img src="./images/10.png">
+                <a href="/elitebaby/admin/news/front_allnormal_2.jsp">
+                    <img src="./images/環境2.png">
                 </a>
             </div>
 
             <div class="flex_items -right">
-                <a href="/front_allnews1.html">
-                    <h1 class="title1">標題</h1>
-                    <p class="para">內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字內容文字</p>
+                <a href="/elitebaby/admin/news/front_allnormal_2.jsp">
+                    <h1 class="title1">新環境公告</h1>
+                    <p class="para">打造最新交誼廳環境讓媽媽們有舒適良好空間</p>
                 </a>
             </div>
         </div>
@@ -199,6 +203,8 @@
 
 	
  <script src="./vendors/jquery/jquery-3.6.3.min.js"></script>
+  <!-- jquery ui連結-->
+    <script src="js/jquery-ui.js"></script>
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">

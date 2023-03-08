@@ -258,13 +258,13 @@ public class LatestNewsServlet extends HttpServlet {
 				errorMsgs.add("時間格式不正確,請重新輸入!");
 			}
 			
-			java.sql.Date offShelfTime = null;
-			try {
-				offShelfTime = java.sql.Date.valueOf(req.getParameter("offShelfTime").trim());
-			} catch (IllegalArgumentException e) {
-				offShelfTime = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入日期時間!");
-			}
+//			java.sql.Date offShelfTime = null;
+//			try {
+//				offShelfTime = java.sql.Date.valueOf(req.getParameter("offShelfTime").trim());
+//			} catch (IllegalArgumentException e) {
+//				offShelfTime = new java.sql.Date(System.currentTimeMillis());
+//				errorMsgs.add("請輸入日期時間!");
+//			}
 
 			String postTitle = req.getParameter("postTitle").trim();
 			if (postTitle == null || postTitle.trim().length() == 0) {

@@ -30,7 +30,7 @@ public class LatestNewsDAO implements LatestNewsDAO_interface {
 	}
 
 //	private static final String INSERT_STMT = "INSERT INTO LATEST_NEWS (SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,OFF_SHELF_TIME,POST_TITLE,NEWS_PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String INSERT_STMT = "INSERT INTO LATEST_NEWS (SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,POST_TITLE,NEWS_PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO LATEST_NEWS (SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,POST_TITLE,NEWS_PHOTO) VALUES (?, ?, ?, ?, ?, ?)";
 //	private static final String GET_ALL_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,OFF_SHELF_TIME,POST_TITLE,NEWS_PHOTO FROM LATEST_NEWS order by NEWS_ID";
 	private static final String GET_ALL_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,POST_TITLE,NEWS_PHOTO FROM LATEST_NEWS order by NEWS_ID";
 //	private static final String GET_ONE_STMT = "SELECT NEWS_ID,SORT_ID,ADMIN_ID,NEWS_INTRO,SCHEDULED_TIME,OFF_SHELF_TIME,POST_TITLE,NEWS_PHOTO FROM LATEST_NEWS where NEWS_ID = ?";
@@ -38,9 +38,9 @@ public class LatestNewsDAO implements LatestNewsDAO_interface {
 //		private static final String GET_Emps_ByDeptno_STMT = 
 //				"SELECT SORT_ID,ADMIN_ID,NEWS_INTRO,ON_NEWS_ID,OFF_NEWS_ID,POST_TITLE FROM LATEST_NEWS where deptno = ? order by empno";
 
-	private static final String DELETE_NEWS_MESSAGE = "DELETE FROM NEWS_MESSAGE WHERE NEW_MESSAGE_ID=?";
+	private static final String DELETE_NEWS_MESSAGE = "DELETE FROM NEWS_MESSAGE WHERE NEWS_ID=?";
 				
-	private static final String DELETE = "DELETE FROM LATEST_NEWS where NEWS_ID = ?";
+	private static final String DELETE_LATEST_NEWS = "DELETE FROM LATEST_NEWS where NEWS_ID = ?";
 //	private static final String UPDATE = "UPDATE LATEST_NEWS  set SORT_ID=?,ADMIN_ID=?,NEWS_INTRO=?,SCHEDULED_TIME=?,OFF_SHELF_TIME=?,POST_TITLE=?,NEWS_PHOTO=?where NEWS_ID = ?";
 	private static final String UPDATE = "UPDATE LATEST_NEWS  set SORT_ID=?,ADMIN_ID=?,NEWS_INTRO=?,SCHEDULED_TIME=?,POST_TITLE=?,NEWS_PHOTO=?where NEWS_ID = ?";
 	private static final String SEARCH = "Select  NEWS_ID,POST_TITLE, NEWS_PHOTO,NEWS_INTRO from  Latest_news  where post_title LIKE ? ";
@@ -150,7 +150,7 @@ public class LatestNewsDAO implements LatestNewsDAO_interface {
 			updateCount_NEWS_MESSAGE = pstmt.executeUpdate();
 			
 
-			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(DELETE_LATEST_NEWS);
 
 			pstmt.setInt(1, newsId);
 

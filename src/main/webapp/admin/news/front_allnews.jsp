@@ -18,8 +18,8 @@
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-    <link rel="stylesheet" href="css\official.css" />
-    <link rel="stylesheet" href="./css/front_allnews.css">
+    <link rel="stylesheet" href="/elitebaby/admin/news/css/front_allnews.css" />
+    <link rel="stylesheet" href="/elitebaby/admin/news/css/front_allnews.css">
    
     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
