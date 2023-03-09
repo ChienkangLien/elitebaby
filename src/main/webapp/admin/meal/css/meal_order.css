@@ -80,14 +80,31 @@ body {
     color: #8B4513;
 }
 
-.btn {
-    background-color: #ff8188;
-    color: white;
+table.meal_order {
+    width: 850px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 100px;
 }
 
-.bkbtn {
-    background-color: #FDFDFD;
-    color: #333333;
+table.meal_order,
+th,
+td {
+    border: 1px solid #CCCCFF;
 }
+
+table.meal_order,
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+div.meal_order_search {
+    margin-right: 250px;
+    float: right;
+}
+
 
 /* ================================ */

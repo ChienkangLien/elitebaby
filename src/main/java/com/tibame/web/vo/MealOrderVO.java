@@ -8,8 +8,11 @@ public class MealOrderVO {
 	private Integer userId;
 	private Integer orderPayment;
 	private Integer orderStatus;
-	private Timestamp orderDate;
+	private String orderDate;
 	private String orderNotes;
+	private String strPayment;
+	private String strstatus;
+	private Integer total;
 
 	public Integer getMealOrderId() {
 		return mealOrderId;
@@ -43,11 +46,11 @@ public class MealOrderVO {
 		this.orderStatus = orderStatus;
 	}
 
-	public Timestamp getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Timestamp orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -57,5 +60,29 @@ public class MealOrderVO {
 
 	public void setOrderNotes(String orderNotes) {
 		this.orderNotes = orderNotes;
+	}
+
+	public String getStrPayment() {
+		return strPayment;
+	}
+
+	public void setStrPayment(String strPayment) {
+		this.strPayment = strPayment;
+	}
+
+	public String getStrstatus() {
+		return strstatus;
+	}
+
+	public void setStrstatus(String strstatus) {
+		this.strstatus = strstatus;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 }

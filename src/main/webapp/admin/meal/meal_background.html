@@ -28,7 +28,7 @@
 
     <ul class="list-unstyled ps-0">
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#home-collapse" aria-expanded="true">
           會員中心
         </button>
@@ -44,7 +44,7 @@
       <!-- ================膳食管理============== -->
 
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#orders-collapse" aria-expanded="false">
           膳食管理
         </button>
@@ -59,7 +59,7 @@
       </li>
       <!-- ===============房間管理============= -->
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#dashboard-collapse" aria-expanded="false">
           房間管理
         </button>
@@ -82,7 +82,7 @@
             討論區
           </button> -->
         <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="#" class="btn">討論區</a>
+        <a href="#" class="btn bkbtn ">討論區</a>
       </li>
       <!-- ================預約參觀============= -->
       <li class="mb-1">
@@ -95,11 +95,11 @@
             預約參觀
           </button> -->
         <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="#" class="btn">預約參觀</a>
+        <a href="#" class="btn bkbtn ">預約參觀</a>
       </li>
       <!-- =============最新消息============ -->
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#orders-collapse2" aria-expanded="false">
           消息區管理
         </button>
@@ -113,7 +113,7 @@
       </li>
       <!-- ===================問題回報================== -->
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
           data-bs-target="#account-collapse" aria-expanded="false">
           問題回報
         </button>
@@ -135,25 +135,139 @@
       商品管理
     </div>
     <!-- 從以下開始編輯 -->
+    <div>
+      <button type="button" class="btn btncreate" id="btncreate" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        data-bs-whatever="@fat">新增商品</button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">新增商品</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">商品名稱:</label>
+                  <input type="text" class="form-control meal_name" id="recipient-name">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">商品照片:</label>
+                  <input type="file" class="form-control meal_pic" id="recipient-name">
+                  <div id="preview">
+                    <span class="text">預覽圖</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">商品價格:</label>
+                  <input type="text" class="form-control meal_price" id="recipient-name"
+                    oninput="value=value.replace(/[^\d]/g,'')">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">預約試吃價格:</label>
+                  <input type="text" class="form-control reserver_price" id="recipient-name"
+                    oninput="value=value.replace(/[^\d]/g,'')">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label meal_status">商品狀態:</label>
+                  <select class="mealstatus">
+                    <option value="0">下架</option>
+                    <option value="1">上架</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+              <button type="button" class="btn btn_insert">確定新增</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <table class="visit_table">
       <thead>
         <tr>
+          <th>商品編號</th>
           <th>商品名稱</th>
           <th>商品照片</th>
-          <th>商品數量</th>
           <th>商品價格</th>
           <th>預約試吃價格</th>
           <th>商品狀態</th>
         </tr>
       </thead>
       <tbody class="getall_tb">
-
       </tbody>
     </table>
-    <div>
-      <button class="SreachAll">查詢全部</button>
+    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">修改商品</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">商品名稱:</label>
+                <input type="text" class="form-control update_meal_name" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">商品照片:</label>
+                <input type="file" class="form-control update_meal_pic" id="recipient-name">
+                <div id="uppreview">
+                  <img src="" class="preview_img" id="update_mealpic">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">商品價格:</label>
+                <input type="number" min="1" class="form-control update_meal_price" id="recipient-name"
+                  oninput="validity.valid||(value='')" placeholder="請輸入價格">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">預約試吃價格:</label>
+                <input type="number" min="1" class="form-control update_reserver_price" id="recipient-name"
+                  oninput="validity.valid||(value='')" placeholder="請輸入價格">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label meal_status">商品狀態:</label>
+                <select class="mealstatus update_meal_status">
+                  <option value="0">下架</option>
+                  <option value="1">上架</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn_toupdate" id="btn_toupdate">確定修改</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="getall">123</div>
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">修改商品</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">確定要刪除此商品嗎?</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn_todelete" id="btn_todelete">確定刪除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="getall">123</div> -->
     <!-- <h4>新增商品種類</h4>
     <div>
       <label>商品名稱:</label>

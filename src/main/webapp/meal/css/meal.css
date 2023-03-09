@@ -84,11 +84,76 @@ body {
 .btn {
     background-color: #ff8188;
     color: white;
+    float: right;
+    margin-left: 10px;
 }
 
 .bkbtn {
     background-color: #FDFDFD;
     color: #333333;
 }
+
+div.footer {
+    /* position: absolute; */
+    /* 或 fixed */
+    bottom: 0;
+    width: 100%;
+    /* background-color: gray; */
+    /* color: white; */
+    text-align: center;
+    /* padding-top: 20px; */
+}
+
+div.meal {
+    /* position: absolute; */
+    /* width: 100%; */
+    /* border: 1px solid green; */
+    /* text-align: center; */
+    margin-top: 30px;
+}
+
+.meal_block {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30px; */
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.meal_block_1 {
+    width: 300px;
+    border: 1px solid green;
+    list-style: none
+}
+
+.meal_pic {
+    max-width: 100%;
+    border: 1px solid red;
+}
+
+.meal_info {
+    border: 1px solid blue;
+}
+
+li.meal_block_1 {
+    flex-basis: calc(25% - 10px);
+    margin-bottom: 20px;
+}
+
+li:nth-child(4n) {
+    margin-right: 0;
+}
+
+div#meal_name {
+    font-size: 24px;
+    font-weight: bold;
+    float: left;
+}
+
+
+
 
 /* ================================ */
