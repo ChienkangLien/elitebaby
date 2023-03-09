@@ -75,7 +75,7 @@ public class MsgLikeDao extends DaoId{
         String sql = "select msg_id, count(*) as mlike from msg_like\n" +
                 "where msg_id = ?\n" +
                 "group by msg_id;";
-        try (Connection connection =ds.getConnection();
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, msgId);
             ResultSet rs = ps.executeQuery();

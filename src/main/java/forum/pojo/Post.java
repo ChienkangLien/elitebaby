@@ -1,11 +1,6 @@
 package forum.pojo;
-
-import lombok.Data;
-
 import java.util.ArrayList;
-import java.util.List;
 
-@Data
 public class Post {
     private int postId;
     private int userId;
@@ -17,6 +12,8 @@ public class Post {
     private ArrayList<byte[]> imgs;
     private String timestamp;
 
+    public Post() {
+    }
 
     public Post(int postId, int userId, String userName, String category, String topic, String content, int like, String timestamp) {
         this.postId = postId;
@@ -106,6 +103,21 @@ public class Post {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", category='" + category + '\'' +
+                ", topic='" + topic + '\'' +
+                ", content='" + content + '\'' +
+                ", like=" + like +
+                ", imgs=" + imgs +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
     }
 }
 

@@ -448,14 +448,46 @@ values
     ("eka29ek",null);
 
 
+DROP TABLE IF EXISTS access;
+create table access
+(
+    user_id   int auto_increment
+        primary key,
+    user_name varchar(20) null,
+    password  varchar(50) not null
+);
+
+DROP TABLE IF EXISTS access;
+create table access
+(
+    user_id   int auto_increment
+        primary key,
+    user_name varchar(20) null,
+    password  varchar(50) not null
+);
+
+insert into access (user_name, password)
+values ('使用者1號', 'password'),
+       ('使用者2號', 'password'),
+       ('使用者3號', 'password'),
+       ('使用者4號', 'password'),
+       ('使用者5號', 'password'),
+       ('使用者6號', 'password'),
+       ('使用者7號', 'password'),
+       ('使用者8號', 'password'),
+       ('使用者9號', 'password'),
+       ('使用者10號', 'password'),
+       ('root', 'password');
+
+
 DROP TABLE IF EXISTS category;
 create table category
 (
     id       int auto_increment
         primary key,
-    category varchar(50)  not null,
-    img      varchar(200) not null,
-    level    int          not null,
+    category varchar(50) not null,
+    img      varchar(200),
+    level    int,
     constraint category
         unique (category),
     constraint checklevel
@@ -470,7 +502,7 @@ VALUES ('育嬰', 'fa-solid fa-baby', 0),
        ('健康', 'fa-solid fa-briefcase-medical', 0),
        ('財經', 'fa-solid fa-money-bill-trend-up', 1),
        ('房地產', 'fa-solid fa-house-building', 1),
-       ('好康福利','fa-solid fa-venus-mars',1),
+       ('好康福利', 'fa-solid fa-venus-mars', 1),
        ('會員專區', 'fa-solid fa-money-check-dollar', 2);
 
 
@@ -486,8 +518,8 @@ create table post
     timing   timestamp default CURRENT_TIMESTAMP null,
     constraint post_category_category_fk
         foreign key (category) references elitebaby.category (category),
-    constraint post_member_id_fk
-        foreign key (user_id) references elitebaby.member (USER_ID)
+    constraint post_access_id_fk
+        foreign key (user_id) references elitebaby.access (USER_ID)
 );
 
 create index post_category_index
@@ -524,8 +556,8 @@ create table post_like
     user_id int not null,
     constraint post_like_pk
         unique (post_id, user_id),
-    constraint post_like_member_USER_ID_fk
-        foreign key (user_id) references member (USER_ID),
+    constraint post_like_access_USER_ID_fk
+        foreign key (user_id) references access (USER_ID),
     constraint postlike_post_post_id_fk
         foreign key (post_id) references post (post_id)
 );
@@ -539,8 +571,8 @@ create table msg
     post_id int                                 not null,
     content text                                not null,
     timing  timestamp default CURRENT_TIMESTAMP not null,
-    constraint msg_member_USER_ID_fk
-        foreign key (user_id) references elitebaby.member (USER_ID),
+    constraint msg_access_USER_ID_fk
+        foreign key (user_id) references elitebaby.access (USER_ID),
     constraint msg_post_post_id_fk
         foreign key (post_id) references elitebaby.post (post_id)
 );
@@ -552,12 +584,12 @@ create table msg_like
 (
     like_id int auto_increment
         primary key,
-    msg_id int not null,
+    msg_id  int not null,
     user_id int not null,
     constraint msg_like_pk
         unique (msg_id, user_id),
-    constraint msg_like_member_USER_ID_fk
-        foreign key (user_id) references member (USER_ID),
+    constraint msg_like_access_USER_ID_fk
+        foreign key (user_id) references access (USER_ID),
     constraint msglike_msg_msg_id_fk
         foreign key (msg_id) references msg (msg_id)
 );
@@ -573,8 +605,8 @@ create table collection_category
         unique (user_id, category_id),
     constraint collection_category_category_id_fk
         foreign key (category_id) references elitebaby.category (id),
-    constraint collection_category_member_USER_ID_fk
-        foreign key (user_id) references elitebaby.member (USER_ID)
+    constraint collection_category_access_USER_ID_fk
+        foreign key (user_id) references elitebaby.access (USER_ID)
 );
 
 DROP TABLE IF EXISTS post_imgs;
@@ -591,10 +623,10 @@ create table post_imgs
 DROP TABLE IF EXISTS msg_imgs;
 create table elitebaby.msg_imgs
 (
-    id      int auto_increment
+    id     int auto_increment
         primary key,
     msg_id int      not null,
-    img     longblob not null,
+    img    longblob not null,
     constraint msg_imgs_msg_msg_id_fk
         foreign key (msg_id) references elitebaby.msg (msg_id)
 );

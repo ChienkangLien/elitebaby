@@ -1,7 +1,7 @@
 package forum.service;
-import forum.dao.CategoryDao;
-import forum.dao.CollectionDao;
-import forum.pojo.Category;
+
+import forum.dao.*;
+import forum.pojo.*;
 import java.util.ArrayList;
 
 public class CategoryService {

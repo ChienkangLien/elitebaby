@@ -15,8 +15,8 @@ public class AjaxFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-        if(user != null){
+        Object access = session.getAttribute("access");
+        if(access != null){
             request.setCharacterEncoding("UTF-8");
             chain.doFilter(request,response);
         }else {

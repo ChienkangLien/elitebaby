@@ -1,8 +1,5 @@
 package forum.service;
-import forum.dao.MsgDao;
-import forum.dao.MsgLikeDao;
-import forum.dao.PostDao;
-
+import forum.dao.*;
 
 public class MsgService {
     private PostDao postDao = new PostDao();
@@ -26,7 +23,6 @@ public class MsgService {
     public void MsgGenerator() {
      msgDao.generator(postDao.getPostIds());
     }
-
 
 }
 

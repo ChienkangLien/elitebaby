@@ -12,6 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="elitebaby" target="17" />
+      <module name="forum" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

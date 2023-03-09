@@ -14,6 +14,9 @@ public class Category {
         this.level = level;
     }
 
+    public Category() {
+    }
+
     public int getId() {
         return id;
     }

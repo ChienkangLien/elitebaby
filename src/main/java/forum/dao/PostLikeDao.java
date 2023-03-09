@@ -26,7 +26,7 @@ public class PostLikeDao extends DaoId{
 
     public void clean() {
         String sql = "delete from post_like where 1=1;";
-        try (Connection connection =ds.getConnection();
+        try (Connection connection = ds.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.execute();
         } catch (SQLException e) {
