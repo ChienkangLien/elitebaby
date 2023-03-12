@@ -20,7 +20,7 @@ function getBackend() {
             for (let i = 0; i < data.length; i++) {
                 let checkboxClone = checkboxTemp.cloneNode(true);
                 checkboxClone.querySelector("input[type='checkbox']").id = data[i].id;
-                checkboxClone.querySelector(".category-name").innerText = data[i].category;
+                checkboxClone.querySelector(".category-name").innerText = "《" + data[i].category + "》";
                 checkboxes.append(checkboxClone);
             }
             panel.innerHTML = '';
@@ -31,14 +31,21 @@ function getBackend() {
     const addCategoryBtn = categoryBackend.querySelector(".add-button")
     addCategoryBtn.addEventListener("click", () => {
         if (!panel.querySelector("form")) {
+            //製作新增表單
             let form = document.createElement("form");
             form.innerHTML = '<input type="text" placeholder="話題名稱" name="newCategory">' +
                 '<input type="submit" value="確認送出">';
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
+                const formData = new FormData(form);
+                const newCategory = formData.get("newCategory").trim(); // 取得輸入字段的值並去除前後空格
+                if (!newCategory) {
+                    alert("請輸入話題名稱"); // 如果值為空，提示用戶輸入必要的信息
+                    return;
+                }
                 fetch("../backend/categoryAdd", {
                     method: "post",
-                    body: new FormData(form)
+                    body: formData
                 })
                     .then(response => response.text())
                     .then((text) => JSON.parse(text))
@@ -75,6 +82,8 @@ function getBackend() {
                     if (data.length > 0) {
                         panel.innerHTML = '';
                         panel.appendChild(fillPostsTemplate(data));
+                    } else {
+                        alert("查無資料")
                     }
                 })
         } else {
@@ -92,7 +101,7 @@ function fillPostsTemplate(data) {
     for (let i = 0; i < data.length; i++) {
         const post = postsTemp.cloneNode(true);
         post.querySelector(".user").innerText = data[i].userName;
-        post.querySelector(".category").innerText = data[i].category;
+        post.querySelector(".category").innerText = "《" + data[i].category + "》";
         post.querySelector(".topic").innerText = data[i].topic;
         post.querySelector(".date").innerText = data[i].timestamp;
         post.querySelector(".view").addEventListener("click", () => {
@@ -109,7 +118,7 @@ function viewBtnListener(postId) {
         .then(response => response.text())
         .then(text => JSON.parse(text))
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const postByView = fillPostTemplate(data.post)
             const msgsByView = fillMsgTemplate(data.msgs);
             panel.innerHTML = '';
@@ -126,10 +135,9 @@ function fillPostTemplate(postData) {
     const postTemp = document.querySelector(".post-template").content;
     const post = postTemp.cloneNode(true);
     post.querySelector(".user").innerText = postData.userName;
-    post.querySelector(".category").innerText = postData.category;
+    post.querySelector(".category").innerText = "《" + postData.category + "》";
     post.querySelector(".topic").innerText = postData.topic;
     post.querySelector(".date").innerText = postData.timestamp;
-    post.querySelector(".like").innerText = "like:" + postData.like;
     post.querySelector(".content").innerText = postData.content;
 
     const postImgs = post.querySelector(".img");
@@ -177,9 +185,9 @@ function fillMsgTemplate(msgsData) {
         const msgView = document.createElement("div");
         msgView.classList.add("msg-view");
         const msg = msgTemp.cloneNode(true);
+        msg.querySelector("input[type='checkbox']").id = msgsData[i].msgId;
         msg.querySelector(".user").innerText = msgsData[i].userName;
         msg.querySelector(".date").innerText = msgsData[i].timestamp;
-        msg.querySelector(".like").innerText = "like:" + msgsData[i].like;
         msg.querySelector(".content").innerText = msgsData[i].content;
         const msgImgs = msg.querySelector(".img");
         let msgDataImgs = msgsData[i].imgs;
@@ -190,31 +198,49 @@ function fillMsgTemplate(msgsData) {
                 msgImgs.appendChild(msgImg)
             }
         }
-        msg.querySelector(".msg-delete").addEventListener("click", () => {
-            msgDelete(msgsData[i].msgId);
-        })
-
         msgView.appendChild(msg)
         msgsView.append(msgView)
     }
+    const msgsDelete = document.createElement("button");
+    msgsDelete.classList.add("msg-delete");
+    msgsDelete.innerText = "批次刪除留言";
+    msgsDelete.addEventListener("click", () => {
+        checkedMsgDelete()
+    })
+    msgsView.appendChild(msgsDelete);
+
     return msgsView
 }
 
+
 //刪除留言
-function msgDelete(msgId) {
-    console.log(msgId);
+function checkedMsgDelete() {
+    let checkedMsgIds = [];
+    const checkboxMsglist = document.querySelectorAll(".checkbox-msg");
+
+    for (let i = 0; i < checkboxMsglist.length; i++) {
+        if (checkboxMsglist[i].checked) {
+            checkedMsgIds.push(checkboxMsglist[i].id)
+        }
+    }
     if (confirm("您確定刪除?")) {
-        fetch("../backend/deleteMsg?msgId=" + msgId)
-            .then(response => response.text())
-            .then(text => JSON.parse(text))
-            .then(data => {
-                if (data == true) {
-                    alert("刪除成功")
-                    window.location.href = "../frontForum/backend.html";
-                } else {
-                    alert("刪除失敗")
-                }
-            })
+        if (checkedMsgIds.length > 0) {
+            const encodedIds = encodeURIComponent(JSON.stringify(checkedMsgIds));
+            fetch("../backend/deleteMsgs?ids=" + encodedIds)
+                .then(response => response.text())
+                .then(text => JSON.parse(text))
+                .then(data => {
+
+                    if (data > 0) {
+                        alert("刪除" + data + "筆留言")
+                        window.location.href = "../frontForum/backend.html";
+                    } else {
+                        alert("刪除失敗")
+                    }
+                })
+        } else {
+            alert("請選擇要刪除的留言")
+        }
     }
 }
 

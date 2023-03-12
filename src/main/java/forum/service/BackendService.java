@@ -43,8 +43,13 @@ public class BackendService {
         return postDao.deleteById(postId);
     }
 
-    public boolean deleteMsg(int msgId) {
-        return msgDao.deleteById(msgId);
+    public int deleteMsgByIds(ArrayList<Integer> ids) {
+        int succeed = 0;
+        for (int id : ids) {
+            int i = msgDao.deleteById(id);
+            succeed += i;
+        }
+        return succeed;
     }
 }
 

@@ -112,7 +112,7 @@ public class MsgDao extends DaoId {
         }
     }
 
-    public boolean deleteById(int msgId) {
+    public int deleteById(int msgId) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -132,7 +132,7 @@ public class MsgDao extends DaoId {
             preparedStatement.executeUpdate();
 
             connection.commit();
-            return true;
+            return 1;
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -152,7 +152,7 @@ public class MsgDao extends DaoId {
                 e.printStackTrace();
             }
         }
-        return false;
+        return 0;
     }
 }
 

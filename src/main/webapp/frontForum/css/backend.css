@@ -8,12 +8,6 @@ main {
     background-color: aliceblue; }
   main .panel {
     background-color: powderblue; }
-    main .panel .backend {
-      border: 1px red solid; }
-      main .panel .backend .buttons {
-        border: 1px red solid; }
-      main .panel .backend .checkboxes {
-        border: 1px red solid; }
 
 .checkbox {
   display: flex; }

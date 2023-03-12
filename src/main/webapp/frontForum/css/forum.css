@@ -2,9 +2,8 @@
   box-sizing: border-box; }
 
 header {
-  font-size: 50px;
-  text-align: center;
-  background-color: pink; }
+  min-height: 50px;
+  }
 
 .button {
   background-color: #4caf50;
@@ -34,6 +33,7 @@ a {
   flex-wrap: wrap;
   border: 1px dotted black; }
   .sticky .welcome {
+    font-size: 20px;
     margin: 0 2rem;
     width: 60%; }
   .sticky .switch {

@@ -1,10 +1,7 @@
 package forum.service;
 
 import forum.dao.*;
-import forum.pojo.Category;
-import forum.pojo.Msg;
-import forum.pojo.Post;
-import forum.pojo.PostBean;
+import forum.pojo.*;
 
 import java.util.ArrayList;
 
@@ -75,7 +72,6 @@ public class PostService {
 
     public boolean checkUserAndPostMatch(int userId, int postId) {
         boolean b = postDao.selectByPostIdUserId(userId, postId);
-        System.out.println("boolean:" + b);
         return b;
     }
 
