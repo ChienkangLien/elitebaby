@@ -2,9 +2,10 @@ package com.tibame.web.dao;
 
 import java.util.List;
 
+import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.TestMemberVO;
-import com.tibame.web.vo.VisitVO;
+
 
 public interface EmailDAO {
 
@@ -23,6 +24,8 @@ public interface EmailDAO {
 	public List<EmailVO> getAllByAdmin(Integer offset);
 
 	public List<EmailVO> findByUserId(Integer userId);
+	
+	public List<EmailVO> findByUserIdMember(Integer userId);
 
 	public List<EmailVO> getAllCount();
 
@@ -31,4 +34,14 @@ public interface EmailDAO {
 	public int insertFromBack(EmailVO emailVO);
 	
 	public List<TestMemberVO> getAllMember();
+	 
+	public List<EmailVO> serchInfo(EmailDTO dto);
+	
+	public List<EmailVO> serchInfoAdmin(EmailDTO dto);
+	
+	List<EmailVO> emailBillAdmin();
+	
+	List<EmailVO> emailBillMember();
+	
+	
 }

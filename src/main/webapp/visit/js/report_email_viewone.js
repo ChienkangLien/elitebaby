@@ -41,6 +41,7 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 				<div id="preview_back">
 					<span class="text">預覽圖</span>
 				</div>
+
 		`;
 
 
@@ -74,6 +75,7 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 				<div id="preview_back">
 					<span class="text">預覽圖</span>
 				</div>
+				
 		`;
 
 
@@ -145,7 +147,7 @@ function getanswerphoto() {
 						for (var i = 0; i < base64.length; i++) {
 							var str = base64[i];
 							if (str != null) {
-								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_report' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
+								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_answer' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
 								$("#preview_back").append(img);
 							}
 						}
@@ -327,3 +329,60 @@ $("#sam_btn_cancle").on("click", function() {
 	}
 	
 	})
+
+
+setTimeout(function() {
+	const imagesreport = document.querySelectorAll(".preview_img_report");
+	const imagesanswer = document.querySelectorAll(".preview_img_answer");
+	
+    $(function () {
+	  imagesreport.forEach((imgess) => {
+		imgess.addEventListener("click", (e) => {
+			var imgsrc = $(e.target).attr("src");
+		 var large_image = `<img src="${imgsrc}"</img>`;
+		 console.log(large_image);
+		 getCurrentPhoto()
+		 $('#dialog_large_image_report').html($(large_image).animate({ height: '100%', width: '100%' }, 500));
+		});
+	   });
+	});
+
+	$(function () {
+		imagesanswer.forEach((imgeyy) => {
+			imgeyy.addEventListener("click", (e) => {
+			 var imgsrcss = $(e.target).attr("src");
+			 var large_image_ab = `<img src="${imgsrcss}"</img>`;
+			 console.log(large_image_ab);
+			 getCurrentPhoto()
+			 $('#dialog_large_image_report').html($(large_image_ab).animate({ height: '100%', width: '100%' }, 500));
+			});
+		   });
+	});
+
+
+ 
+}, 750);
+
+
+
+
+function getCurrentPhoto(){
+	$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+	$(".dialog").css("display", "block"); // 顯示dialog。
+	
+	$(".dialog").animate({			   
+	  opacity: '1',
+	  top: '50px' // 決定對話框要滑到哪個位置停止。		   
+	}, 550);
+  };
+  
+  $(".modal").click( function () {
+	$(".dialog").animate({			   
+	  opacity: '0',
+	  top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
+	}, 350, function () {
+	  // 此區塊為callback function，會在動畫結束時被呼叫。
+	  $(".modal").css("display", "none"); // 隱藏modal。
+	  $(".dialog").css("display", "none"); // 隱藏dialog。
+	});
+  });	

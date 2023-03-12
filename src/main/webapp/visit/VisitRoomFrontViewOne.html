@@ -12,7 +12,6 @@
     <!-- <link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css"> -->
     <link rel="stylesheet" href="../css/official.css" />
     <link rel="stylesheet" href="../css/front_navbar.css">
-    <link rel="stylesheet" href="css/room.css">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-css-->
 
 
@@ -57,6 +56,7 @@
 
                                 <li><a class="dropdown-item" href="#">編輯會員資料</a></li>
                                 <li><a class="dropdown-item" href="#">查詢訂單</a></li>
+                                <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">您的預約參訪</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
@@ -80,7 +80,7 @@
                                 <path
                                     d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;">5</span>
+                            <span class="badge badge-danger navbar-badge ;"></span>
                         </button>
 
                         <!-- ===================================鈴鐺==================================== -->
@@ -91,7 +91,7 @@
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;">3</span>
+                            <span class="badge badge-danger navbar-badge emailBill ;"></span>
                         </button>
 
                         <li class="nav-item"><a class="nav-link " id="logout_btn">登出</a></li>
@@ -104,34 +104,54 @@
     <div id="blank_area">
         <!-- 此處留空 -->
     </div>
+    <div id="popupWrapper">
+        <p>信件通知</p>
+        <hr style="margin-top: 5px;">
+        <div id="popupContent" style="align-items: center;">
+         
+        </div>
+    </div>
+   
+
+<div class="modal"></div>
+<div class="dialog">
+  <div class="title" style="background-color: rgb(45, 215, 93);">已成功跟您接洽</div>
+  <div class="content">
+    <div>1.如果預約完成想更改時間或是其他資訊,歡迎使用信件回報</div>
+    <div>2.每日參訪時間限制為下午13:00-晚上18:00</div>
+	<div>3.如果畫面表示已接洽但是還沒有客服跟您聯絡,再麻煩使用信件回報或是重新預約</div>
+    <div>4.如有還有任何疑問歡迎聯繫客服</div>
+  </div>
+  
+  <div class="buttons">			
+    <div class="cancelBtn" style="background-color: rgb(45, 215, 93);">了解</div>
+  </div>
+</div>
     
-    
-    <center><h1>預約參觀</h1></center>
-    <center>
-            <label>會員ID</label>
-            <input type="text" name="userid" class="userid" disabled >
-    </center>
+    <center><h2 style="margin-bottom: 30px; margin-top: 30px; color: indianred;">預約參觀</h2></center>
+    <hr>
+
         <div class="w3l-main">
             <div class="w3l-from">
                 <form action="#" method="post">	
                     <div class="w3l-user">
                         <label class="head">名字<span class="w3l-star"> * </span></label>
-                        <input type="text" name="Username" placeholder="預設名字" class="visitname" disabled>
+                        <input type="text" name="Username" placeholder="預設名字" class="visitname" readonly>
                     </div>
                     <div class="w3l-mail">
                         <label class="head">信箱<span class="w3l-star"> * </span></label>
-                        <input type="email" name="email" placeholder="預設信箱" class="visitemail" disabled>
+                        <input type="email" name="email" placeholder="預設信箱" class="visitemail" readonly>
                     </div>
                     <div class="clear"></div>
                     <div class="w3l-details1">
                         <div class="w3l-num">
                             <label class="head" >電話<span class="w3l-star"> * </span></label>
-                            <input type="text"  name="phone" placeholder="預設電話" class="visitphone" disabled>
+                            <input type="number"  name="phone" placeholder="預設電話" class="visitphone" readonly>
                         </div>
                         <div class="w3l-date">
                             <label class="head">預約參訪時間<span class="w3l-star"> * </span></label>
                                 <div class="styled-input">
-                                    <input class="visitdate" id="datepicker" name="visitdate" type="date" disabled>
+                                    <input class="visitdate" id="datepicker" name="visitdate" type="date" readonly>
                                 </div>
                             </div>	
                     <div class="clear"></div>
@@ -147,7 +167,7 @@
                     </div>
                     <div class="w3l-options2">
                         <label class="head" >預產期<span class="w3l-star"> * </span></label>
-                        <input class="duedate" type="date" name="duedate" disabled>
+                        <input class="duedate" type="date" name="duedate" readonly>
                     </div>
                     <div class="gender">
                         <label class="head">胎次<span class="w3l-star"> * </span></label>	
@@ -170,7 +190,7 @@
                     <div class="w3l-rem">
                         <div class="w3l-right">
                             <label class="w3l-set2">備註</label>
-                            <textarea class="visitremark" name="remark" disabled></textarea>
+                            <textarea class="visitremark" name="remark" readonly></textarea>
                         </div>	
                    
                     </div>

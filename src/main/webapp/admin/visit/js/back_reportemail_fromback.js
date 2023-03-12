@@ -85,6 +85,7 @@ $("#sam_btn_submit").on("click", function() {
 	}
 
 	if(rstee.length == 0 ){
+		sendMessage();
 		fetch('/elitebaby/report/emailservlet?action=INSERT_BACK', {
 			method: 'POST',
 			headers: {
@@ -168,7 +169,48 @@ $("#sam_btn_submit").on("click", function() {
 	}
 
 
+
+
+
+	function sendMessage() {
+		const user = document.querySelector(".sam_adminId_anwser").value.replace(reg,"");
+		var MyPoint = `/emailBell/55688`;
+			var host = window.location.host;
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+			var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+				
+			var webSocket;
+			webSocket = new WebSocket(endPointURL);
+			
+			var jsonObj = {
+				"status": "unread",
+				"from"  : 'admin',
+				"userId": user,
+				"unreadCount" : 1
+				};
+			webSocket.onopen = function(event) {
+				console.log("Connect Success!");
+	
+				webSocket.send(JSON.stringify(jsonObj));
+			};
+	
+	
+		   
+			webSocket.onclose = function(event) {
+			console.log("Disconnected!");
+		  };
+		};
 });
+
+
+
+			
+
+
+
+
+
 
 
 
@@ -181,3 +223,4 @@ $("#sam_btn_cancle").on("click", function() {
 	}
 	
 	})
+

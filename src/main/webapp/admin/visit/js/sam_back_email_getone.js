@@ -1,3 +1,4 @@
+
 fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
@@ -14,8 +15,7 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 
 		document.querySelector(".one_authcode").value = email.authCode;
 
-
-
+		document.querySelector(".userIdd").value = email.userId;
 
 		if (email.adminId != 0 && email.determine === "會員"  && typeof(email.answerContent) === "string") {
 
@@ -105,6 +105,7 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	});
 
 
+
 fetch(`/elitebaby/report/emailservlet?action=getPhoto`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
@@ -150,7 +151,7 @@ function getanswerphoto() {
 						for (var i = 0; i < base64.length; i++) {
 							var str = base64[i];
 							if (str != null) {
-								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_report' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
+								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_answer' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
 								$("#preview_back").append(img);
 							}
 						}
@@ -159,7 +160,6 @@ function getanswerphoto() {
 				});
 		
 }
-
 
 
 
@@ -232,8 +232,11 @@ $(document).on("click", "#sam_btn_submit", function() {
 	}
 
 if(rstee.length == 0){
-	var result = confirm("確認修改");
+
+	var result = confirm("確認送出");
 	if (result) {
+
+		sendMessage()
 		fetch("/elitebaby/report/emailservlet?action=get_one_answer", {
 			method: 'POST',
 			headers: {
@@ -317,8 +320,109 @@ const authcode = document.querySelector(".one_authcode").value;
 	}
 
 
-
+	function sendMessage() {
+		const useriddd = document.querySelector(".userIdd").value;
+		var MyPoint = `/emailBell/55688`;
+			var host = window.location.host;
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+			var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+				
+			var webSocket;
+			webSocket = new WebSocket(endPointURL);
+			
+			var jsonObj = {
+				"status": "unread",
+				"from"  : 'member',
+				"userId": useriddd,
+				"unreadCount" : 1
+				};
+			webSocket.onopen = function(event) {
+				console.log("Connect Success!");
+	
+				webSocket.send(JSON.stringify(jsonObj));
+			};
+	
+	
+		   
+			webSocket.onclose = function(event) {
+			console.log("Disconnected!");
+		  };
+		};
 
 
 
 })
+
+
+
+
+setTimeout(function() {
+	const imagesreport = document.querySelectorAll(".preview_img_report");
+	const imagesanswer = document.querySelectorAll(".preview_img_answer");
+	
+    $(function () {
+		imagesreport.forEach((imgess) => {
+		  imgess.addEventListener("click", (e) => {
+			  var imgsrc = $(e.target).attr("src");
+		   var large_image = `<img src="${imgsrc}"</img>`;
+		   console.log(large_image);
+		   getCurrentPhoto()
+		   $('#dialog_large_image_report').html($(large_image).animate({ height: '100%', width: '100%' }, 500));
+		  });
+		 });
+	  });
+  
+	  $(function () {
+		  imagesanswer.forEach((imgeyy) => {
+			  imgeyy.addEventListener("click", (e) => {
+			   var imgsrcss = $(e.target).attr("src");
+			   var large_image_ab = `<img src="${imgsrcss}"</img>`;
+			   console.log(large_image_ab);
+			   getCurrentPhoto()
+			   $('#dialog_large_image_report').html($(large_image_ab).animate({ height: '100%', width: '100%' }, 500));
+			  });
+			 });
+	  });
+  
+
+ 
+}, 750);
+
+
+
+
+function getCurrentPhoto(){
+	$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+	$(".dialog").css("display", "block"); // 顯示dialog。
+	
+	$(".dialog").animate({			   
+	  opacity: '1',
+	  top: '50px' // 決定對話框要滑到哪個位置停止。		   
+	}, 550);
+  };
+  
+  $(".modal").click( function () {
+	$(".dialog").animate({			   
+	  opacity: '0',
+	  top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
+	}, 350, function () {
+	  // 此區塊為callback function，會在動畫結束時被呼叫。
+	  $(".modal").css("display", "none"); // 隱藏modal。
+	  $(".dialog").css("display", "none"); // 隱藏dialog。
+	});
+  });	
+
+
+
+
+
+
+  $("#sam_btn_cancle").on("click", function() {
+
+	var result = confirm("確定取消")
+	if(result){
+		location.href = "back_admin_mailbox.html"
+	}
+	
+	})

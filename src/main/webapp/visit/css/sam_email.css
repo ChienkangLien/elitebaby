@@ -1,3 +1,15 @@
+h1,h2,h3,h4,h5,h6{
+	margin:0;	
+	font-weight:400;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+	font-family: 'Raleway', sans-serif;
+}
+
+
 div.sam_div_form{
     border: 1px solid black;
     display: inline-block;
@@ -5,8 +17,9 @@ div.sam_div_form{
     min-height: 600x;
     position: relative;
     margin-left: 265px;
-    background-color: pink;
-    
+    background: #de6d9878;
+	  box-shadow: 2px 2px 4px #6e6969;
+    margin-bottom: 20px;
     
 }
 
@@ -17,7 +30,9 @@ div.sam_div_emailtilte,#sam_div_emailfile{
     margin-bottom: 20px;
     width: 200px;
     background-color: white;
-    display : inline-block    
+    display : inline-block;
+    box-shadow: 2px 2px 4px #6e6969;    
+    
 }
 
 div.sam_div_emailcategory{
@@ -27,7 +42,8 @@ div.sam_div_emailcategory{
     margin-bottom: 20px;
     width: 200px;
     background-color: white;
-    display : inline-block
+    display : inline-block;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 
 div.sam_div_adminId{
@@ -37,7 +53,8 @@ div.sam_div_adminId{
     margin-bottom: 20px;
     width: 200px;
     background-color: white;
-    display : inline-block
+    display : inline-block;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 
 #sam_label_emailcategory,#sam_label_emailtitle{
@@ -56,6 +73,7 @@ div.sam_div_adminId{
     margin-left: 50px;
     margin-right: 50px;
     background-color: white;
+    box-shadow: 2px 2px 4px #6e6969;
 
 }
 
@@ -67,6 +85,7 @@ div.sam_div_adminId{
     margin-bottom: 10px;   
     margin-left: 22px;  
     background-color: #80808042;     
+    
 }
 
 #sam_btn_submit{
@@ -96,7 +115,6 @@ div.sam_div_adminId{
 
 #preview{
     margin: auto;
-    border: 1px solid pink;
     display: inline-block;
     width: 350px;
     min-height: 100px;
@@ -118,7 +136,6 @@ div.sam_div_adminId{
   
   #preview_back{
     margin: auto;
-    border: 1px solid pink;
     display: inline-block;
     width: 350px;
     min-height: 100px;
@@ -136,10 +153,11 @@ div.sam_div_adminId{
   #preview_back img.preview_img_answer{
     width: 100%;
     display: inline-block;
+    transition: transform 0.2s ease;
   }
   
   .my_bton{
-    margin-left: 350px;
+    margin-left: 280px;
     margin-bottom: 20px;
   }
   
@@ -162,3 +180,122 @@ div.sam_div_adminId{
     background-color: #80808042;     
 }
 
+.preview_img_answer.enlarged {
+    transform: scale(2);
+  }
+
+  img.preview_img_report.enlarged {
+    transform: scale(2);
+  }
+
+  button#sam_btn_submit{
+    background-color: #3bf19fd1;
+    border-color: #3bf19fd1;
+    align-items: center;
+    height: 30px;
+    width: 80px;
+    font-size: small;
+
+}
+
+button#sam_btn_cancle{
+  background-color: #db3232d1;
+  border-color: #db3232d1;
+  align-items: center;
+  height: 30px;
+  width: 80px;
+  font-size: small;
+  margin-left: 30px;
+  color: rgb(255, 255, 255);
+
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.modal {
+  
+  position: absolute;	
+  z-index: 10;		
+  display: none;
+  width: 100%;
+  height: 1440px;
+  background: #6a6a6aa6;			
+  position: fixed;
+}
+
+.dialog {		
+  position: absolute;
+  z-index: 11;
+  /* 將對話框水平置中。 */
+  left: 50%;	
+  transform: translate(-50%, 0%);			
+  top: -10px; /* 設定對話框的起始位置。 對話框滑動的距離與時間會影響淡入效果，可以自行嘗試調整。 */
+  opacity: 0; /* 將對話框設為透明。 */
+  display: none; /* 隱藏對話框。 */
+  width: 30%; /* 對話框寬度。 */
+  background: white;
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  line-height: 1.7em;
+  position: fixed;
+  font: optional;
+}
+
+.title {
+  text-align: center;
+  padding: 8px;
+  font-size: 20px;
+  background: #1f7038ad;    		
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  border: 1px #f2e6e6 solid;
+  box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 15%);
+}
+
+.content {
+  padding: 4px 8px;
+}
+
+.buttons {
+  /* 加上這兩個CSS，可以讓button移動到對話框下方。 */
+  /*position: absolute;
+  right: 0px;
+  */
+  text-align: right;
+  text-align: center;
+  padding: 8px 14px;
+}
+
+.okBtn {
+  display: inline-block;
+  background: #092b68b3;
+  color: #ffffffeb;		    
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  display: inline-block;
+  background: #e90202ad;
+  color: #ffffffeb;		    
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 4px 8px;
+  cursor: pointer;  
+}
+/*-- //input-effect --*/
+
+
+
+/*--/responsive--*/

@@ -71,6 +71,7 @@ div.contact_status {
 
 								<li><a class="dropdown-item" href="#">編輯會員資料</a></li>
 								<li><a class="dropdown-item" href="#">查詢訂單</a></li>
+								<li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">您的預約參訪</a> </li>
 								<li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
@@ -94,7 +95,7 @@ div.contact_status {
                                 <path
 									d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-							<span class="badge badge-danger navbar-badge ;">5</span>
+							<span class="badge badge-danger navbar-badge ;"></span>
 						</button>
 
 						<!-- ===================================鈴鐺==================================== -->
@@ -106,7 +107,7 @@ div.contact_status {
                                 <path
 									d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-							<span class="badge badge-danger navbar-badge ;">3</span>
+							<span class="badge badge-danger navbar-badge emailBill ;"></span>
 						</button>
 
 						<li class="nav-item"><a class="nav-link " id="logout_btn">登出</a></li>
@@ -116,12 +117,19 @@ div.contact_status {
 		</nav>
 	</div>
 	<div id="book_visit">
-		<a href="VisitRoomFrontInsert.html"> <img class="img-responsive"
+		<a href="/elitebaby/visit/VisitRoomFrontInsert.html"> <img class="img-responsive"
 			src="./img/book_visit.png" />
 		</a>
 	</div>
 	<div id="blank_area">
 		<!-- 此處留空 -->
+	</div>
+	<div id="popupWrapper">
+		<p>信件通知</p>
+		<hr style="margin-top: 5px;">
+		<div id="popupContent" style="align-items: center;">
+		 
+		</div>
 	</div>
 	<center>
 		<div class="t2" id="title" style="margin-top: 30px">收信匣</div>
@@ -135,19 +143,18 @@ div.contact_status {
 	
 	<center>
 		<table class="visit_table">
-			<thead>
-				<tr>
+			<thead >
+				<tr style="background-color:#FF8188 ;">
 					<th>信件編號</th>
 					<th>標題</th>
 					<th>類別</th>
 					<th>發送日期</th>
 					<th>是否回覆</th>
-					<th>詳細</th>
 					<th>刪除</th>
 				</tr>
 			</thead>
 			<tbody class="getall_tb">
-
+				
 			</tbody>
 		</table>
 	</center>
@@ -173,8 +180,7 @@ div.contact_status {
 	<script src="./js/report_email_getoneRS.js"></script>
 
 
-
-
+	
 </body>
 
 </html>

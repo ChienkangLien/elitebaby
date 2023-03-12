@@ -52,6 +52,8 @@ public class EmailVO {
 	
 	private String strPreportCreateTime;
 	
+	private String strAnswerCreateTime;
+	
 	private String authCode;
 	
 	private String strBase64;
@@ -183,6 +185,14 @@ public class EmailVO {
 
 	public void setDetermine(String determine) {
 		this.determine = determine;
+	}
+
+	public String getStrAnswerCreateTime() {
+		return strAnswerCreateTime;
+	}
+
+	public void setStrAnswerCreateTime(String strAnswerCreateTime) {
+		this.strAnswerCreateTime = strAnswerCreateTime;
 	}
 
 }

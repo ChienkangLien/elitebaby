@@ -19,7 +19,7 @@ var allcount
                 };
                 if( allcount > 5 ){
                     document.querySelector(".sprn").innerHTML = `
-                    <input type="button" value="下一頁" class="next_page">`
+                    <input type="button" value="下一頁" class="next_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;'>`
                 }
                 console.log(allcount);
 			})
@@ -36,46 +36,30 @@ var allcount
 		
 					if( resData[i].contactSatus == 0 && resData[i].visitStatus == 0) {
 						document.querySelector(".getall_tb").innerHTML += `
+						    <tr onclick='trclickvisit(${resData[i].visitId});'>
 							<td>${resData[i].visitId}</td>
 							<td>${resData[i].strVisitTime}</td>
 							<td>[${resData[i].userId}]${resData[i].userName}</td>
 							<td>${resData[i].strCreateTime}</td>
 							<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-							<td>            
-							 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-								 <input type="submit" value="修改">
-								 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-								 <input type="hidden" name="action"	value="getOne_For_Update">
-							  </FORM>
+							<td onclick=delete_visit(${resData[i].visitId})>      
+					   			<input type="button" id="delete" value="刪除">					
 							</td>
-							<td>  
-							<div class = "div_delete" visitId="${resData[i].visitId}">              
-								   <input type="button" id="delete" value="刪除">
-							</div>
-							</FORM>
-							</td>
+							</tr>
 							`;
 					}else if(resData[i].contactSatus == 1 && resData[i].visitStatus == 0){
 		
 						document.querySelector(".getall_tb").innerHTML += `
+							<tr onclick='trclickvisit(${resData[i].visitId});'>
 							<td>${resData[i].visitId}</td>
 							<td>${resData[i].strVisitTime}</td>
 							<td>[${resData[i].userId}]${resData[i].userName}</td>
 							<td>${resData[i].strCreateTime}</td>
 							<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-							<td>            
-							 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-								 <input type="submit" value="修改">
-								 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-								 <input type="hidden" name="action"	value="getOne_For_Update">
-							  </FORM>
+							<td onclick=delete_visit(${resData[i].visitId})>      
+					   			<input type="button" id="delete" value="刪除">					
 							</td>
-							<td>  
-							<div class = "div_delete" visitId="${resData[i].visitId}">              
-								   <input type="button" id="delete" value="刪除">
-							</div>
-							</FORM>
-							</td>
+							</tr>
 							`;	
 		
 		
@@ -116,46 +100,30 @@ $(document).on("click","input.last_page",function(){
 		for (let i = 0; i < resData.length; i++) {
 			if( resData[i].contactSatus == 0 && resData[i].visitStatus == 0) {
 				document.querySelector(".getall_tb").innerHTML += `
-					<td>${resData[i].visitId}</td>
-					<td>${resData[i].strVisitTime}</td>
-					<td>[${resData[i].userId}]${resData[i].userName}</td>
-					<td>${resData[i].strCreateTime}</td>
-					<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-						 <input type="submit" value="修改">
-						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-						 <input type="hidden" name="action"	value="getOne_For_Update">
-					  </FORM>
-					</td>
-					<td>  
-					<div class = "div_delete" visitId="${resData[i].visitId}">              
-						   <input type="button" id="delete" value="刪除">
-					</div>
-					</FORM>
-					</td>
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick=delete_visit(${resData[i].visitId})>      
+					   <input type="button" id="delete" value="刪除">					
+				</td>
+				</tr>
 					`;
 			}else if(resData[i].contactSatus == 1 && resData[i].visitStatus == 0){
 
 				document.querySelector(".getall_tb").innerHTML += `
-					<td>${resData[i].visitId}</td>
-					<td>${resData[i].strVisitTime}</td>
-					<td>[${resData[i].userId}]${resData[i].userName}</td>
-					<td>${resData[i].strCreateTime}</td>
-					<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-						 <input type="submit" value="修改">
-						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-						 <input type="hidden" name="action"	value="getOne_For_Update">
-					  </FORM>
-					</td>
-					<td>  
-					<div class = "div_delete" visitId="${resData[i].visitId}">              
-						   <input type="button" id="delete" value="刪除">
-					</div>
-					</FORM>
-					</td>
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick=delete_visit(${resData[i].visitId})>      
+					   <input type="button" id="delete" value="刪除">					
+				</td>
+				</tr>
 					`;	
 
 
@@ -164,12 +132,12 @@ $(document).on("click","input.last_page",function(){
 			console.log(page)
 			if( allcount > 5 ){
 				document.querySelector(".sprn").innerHTML = `
-				<input type="button" value="下一頁" class="next_page">`
+				<input type="button" value="下一頁" class="next_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;'>`
 			  }
 			if(page > 1){
 
 				document.querySelector(".sprl").innerHTML = `
-				<input type="button" value="上一頁" class="last_page">`
+				<input type="button" value="上一頁" class="last_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;  margin-right: 30px;'>`
 
 			}  
 		}
@@ -208,46 +176,30 @@ $(document).on("click","input.next_page",function(){
 		for (let i = 0; i < resData.length ; i++) {
 			if( resData[i].contactSatus == 0 && resData[i].visitStatus == 0) {
 				document.querySelector(".getall_tb").innerHTML += `
-					<td>${resData[i].visitId}</td>
-					<td>${resData[i].strVisitTime}</td>
-					<td>[${resData[i].userId}]${resData[i].userName}</td>
-					<td>${resData[i].strCreateTime}</td>
-					<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-						 <input type="submit" value="修改">
-						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-						 <input type="hidden" name="action"	value="getOne_For_Update">
-					  </FORM>
-					</td>
-					<td>  
-					<div class = "div_delete" visitId="${resData[i].visitId}">              
-						   <input type="button" id="delete" value="刪除">
-					</div>
-					</FORM>
-					</td>
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick=delete_visit(${resData[i].visitId})>      
+					   <input type="button" id="delete" value="刪除">					
+				</td>
+				</tr>
 					`;
 			}else if(resData[i].contactSatus == 1 && resData[i].visitStatus == 0){
 
 				document.querySelector(".getall_tb").innerHTML += `
-					<td>${resData[i].visitId}</td>
-					<td>${resData[i].strVisitTime}</td>
-					<td>[${resData[i].userId}]${resData[i].userName}</td>
-					<td>${resData[i].strCreateTime}</td>
-					<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
-					<td>            
-					 <FORM METHOD="post" ACTION="/elitebaby/visit/servlet?action=getOne_For_Update" style="margin-bottom: 0px;">
-						 <input type="submit" value="修改">
-						 <input type="hidden" name="visitid"  value="${resData[i].visitId}">
-						 <input type="hidden" name="action"	value="getOne_For_Update">
-					  </FORM>
-					</td>
-					<td>  
-					<div class = "div_delete" visitId="${resData[i].visitId}">              
-						   <input type="button" id="delete" value="刪除">
-					</div>
-					</FORM>
-					</td>
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick=delete_visit(${resData[i].visitId})>      
+					   <input type="button" id="delete" value="刪除">					
+				</td>
+				</tr>
 					`;	
 
 
@@ -257,13 +209,13 @@ $(document).on("click","input.next_page",function(){
 			if(page>1){
 				if( allcount/(page*5) > page ){
 				document.querySelector(".sprl").innerHTML = `
-				<input type="button" value="上一頁" class="last_page">`;
+				<input type="button" value="上一頁" class="last_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;  margin-right: 30px;'>`;
 				document.querySelector(".sprn").innerHTML = `
-				<input type="button" value="下一頁" class="next_page">`;
+				<input type="button" value="下一頁" class="next_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;'>`;
 				
 				}
 				document.querySelector(".sprl").innerHTML = `
-				<input type="button" value="上一頁" class="last_page">`
+				<input type="button" value="上一頁" class="last_page" style='background-color: #3b7bf1bd;border-color: #3b7bf1bd;align-items: center;height: 30px; width: 80px; font-size: small;  margin-right: 30px;'>`
 			}
 			if(allcount/(page*5) <= 1){
 				document.querySelector(".sprn").innerHTML = ``;
@@ -276,6 +228,11 @@ $(document).on("click","input.next_page",function(){
 
 
 
+function trclickvisit(visitIdlink){
+
+	var link = `/elitebaby/visit/servlet?action=getOne_For_Update&&visitid=${visitIdlink}`;
+	 window.document.location = link;
+ };
 
 
 
@@ -286,17 +243,17 @@ $(document).on("click","input.next_page",function(){
 
 
 
-$(document).on("click", "input#delete", function() {
+function delete_visit(visitIdss) {
 
+	event.stopPropagation();
 
-	var result = confirm("是否確定刪除");
-	if (result) {
+	if (confirm("是否確定刪除")) {
 		fetch("/elitebaby/visit/servlet?action=DELETE_ONE_VISIT", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			}, body: JSON.stringify({
-				visitId: $(this).closest(".div_delete").attr("visitId")
+				visitId: visitIdss
 
 			})
 
@@ -312,7 +269,12 @@ $(document).on("click", "input#delete", function() {
 
 
 			});
+	}else{
+		event.stopPropagation();
 	}
 
-})
+};
+
+
+
 

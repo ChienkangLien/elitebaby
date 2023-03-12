@@ -1,18 +1,16 @@
 package com.tibame.web.service.impl;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-
-import org.hibernate.SessionFactory;
 
 import com.tibame.web.dao.EmailDAO;
 import com.tibame.web.dao.ReportImageDAO;
 import com.tibame.web.dao.impl.EmailDAOImpl;
 import com.tibame.web.dao.impl.ReportImageDAOImpl;
 import com.tibame.web.service.ReportEmailService;
-import com.tibame.web.util.HibernateUtil;
+
 import com.tibame.web.vo.AnswerImageVO;
+import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
 import com.tibame.web.vo.TestMemberVO;
@@ -27,7 +25,7 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 
 	@Override
 	public List<EmailVO> getAllInfo(Integer offset) {
-		return offset!=null ?  dao.getAll(offset): null;
+		return offset != null ? dao.getAll(offset) : null;
 	}
 
 	@Override
@@ -135,13 +133,13 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 
 	@Override
 	public List<EmailVO> getAllCount() {
-		
+
 		return dao.getAllCount();
 	}
 
 	@Override
 	public String insertEamilFromBack(EmailVO emailVO) {
-		
+
 		if (emailVO != null) {
 			return dao.insertFromBack(emailVO) >= 1 ? "文字新增成功" : "文字新增失敗";
 		}
@@ -156,14 +154,54 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 
 	@Override
 	public List<EmailVO> getAllInfoByAdmin(Integer offset) {
-		
-		return offset!=null ?  dao.getAllByAdmin(offset): null;
+
+		return offset != null ? dao.getAllByAdmin(offset) : null;
 	}
 
 	@Override
 	public List<TestMemberVO> getAllMemberInfo() {
 		List<TestMemberVO> list = dao.getAllMember();
 		return list != null ? list : null;
+	}
+
+	@Override
+	public List<EmailVO> serchInfoMember(EmailDTO dto) {
+
+		return dto != null ? dao.serchInfo(dto) : null;
+
+	}
+
+	@Override
+	public List<EmailVO> serchInfoAdmin(EmailDTO dto) {
+
+		return dto != null ? dao.serchInfoAdmin(dto) : null;
+	}
+
+	@Override
+	public List<EmailVO> getAllByUserIdMember(Integer userId) {
+
+		return userId != null ? dao.findByUserIdMember(userId) : null;
+	}
+
+	@Override
+	public String deleteAllEmailData(Integer mailId, String authCode) {
+
+		if (mailId != null && mailId != 0 && authCode != null && !authCode.isEmpty()) {
+
+			ReportImageDAO photoDao = new ReportImageDAOImpl();
+
+			int test1 = photoDao.deleteAnswerImg(authCode);
+
+			int test2 = photoDao.deleteReportImg(authCode);
+
+			if (test1 + test2 >= 0) {
+				return dao.delete(mailId) > 0 ? "刪除成功" : "請確認信件是否存在";
+			} else {
+				return null;
+			}
+
+		}
+		return null;
 	}
 
 }

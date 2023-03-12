@@ -177,7 +177,7 @@
 					<div class="w3l-details1">
 						<div class="w3l-num">
 							<label class="head">電話<span class="w3l-star"> * </span></label> <input
-								type="text" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)" min="0">
+								type="number" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)" min="0">
 						</div>
 						<div class="w3l-date">
 							<label class="head">預約參訪時間<span class="w3l-star">
@@ -240,14 +240,14 @@
 								<label class="w3l-set2">備註</label>
 								<textarea class="visitremark" name="remark"></textarea>
 							</div>
-							<div class="visitbutton">
+							<center><div class="visitbutton">
 								<button type="button" id="visitsubmit">確認更改</button>
 								<input type="hidden" name="action" value="update" id="update">
 								<input type="hidden" name="userid" value="" class="inputuserid">
 								<input type="hidden" name="visitid" value=""
 									class="inputvisitid">
 							</div>
-						</div>
+						</div></center>
 						<div class="clear"></div>
 				</form>
 			</div>

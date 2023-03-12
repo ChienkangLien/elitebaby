@@ -20,8 +20,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.ReportEmailService;
 import com.tibame.web.service.impl.ReportEmailServiceImpl;
+import com.tibame.web.util.EmailJedis;
 import com.tibame.web.util.GetAuthCode;
 import com.tibame.web.vo.AnswerImageVO;
+import com.tibame.web.vo.EmailBellBean;
+import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
 import com.tibame.web.vo.ReportImageVO;
 import com.tibame.web.vo.TestMemberVO;
@@ -166,12 +169,26 @@ public class ReportEmailServlet extends HttpServlet {
 
 		}
 
-		if (action.equals("get_byUserId")) {
+		if (action.equals("get_byUserId_admin")) {
 
 			Gson gson = new Gson();
 			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
 			ReportEmailService service = new ReportEmailServiceImpl();
 			List<EmailVO> getOneList = service.getAllByUserId(emailVO.getUserId());
+			Writer writer = resp.getWriter();
+			writer.write(gson.toJson(getOneList));
+
+		}
+
+		if (action.equals("get_byUserId_member")) {
+			
+//			HttpSession session = req.getSession() ;
+//			MemberVO memberVO = (MemberVO)session.getAttribute("");
+			
+			Gson gson = new Gson();
+			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> getOneList = service.getAllByUserIdMember(emailVO.getUserId());
 			Writer writer = resp.getWriter();
 			writer.write(gson.toJson(getOneList));
 
@@ -240,7 +257,6 @@ public class ReportEmailServlet extends HttpServlet {
 			}
 		}
 
-		
 		if (action.equals("getEmail")) {
 
 			HttpSession session = req.getSession();
@@ -251,7 +267,6 @@ public class ReportEmailServlet extends HttpServlet {
 
 		}
 
-		
 		if (action.equals("getPhoto")) {
 
 			HttpSession session = req.getSession();
@@ -261,7 +276,6 @@ public class ReportEmailServlet extends HttpServlet {
 			writer.write(gson.toJson(reportImageVO));
 		}
 
-		
 		if (action.equals("get_one_answer")) {
 
 			Gson gson = new Gson();
@@ -281,7 +295,6 @@ public class ReportEmailServlet extends HttpServlet {
 
 		}
 
-		
 		if (action.equals("get_answerphoto")) {
 
 			Gson gson = new Gson();
@@ -295,7 +308,6 @@ public class ReportEmailServlet extends HttpServlet {
 			}
 		}
 
-		
 		if (action.equals("get_one_user_answer")) {
 
 			Gson gson = new Gson();
@@ -315,7 +327,6 @@ public class ReportEmailServlet extends HttpServlet {
 
 		}
 
-		
 		if (action.equals("insert_reportphoto")) {
 			String resultStr = null;
 			HttpSession session = req.getSession();
@@ -344,7 +355,6 @@ public class ReportEmailServlet extends HttpServlet {
 
 		}
 
-		
 		if (action.equals("insert_answerphoto")) {
 
 			String resultStr = null;
@@ -371,8 +381,124 @@ public class ReportEmailServlet extends HttpServlet {
 			}
 		}
 
-		
-		
+		if (action.equals("serch_by_info_member")) {
+
+			EmailDTO dto = new EmailDTO();
+			String category = req.getParameter("category");
+			String likesome = req.getParameter("likesome");
+			Integer userId = 0;
+			if (req.getParameter("userId") != null) {
+				userId = Integer.valueOf(req.getParameter("userId"));
+			}
+			if (category != null && !category.isEmpty()) {
+				dto.setCategory(category);
+			}
+			if (likesome != null && !likesome.isEmpty()) {
+				dto.setLikesome(likesome);
+			}
+			if (userId != null && userId != 0) {
+				dto.setUserId(userId);
+			}
+			System.out.println(dto);
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> serchList = service.serchInfoMember(dto);
+			if (serchList != null) {
+				Gson gson = new Gson();
+				Writer writer = resp.getWriter();
+				writer.write(gson.toJson(serchList));
+			}
+
+		}
+
+		if (action.equals("serch_by_info_admin")) {
+
+			EmailDTO dto = new EmailDTO();
+			String category = req.getParameter("category");
+			String likesome = req.getParameter("likesome");
+			Integer userId = 0;
+			if (req.getParameter("userId") != null) {
+				userId = Integer.valueOf(req.getParameter("userId"));
+			}
+			if (category != null && !category.isEmpty()) {
+				dto.setCategory(category);
+			}
+			if (likesome != null && !likesome.isEmpty()) {
+				dto.setLikesome(likesome);
+			}
+			if (userId != null && userId != 0) {
+				dto.setUserId(userId);
+			}
+
+			ReportEmailService service = new ReportEmailServiceImpl();
+			List<EmailVO> serchList = service.serchInfoAdmin(dto);
+			if (serchList != null) {
+				Gson gson = new Gson();
+				Writer writer = resp.getWriter();
+				writer.write(gson.toJson(serchList));
+			}
+
+		}
+
+		if (action.equals("get_email_redis")) {
+			Gson gson = new Gson();
+			String userId = req.getParameter("userId");
+			if (userId != null) {
+
+				List<EmailBellBean> emailBellData = EmailJedis.getBellData(userId);
+
+				if (emailBellData != null) {
+					Writer writer = resp.getWriter();
+					writer.write(gson.toJson(emailBellData));
+				}
+
+			}
+		}
+
+		if (action.equals("get_email_chang_status")) {
+
+			Gson gson = new Gson();
+			String userId = req.getParameter("userId");
+			if (userId != null) {
+
+				List<EmailBellBean> emailBellData = EmailJedis.getBellData(userId);
+
+				if (emailBellData != null) {
+					EmailJedis.changeStatus(userId);
+					Writer writer = resp.getWriter();
+					writer.write(gson.toJson(emailBellData));
+				}
+
+			}
+
+		}
+
+		if (action.equals("delete_email")) {
+
+			Gson gson = new Gson();
+			JsonObject json = new JsonObject();
+			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
+			String authCode = emailVO.getAuthCode();
+			Integer mailId = emailVO.getMailId();
+			System.out.println(authCode+mailId);
+			String result = "請確認信件是否存在";
+			if (authCode != null && !authCode.isEmpty() && mailId != null && mailId != 0) {
+				ReportEmailService service = new ReportEmailServiceImpl();
+				result = service.deleteAllEmailData(mailId, authCode);
+				
+					json.addProperty("successful", result.equals("刪除成功"));
+					json.addProperty("message", result);
+					resp.getWriter().append(json.toString());
+				
+
+			} else {
+
+				json.addProperty("successful", result.equals("刪除成功"));
+				json.addProperty("message", result);
+				resp.getWriter().append(json.toString());
+			}
+
+		}
+
 	}
 
 }

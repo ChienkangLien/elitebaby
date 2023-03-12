@@ -15,7 +15,6 @@
 <!-- <link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../css/official.css" />
 <link rel="stylesheet" href="../css/front_navbar.css">
-<link rel="stylesheet" href="css/room.css">
 <link href="css/sam_email.css" rel="stylesheet" type="text/css"
 	media="all" />
 <!--stylesheet-css-->
@@ -66,6 +65,7 @@
 
 								<li><a class="dropdown-item" href="#">編輯會員資料</a></li>
 								<li><a class="dropdown-item" href="#">查詢訂單</a></li>
+								<li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">您的預約參訪</a> </li>
 								<li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
                                 <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
@@ -89,7 +89,7 @@
                                 <path
 									d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-							<span class="badge badge-danger navbar-badge ;">5</span>
+							<span class="badge badge-danger navbar-badge ;"></span>
 						</button>
 
 						<!-- ===================================鈴鐺==================================== -->
@@ -101,7 +101,7 @@
                                 <path
 									d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-							<span class="badge badge-danger navbar-badge ;">3</span>
+							<span class="badge badge-danger navbar-badge emailBill ;"></span>
 						</button>
 
 						<li class="nav-item"><a class="nav-link " id="logout_btn">登出</a></li>
@@ -114,19 +114,38 @@
 	<div id="blank_area">
 		<!-- 此處留空 -->
 	</div>
+</div>
+<div id="popupWrapper">
+	<p>信件通知</p>
+	<hr style="margin-top: 5px;">
+	<div id="popupContent" style="align-items: center;">
+	 
+	</div>
+</div>
 
 
+<div class="modal"></div>
+<div class="dialog">
+  <div class="content">
 	<center>
-		<h1>回報信件</h1>
-	</center>
-	<hr>
+	<div id="dialog_large_image_report"></div>
+	<div id="dialog_large_image_answer"></div></center>
+  </div>
+</div>
 
+
+
+<center>
+	<h2 style="margin-bottom: 30px; margin-top: 30px; color: indianred;">回報信件</h2>
+</center>
+	<hr>
+	
 	<div class="sam_div_form">
 		<form>
 
 			<div class="sam_div_emailtilte">
 				<label id="sam_label_emailtitle">標題:</label> <input type="text"
-					id="sam_input_emailtitle" value="" disabled>
+					id="sam_input_emailtitle" value="" disabled maxlength="20" placeholder="20字以內">
 			</div>
 
 			<div class="sam_div_emailcategory">
@@ -136,10 +155,10 @@
 					<option value="1">訂房</option>
 					<option value="2">參訪</option>
 					<option value="3">訂餐</option>
-					<option value="4">試吃</option>
-					<option value="5">文章</option>
-					<option value="6">消息</option>
-					<option value="7">會員</option>
+					<option value="4">文章</option>
+					<option value="5">消息</option>
+					<option value="6">會員</option>
+					<option value="7">試吃</option>
 					<option value="8">其他</option>
 				</select>
 			</div>
@@ -155,17 +174,15 @@
 			    <input class="one_authcode" value="" type="hidden">
 				<span class="text">預覽圖</span>
 			</div>
-
-
 		</form>
 	</div>
-
+<hr>
 	<div class="sam_div_form">
 		<form class="inserthere">
 
 			<div class="sam_div_emailtilte">
 				<label id="sam_label_emailtitle">標題:</label> <input type="text"
-					id="sam_input_emailtitle_anwser" value="" >
+					id="sam_input_emailtitle_anwser" value="" maxlength="20" placeholder="20字以內">
 			</div>
 
 			
@@ -178,8 +195,8 @@
 
 
 			<div id="sam_div_emailfile">
-				<label id="sam_label_emailfile">上傳圖片</label> <input type="file"
-					id="sam_input_emailfile" value="" multiple>
+				<label id="sam_label_emailfile">上傳圖片:最多3張</label><hr style="margin: 1px;"> <input type="file"
+					id="sam_input_emailfile" value="" multiple maxlength="3">
 			</div>
 			<div id="preview_back">
 				<span class="text">預覽圖</span>

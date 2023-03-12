@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,8 @@ public class VisitServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		response.setContentType("application/json");
 		request.setCharacterEncoding("UTF-8");
+		
+
 
 		final String action = request.getParameter("action");
 
