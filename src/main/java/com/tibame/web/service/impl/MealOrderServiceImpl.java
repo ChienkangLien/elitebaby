@@ -33,12 +33,19 @@ public class MealOrderServiceImpl implements MealOrderService {
 				total += modlist.get(j).getMealPrice() * modlist.get(j).getOrderCount();
 			}
 			list.get(i).setTotal(total);
-			if(list.get(i).getOrderStatus() == 0) {
+			if (list.get(i).getOrderStatus() == 0) {
 				list.get(i).setStrstatus("未付款");
-			} else if(list.get(i).getOrderStatus() == 1) {
+			} else if (list.get(i).getOrderStatus() == 1) {
 				list.get(i).setStrstatus("已付款");
-			}else {
+			} else {
 				list.get(i).setStrstatus("取消");
+			}
+			if (list.get(i).getOrderPayment() == 1) {
+				list.get(i).setStrPayment("現金");
+			} else if (list.get(i).getOrderPayment() == 2) {
+				list.get(i).setStrPayment("信用卡");
+			} else {
+				list.get(i).setStrPayment("LinePay");
 			}
 		}
 		return list != null ? list : null;
@@ -113,14 +120,36 @@ public class MealOrderServiceImpl implements MealOrderService {
 		}
 		return listmo;
 	}
-	
-	
-
 
 	@Override
 	public List<MealOrderVO> findByMealOrder(int id) {
 		// TODO Auto-generated method stub
 		List<MealOrderVO> list = modao.findByMealOrderId(id);
+		for (int i = 0; i < list.size(); i++) {
+			int total = 0;
+			System.out.println(list.get(i).getAuthCode());
+			List<MealOrderDetailVO> modlist = moddao.findByAuthCode(list.get(i).getAuthCode());
+			for (int j = 0; j < modlist.size(); j++) {
+				System.out.println(modlist.get(j).getMealPrice());
+				System.out.println(modlist.get(j).getOrderCount());
+				total += modlist.get(j).getMealPrice() * modlist.get(j).getOrderCount();
+			}
+			list.get(i).setTotal(total);
+			if (list.get(i).getOrderStatus() == 0) {
+				list.get(i).setStrstatus("未付款");
+			} else if (list.get(i).getOrderStatus() == 1) {
+				list.get(i).setStrstatus("已付款");
+			} else {
+				list.get(i).setStrstatus("取消");
+			}
+			if (list.get(i).getOrderPayment() == 1) {
+				list.get(i).setStrPayment("現金");
+			} else if (list.get(i).getOrderPayment() == 2) {
+				list.get(i).setStrPayment("信用卡");
+			} else {
+				list.get(i).setStrPayment("LinePay");
+			}
+		}
 		return list;
 	}
 

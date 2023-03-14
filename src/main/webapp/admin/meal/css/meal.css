@@ -175,4 +175,20 @@ img.update_preview_img {
     object-fit: fill;
 }
 
+div#title {
+    margin-left: 13.5%;
+}
+
+div.btn_create {
+    width: 100%;
+    height: 37.6px;
+    /* float: right; */
+    margin-right: 300px;
+}
+
+button.btncreate {
+    float: right;
+    margin-right: 198px;
+}
+
 /* ================================ */

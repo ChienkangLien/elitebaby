@@ -42,15 +42,14 @@ public class MealOrder extends HttpServlet {
 			MealOrderVO mealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
 			MealOrderService mealOrderService = new MealOrderServiceImpl();
 			List<MealOrderVO> list = mealOrderService.findByPrimaryKey(mealOrderObject.getUserId());
-			JsonObject respbody = new JsonObject();
 //			int cartCount = carts.findByPrimaryKey(cartObject.getUserId()).size();
-			if (list !=null) {
+			if (list != null) {
 				response.getWriter().write(gson.toJson(list));
 			} else {
 				response.getWriter().write(gson.toJson(null));
 			}
 		}
-		
+
 		if (str.equals("getall")) {
 			Gson gson = new Gson();
 			MealOrderService service = new MealOrderServiceImpl();
@@ -71,7 +70,7 @@ public class MealOrder extends HttpServlet {
 			MealOrderService service = new MealOrderServiceImpl();
 			int udm = service.updateMeal(MealOrderObject);
 			JsonObject respbody = new JsonObject();
-			if(udm > 0) {
+			if (udm > 0) {
 				respbody.addProperty("msg", "success");
 				response.getWriter().write(respbody.toString());
 			} else {
@@ -79,8 +78,8 @@ public class MealOrder extends HttpServlet {
 				response.getWriter().write(respbody.toString());
 			}
 		}
-		
-		if(str.equals("getorderdetail")) {
+
+		if (str.equals("getorderdetail")) {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderDetailVO MealOrderDetailObject = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
@@ -90,6 +89,16 @@ public class MealOrder extends HttpServlet {
 			List<MealOrderDetailVO> list2 = modsService.getOrderDetail(list1.get(0).getAuthCode());
 			response.getWriter().write(gson.toJson(list2));
 //			service.getOrderDetail(str);
+		}
+
+		if (str.equals("getbyorderid")) {
+			Gson gson = new Gson();
+			response.setContentType("application/json");
+			MealOrderDetailVO MealOrderDetailObject = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
+			MealOrderService moService = new MealOrderServiceImpl();
+			List<MealOrderVO> list = moService.findByMealOrder(MealOrderDetailObject.getMealOrderId());
+			System.out.println(list);
+			response.getWriter().write(gson.toJson(list));
 		}
 	}
 

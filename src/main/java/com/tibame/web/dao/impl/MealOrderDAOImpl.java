@@ -127,14 +127,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 
 					mealOrder.setMealOrderId(mealOrderId);
 					mealOrder.setUserId(userId);
-//					mealOrder.setOrderPayment(orderPayment);
-					if (orderPayment == 1) {
-						mealOrder.setStrPayment("現金");
-					} else if (orderPayment == 2) {
-						mealOrder.setStrPayment("信用卡");
-					} else {
-						mealOrder.setStrPayment("LinePay");
-					}
+					mealOrder.setOrderPayment(orderPayment);
 //					mealOrder.setStrPayment(String.valueOf(orderPayment));
 					mealOrder.setOrderStatus(orderStatus);
 					mealOrder.setOrderDate(orderDate);

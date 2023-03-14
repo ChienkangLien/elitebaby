@@ -18,17 +18,16 @@ public class MealServiceImpl implements MealService {
 	public List<MealVO> getAllMeal() {
 		Jedis jedis = new Jedis("localhost", 6379);
 		List<MealVO> list = dao.getAll();
-//		System.out.println(list.size());
-//		System.out.println(list.get(0).getMealPic());
 		for (int i = 0; i < list.size(); i++) {
 			String mealPic = null;
+			MealService ms = new MealServiceImpl();
 			if (jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic") == null) {
-				byte[] pic = list.get(i).getMealPic();
-				mealPic = Base64.getMimeEncoder().encodeToString(pic);
+				System.out.println("進來取照片的迴圈");
+				mealPic = ms.getPic(list.get(i).getMealId());
+//				byte[] pic = list.get(i).getMealPic();
+//				mealPic = Base64.getMimeEncoder().encodeToString(pic);
 				jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPic);
 			} else {
-//				byte[] pic = list.get(i).getMealPic();
-//			String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
 				mealPic = jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic");
 			}
 			list.get(i).setBase64(mealPic);
@@ -55,13 +54,13 @@ public class MealServiceImpl implements MealService {
 	public int updateMeal(MealVO meal) {
 		Jedis jedis = new Jedis("localhost", 6379);
 		if (meal != null) {
-			jedis.hset("meal:"+meal.getMealId()+":pic", "pic", meal.getBase64());
+			jedis.hset("meal:" + meal.getMealId() + ":pic", "pic", meal.getBase64());
 			jedis.close();
 			return dao.update(meal);
 		} else {
 			jedis.close();
 			return -1;
-		} 
+		}
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class MealServiceImpl implements MealService {
 	public int deleteMeal(int id) {
 		Jedis jedis = new Jedis("localhost", 6379);
 		if (id >= 0) {
-			jedis.hdel("meal:"+id+":pic", "pic");
+			jedis.hdel("meal:" + id + ":pic", "pic");
 			jedis.close();
 			return dao.delete(id);
 		}
@@ -100,6 +99,13 @@ public class MealServiceImpl implements MealService {
 	@Override
 	public int getMealLength() {
 		return dao.getlength();
+	}
+
+	@Override
+	public String getPic(int mealId) {
+		byte[] pic = dao.getpic(mealId);
+		String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
+		return mealPhoto;
 	}
 
 }

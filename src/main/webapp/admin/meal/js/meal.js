@@ -54,6 +54,7 @@ fetch("/elitebaby/Meal?name=getall")
                     // console.log(body[i].base64);
                 }
                 $("tbody.getall_tb").html(td_str);
+                $("table.visit_table").css("margin", "0 auto");
                 // $("div.getall").html(body[0].mealId);
             }
         } catch (error) {

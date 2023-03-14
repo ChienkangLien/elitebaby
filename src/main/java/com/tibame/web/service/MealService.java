@@ -12,4 +12,5 @@ public interface MealService {
 	int deleteMeal(int id);
 	void addAllMealPicToRedis();
 	int getMealLength();
+	String getPic(int mealId);
 }

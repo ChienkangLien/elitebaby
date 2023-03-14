@@ -128,7 +128,7 @@ public class MealDAOImpl implements MealDAO {
 
 	@Override
 	public List<MealVO> getAll() {
-		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL;";
+		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL;";
 		List<MealVO> list = new ArrayList<MealVO>();
 		
 		try (Connection con = ds.getConnection();
@@ -138,16 +138,14 @@ public class MealDAOImpl implements MealDAO {
 					MealVO meal = new MealVO();
 					Integer mealId = rs.getInt(1);
 					String mealname = rs.getString(2);
-					byte[] mealpic = rs.getBytes(3);
-					Integer mealprice = rs.getInt(4);
-					Integer reserverprice = rs.getInt(5);
-					Integer mealstatus = rs.getInt(6);
-//					System.out.println(mealId + ", " + mealname + ", " + mealpic + ", "
-//							+ mealprice + ", " + reserverprice + ", " + mealstatus);
+//					byte[] mealpic = rs.getBytes(3);
+					Integer mealprice = rs.getInt(3);
+					Integer reserverprice = rs.getInt(4);
+					Integer mealstatus = rs.getInt(5);
 
 					meal.setMealId(mealId);
 					meal.setMealName(mealname);
-					meal.setMealPic(mealpic);
+//					meal.setMealPic(mealpic);
 					meal.setMealPrice(mealprice);
 					meal.setReservePrivce(reserverprice);
 					meal.setMealStatus(mealstatus);
@@ -177,27 +175,22 @@ public class MealDAOImpl implements MealDAO {
 		return -1;
 	}
 
-//	public static void main(String[] args) {
-//		// 測試 getAll()
-//		MealDAO dao = new MealDAOImpl();
-//		List<MealVO> list =dao.getAll();
-//		System.out.println(list.size());
-		
-		// 測試 insert()
-//		MealVO meal1 = new MealVO("TEST",22,300,100);
-//		dao.getAll();
-//		System.out.println(dao);
-//		dao.insert(meal1);
-//		dao.getAll();
-//		System.out.println(dao);
-		
-		//測試update()
-//		MealVO meal2 = new MealVO(6, "TEST111", null, 22, 300, 100, 0);
-//		dao.update(meal2);
-//		System.out.println(dao.getAll());
-//		MealVO meal = new MealVO();
-//		meal.setMealId(1);
-//		System.out.println(dao.findByPrimaryKey(meal));
-		
-//	}
+	@Override
+	public byte[] getpic(Integer mealId) {
+		String sql = "SELECT MEAL_PIC FROM MEAL WHERE MEAL_ID = ?;";
+		try (Connection con = ds.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
+			try (ResultSet rs = ps.executeQuery()) {
+				ps.setInt(1, mealId);
+				if (rs.next()) {
+					byte[] pic = rs.getBytes(1);
+					return pic;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

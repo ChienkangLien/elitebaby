@@ -11,4 +11,5 @@ public interface MealDAO {
     public MealVO findByPrimaryKey(Integer id);
     public List<MealVO> getAll();
     public int getlength();
+    public byte[] getpic(Integer mealId);
 }
