@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -28,6 +29,7 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 
 	@Override
 	public int insert(RoomOrderVO order) {
+
 		if (order.getOrderPrice() == null) {
 			String sql = "insert into ROOM_ORDER(ROOM_ID, ORDER_START_DATE, ORDER_END_DATE, "
 					+ "ORDER_REMARK, ADMIN_ID, ORDER_STATUS) values (?,?,?,?,?,?);";
@@ -43,7 +45,7 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (order.getOrderPrice() != null) {
+		} else if (order.getOrderPrice() != null) { // 若有價格、代表是房客預約單
 			String sql = "insert into ROOM_ORDER(ROOM_ID, ORDER_START_DATE, ORDER_END_DATE, ORDER_RESIDENT, "
 					+ "ORDER_PRICE, ORDER_REMARK, USER_ID, ORDER_STATUS) values (?,?,?,?,?,?,?,?);";
 
@@ -66,6 +68,7 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 
 	@Override
 	public int update(RoomOrderVO order) {
+
 		String sql = "update ROOM_ORDER set ORDER_START_DATE = ?, ORDER_END_DATE = ?, ORDER_RESIDENT = ?, ORDER_PRICE = ?,  ORDER_REMARK = ? where ROOM_order_ID = ?;";
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -125,8 +128,6 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 					order.setRoomName(roomName);
 					order.setOrderStartDate(orderStartDate);
 					order.setOrderEndDate(orderEndDate);
-//					order.setOrderCreateTime(orderCreateTime);
-//					order.setOrderChangeTime(orderChangeTime);
 					order.setFormattedCreateTimestamp(orderCreateTime);
 					if (orderChangeTime != null) {
 						order.setFormattedChangeTimestamp(orderChangeTime);
@@ -259,7 +260,7 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 					order.setOrderRemark(orderRemark);
 					order.setOrderPrice(orderPrice);
 					order.setOrderStatus(orderStatus);
-					
+
 					return order;
 				}
 			}
@@ -267,6 +268,124 @@ public class RoomOrderDAOImpl implements RoomOrderDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public int checkExistingNumForUpdate(Map<String, String> map) {
+		// 欲變更的日期若存在超過一筆訂單、代表有其他既有訂單
+		String sql = "select count(*) from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, Integer.parseInt(map.get("roomId")));
+			ps.setString(2, map.get("startDate"));
+			ps.setString(3, map.get("endDate"));
+			ps.setString(4, map.get("startDate"));
+			ps.setString(5, map.get("endDate"));
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) > 1)
+						return 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+
+	@Override
+	public int checkbelong(Map<String, String> map) {
+		// 欲變更的日期若存在只有一筆訂單、但是該訂單不屬於這位使用者、代表是屬於其他住客
+		String sql = "select ROOM_ORDER_ID=? from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, Integer.parseInt(map.get("orderId")));
+			ps.setInt(2, Integer.parseInt(map.get("roomId")));
+			ps.setString(3, map.get("startDate"));
+			ps.setString(4, map.get("endDate"));
+			ps.setString(5, map.get("startDate"));
+			ps.setString(6, map.get("endDate"));
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) != 1)
+						return 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return 1;
+	}
+
+	@Override
+	public int checkExistingNumForInsert(RoomOrderVO order) {
+		// 驗證是否晚了一步新增訂單
+		String sql = "select count(*) from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, order.getRoomId());
+			ps.setDate(2, order.getOrderStartDate());
+			ps.setDate(3, order.getOrderEndDate());
+			ps.setDate(4, order.getOrderStartDate());
+			ps.setDate(5, order.getOrderEndDate());
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) > 0)
+						return 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
+	}
+
+	@Override
+	public int checkExistingNumForUpdate(RoomOrderVO order) {
+		// 驗證是否晚了一步新增訂單
+		String sql = "select count(*) from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, order.getRoomId());
+			ps.setDate(2, order.getOrderStartDate());
+			ps.setDate(3, order.getOrderEndDate());
+			ps.setDate(4, order.getOrderStartDate());
+			ps.setDate(5, order.getOrderEndDate());
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) > 1)
+						return 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+
+	@Override
+	public int checkbelong(RoomOrderVO order) {
+		String sql = "select ROOM_ORDER_ID=? from ROOM_ORDER  where ROOM_ID = ? and(? between ORDER_START_DATE and ORDER_END_DATE or ? between ORDER_START_DATE and ORDER_END_DATE or (? < ORDER_START_DATE and ?> ORDER_END_DATE)) and ORDER_STATUS != '完成單'";
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, order.getRoomOrderId());
+			ps.setInt(2, order.getRoomId());
+			ps.setDate(3, order.getOrderStartDate());
+			ps.setDate(4, order.getOrderEndDate());
+			ps.setDate(5, order.getOrderStartDate());
+			ps.setDate(6, order.getOrderEndDate());
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) != 1)
+						return 0;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
 	}
 
 }

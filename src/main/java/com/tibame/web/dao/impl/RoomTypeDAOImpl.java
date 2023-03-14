@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 import com.tibame.web.dao.RoomTypeDAO;
 import com.tibame.web.vo.RoomTypeVO;
 
-
 public class RoomTypeDAOImpl implements RoomTypeDAO {
 	private DataSource ds;
 
@@ -27,23 +26,21 @@ public class RoomTypeDAOImpl implements RoomTypeDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public int insert(RoomTypeVO type) {
 		String sql = "insert into ROOM_TYPE (ROOM_TYPE_NAME, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_STATUS) values (?, ?, ?, ?);";
 
-		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1,  type.getRoomTypeName().trim());
-			ps.setInt(2,  type.getRoomPrice());
-			ps.setString(3,  type.getRoomDescription());
-			ps.setString(4,  type.getRoomStatus());
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, type.getRoomTypeName().trim());
+			ps.setInt(2, type.getRoomPrice());
+			ps.setString(3, type.getRoomDescription());
+			ps.setString(4, type.getRoomStatus());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return -1;
-
 	}
 
 	@Override
@@ -51,52 +48,34 @@ public class RoomTypeDAOImpl implements RoomTypeDAO {
 		String sql = "update ROOM_TYPE set ROOM_TYPE_NAME = ?,  ROOM_PRICE = ?,  ROOM_DESCRIPTION= ?,  ROOM_STATUS= ? where ROOM_TYPE_ID = ?;";
 		int result = -1;
 		String diplicatedValue = "";
-		
-		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1,  type.getRoomTypeName());
-			ps.setInt(2,  type.getRoomPrice());
-			ps.setString(3,  type.getRoomDescription());
-			ps.setString(4,  type.getRoomStatus());
-			ps.setInt(5,  type.getRoomTypeId());
+
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, type.getRoomTypeName());
+			ps.setInt(2, type.getRoomPrice());
+			ps.setString(3, type.getRoomDescription());
+			ps.setString(4, type.getRoomStatus());
+			ps.setInt(5, type.getRoomTypeId());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = -1;
+			// 擷取錯誤訊息(重複的UK->房型名稱)
 			String errorMessage = e.getMessage();
-		    Pattern pattern = Pattern.compile("'([^']*)'");
-		    Matcher matcher = pattern.matcher(errorMessage);
-		    if (matcher.find()) {
-		    	diplicatedValue = matcher.group(1);
-		        System.out.println("引號內的字符串: " + diplicatedValue);
-		    }
+			Pattern pattern = Pattern.compile("'([^']*)'");
+			Matcher matcher = pattern.matcher(errorMessage);
+			if (matcher.find()) {
+				diplicatedValue = matcher.group(1);
+			}
 		}
-		return result==1?"修改成功":diplicatedValue+"名稱重複";
-	}
-
-	@Override
-	public int delete(RoomTypeVO type) {
-		String sql = "delete from ROOM_TYPE where ROOM_TYPE_NAME = ?;";
-
-
-		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1,  type.getRoomTypeName());
-			return ps.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+		return result == 1 ? "修改成功" : diplicatedValue + "名稱重複";
 	}
 
 	@Override
 	public RoomTypeVO findByPrimaryKey(RoomTypeVO type) {
 		String sql = "select ROOM_TYPE_ID, ROOM_TYPE_NAME, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_CREATE_TIME, ROOM_CHANGE_TIME, ROOM_STATUS from ROOM_TYPE where ROOM_TYPE_ID = ?;";
 
-
-		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setInt(1,  type.getRoomTypeId());
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, type.getRoomTypeId());
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					Integer roomTypeId = rs.getInt(1);
@@ -129,7 +108,6 @@ public class RoomTypeDAOImpl implements RoomTypeDAO {
 		String sql2 = "select count(*) from ROOM where ROOM_TYPE_ID = ?;";
 		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
 
-
 		try (Connection con = ds.getConnection();
 				PreparedStatement ps1 = con.prepareStatement(sql1);
 				PreparedStatement ps2 = con.prepareStatement(sql2)) {
@@ -151,15 +129,13 @@ public class RoomTypeDAOImpl implements RoomTypeDAO {
 							type.setRoomQuantity(roomQuantity);
 						}
 					}
-					
+
 					type.setRoomTypeId(roomTypeId);
 					type.setRoomTypeName(roomTypeName);
 					type.setRoomPrice(roomPrice);
 					type.setRoomDescription(roomDescription);
-//					type.setRoomCreateTime(roomCreateTime);
-//					type.setRoomChangeTime(roomChangeTime);
 					type.setFormattedCreateTimestamp(roomCreateTime);
-					if(roomChangeTime!=null) {
+					if (roomChangeTime != null) {
 						type.setFormattedChangeTimestamp(roomChangeTime);
 					}
 					type.setRoomStatus(roomStatus);
@@ -176,10 +152,8 @@ public class RoomTypeDAOImpl implements RoomTypeDAO {
 	public RoomTypeVO findByRoomTypeName(RoomTypeVO type) {
 		String sql = "select ROOM_TYPE_ID, ROOM_TYPE_NAME, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_CREATE_TIME, ROOM_CHANGE_TIME, ROOM_STATUS from ROOM_TYPE where ROOM_TYPE_NAME = ?;";
 
-
-		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1,  type.getRoomTypeName());
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setString(1, type.getRoomTypeName());
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					Integer roomTypeId = rs.getInt(1);

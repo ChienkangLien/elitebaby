@@ -19,7 +19,7 @@ import com.tibame.web.service.RoomPhotoService;
 import com.tibame.web.service.impl.RoomPhotoServiceImpl;
 import com.tibame.web.vo.RoomPhotoVO;
 
-@WebServlet("/admin/room/RoomPhotoController")
+@WebServlet("/RoomPhotoController")
 public class RoomPhotoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,14 +28,13 @@ public class RoomPhotoController extends HttpServlet {
 	public RoomPhotoController() {
 		service = new RoomPhotoServiceImpl();
 	}
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Gson gson = new Gson();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-//		JsonObject jsonObject = gson.fromJson(request.getReader(), JsonObject.class);
-//		Integer id = jsonObject.get("id").getAsInt();
 		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		if (id != null) {
@@ -59,7 +58,9 @@ public class RoomPhotoController extends HttpServlet {
 		String resultStr = null;
 
 		List<List<Map<String, Object>>> allData = gson.fromJson(request.getReader(), listType);
+		// 欲新增的照片
 		List<Map<String, Object>> data1 = allData.get(0);
+		// 欲刪除的照片
 		List<Map<String, Object>> data2 = allData.get(1);
 
 		if (data1 == null || data2 == null) {
@@ -86,7 +87,6 @@ public class RoomPhotoController extends HttpServlet {
 		jsonObject.addProperty("message", resultStr);
 
 		response.getWriter().append(jsonObject.toString());
-
 	}
 
 }

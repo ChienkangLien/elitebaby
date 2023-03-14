@@ -46,6 +46,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 		return resultCount > 0 ? "新增成功" : "此房型名稱已被使用";
 	}
 
+	// 同時新增房型及照片
 	@Override
 	public String createRoomType(RoomTypeVO roomType, List<RoomPhotoVO> roomPhotoVO) {
 		String roomTypeName = roomType.getRoomTypeName().trim();
@@ -84,7 +85,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 				return "照片加入失敗，請直接進入該房型做編輯";
 			}
 		}
-
 		return "新增成功";
 	}
 
@@ -129,16 +129,4 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 		}
 		return null;
 	}
-
-//	@Override
-//	public String deleteRoomType(RoomTypeVO roomType) {
-//		String roomTypeName = roomType.getRoomTypeName();
-//		if (roomTypeName == null || roomTypeName.isEmpty()) {
-//			return "查無此房";
-//		}
-//		
-//		final int resultCount = typeDao.delete(roomType);
-//		return resultCount > 0 ? "刪除成功" : "刪除失敗";
-//	}
-
 }

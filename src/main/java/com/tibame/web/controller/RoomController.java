@@ -20,7 +20,7 @@ import com.tibame.web.service.RoomService;
 import com.tibame.web.service.impl.RoomServiceImpl;
 import com.tibame.web.vo.RoomVO;
 
-@WebServlet("/admin/room/RoomController")
+@WebServlet("/RoomController")
 public class RoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RoomService service;
@@ -36,16 +36,14 @@ public class RoomController extends HttpServlet {
 		response.setContentType("application/json");
 
 		Gson gson = new Gson();
-//		Type type = new TypeToken<Map<String, String>>(){}.getType();
-//		Map<String, String> map = gson.fromJson(request.getReader(), type);
-
 		String task = request.getParameter("task");
 
-		if (task != null && task.equals("check")) {
+		if (task != null && task.equals("check")) { // 檢查欲變更的訂單日期是否為空房
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
 			String roomId = request.getParameter("roomId");
 			String orderId = request.getParameter("orderId");
+
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
@@ -64,10 +62,11 @@ public class RoomController extends HttpServlet {
 					response.getWriter().append(jsonObject.toString());
 				}
 			}
-		} else if (task != null && task.equals("available")) {
+		} else if (task != null && task.equals("available")) { // 查詢日期間有多少空房
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
 			String typeId = request.getParameter("typeId");
+
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("startDate", startDate);
 			map.put("endDate", endDate);
@@ -82,7 +81,7 @@ public class RoomController extends HttpServlet {
 					response.getWriter().write(gson.toJson(list));
 				}
 			}
-		} else if (task != null && task.equals("search")) {
+		} else if (task != null && task.equals("search")) { // 搜尋該房型底下的房間
 			RoomVO room = new RoomVO();
 			room.setRoomTypeId(Integer.parseInt(request.getParameter("roomTypeId")));
 
@@ -111,8 +110,10 @@ public class RoomController extends HttpServlet {
 		Type listType = new TypeToken<List<List<Map<String, Object>>>>() {
 		}.getType();
 		List<List<Map<String, Object>>> allData = gson.fromJson(request.getReader(), listType);
-		System.out.println(allData);
+
+		// 要新增的房間
 		List<Map<String, Object>> data1 = allData.get(0);
+		// 要變更名字的房間
 		List<Map<String, Object>> data2 = allData.get(1);
 
 		if (data1 == null || data2 == null) {

@@ -3,7 +3,7 @@ function loadHistoryRoomOrder() {
   historyLimit = 0;
   $("tbody#target").empty();
 
-  fetch("/elitebaby/admin/room/RoomOrderController?status=maintain&limit=0")
+  fetch("/elitebaby/RoomOrderController?status=maintain&limit=0")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -35,26 +35,8 @@ function loadHistoryRoomOrder() {
       <td>${body[i].orderRemark == undefined ? "" : body[i].orderRemark}</td>
       <td><button type="button" class="btn deleteStatus" data-id="${
         body[i].roomOrderId
-      }">
-      刪除
-    </button></td>
-    </tr>`;
+      }">刪除</button></td></tr>`;
             $("tbody#target").append(html);
-            // let html2 = `<div class="modal fade" id="exampleModal${body[i].roomOrderId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            //   <div class="modal-dialog">
-            //     <div class="modal-content">
-            //       <div class="modal-header">
-            //         <h5 class="modal-title" id="exampleModalLabel">維護完成刪除此關房單</h5>
-            //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            //       </div>
-
-            //       <div class="modal-footer" data-id="${body[i].roomOrderId}">
-            //         <button type="button" class="btn deleteStatus">刪除此筆訂單</button>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>`;
-            // $(".container").append(html2);
           }
           $("#container").append(`<nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -72,7 +54,7 @@ $(document).ready(function () {
   loadHistoryRoomOrder();
 
   //載入房型名稱到標籤
-  fetch("/elitebaby/admin/room/RoomTypeController?task=getAll")
+  fetch("/elitebaby/RoomTypeController?task=getAll")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -93,7 +75,7 @@ $(document).ready(function () {
         console.log(error + "，資料庫沒房型資料故後端沒回傳");
       }
       const trId = $("select#roomTypeId2").val();
-      fetch(`RoomController?task=search&roomTypeId=${trId}`)
+      fetch(`/elitebaby/RoomController?task=search&roomTypeId=${trId}`)
         .then((resp) => {
           if (resp.status === 204) {
             console.log("resp.status===" + resp.status);
@@ -117,7 +99,14 @@ $(document).ready(function () {
 
   //日期選擇
   $(document).on("click", ".order_start_date", function () {
-    this.setAttribute("min", new Date().toISOString().split("T")[0]);
+    this.setAttribute(
+      "min",
+      new Date().getFullYear() +
+        "-" +
+        (new Date().getMonth() + 1).toString().padStart(2, "0") +
+        "-" +
+        new Date().getDate().toString().padStart(2, "0")
+    );
   });
   $(document).on("change", ".order_start_date", function () {
     $(this)
@@ -173,12 +162,9 @@ $(document).on(
     const typeId = $(this).closest("form").find("select#roomTypeId").val();
 
     if (startDate != "" && endDate != "" && typeId != "") {
-      console.log(startDate);
-      console.log(endDate);
-      console.log(typeId);
       $(this).closest("form").find("select.roomSelect").empty();
       fetch(
-        `/elitebaby/admin/room/RoomController?task=available&startDate=${startDate}&endDate=${endDate}&typeId=${typeId}`
+        `/elitebaby/RoomController?task=available&startDate=${startDate}&endDate=${endDate}&typeId=${typeId}`
       )
         .then((resp) => {
           if (resp.status === 204) {
@@ -192,7 +178,6 @@ $(document).on(
           try {
             if (body.length != null) {
               $(`select#roomId`).empty();
-              console.log(body);
               for (let i = 0; i < body.length; i++) {
                 let option_str = `<option data-room-id='${body[i].roomId}' value='${body[i].roomId}'>${body[i].roomName}</option>`;
                 $(`select#roomId`).append(option_str);
@@ -211,7 +196,7 @@ let historyLimit = 0;
 $(document).on("click", "#historyN", function () {
   historyLimit = historyLimit + 5;
 
-  fetch(`RoomOrderController?status=maintain&limit=${historyLimit}`)
+  fetch(`/elitebaby/RoomOrderController?status=maintain&limit=${historyLimit}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -248,21 +233,6 @@ $(document).on("click", "#historyN", function () {
     </button></td>
     </tr>`;
             $("tbody#target").append(html);
-            //   let html2 = `<div class="modal fade" id="exampleModal${body[i].roomOrderId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            //   <div class="modal-dialog">
-            //     <div class="modal-content">
-            //       <div class="modal-header">
-            //         <h5 class="modal-title" id="exampleModalLabel">維護完成刪除此關房單</h5>
-            //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            //       </div>
-
-            //       <div class="modal-footer" data-id="${body[i].roomOrderId}">
-            //         <button type="button" class="btn deleteStatus">刪除此筆訂單</button>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>`;
-            //   $(".container").append(html2);
           }
           $("#container").append(`<nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -270,7 +240,6 @@ $(document).on("click", "#historyN", function () {
               <li class="page-item"><a class="page-link f3"  id="historyN">下一頁</a></li>
             </ul>
           </nav>`);
-          console.log("sus N" + historyLimit);
         }
       } catch (error) {
         console.log(error + "，資料庫沒訂單資料故後端沒回傳");
@@ -280,7 +249,6 @@ $(document).on("click", "#historyN", function () {
               <li class="page-item"><a class="page-link f3"  id="historyP">上一頁</a></li>
             </ul>
           </nav>`);
-        console.log("fail N" + historyLimit);
         alert("已是最末頁");
       }
     });
@@ -288,7 +256,9 @@ $(document).on("click", "#historyN", function () {
 $(document).on("click", "#historyP", function () {
   if (historyLimit >= 5) {
     historyLimit = historyLimit - 5;
-    fetch(`RoomOrderController?status=maintain&limit=${historyLimit}`)
+    fetch(
+      `/elitebaby/RoomOrderController?status=maintain&limit=${historyLimit}`
+    )
       .then((resp) => {
         if (resp.status === 204) {
           console.log("resp.status===" + resp.status);
@@ -327,21 +297,6 @@ $(document).on("click", "#historyP", function () {
             </button></td>
             </tr>`;
               $("tbody#target").append(html);
-              //   let html2 = `<div class="modal fade" id="exampleModal${body[i].roomOrderId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              //   <div class="modal-dialog">
-              //     <div class="modal-content">
-              //       <div class="modal-header">
-              //         <h5 class="modal-title" id="exampleModalLabel">維護完成刪除此關房單</h5>
-              //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              //       </div>
-
-              //       <div class="modal-footer" data-id="${body[i].roomOrderId}">
-              //         <button type="button" class="btn deleteStatus">刪除此筆訂單</button>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </div>`;
-              //   $(".container").append(html2);
             }
             $("#container").append(`<nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -350,11 +305,8 @@ $(document).on("click", "#historyP", function () {
             </ul>
           </nav>`);
           }
-          console.log("P>0" + historyLimit);
           if (historyLimit == 0) {
             $("#historyP").remove();
-            console.log("P=0" + historyLimit);
-            // alert("已是最前頁");
           }
         } catch (error) {
           console.log(error + "，資料庫沒訂單資料故後端沒回傳");
@@ -368,7 +320,7 @@ $(document).on("click", ".deleteStatus", function () {
   let that = this;
   if (confirm("刪除後將從資料庫移除")) {
     const id = $(that).attr("data-id");
-    fetch("RoomOrderController", {
+    fetch("/elitebaby/RoomOrderController", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -392,7 +344,7 @@ $(document).on("change", "select#roomTypeId2", function () {
   const trId = $(this).val();
   $("select#roomId2").empty();
 
-  fetch(`RoomController?task=search&roomTypeId=${trId}`)
+  fetch(`/elitebaby/RoomController?task=search&roomTypeId=${trId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -419,9 +371,7 @@ let eventArr = [];
 $(document).on("click", "button#selectBtn", function () {
   const roomId = $(this).closest("div#roomSelectdiv").find("#roomId2").val();
 
-  fetch(
-    `/elitebaby/admin/room/RoomOrderController?status=calendar&roomId=${roomId}`
-  )
+  fetch(`/elitebaby/RoomOrderController?status=calendar&roomId=${roomId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -458,7 +408,6 @@ $(document).on("click", "button#selectBtn", function () {
             };
             eventArr.push(newObject);
           }
-          console.log(eventArr);
           const calendarEl = document.getElementById("calendar");
           const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: "dayGridMonth",
@@ -483,43 +432,6 @@ $(document).on("click", "button#selectBtn", function () {
       }
     });
 });
-
-//行事曆
-// document.addEventListener("DOMContentLoaded", function () {
-//   const calendarEl = document.getElementById("calendar");
-//   const calendar = new FullCalendar.Calendar(calendarEl, {
-//     initialView: "dayGridMonth",
-//     locale: "zh",
-//     height: 550,
-//     events: [
-//       // 事件
-//       {
-//         // 事件
-//         title: "約會",
-//         start: "2023-02-01",
-//       },
-//       {
-//         // 事件(包含開始時間)
-//         title: "中餐",
-//         start: "2023-02-12",
-//       },
-//       {
-//         // 事件(包含跨日開始時間、結束時間)
-//         title: "音樂節",
-//         start: "2023-02-07",
-//         end: "2023-02-10",
-//       },
-//       {
-//         // 事件(包含開始時間、結束時間)
-//         title: "會議",
-//         start: "2023-02-12",
-//         end: "2023-02-12",
-//       },
-//       e1,
-//     ],
-//   });
-//   calendar.render();
-// });
 
 //日期轉換函式(起始日)
 function formatStartDate(dateStr) {
@@ -582,7 +494,7 @@ $(document).on("click", "#createRoomType", function () {
   }
 
   if (!hasError) {
-    fetch("RoomOrderController", {
+    fetch("/elitebaby/RoomOrderController", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",

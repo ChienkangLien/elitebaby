@@ -9,49 +9,37 @@ import com.tibame.web.vo.RoomPhotoVO;
 
 public class RoomPhotoServiceImpl implements RoomPhotoService {
 	private RoomPhotoDAO photoDao;
-	
+
 	public RoomPhotoServiceImpl() {
 		photoDao = new RoomPhotoDAOImpl();
 	}
 
 	@Override
 	public List<RoomPhotoVO> getAllPhotos(Integer id) {
-		if(id!=null ) {
-			return photoDao.getAllByRoomTypeId(id);		
+		if (id != null) {
+			return photoDao.getAllByRoomTypeId(id);
 		}
 		return null;
 	}
 
 	@Override
 	public String editRoomTypePhoto(List<RoomPhotoVO> insertRoomPhotoVOList, List<RoomPhotoVO> deleteRoomPhotoVOList) {
-		if(insertRoomPhotoVOList.size()!=0) {
-			for(int i = 0; i<insertRoomPhotoVOList.size();i++) {
+		if (insertRoomPhotoVOList.size() != 0) {
+			for (int i = 0; i < insertRoomPhotoVOList.size(); i++) {
 				int insertResultCount = photoDao.insert(insertRoomPhotoVOList.get(i));
-				if(insertResultCount<1) {
+				if (insertResultCount < 1) {
 					return "照片加入失敗";
 				}
 			}
 		}
-		if(deleteRoomPhotoVOList.size()!=0) {
-			for(int i = 0; i<deleteRoomPhotoVOList.size();i++) {
+		if (deleteRoomPhotoVOList.size() != 0) {
+			for (int i = 0; i < deleteRoomPhotoVOList.size(); i++) {
 				int deleteResultCount = photoDao.delete(deleteRoomPhotoVOList.get(i));
-				if(deleteResultCount<1) {
-					return "照片加入失敗";
+				if (deleteResultCount < 1) {
+					return "照片刪除失敗";
 				}
 			}
 		}
 		return "修改成功";
 	}
-	
-//	@Override
-//	public String editRoomTypePhoto(List<RoomPhotoVO> inserRoomPhotoVOList) {
-//		for(int i = 0; i<inserRoomPhotoVOList.size();i++) {
-//			int insertResultCount = photoDao.insert(inserRoomPhotoVOList.get(i));
-//			if(insertResultCount<1) {
-//				return "照片加入失敗";
-//			}
-//		}
-//		return "加入成功";
-//	}
-
 }
