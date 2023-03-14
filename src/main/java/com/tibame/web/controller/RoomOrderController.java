@@ -15,9 +15,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.RoomOrderService;
 import com.tibame.web.service.impl.RoomOrderServiceImpl;
+import com.tibame.web.vo.EmployeeVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.RoomOrderVO;
 
-@WebServlet("/admin/room/RoomOrderController")
+@WebServlet("/RoomOrderController")
 public class RoomOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RoomOrderService service;
@@ -31,10 +33,9 @@ public class RoomOrderController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		Gson gson = new Gson();
-
 		String status = request.getParameter("status");
-		
-		if (status != null && status.equals("orderIdSearch")) {
+
+		if (status != null && status.equals("orderIdSearch")) { // 根據id搜尋
 			Integer orderId = Integer.parseInt(request.getParameter("orderId"));
 			if (orderId != null) {
 				final RoomOrderVO roomOrder = service.getByOrderId(orderId);
@@ -45,10 +46,10 @@ public class RoomOrderController extends HttpServlet {
 					writer.write(gson.toJson(roomOrder));
 				}
 			}
-		} else if (status != null && status.equals("userSearch")) {
-//			Integer userId = (Integer)request.getSession().getAttribute("UserId"));
+		} else if (status != null && status.equals("userSearch")) { // 根據使用者搜尋
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
 //			屆時登入功能完成要使用
-			Integer userId = 1;
+//			Integer userId = 1;
 			if (userId != null) {
 				final List<RoomOrderVO> list = service.getOrdersByUser(userId);
 				if (list.size() == 0 || list == null) {
@@ -58,7 +59,7 @@ public class RoomOrderController extends HttpServlet {
 					writer.write(gson.toJson(list));
 				}
 			}
-		} else if (status != null && status.equals("calendar")) {
+		} else if (status != null && status.equals("calendar")) { // 根據房間搜尋
 			Integer roomId = Integer.parseInt(request.getParameter("roomId"));
 			if (roomId != null) {
 				final List<RoomOrderVO> list = service.getOrdersForCalendar(roomId);
@@ -69,7 +70,7 @@ public class RoomOrderController extends HttpServlet {
 					writer.write(gson.toJson(list));
 				}
 			}
-		} else if (status != null && !status.equals("calendar")) {
+		} else if (status != null && !status.equals("calendar")) { // 一般搜尋
 			Integer limit = Integer.parseInt(request.getParameter("limit"));
 			if (limit != null) {
 				final List<RoomOrderVO> list = service.getAllOrders(status, limit);
@@ -89,19 +90,20 @@ public class RoomOrderController extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
+		// 前端日期字串轉換
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		RoomOrderVO roomOrder = gson.fromJson(req.getReader(), RoomOrderVO.class);
 		String resultStr = null;
-		
+
 		String action = req.getParameter("action");
-		if(action!=null&&action.equals("status")) {
+		if (action != null && action.equals("status")) { // 管理員狀態變更
 			if (roomOrder == null) {
 				resultStr = "狀態內容有誤";
 			} else {
 				resultStr = service.changeStatus(roomOrder);
 			}
-			
-		}else if (action!=null&&action.equals("edit")) {
+
+		} else if (action != null && action.equals("edit")) { // 使用者變更
 			if (roomOrder == null) {
 				resultStr = "編輯內容有誤";
 			} else {
@@ -141,22 +143,21 @@ public class RoomOrderController extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
+		System.out.println("進入controller");
+		// 前端日期字串轉換
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-
-//		Gson gson = new Gson();
-
 		RoomOrderVO roomOrder = gson.fromJson(request.getReader(), RoomOrderVO.class);
 		String resultStr = null;
-
-		if (roomOrder.getOrderResident() == null) {
-//			roomOrder.setAdminId((Integer)request.getSession().getAttribute("adminId"));
+		System.out.println("roomOrder==null:" + roomOrder == null);
+		if (roomOrder.getOrderResident() == null) { // 新增關房單
+			roomOrder.setAdminId(((EmployeeVO)request.getSession().getAttribute("employeeVO")).getId());
 //			屆時登入功能完成要使用
-			roomOrder.setAdminId(1);
+//			roomOrder.setAdminId(1);
 			resultStr = service.addOrder(roomOrder);
-		} else if (roomOrder.getOrderResident() != null) {
-//			roomOrder.setUserId((Integer)request.getSession().getAttribute("userId"));
+		} else if (roomOrder.getOrderResident() != null) { // 新增預約單
+			roomOrder.setUserId(((MemberVO)request.getSession().getAttribute("memberVO")).getId());
 //			屆時登入功能完成要使用
-			roomOrder.setUserId(1);
+//			roomOrder.setUserId(1);
 			resultStr = service.addOrder(roomOrder);
 		} else {
 			resultStr = "操作有誤";

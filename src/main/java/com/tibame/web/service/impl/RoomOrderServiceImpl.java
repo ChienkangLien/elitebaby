@@ -16,6 +16,7 @@ public class RoomOrderServiceImpl implements RoomOrderService {
 
 	@Override
 	public List<RoomOrderVO> getAllOrders(String status, Integer limit) {
+		// limit代表從第n筆資料開始(分頁效果)
 		if (status.equals("new") && limit >= 0) {
 			return orderDao.getAll("客訂單", limit);
 		} else if (status.equals("history") && limit >= 0) {
@@ -52,7 +53,12 @@ public class RoomOrderServiceImpl implements RoomOrderService {
 
 	@Override
 	public String addOrder(RoomOrderVO roomOrder) {
-		return orderDao.insert(roomOrder) > 0 ? "新增成功" : "新增失敗";
+		if (orderDao.checkExistingNumForInsert(roomOrder) == 1) {
+			int result = orderDao.insert(roomOrder);
+			return result > 0 ? "新增成功" : "新增失敗";
+		} else {
+			return "晚了一步，此時段此房間已被其他房客預定";
+		}
 	}
 
 	@Override
@@ -74,7 +80,12 @@ public class RoomOrderServiceImpl implements RoomOrderService {
 	@Override
 	public String editOrder(RoomOrderVO roomOrder) {
 		if (roomOrder != null && roomOrder.getRoomOrderId() != null) {
-			return orderDao.update(roomOrder) > 0 ? "訂單更新成功" : "訂單更新失敗";
+			if (orderDao.checkExistingNumForUpdate(roomOrder) == 1) {
+				if (orderDao.checkbelong(roomOrder) == 1) {
+					return orderDao.update(roomOrder) > 0 ? "訂單更新成功" : "訂單更新失敗";
+				}
+			}
+			return "晚了一步，此時段此房間已被其他房客預定";
 		}
 		return "訂單更新失敗";
 	}

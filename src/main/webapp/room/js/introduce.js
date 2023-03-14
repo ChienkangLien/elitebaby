@@ -1,6 +1,6 @@
 //載入房型
 $(document).ready(function () {
-  fetch("/elitebaby/admin/room/RoomTypeController?task=getAll")
+  fetch("/elitebaby/RoomTypeController?task=getAll")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -36,7 +36,8 @@ $(document).ready(function () {
         <div class="room_type_para t3" >
             ${body[i].roomDescription}
         </div>
-        <button class="room_type_btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal${body[i].roomTypeId}">立即訂房</button>
+        <button class="btn find_room_type" from="${body[i].roomTypeId}">立即訂房</button>
+        <button class="room_type_btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal${body[i].roomTypeId}" style="display:none;" to="${body[i].roomTypeId}">立即訂房</button>
   
   
         <hr>
@@ -51,7 +52,9 @@ $(document).ready(function () {
               為了提升您的住宿品質，請務必在訂房前完成參觀流程
             </div>
             <div class="modal-footer">
-              <button class="btn" data-bs-dismiss="modal">預約參觀</button>
+              <a href="/elitebaby/visit/VisitRoomFrontInsert.html">
+              <button class="btn" >預約參觀</button>
+              </a>
               <button class="btn" data-bs-target="#exampleModalToggleNext${body[i].roomTypeId}" data-bs-toggle="modal">立即訂房</button>
             </div>
           </div>
@@ -120,7 +123,7 @@ $(document).ready(function () {
         roomTypeArr.push($(this).data("id-to-arr"));
       });
       for (let i = 0; i < roomTypeArr.length; i++) {
-        fetch(`/elitebaby/admin/room/RoomPhotoController?id=${roomTypeArr[i]}`)
+        fetch(`/elitebaby/RoomPhotoController?id=${roomTypeArr[i]}`)
           .then((resp) => {
             if (resp.status === 204) {
               console.log("resp.status===" + resp.status);
@@ -132,8 +135,6 @@ $(document).ready(function () {
             try {
               if (body.length != null) {
                 for (let i = 0; i < body.length; i++) {
-                  console.log(body[i].roomPhoto);
-                  console.log(body[i].roomTypeId);
                   let img = `<div class="carousel-item">
                   <img src="data:image/*;base64,${body[i].roomPhoto}" class="d-block w-100" roomPhotoId="${body[i].roomPhotoId}">
                 </div>`;
@@ -163,7 +164,14 @@ $(document).ready(function () {
 
   //日期選擇
   $(document).on("click", ".order_start_date", function () {
-    this.setAttribute("min", new Date().toISOString().split("T")[0]);
+    this.setAttribute(
+      "min",
+      new Date().getFullYear() +
+        "-" +
+        (new Date().getMonth() + 1).toString().padStart(2, "0") +
+        "-" +
+        new Date().getDate().toString().padStart(2, "0")
+    );
   });
   $(document).on("change", ".order_start_date", function () {
     $(this)
@@ -212,14 +220,6 @@ $(document).ready(function () {
 
 //訂房時清空篩選欄位
 $(document).on("click", "button.room_type_btn", function () {
-  // let order_start_date = document.querySelectorAll(".order_start_date");
-  // let order_end_date = document.querySelectorAll(".order_end_date");
-  // let remark = document.querySelectorAll(".remark");
-  // order_end_date.setAttribute("readonly", "");
-  // order_start_date.value = "";
-  // order_end_date.value = "";
-  // remark.value = "";
-
   $(".order_start_date").each(function () {
     $(this).val("").removeAttr("min").removeAttr("max");
   });
@@ -255,7 +255,7 @@ $(document).on(
     if (startDate != "" && endDate != "") {
       $(this).closest("form").find("select.roomSelect").empty();
       fetch(
-        `/elitebaby/admin/room/RoomController?task=available&startDate=${startDate}&endDate=${endDate}&typeId=${typeId}`
+        `/elitebaby/RoomController?task=available&startDate=${startDate}&endDate=${endDate}&typeId=${typeId}`
       )
         .then((resp) => {
           if (resp.status === 204) {
@@ -269,7 +269,6 @@ $(document).on(
           try {
             if (body.length != null) {
               $(`select#${body[0].roomTypeId}`).empty();
-              console.log(body);
               for (let i = 0; i < body.length; i++) {
                 let option_str = `<option data-room-id='${body[i].roomId}' value='${body[i].roomId}'>${body[i].roomName}</option>`;
                 $(`select[data-id='${body[i].roomTypeId}'`).append(option_str);
@@ -323,7 +322,7 @@ $(document).on("click", ".createOrder", function () {
   }
 
   if (!hasError) {
-    fetch("/elitebaby/admin/room/RoomOrderController", {
+    fetch("/elitebaby/RoomOrderController", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -346,4 +345,24 @@ $(document).on("click", ".createOrder", function () {
         }
       });
   }
+});
+
+//點擊立即訂房、做登入驗證
+$(document).on("click", ".find_room_type", function () {
+  const id = $(this).attr("from");
+
+  fetch("/elitebaby/SimpleVerify")
+    .then((resp) => {
+      if (resp.redirected) {
+        // 如果 response 是一個 redirect，就進行畫面跳轉
+        window.location.href = resp.url;
+      } else {
+        return resp.json();
+      }
+    })
+    .then((body) => {
+      if (body.message == "已登入") {
+        $(`button[to='${id}']`).click();
+      }
+    });
 });

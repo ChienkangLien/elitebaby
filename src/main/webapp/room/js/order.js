@@ -3,7 +3,7 @@ function loadNewRoomOrder() {
   $("tbody#target").empty();
   $("#main2").empty();
 
-  fetch("/elitebaby/admin/room/RoomOrderController?status=userSearch")
+  fetch("/elitebaby/RoomOrderController?status=userSearch")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -91,9 +91,8 @@ let ava = false;
 $(document).on("click", "button.editBtn", function () {
   ava = true;
   const orderId = $(this).attr("data-id");
-  console.log(ava);
   fetch(
-    `/elitebaby/admin/room/RoomOrderController?status=orderIdSearch&orderId=${orderId}`
+    `/elitebaby/RoomOrderController?status=orderIdSearch&orderId=${orderId}`
   )
     .then((resp) => {
       if (resp.status === 204) {
@@ -189,7 +188,7 @@ $(document).on("click", ".deleteBtn", function () {
   let that = this;
   if (confirm("確認刪除?")) {
     const id = $(that).attr("data-id");
-    fetch("/elitebaby/admin/room/RoomOrderController", {
+    fetch("/elitebaby/RoomOrderController", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -212,7 +211,14 @@ $(document).on("click", ".deleteBtn", function () {
 
 //日期選擇
 $(document).on("click", ".order_start_date", function () {
-  this.setAttribute("min", new Date().toISOString().split("T")[0]);
+  this.setAttribute(
+    "min",
+    new Date().getFullYear() +
+      "-" +
+      (new Date().getMonth() + 1).toString().padStart(2, "0") +
+      "-" +
+      new Date().getDate().toString().padStart(2, "0")
+  );
 
   const start = new Date(
     $(this).closest("form").find("input.order_end_date").val()
@@ -220,13 +226,8 @@ $(document).on("click", ".order_start_date", function () {
   const end = new Date(start);
   end.setDate(end.getDate() - 1);
   $(this).attr("max", end.toISOString().split("T")[0]);
-  // this.setAttribute(
-  //   "max",
-  //   $(this).closest("form").find("input.order_end_date").val()
-  // );
 });
 $(document).on("click", ".order_end_date", function () {
-  // this.setAttribute("min", $(this).closest("form").find("input.order_start_date").val());
   const start = new Date(
     $(this).closest("form").find("input.order_start_date").val()
   );
@@ -265,7 +266,7 @@ $(document).on("change", ".order_end_date, .order_start_date", function () {
 
   if (startDate != "" && endDate != "") {
     fetch(
-      `/elitebaby/admin/room/RoomController?task=check&startDate=${startDate}&endDate=${endDate}&roomId=${roomId}&orderId=${orderId}`
+      `/elitebaby/RoomController?task=check&startDate=${startDate}&endDate=${endDate}&roomId=${roomId}&orderId=${orderId}`
     )
       .then((resp) => {
         if (resp.status === 204) {
@@ -282,7 +283,6 @@ $(document).on("change", ".order_end_date, .order_start_date", function () {
           } else {
             ava = true;
           }
-          console.log(ava);
         } catch (error) {
           console.log(error + "，資料庫沒可用房間故後端沒回傳");
         }
@@ -344,6 +344,10 @@ $(document).on("click", "button.confirmEdit", function () {
     .val()
     .trim();
   const roomOrderId = $(this).attr("data-id");
+  const roomId = $(this)
+    .closest("div.modal-content")
+    .find("form")
+    .attr("data-room-id");
 
   let hasError = false;
   if (!orderEndDate) {
@@ -356,7 +360,7 @@ $(document).on("click", "button.confirmEdit", function () {
   }
 
   if (ava && !hasError) {
-    fetch("/elitebaby/admin/room/RoomOrderController?action=edit", {
+    fetch("/elitebaby/RoomOrderController?action=edit", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -368,6 +372,7 @@ $(document).on("click", "button.confirmEdit", function () {
         orderResident: orderResident,
         orderEndDate: orderEndDate,
         orderStartDate: orderStartDate,
+        roomId: roomId,
       }),
     })
       .then((resp) => resp.json())

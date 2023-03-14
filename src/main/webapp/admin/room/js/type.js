@@ -1,6 +1,6 @@
 //函式宣告(載入既有房型)
 function loadRoomType() {
-  fetch("RoomTypeController?task=getAll")
+  fetch("/elitebaby/RoomTypeController?task=getAll")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -180,7 +180,6 @@ aria-hidden="true"
   </div>
 </div>
 </div>`);
-
             $(".remark").summernote({
               tabsize: 2,
               height: 100,
@@ -207,7 +206,6 @@ $(document).ready(function () {
     $("#createRoomQuantity").val("");
     $("#createRoomPrice").val("");
     imageList = [];
-    // $(".note-editable").html("<p><br></p>");
     document.querySelector(".note-editable").innerHTML = "<p><br></p>";
     document.querySelectorAll(".roomName").forEach(function (e) {
       e.closest("div").remove();
@@ -218,7 +216,6 @@ $(document).ready(function () {
 
   // 新增房型及照片
   $("#createRoomType").on("click", function () {
-    // console.log(imageList);
     let base64Array = [];
     for (let i = 0; i < imageList.length; i++) {
       let data = imageList[i];
@@ -226,9 +223,7 @@ $(document).ready(function () {
       base64Array.push(base64Code);
     }
     let arrOfObjs = base64Array.map((roomPhoto) => ({ roomPhoto }));
-    // let imgJsonStr = JSON.stringify(arrOfObjs);
     const roomTypeName = document.getElementById("createRoomTypeName");
-    // const roomQuantity = document.getElementById("createRoomQuantity");
     const roomPrice = document.getElementById("createRoomPrice");
     const roomDescription = $("#createRoomDescription").summernote("code");
     const roomStatus = document.getElementById("createRoomStatus");
@@ -250,7 +245,7 @@ $(document).ready(function () {
       hasError = true;
     }
     if (!hasError) {
-      fetch("RoomTypeController", {
+      fetch("/elitebaby/RoomTypeController", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
@@ -271,7 +266,6 @@ $(document).ready(function () {
           if (body.message == "新增成功") {
             loadRoomType();
             $("#cancel").click();
-            // location.reload();
           }
         });
     }
@@ -293,24 +287,13 @@ document
       // 檔案讀取完畢時觸發
       reader.addEventListener("load", function () {
         // 可以透過 reader.result 取得圖片讀取完成時的 Base64 編碼格式
-        // console.log(this.result);
         imageList.push(this.result);
 
-        //寫法一
-        //   let li_str = `
-        //   <li>
-        //   <img src='${reader.result}' class='preview'>
-        //   </li>
-        //   `
-
-        //寫法二
         let li_str = "";
         li_str += "<li>";
         li_str += "<img src='" + reader.result + "' class='preview'>";
         li_str += "</li>";
 
-        // let ul_el = document.querySelector(".picture_list");
-        //   ul_el.innerHTML = li_str;
         ul_el.insertAdjacentHTML("beforeend", li_str);
       });
     }
@@ -327,7 +310,7 @@ $(document).on("click", ".editPhotoBtn", function () {
     .closest("div")
     .find("input")
     .val("");
-  fetch(`RoomPhotoController?id=${trId}`)
+  fetch(`/elitebaby/RoomPhotoController?id=${trId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -361,7 +344,6 @@ $(document).on("change", ".reCreateRoomPhoto", function () {
     // 檔案讀取完畢時觸發
     reader.addEventListener("load", function () {
       // 可以透過 reader.result 取得圖片讀取完成時的 Base64 編碼格式
-      // console.log(this.result);
       reimageList.push(this.result);
 
       let li_str = "";
@@ -384,21 +366,16 @@ $(document).on("dblclick", "img.fromDatabase", function () {
 //送出照片編輯、加入刪除照片
 let result = [];
 $(document).on("click", "button.confirmPhotoEditbtn", function () {
-  console.log(deletePhotoId);
   if (reimageList.length > 0) {
     let id = $(this).attr("data-id");
     for (let i = 0; i < reimageList.length; i++) {
       let data = reimageList[i];
       let base64Code = data.split(",")[1];
-      // base64Array.push(base64Code);
 
       result.push({ roomPhoto: base64Code, roomTypeId: id });
     }
-    // let arrOfObjs = base64Array.map((roomPhoto) => ({ roomPhoto }));
-    console.log(result);
-    console.log(JSON.stringify([result, deletePhotoId]));
   }
-  fetch("RoomPhotoController", {
+  fetch("/elitebaby/RoomPhotoController", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -426,13 +403,11 @@ $(document).on("click", "button.quantityCheck", function () {
   const targetValue = $(this).data("bs-target"); // 取得data-bs-target屬性的值
   const targetId = targetValue.replace("#", ""); // 刪除其中的`#`字符
   const trId = $(this).closest("tr").attr("data-id");
-  console.log(targetId); // 將處理後的值輸出到控制台
-  console.log(roomTypeQuantity);
   $(`div#${targetId}`).find("form").empty();
 
   increaseNum = 1;
 
-  fetch(`RoomController?task=search&roomTypeId=${trId}`)
+  fetch(`/elitebaby/RoomController?task=search&roomTypeId=${trId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -443,9 +418,7 @@ $(document).on("click", "button.quantityCheck", function () {
     .then((body) => {
       try {
         if (body.length != null) {
-          // $(`ul[data-id='ori_${body[0].roomTypeId}'`).empty();
           for (let i = 0; i < body.length; i++) {
-            console.log(body[i]);
             let html = `<div class="mb-3 putToOri">
     <label for="editRoomName${i + 1}" class="col-form-label"
       >房間名稱${i + 1}</label
@@ -487,7 +460,6 @@ $(document).on("click", "button.increaseRoom", function () {
 });
 
 //送出房間修改
-
 $(document).on("click", "button.confirmRoomQuantityEditbtn", function () {
   hasError = false;
 
@@ -526,7 +498,7 @@ $(document).on("click", "button.confirmRoomQuantityEditbtn", function () {
     newData = [];
     oriData = [];
   } else {
-    fetch("RoomController", {
+    fetch("/elitebaby/RoomController", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -544,15 +516,11 @@ $(document).on("click", "button.confirmRoomQuantityEditbtn", function () {
         oriData = [];
       });
   }
-
-  console.log(JSON.stringify([newData, oriData]));
 });
 
 //房型修改
 $(document).on("click", "button.confirmTypeEditbtn", function () {
-  // location.reload();
   let that = this;
-  console.log(1);
   const roomTypeId = $(this).closest("div.modal-dialog").attr("data-id");
   const roomTypeName = $(this)
     .closest("div.modal-content")
@@ -591,7 +559,7 @@ $(document).on("click", "button.confirmTypeEditbtn", function () {
     hasError = true;
   }
   if (!hasError) {
-    fetch("RoomTypeController", {
+    fetch("/elitebaby/RoomTypeController", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -611,7 +579,6 @@ $(document).on("click", "button.confirmTypeEditbtn", function () {
         if (body.message == "修改成功") {
           loadRoomType();
           $(that).closest("div.modal-footer").find("button.cancelbtn").click();
-          // location.reload();
         }
       });
   }
@@ -622,7 +589,7 @@ $(document).on("click", "button.getSingleType", function () {
   const roomTypeId = $(this).closest("tr").attr("data-id");
   $("div#container2").find(`div[data-id="${roomTypeId}"]`).find("form").empty();
 
-  fetch(`RoomTypeController?task=getSingle&roomTypeId=${roomTypeId}`)
+  fetch(`/elitebaby/RoomTypeController?task=getSingle&roomTypeId=${roomTypeId}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);

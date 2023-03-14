@@ -3,7 +3,7 @@ function loadNewRoomOrder() {
   newLimit = 0;
   $("tbody#target-undone").empty();
 
-  fetch("RoomOrderController?status=new&limit=0")
+  fetch("/elitebaby/RoomOrderController?status=new&limit=0")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -58,7 +58,7 @@ function loadHistoryRoomOrder() {
   historyLimit = 0;
   $("tbody#target-done").empty();
 
-  fetch("RoomOrderController?status=history&limit=0")
+  fetch("/elitebaby/RoomOrderController?status=history&limit=0")
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -136,7 +136,7 @@ $(document).ready(function () {
 //完成訂單
 $(document).on("click", ".changeStatus", function () {
   const trId = $(this).closest("tr").attr("data-id");
-  fetch("RoomOrderController?action=status", {
+  fetch("/elitebaby/RoomOrderController?action=status", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -159,7 +159,7 @@ $(document).on("click", ".changeStatus", function () {
 //返回訂單
 $(document).on("click", ".backStatus", function () {
   const id = $(this).closest("div.modal-footer").attr("data-id");
-  fetch("RoomOrderController?action=status", {
+  fetch("/elitebaby/RoomOrderController?action=status", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -184,7 +184,7 @@ $(document).on("click", ".deleteStatus", function () {
   let that = this;
   if (confirm("刪除後將從資料庫移除")) {
     const id = $(that).closest("div.modal-footer").attr("data-id");
-    fetch("RoomOrderController", {
+    fetch("/elitebaby/RoomOrderController", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -210,7 +210,7 @@ let historyLimit = 0;
 //分頁效果(未完成單)
 $(document).on("click", "#newN", function () {
   newLimit = newLimit + 5;
-  fetch(`RoomOrderController?status=new&limit=${newLimit}`)
+  fetch(`/elitebaby/RoomOrderController?status=new&limit=${newLimit}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -255,7 +255,6 @@ $(document).on("click", "#newN", function () {
             </ul>
           </nav>`);
         }
-        console.log("sus N" + newLimit);
       } catch (error) {
         console.log(error + "，資料庫沒訂單資料故後端沒回傳");
         newLimit = newLimit - 5;
@@ -264,7 +263,6 @@ $(document).on("click", "#newN", function () {
               <li class="page-item"><a class="page-link f3"  id="newP">上一頁</a></li>
             </ul>
           </nav>`);
-        console.log("fail N" + newLimit);
         alert("已是最末頁");
       }
     });
@@ -272,7 +270,7 @@ $(document).on("click", "#newN", function () {
 $(document).on("click", "#newP", function () {
   if (newLimit >= 5) {
     newLimit = newLimit - 5;
-    fetch(`RoomOrderController?status=new&limit=${newLimit}`)
+    fetch(`/elitebaby/RoomOrderController?status=new&limit=${newLimit}`)
       .then((resp) => {
         if (resp.status === 204) {
           console.log("resp.status===" + resp.status);
@@ -319,10 +317,7 @@ $(document).on("click", "#newP", function () {
           }
           if (newLimit == 0) {
             $("#newP").remove();
-            console.log("P=0" + newLimit);
-            // alert("已是最前頁");
           }
-          console.log("P>0" + newLimit);
         } catch (error) {
           console.log(error + "，資料庫沒訂單資料故後端沒回傳");
         }
@@ -334,7 +329,7 @@ $(document).on("click", "#newP", function () {
 $(document).on("click", "#historyN", function () {
   historyLimit = historyLimit + 5;
 
-  fetch(`RoomOrderController?status=history&limit=${historyLimit}`)
+  fetch(`/elitebaby/RoomOrderController?status=history&limit=${historyLimit}`)
     .then((resp) => {
       if (resp.status === 204) {
         console.log("resp.status===" + resp.status);
@@ -397,7 +392,6 @@ $(document).on("click", "#historyN", function () {
               <li class="page-item"><a class="page-link f3"  id="historyN">下一頁</a></li>
             </ul>
           </nav>`);
-          console.log("sus N" + historyLimit);
         }
       } catch (error) {
         console.log(error + "，資料庫沒訂單資料故後端沒回傳");
@@ -407,7 +401,6 @@ $(document).on("click", "#historyN", function () {
               <li class="page-item"><a class="page-link f3"  id="historyP">上一頁</a></li>
             </ul>
           </nav>`);
-        console.log("fail N" + historyLimit);
         alert("已是最末頁");
       }
     });
@@ -415,7 +408,7 @@ $(document).on("click", "#historyN", function () {
 $(document).on("click", "#historyP", function () {
   if (historyLimit >= 5) {
     historyLimit = historyLimit - 5;
-    fetch(`RoomOrderController?status=history&limit=${historyLimit}`)
+    fetch(`/elitebaby/RoomOrderController?status=history&limit=${historyLimit}`)
       .then((resp) => {
         if (resp.status === 204) {
           console.log("resp.status===" + resp.status);
@@ -479,11 +472,8 @@ $(document).on("click", "#historyP", function () {
             </ul>
           </nav>`);
           }
-          console.log("P>0" + historyLimit);
           if (historyLimit == 0) {
             $("#historyP").remove();
-            console.log("P=0" + historyLimit);
-            // alert("已是最前頁");
           }
         } catch (error) {
           console.log(error + "，資料庫沒訂單資料故後端沒回傳");
