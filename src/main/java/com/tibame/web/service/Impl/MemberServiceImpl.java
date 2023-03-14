@@ -40,25 +40,24 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO login(MemberVO member) {
 		final String email = member.getEmail();
-		if (email == null || email.isEmpty()) {
-			return null;
-		}
 		final String password = member.getPassword();
-		if (password == null || password.isEmpty()) {
+		if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
 			return null;
+		}else {
+			return dao.find(member);
+			
 		}
 
-		return dao.find(member);
 	}
 	
 	
 
 	@Override
 	public MemberVO update(MemberVO member) {
-		final int id = member.getId();
-		final String password = member.getPassword();
-		final String address = member.getAddress();
-		final String phonenumber = member.getPhoneNumber();
+		member.getId();
+		member.getPassword();
+		member.getAddress();
+		member.getPhoneNumber();
 		dao.updateById(member);
 		return member;
 	}
@@ -77,4 +76,13 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public List<MemberVO> findAll() {
+		return dao.selectAll();
+	}
+	
+	
 }

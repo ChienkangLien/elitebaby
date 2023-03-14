@@ -7,16 +7,13 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.tibame.web.vo.MemberVO;
+import com.tibame.web.vo.EmployeeVO;
 
-@WebFilter(urlPatterns = { "" })
-public class MemFilter implements Filter {
-
+public class EmpFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -24,14 +21,14 @@ public class MemFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 
 		HttpSession session = req.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-		if (memberVO == null || memberVO.getId() == null) {
+		EmployeeVO employeeVO = (EmployeeVO) session.getAttribute("employeeVO");
+		if (employeeVO == null || employeeVO.getEmpid() == null) {
 			session.setAttribute("location", req.getRequestURI());
-			resp.sendRedirect(req.getContextPath() + "/member/login.html");
+			resp.sendRedirect(req.getContextPath() + "/employee/login.html");
 			return;
 
 		} else {
-			System.out.println(memberVO.getId() + ", " + req.getRequestURI());
+			System.out.println(employeeVO.getEmpid() + ", " + req.getRequestURI());
 			chain.doFilter(req, resp);
 		}
 

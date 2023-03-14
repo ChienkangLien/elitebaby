@@ -14,14 +14,13 @@ import com.tibame.web.service.MemberService;
 import com.tibame.web.service.impl.MemberServiceImpl;
 import com.tibame.web.vo.MemberVO;
 
-
 @WebServlet("/member/register")
 public class MemberRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public MemberRegisterServlet() {
-    	
-    }
+
+	public MemberRegisterServlet() {
+
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,11 +29,11 @@ public class MemberRegisterServlet extends HttpServlet {
 		MemberVO member = gson.fromJson(req.getReader(), MemberVO.class);
 		MemberService service = new MemberServiceImpl();
 		final String resultStr = service.register(member);
-		
+
 //			System.out.println(resultStr);
-		
+
 		resp.setContentType("application/json;charset=UTF-8");
-		
+
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", resultStr.equals("註冊成功"));
 		respBody.addProperty("message", resultStr);
@@ -42,4 +41,3 @@ public class MemberRegisterServlet extends HttpServlet {
 	}
 
 }
-
