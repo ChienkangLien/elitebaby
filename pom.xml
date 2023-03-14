@@ -17,11 +17,6 @@
 
 
 	<dependencies>
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>2.9.0</version>
-		</dependency>
 
 		<dependency>
 			<groupId>javax.websocket</groupId>
@@ -33,6 +28,21 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.6.15.Final</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

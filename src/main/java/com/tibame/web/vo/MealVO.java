@@ -1,32 +1,33 @@
 package com.tibame.web.vo;
 
 public class MealVO {
+	
 	private Integer mealId;
 	private String mealName;
 	private byte[] mealPic;
-	private Integer mealQuantity;
 	private Integer mealPrice;
 	private Integer reserverPrice;
 	private Integer mealStatus;
-	
+	private String base64;
+	private Integer count;
+	private Integer total;
+
+
 	public MealVO() {	
 	};
 	
-	public MealVO(String mealName, Integer mealQuantity, Integer mealPrice,
-			Integer reservePrivce) {
+	public MealVO(String mealName, Integer mealPrice, Integer reservePrivce) {
 		this.mealName = mealName;
-		this.mealQuantity = mealQuantity;
 		this.mealPrice = mealPrice;
 		this.reserverPrice = reservePrivce;
 	}
 	
-	public MealVO(Integer mealId, String mealName, byte[] mealPic, Integer mealQuantity, Integer mealPrice,
+	public MealVO(Integer mealId, String mealName, byte[] mealPic, Integer mealPrice, 
 			Integer reservePrivce, Integer mealStatus) {
 		super();
 		this.mealId = mealId;
 		this.mealName = mealName;
 		this.mealPic = mealPic;
-		this.mealQuantity = mealQuantity;
 		this.mealPrice = mealPrice;
 		this.reserverPrice = reservePrivce;
 		this.mealStatus = mealStatus;
@@ -56,14 +57,6 @@ public class MealVO {
 		this.mealPic = mealPic;
 	}
 
-	public Integer getMealQuantity() {
-		return mealQuantity;
-	}
-
-	public void setMealQuantity(Integer mealQuantity) {
-		this.mealQuantity = mealQuantity;
-	}
-
 	public Integer getMealPrice() {
 		return mealPrice;
 	}
@@ -88,9 +81,25 @@ public class MealVO {
 		this.mealStatus = mealStatus;
 	}
 	
+	public String getBase64() {
+		return base64;
+	}
+
+	public void setBase64(String base64) {
+		this.base64 = base64;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
-		return "MealVO [mealId=" + mealId + ", mealname=" + mealName +", mealpic="+ mealPic +", mealQuantity=" + mealQuantity
+		return "MealVO [mealId=" + mealId + ", mealname=" + mealName +", mealpic="+ mealPic
 				+", mealPrice="+ mealPrice +", reservePrivce="+reserverPrice+", mealStatus"+mealStatus+ "]";
 	}
 

@@ -54,20 +54,3 @@ div#book_visit>a>img {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-.meal_block_1 {
-    width: 300px;
-    border: 1px solid green;
-    float: left;
-    margin-right: 30px;
-    list-style: none
-}
-
-.meal_pic {
-    max-width: 100%;
-    border: 1px solid red;
-}
-
-.meal_info {
-    border: 1px solid blue;
-}
