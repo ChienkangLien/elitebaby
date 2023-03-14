@@ -86,15 +86,23 @@ if(rstee.length == 0){
 				if (img_base64_el.length > 0) {
 					inserPhoto();
 				} else {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					
+					Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "ReportEmailFrontGetAll.html"
+					   });
+					
 				}
 
 			} else {
-				alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-				location.href = "ReportEmailFrontGetAll.html"
+				Swal.fire({
+					icon: 'error',
+					title: '寄出失敗',
+					text: '請檢查信件格式是否正確或是重新寄一次'
+				  })
 			}
 
 
@@ -103,11 +111,15 @@ if(rstee.length == 0){
 }
 
 	if(rstee!=null && rstee.length != 0 ){
-		alert(rstee);
 		var emtyarry = [];
+		Swal.fire({
+		icon: 'error',
+		title: '格式錯誤',
+		text: `${rstee}`
+	  })
 		rstee = emtyarry;
-		
-	}
+	
+		}
 
 function inserPhoto() {
 
@@ -129,14 +141,21 @@ function inserPhoto() {
 			.then(data => {
 				
 				if (data.successful) {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
 
+					  Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "ReportEmailFrontGetAll.html"
-					
-				} else {					
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					   });				
+				} else {			
+
+					Swal.fire({
+						icon: 'error',
+						title: '圖片新增失敗',
+						text: '請檢查圖片格式是否正確'
+					  })
 
 				}
 
@@ -153,12 +172,20 @@ function inserPhoto() {
 
 $("#sam_btn_cancle").on("click", function() {
 
-	var result = confirm("確定取消")
+	Swal.fire({
+		title: '確定取消?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確定',
+		cancelButtonText : '取消'
+	  }).then((result) => {
 
-if(result){
-	location.href = "ReportEmailFrontGetAll.html"
-}
-
+		if (result.isConfirmed) {
+		location.href = "ReportEmailFrontRSMail.html"
+	}
 })
+})	
 
 

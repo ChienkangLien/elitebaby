@@ -20,6 +20,7 @@ div.sam_div_form{
     background: #de6d9878;
 	  box-shadow: 2px 2px 4px #6e6969;
     margin-bottom: 20px;
+    border-radius: 20px;
     
 }
 
@@ -35,6 +36,10 @@ div.sam_div_emailtilte,#sam_div_emailfile{
     
 }
 
+div.sam_div_emailtilte{
+  border-radius: 20px;
+}
+
 div.sam_div_emailcategory{
     border: 1px solid black;
     margin-top: 50px;
@@ -44,6 +49,7 @@ div.sam_div_emailcategory{
     background-color: white;
     display : inline-block;
     box-shadow: 2px 2px 4px #6e6969;
+    border-radius: 20px;
 }
 
 div.sam_div_adminId{
@@ -74,6 +80,7 @@ div.sam_div_adminId{
     margin-right: 50px;
     background-color: white;
     box-shadow: 2px 2px 4px #6e6969;
+    border-radius: 20px;
 
 }
 
@@ -84,7 +91,8 @@ div.sam_div_adminId{
     margin-top: 10px;
     margin-bottom: 10px;   
     margin-left: 22px;  
-    background-color: #80808042;     
+    background-color: #80808042; 
+    border-radius: 20px;
     
 }
 
@@ -102,6 +110,7 @@ div.sam_div_adminId{
     margin-bottom: 10px;
     margin-left: 10px;
     background-color: #80808042;
+    border-radius: 20px;
 }
 #sam_btn_cancle{
     margin-left: 20px;

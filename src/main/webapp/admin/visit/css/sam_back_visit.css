@@ -63,3 +63,30 @@
       font-size: small;
       
     }
+
+
+    .selcet_email{
+      margin-left: 100px;
+      border-radius: 8px;
+      background-color: #e4ad4ebd;
+      border-color: #755a2ce3;
+      align-items: center;
+      height: 30px; 
+      width: 80px; 
+      font-size: small;
+
+    }
+
+    #serch{
+      border-radius: 8px;
+      background-color: #3b7bf1bd;
+      border-color: #3b7bf1bd;
+      align-items: center;height: 30px; 
+      width: 80px; 
+      font-size: small;
+    }
+
+    .selcet_pk{
+      border-radius: 20px;
+      background-color: #a9fdf9;
+    }

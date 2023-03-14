@@ -47,12 +47,25 @@ fetch("/elitebaby/visit/servlet?action=GET_ONE_VISIT_DATA",
 
 		if (visitone.visitStatus == 1) {
 			$(".yes_visit").prop("checked", true);
+
+			$('.visitname').attr('readonly', true);
+			$('.visitemail').attr('readonly', true);
+			$('.visitphone').attr('readonly', true);
+			$('.visitdate').attr('readonly', true);
+			$('.contacttime').attr('disabled', true);
+			$('.duedate').attr('readonly', true);
+			$('.kids').attr('disabled', true);
+			$('.visitremark').attr('readonly', true);
+
 		}
 
 		if (visitone.contactSatus == 1) {
 			$(".yes_contact").prop("checked", true);
 
 		}
+
+	
+
 
 	});
 
@@ -64,8 +77,11 @@ fetch("/elitebaby/visit/servlet?action=GET_ONE_VISIT_DATA",
 		if (regex.test(email)) {	
 	
 		} else {
-	
-			alert('請輸入正確的Email格式!');
+			document.querySelector('.visitemail').value=""
+			Swal.fire({
+				icon: 'error',
+				title: '請輸入正確的Email格式!'
+			  })
 			return true;
 	
 		}
@@ -97,8 +113,18 @@ document.querySelector("#visitsubmit").addEventListener("click", function() {
 
 	if(rstee.length == 0){
 
-	var result = confirm("是否確定修改");
-	if (result) {
+		Swal.fire({
+			title: '確定修改?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '確定',
+			cancelButtonText : '取消'
+		  }).then((result) => {
+	
+			if (result.isConfirmed) {
+				
 		fetch('/elitebaby/visit/servlet?action=UPDATE_VISIT', {
 			method: 'POST',
 			headers: {
@@ -122,13 +148,27 @@ document.querySelector("#visitsubmit").addEventListener("click", function() {
 			.then(resp => resp.json())
 			.then(data => {
 
-				alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-
 				if (data.successful) {
-					location.href = "getall_visit.html"
+
+					
+					Swal.fire({
+						title:"更新成功",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
+
+					location.href =  "getall_visit.html";
+ 									   
+					});
+
 				} else {
-					location.reload();
+
+					Swal.fire({
+						icon: 'error',
+						title: '更新失敗',
+						text: '請檢查輸入格式是否正確'
+				   })
+				   
 				}
 
 			});
@@ -136,13 +176,20 @@ document.querySelector("#visitsubmit").addEventListener("click", function() {
 
 	}
 
-}
+		  })	
+
+};
 
 
 if(rstee !=null && rstee.length != 0 ){
-
-	alert(rstee);
 	var emtyarry = [];
+	
+	Swal.fire({
+		icon: 'error',
+		title: '以下格式錯誤',
+		text: `${rstee}`
+	  })
+
 	rstee = emtyarry;
 
 	} 
@@ -160,8 +207,11 @@ document.getElementById("duedateId").setAttribute("min",today);
 function validate(input) {
 	const chineseRegex = /^[\u4e00-\u9fa5]+$/; // 只允許中文字符
 	if (!chineseRegex.test(input.value)) {	
-	  alert("請輸入中文");  
-	  input.value = "請輸入中文";
+	  Swal.fire({
+		icon: 'error',
+		title: `請輸入中文`,
+	  })
+	  input.value = "";
 	  input.focus();
 	}
   }
@@ -186,8 +236,14 @@ document.getElementById("datepicker").addEventListener("change",function(){
 		.then(data => { 
 
 			if(data.successful){
-				alert(`${checkdate}預約已滿`)
+
+				Swal.fire({
+					icon: 'error',
+					title: `非常抱歉${checkdate}預約已滿`,
+					text: `麻煩請重新選擇其他日期`
+				  })
 				document.getElementById("datepicker").value = "";
+
 			}
 
 

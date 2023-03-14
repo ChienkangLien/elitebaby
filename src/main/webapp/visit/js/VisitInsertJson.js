@@ -55,8 +55,11 @@ function validateEmail() {
 	if (regex.test(email)) {	
 
 	} else {
-
-		alert('請輸入正確的Email格式!');
+		document.querySelector('.visitemail').value=""
+		Swal.fire({
+			icon: 'error',
+			title: '請輸入正確的Email格式!'
+		  })
 		return true;
 
 	}
@@ -107,30 +110,46 @@ document.querySelector('#visitsubmit').addEventListener('click', () => {
 			.then(resp => resp.json())
 			.then(data => {
 
-				if(data.successful){
 
+				if (data.successful) {
 
-				alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					
+					Swal.fire({
+						title:"恭喜預約成功",
+						text: '會有專人聯絡您',
+						icon : 'success'
+				   }).then((result) => {
 
 					location.href = "/elitebaby/visit/VisitRoomFrontGetAll.html"
+ 									   
+					});
 
-				}else{
+				} else {
 
-                alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-					  
+					Swal.fire({
+						icon: 'error',
+						title: '預約失敗',
+						text: '請重新預約'
+				   })
+				   
 				}
-				
+
+
 			});
    }
 
    
 	if(rstee !=null && rstee.length != 0 ){
 
-		alert(rstee);
 		var emtyarry = [];
+		Swal.fire({
+			icon: 'error',
+			title: '以下格式錯誤',
+			text: `${rstee}`
+		  })
+	
 		rstee = emtyarry;
+	
 	
 		} 
 
@@ -148,9 +167,12 @@ document.getElementById("duedateId").setAttribute("min",today);
 function validate(input) {
 	const chineseRegex = /^[\u4e00-\u9fa5]+$/; // 只允許中文字符
 	if (!chineseRegex.test(input.value)) {	
-	  alert("請輸入中文");  
-	  input.value = "";
-	  input.focus();
+		Swal.fire({
+			icon: 'error',
+			title: `請輸入中文`,
+		  })
+		  input.value = "";
+		  input.focus();
 	}
   }
 
@@ -173,7 +195,11 @@ function validate(input) {
 		.then(data => { 
 
 			if(data.successful){
-				alert(`${checkdate}預約已滿`)
+				Swal.fire({
+					icon: 'error',
+					title: `非常抱歉${checkdate}預約已滿`,
+					text: `麻煩請重新選擇其他日期`
+				  })
 				document.getElementById("datepicker").value = "";
 			}
 

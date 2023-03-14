@@ -64,6 +64,7 @@ $("#sam_btn_submit").on("click", function() {
 	const title = document.querySelector("#sam_input_emailtitle");
 			if (title.value == null || title.value.trim() == "" || title.length == 0) {
 				rstee.push("請輸入標題\r");
+				
 			}
 	
 	const category = document.querySelector("#sam_input_emailcategory");
@@ -74,6 +75,7 @@ $("#sam_btn_submit").on("click", function() {
 	const remark = document.querySelector(".visitremark");
 			if (remark.value == null || remark.value.trim() == "" || remark.length == 0) {
 				rstee.push("請輸入回報內容\r");
+				
 			}
 
 
@@ -110,14 +112,24 @@ $("#sam_btn_submit").on("click", function() {
 				if (img_base64_el.length > 0) {
 					inserPhoto();
 				} else {
-					alert(`successful: ${data.successful}
-					message: ${data.message}`)
+
+					Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "back_admin_mailbox.html"
+					   });
+			   
 				}
 				
 			} else {
-				alert(`successful: ${data.successful}
-				message: ${data.message}`)
+
+				Swal.fire({
+					icon: 'error',
+					title: '寄出失敗',
+					text: '請檢查信件格式是否正確或是重新寄一次'
+				  })
 				
 			}
 			
@@ -126,10 +138,15 @@ $("#sam_btn_submit").on("click", function() {
 		
 	}
 
-	if(rstee!=null && rstee.length > 0 ){
-		alert(rstee);
+	if(rstee!=null && rstee.length > 0 ){		
 		var emtyarry = [];
+		Swal.fire({
+		icon: 'error',
+		title: '格式錯誤',
+		text: `${rstee}`
+	  })
 		rstee = emtyarry;
+	
 		}
 	
 	function inserPhoto() {
@@ -152,15 +169,22 @@ $("#sam_btn_submit").on("click", function() {
 			.then(data => {
 				
 				if (data.successful) {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
 
+					Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "back_admin_mailbox.html"
+					   });
 					
-				} else {					
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-
+				} else {			
+							
+					Swal.fire({
+						icon: 'error',
+						title: '圖片新增失敗',
+						text: '請檢查圖片格式是否正確'
+					  })
 				}
 
 			});
@@ -217,10 +241,20 @@ $("#sam_btn_submit").on("click", function() {
 
 $("#sam_btn_cancle").on("click", function() {
 
-	var result = confirm("確定取消")
-	if(result){
+	Swal.fire({
+		title: '確定取消?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確定',
+		cancelButtonText : '取消'
+	  }).then((result) => {
+
+		if (result.isConfirmed) {
 		location.href = "back_admin_mailbox.html"
 	}
+})
 	
-	})
+})
 

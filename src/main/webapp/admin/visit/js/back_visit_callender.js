@@ -31,7 +31,7 @@ $(document).ready(function() {
     dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"], //周简写
       events: [], // 空的 events 陣列，等待 fetch 回傳事件資料後加入
       eventClick: function(event) {
-        alert('Event: ' + event.title+event.id);
+
         fetch(`/elitebaby/visit/servlet?action=getOne_For_Update&visitid=${event.id}`, {
           method: 'POST',
           headers: {
