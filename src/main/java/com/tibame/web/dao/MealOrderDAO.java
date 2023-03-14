@@ -9,6 +9,7 @@ public interface MealOrderDAO {
 	public int insert(MealOrderVO MealOrderVO);
     public int update(MealOrderVO MealOrderVO);
     public int delete(Integer mealOrderId);
-    public MealOrderVO findByPrimaryKey(Integer mealOrderId);
+    public List<MealOrderVO> findByUserId(Integer userId);
+    public List<MealOrderVO> findByMealOrderId(Integer mealOrderId);
     public List<MealOrderVO> getAll();
 }

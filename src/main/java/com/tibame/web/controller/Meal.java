@@ -47,7 +47,7 @@ public class Meal extends HttpServlet {
 //			}
 			MealService service = new MealServiceImpl();
 			List<MealVO> list = service.getAllMeal();
-			System.out.println(list);
+//			System.out.println(list);
 
 			if (list.size() == 0) {
 				response.setStatus(HttpServletResponse.SC_NO_CONTENT);

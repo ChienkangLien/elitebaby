@@ -63,16 +63,12 @@ fetch("/elitebaby/Cart?name=getcart", {
     })
     .then((body) => {
         try {
-            console.log(body);
             if (body != null) {
-                console.log(body.msg);
                 if (body.msg == "為已登入狀態") {
-                    console.log(body.cartcount);
-                    // document.querySelector("#cartCount").innerHTML(body.cartcount);
+                    console.log("已登入並取得購物車內數量");
                     $("span#cartCount").html(body.cartcount);
-                    alert("已登入並取得購物車內數量");
                 } else {
-                    alert("尚未登入");
+                    console.log("尚未登入");
                 }
                 // console.log("ttttt");
                 // $("ul.meal_block").html(li_str);
@@ -102,7 +98,7 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
             {
                 userId: userId,
                 mealId: data_id,
-                orderCount: 1
+                count: 1
             }
         ),
     })
@@ -147,8 +143,6 @@ $("button#cart_btn").on("click", function () {
         body: JSON.stringify(
             {
                 userId: userId,
-                mealId: data_id,
-                orderCount: 1
             }
         ),
     })
@@ -161,23 +155,17 @@ $("button#cart_btn").on("click", function () {
         })
         .then((body) => {
             try {
-                if (body.msg === "success") {
-                    // let str = "";
-                    alert("已新增至購物車!!");
-                    console.log(body.cartcount);
-                    $("span#cartCount").html(body.cartcount);
-                    // document.querySelector("#cartCount").innerHTML(body.cartcount);
-                    data_id = "";
-                    // location.reload();
+                if (body.msg == "為已登入狀態") {
+                    location.href = "../meal/cart.html";
                 } else {
-                    alert("修改失敗!!!!");
+                    alert("跳轉到登入頁面(未引入)");
                     // console.log("新增失敗");
-                    // location.reload();
+                    location.reload();
                 }
             } catch (error) {
                 alert("出現錯誤!!!!");
                 // location.reload();
-                console.log(error + "，修改失敗");
+                console.log(error + "，跳轉購物車頁面失敗");
             }
         });
 })

@@ -97,4 +97,9 @@ public class MealServiceImpl implements MealService {
 		jedis.close();
 	}
 
+	@Override
+	public int getMealLength() {
+		return dao.getlength();
+	}
+
 }

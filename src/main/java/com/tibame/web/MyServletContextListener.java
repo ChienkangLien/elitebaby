@@ -17,13 +17,10 @@ import redis.clients.jedis.Jedis;
 public class MyServletContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {
-		// 在这里添加需要在Tomcat启动时执行的代码
-		// ...
-		System.out.println("伺服器啟動成功，開始檢查Redis內的所有產品照片是否存在");
-//		
-		// 在MealDAO寫一個取得商品個數的方法 (未寫)
+		System.out.println("伺服器啟動成功，開始檢查Redis內的所有產品照片是否存在");	
 		Jedis jedis = new Jedis("localhost", 6379);
 		MealDAO dao = new MealDAOImpl();
+		// 在MealDAO寫一個取得商品個數的方法 (未寫)
 		if (dao.getlength() != jedis.keys("meal*").size()) {
 			List<MealVO> list = dao.getAll();
 			System.out.println(list.size());

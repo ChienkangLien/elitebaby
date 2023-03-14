@@ -9,7 +9,10 @@ public class MealVO {
 	private Integer reserverPrice;
 	private Integer mealStatus;
 	private String base64;
-	
+	private Integer count;
+	private Integer total;
+
+
 	public MealVO() {	
 	};
 	
@@ -84,6 +87,14 @@ public class MealVO {
 
 	public void setBase64(String base64) {
 		this.base64 = base64;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 	@Override

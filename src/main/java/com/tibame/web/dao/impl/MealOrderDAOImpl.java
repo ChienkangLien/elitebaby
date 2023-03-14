@@ -29,12 +29,12 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 
 	@Override
 	public int insert(MealOrderVO MealOrderVO) {
-		String sql = "insert into MEAL_ORDER(USER_ID, ORDER_PAYMENT, ORDER_NOTES) values (?,?,?);";
+		String sql = "insert into MEAL_ORDER(USER_ID, ORDER_PAYMENT, AUTH_CODE) values (?,?,?);";
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, MealOrderVO.getUserId());
 			ps.setInt(2, MealOrderVO.getOrderPayment());
-			ps.setString(3, MealOrderVO.getOrderNotes());
+			ps.setString(3, MealOrderVO.getAuthCode());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +44,11 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 
 	@Override
 	public int update(MealOrderVO MealOrderVO) {
-		String sql = "UPDATE MEAL_ORDER set ORDER_PAYMENT=?, ORDER_STATUS=?, ORDER_NOTES=? where MEAL_ORDER_ID = ?";
+		String sql = "UPDATE MEAL_ORDER set ORDER_STATUS=? where MEAL_ORDER_ID = ?";
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, MealOrderVO.getOrderPayment());
-			ps.setInt(2, MealOrderVO.getOrderStatus());
-			ps.setString(3, MealOrderVO.getOrderNotes());
-			ps.setInt(4, MealOrderVO.getMealOrderId());
+			ps.setInt(1, MealOrderVO.getOrderStatus());
+			ps.setInt(2, MealOrderVO.getMealOrderId());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,33 +71,33 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 	}
 
 	@Override
-	public MealOrderVO findByPrimaryKey(Integer id) {
-		String sql = "SELECT * FROM MEAL_ORDER WHERE MEAL_ORDER_ID = ?;";
+	public List<MealOrderVO> findByUserId(Integer id) {
+		String sql = "SELECT * FROM MEAL_ORDER WHERE USER_ID = ?;";
+		List<MealOrderVO> list = new ArrayList<MealOrderVO>();
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
-				if (rs.next()) {
+				while (rs.next()) {
 					Integer mealOrderId = rs.getInt(1);
 					Integer userId = rs.getInt(2);
 					Integer orderPayment = rs.getInt(3);
 					Integer orderStatus = rs.getInt(4);
-					Timestamp timestamp = rs.getTimestamp(5);
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String orderDate = dateFormat.format(timestamp);
-					String orderNotes = rs.getString(6);
+					String orderDate = dateFormat.format(rs.getTimestamp(5));
+					String authCode = rs.getString(6);
 
 					MealOrderVO mealorder = new MealOrderVO();
 					mealorder.setMealOrderId(mealOrderId);
 					mealorder.setUserId(userId);
 					mealorder.setOrderPayment(orderPayment);
-//					mealorder.setStrPayment(String.valueOf(orderPayment));
 					mealorder.setOrderStatus(orderStatus);
 					mealorder.setOrderDate(orderDate);
-					mealorder.setOrderNotes(orderNotes);
+					mealorder.setAuthCode(authCode);
 					System.out.println(mealorder);
-					return mealorder;
+					list.add(mealorder);
 				}
+				return list;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,9 +121,9 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 					Timestamp timestamp = rs.getTimestamp(5);
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String orderDate = dateFormat.format(timestamp);
-					String orderNotes = rs.getString(6);
-					System.out.println(mealOrderId + ", " + userId + ", " + orderPayment + ", " + orderStatus + ", "
-							+ orderDate + ", " + orderNotes);
+					String authCode = rs.getString(6);
+//					System.out.println(mealOrderId + ", " + userId + ", " + orderPayment + ", " + orderStatus + ", "
+//							+ orderDate + ", " + orderNotes);
 
 					mealOrder.setMealOrderId(mealOrderId);
 					mealOrder.setUserId(userId);
@@ -140,7 +138,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 //					mealOrder.setStrPayment(String.valueOf(orderPayment));
 					mealOrder.setOrderStatus(orderStatus);
 					mealOrder.setOrderDate(orderDate);
-					mealOrder.setOrderNotes(orderNotes);
+					mealOrder.setAuthCode(authCode);
 					list.add(mealOrder);
 				}
 			}
@@ -148,6 +146,41 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 			e.printStackTrace();
 		}
 		return list != null ? list : null;
+	}
+
+	@Override
+	public List<MealOrderVO> findByMealOrderId(Integer id) {
+		String sql = "SELECT * FROM MEAL_ORDER WHERE MEAL_ORDER_ID = ?;";
+		List<MealOrderVO> list = new ArrayList<MealOrderVO>();
+		
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					Integer mealOrderId = rs.getInt(1);
+					Integer userId = rs.getInt(2);
+					Integer orderPayment = rs.getInt(3);
+					Integer orderStatus = rs.getInt(4);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String orderDate = dateFormat.format(rs.getTimestamp(5));
+					String authCode = rs.getString(6);
+
+					MealOrderVO mealorder = new MealOrderVO();
+					mealorder.setMealOrderId(mealOrderId);
+					mealorder.setUserId(userId);
+					mealorder.setOrderPayment(orderPayment);
+					mealorder.setOrderStatus(orderStatus);
+					mealorder.setOrderDate(orderDate);
+					mealorder.setAuthCode(authCode);
+					System.out.println(mealorder);
+					list.add(mealorder);
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -11,4 +11,5 @@ public interface MealService {
 	MealVO findByPrimaryKey(int id);
 	int deleteMeal(int id);
 	void addAllMealPicToRedis();
+	int getMealLength();
 }

@@ -9,6 +9,9 @@ public class MealOrderDetailVO {
 	private Integer orderCount;
 	private Integer mealPrice;
 	private Integer userId;
+	private String mealName;
+	private String authCode;
+	private String base64;
 
 	public MealOrderDetailVO() {
 		
@@ -74,5 +77,29 @@ public class MealOrderDetailVO {
 	
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getMealName() {
+		return mealName;
+	}
+
+	public void setMealName(String mealName) {
+		this.mealName = mealName;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	public String getBase64() {
+		return base64;
+	}
+
+	public void setBase64(String base64) {
+		this.base64 = base64;
 	}
 }

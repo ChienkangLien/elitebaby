@@ -11,8 +11,10 @@ public class MealOrderVO {
 	private String orderDate;
 	private String orderNotes;
 	private String strPayment;
-	private String strstatus;
+	private String strStatus;
 	private Integer total;
+	private String authCode;
+
 
 	public Integer getMealOrderId() {
 		return mealOrderId;
@@ -71,11 +73,11 @@ public class MealOrderVO {
 	}
 
 	public String getStrstatus() {
-		return strstatus;
+		return strStatus;
 	}
 
 	public void setStrstatus(String strstatus) {
-		this.strstatus = strstatus;
+		this.strStatus = strstatus;
 	}
 
 	public Integer getTotal() {
@@ -85,4 +87,22 @@ public class MealOrderVO {
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	@Override
+	public String toString() {
+		return "MealOrderVO [mealOrderId=" + mealOrderId + ", userId=" + userId + ", orderPayment=" + orderPayment
+				+ ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", orderNotes=" + orderNotes
+				+ ", strPayment=" + strPayment + ", strstatus=" + strStatus + ", total=" + total + ", authCode="
+				+ authCode + "]";
+	}
+
+
 }

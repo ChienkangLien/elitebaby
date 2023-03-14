@@ -10,12 +10,11 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="./css/official.css" />
     <link rel="stylesheet" href="./css/front_navbar.css">
-    <link rel="stylesheet" href="./css/meal.css">
-
+    <link rel="stylesheet" href="./css/cart.css">
 
     <title>菁英產後護理之家</title>
-
 </head>
 
 <body>
@@ -105,25 +104,119 @@
         <!-- 此處留空 -->
     </div>
     <!-- 從以下開始編輯 -->
-    <div class="meal">
-        <ul class="meal_block">
-        </ul>
+    <h3>購物車明細</h3>
+    <div>
+        <div>
+            <table class="cart_table">
+                <thead>
+                    <tr>
+                        <th>商品編號</th>
+                        <th>商品名稱</th>
+                        <th>商品照片</th>
+                        <th>商品價格</th>
+                        <th>商品數量</th>
+                        <th>商品總價</th>
+                    </tr>
+                </thead>
+                <tbody class="getcart_tb">
+                </tbody>
+            </table>
+        </div>
+        <div class="checkout">
+            <h4>總金額為 </h4>
+            <div class="total"></div>
+            <label for="payment">請選擇結帳方式</label>
+            <select name="payment" id="payment">
+                <option value="0">請選擇</option>
+                <option value="1">現金</option>
+                <option value="2">信用卡</option>
+                <option value="3">LinePay</option>
+            </select>
+            <div>
+                <button class="btn display_block click_payment">結帳</button>
+                <button type="button" class="btn btn_checkout display_none" id="btn_checkout" data-bs-toggle="modal"
+                    data-bs-target="#checkout" data-bs-whatever="@fat">結帳</button>
+            </div>
+        </div>
     </div>
-    <div class="block">
+
+    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">修改商品數量</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">數量:</label>
+                            <input type="number" min="1" max="99" class="form-control meal_count" id="recipient-name"
+                                oninput="validity.valid||(value='')" placeholder="請輸入數量">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn_toupdate" id="btn_toupdate">確定修改</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="footer">
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">刪除商品</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">確定要刪除此商品嗎?</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn_todelete" id="btn_todelete">確定刪除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">確認結帳</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">確定要結帳嗎?</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn_tocheckout" id="btn_tocheckout">確定結帳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
         <p class="text-center">
             10488 台北市中山區南京東路三段219號5樓｜TEL : 02-2712-0589｜FAX :
             02-2794-0123｜E-mail : service@shinebc.com.tw
         </p>
     </div>
-
     <script src="./vendors/jquery/jquery-3.6.3.min.js"></script>
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
-    <script src="./js/meal_front.js"></script>
+    <script src="./js/cart.js"></script>
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->

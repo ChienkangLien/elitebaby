@@ -8,6 +8,7 @@ public interface MealOrderService {
 	List<MealOrderVO> getAllMeal();
 	int insertMeal(MealOrderVO meal);
 	int updateMeal(MealOrderVO meal);
-	MealOrderVO findByPrimaryKey(int id);
+	List<MealOrderVO> findByPrimaryKey(int id);
+	List<MealOrderVO> findByMealOrder(int id);
 	int deleteMeal(int id);
 }

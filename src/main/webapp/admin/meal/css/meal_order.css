@@ -106,5 +106,13 @@ div.meal_order_search {
     float: right;
 }
 
+img#mealPic {
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 100px;
+}
+
+
+
 
 /* ================================ */
