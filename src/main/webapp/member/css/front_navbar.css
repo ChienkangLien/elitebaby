@@ -129,12 +129,7 @@ form {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-  } */
-  
+ 
   label {
     display: block;
     margin-bottom: 5px;
@@ -157,8 +152,8 @@ form {
   }
   
   input[type="button"] {
-    display: block;
-    width: 100%;
+    /* display: block; */
+    width: 50%;
     padding: 10px;
     background-color: #4CAF50;
     border: none;
@@ -169,9 +164,28 @@ form {
     transition: background-color 0.2s ease;
   }
   
-  input[type="submit"]:hover {
-    background-color: #3e8e41;
+  input[type="button"]:hover {
+    background-color: #ccd54a;
   }
+
+
+/* 返回首頁 */
+  .btn_back {
+    width: 50%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .btn_back:hover {
+    background-color: #ccd54a;
+  }
+
+
 
   .login_btn{
 
@@ -189,28 +203,15 @@ form {
   }
 
 
-  /* .btn_save {
+.register_btn {
     color: #fff;
     background-color: #ff8188;
     border-radius: 5px;
     padding: 8px;
     border: #7cb0ae;
     margin-left: 10px;
-  }
+}
 
-  .btn_save:hover {
+.register_btn:hover {
     background-color: rgb(70, 131, 228);
   }
-
-  .btn_close{
-    color: #fff;
-    background-color: #ff8188;
-    border-radius: 5px;
-    padding: 8px;
-    border: #7cb0ae;
-    margin-left: 10px;
-  }
-
-  .btn_close:hover{
-    background-color: rgb(70, 131, 228);
-  } */

@@ -47,16 +47,16 @@
                         
 
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown member">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-                                <!-- <li><a class="dropdown-item" href="#">編輯會員資料</a></li> -->
+                      
                                 <li><a class="dropdown-item" href="#">查詢房間訂單</a></li>
                                 <li><a class="dropdown-item" href="#">查詢膳食訂單</a></li>
                                 <li> <a class="dropdown-item" href="#">信箱</a> </li>
@@ -96,12 +96,12 @@
                             <span class="badge badge-danger navbar-badge ;">3</span>
                         </button>
 
-                        <!-- <li class="nav-item"><a class="nav-link " id="logout_btn">登出</a></li> -->
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             登出
                         </button>
+                        <button id="registerButton" class="register_btn">註冊</button>
                         <!-- 試試看還沒完成(登入按鈕) -->
                         <button id="loginButton" class="login_btn">登入</button>
                     </ul>
@@ -200,6 +200,7 @@
                 </div>
             </div>
           </div>
+          
 
           <!-- 醫生團隊 -->
           <div class="text-center">
@@ -215,7 +216,9 @@
           <div class="container"> 
             <div class="row">
                 <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor1.jpg" /></a></div></div>
-                <div class="col d-flex align-items-center doctextImage"><div><b>蔡瑞雪 小兒科主治醫師</b>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>蔡瑞雪 小兒科主治醫師</b>
                     <br>學經歷
                     <br>輔仁大學醫學系
                     <br>輔大醫院兒科主治醫師
@@ -226,12 +229,15 @@
                     <br>
                     <br>醫務專長
                     小兒心臟、新生兒及早產兒照護、小兒胸腔暨重症照護、一般兒科常見疾病
-                </div></div>
+                  </div>
+                </div>
 
             </div>
             <div class="row">
                 <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor2.jpg" /></a></div></div>
-                <div class="col d-flex align-items-center doctextImage"><div><b>施明德 感染科主治醫師</b>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>施明德 感染科主治醫師</b>
                     <br>學經歷
                     <br>高雄醫學院醫學系
                     <br>聯合醫院內科主治醫師
@@ -240,12 +246,15 @@
                     <br>
                     <br>醫務專長
                     臨床感染症、醫院感染管制、一般兒科常見疾病、新生兒及早產兒照護、小兒胸腔暨重症照護。
-                </div></div>
+                  </div>
+                </div>
                 
             </div>
             <div class="row">
                 <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor3.jpg" /></a></div></div>
-                <div class="col d-flex align-items-center doctextImage"><div><b>張哲瑋 婦產科主治醫生</b>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>張哲瑋 婦產科主治醫生</b>
                     <br>學經歷
                     <br>國立陽明大學醫學博士
                     <br>加州周產期醫學會理事
@@ -256,8 +265,10 @@
                     <br>
                     <br>醫務專長
                     婦科腹腔繞手術、一般產科、高危險妊娠、高層次超音波、分子生物學研究、多囊性卵巢症候群、胎兒異常產前診斷、婦科良性子宮或卵巢腫瘤腹腔鏡手術
-                </div></div>
+                  </div>
+                </div>
             </div>
+          </div>
         </div>
       </div>
 
@@ -338,7 +349,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-    <script src="./vendors/jquery/jquery-3.6.3.min.js"></script>
+    <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
@@ -363,6 +374,14 @@
         window.location.href = "login.html";
     });
 
+</script>
+
+<script>
+  const register_btn = document.querySelector(".register_btn");
+  register_btn.addEventListener("click", function () {
+    // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+    window.location.href = "register.html";
+  });
 </script>
 
 <script>
@@ -422,17 +441,62 @@
             }
           });
         }
-        // alert("編輯成功!")
-        // $(location).attr("href","homepage.html");
+
       
-  }  
-// OK?
+    }  
+    function getAPI(){
+      $.ajax({
+                url: "Find",
+                method: "GET",
+                dataType: 'json',
+                contentType:"application/json",
+                
+              success: function(response) {
+                $('#name').val(response.username);
+                $('#address').val(response.address);
+                $('#phoneNumber').val(response.phoneNumber);
+             
+              },
+              error: function(error) {
+                alert("Error calling API:" + error);
+              }
+            });
+    }
+    function checkLogin(){
+      $.ajax({
+      url: "check",           // 資料請求的網址
+      type: "GET",                  // GET | POST | PUT | DELETE | PATCH
+      // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
+      dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+      success: function(resp){      // request 成功取得回應後執行
+        if(resp.message == "已登入"){
+            // console.log(resp);
+            console.log(resp.message);
+            var loginButton =  $('#loginButton');
+            loginButton.remove();
+            var registerButton = $('#registerButton');
+            registerButton.remove();
+
+          }else{ 
+            console.log(resp.message);
+            var member = $('.member');
+            member.remove();
+            var logoutButton = $("#logoutButton");
+            logoutButton.remove();
+          }
+      }
+    });
+      
+        
+    }
+    checkLogin();
       $("button.btn-primary.btn_save").on("click", function(){
         callAPI();
       })
+      $("button.btn_edit").on("click", function(){
+        getAPI();
+      })
 })
-    
-
 </script>
 
 

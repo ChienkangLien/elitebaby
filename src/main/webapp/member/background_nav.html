@@ -13,8 +13,9 @@
     />
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css" /> -->
-    <link rel="stylesheet" href="css\official.css" />
+    <link rel="stylesheet" href="css/official.css" />
     <link rel="stylesheet" href="css/background_navbar.css" />
+    <link rel="stylesheet" href="../admin/member/css/management.css" />
 
     <title>菁英產後護理之家</title>
   </head>
@@ -25,7 +26,7 @@
         href="#"
         class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
       >
-        <img src="/images/logo.jpg" style="width: 30px" />
+        <img src="images/logo.jpg" style="width: 30px" />
         <span class="fs-5 fw-semibold">菁英產後護理之家</span>
       </a>
 
@@ -43,9 +44,20 @@
           </button>
           <div class="collapse" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">用戶資料管理</a></li>
-              <li><a href="#" class="link-dark rounded">查詢會員</a></li>
-              <li><a href="#" class="link-dark rounded">編輯會員資訊</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/member/management.html"
+                  class="link-dark rounded"
+                  >員工管理系統</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/member/search.html"
+                  class="link-dark rounded"
+                  >會員管理系統</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -149,18 +161,70 @@
             </ul>
           </div>
         </li>
+        <li>
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            id="logoutButton"
+            class="btn-logout"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            登出
+          </button>
+        </li>
       </ul>
     </div>
-    <div class="c1" id="header">
+
+    <!-- <div class="c1" id="header">
       <p class="t1">後台管理系統</p>
     </div>
     <div id="main_div">
-      <div id="blank_area">此處留空</div>
-      <div class="t2" id="title">
+      <div id="blank_area">此處留空</div> -->
+    <!-- <div class="t2" id="title">
         此處放標題，會員中心的用戶資料管理，就寫[用戶資料管理]
       </div>
       從以下開始編輯
+    </div> -->
+
+    <!-- 登出彈跳視窗Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">確定要登出嗎?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">點擊下面的按鈕以登出</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              關閉
+            </button>
+            <button type="button" class="btn btn-primary btn_logout">
+              登出
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+    <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
 
     <!-- bootstrap引用cdn -->
     <script
@@ -173,6 +237,12 @@
       src="./vendors/bootstrap/bootstrap.bundle.min.js"
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
       crossorigin="anonymous"
-    ></script> -->
+      ></script> -->
+
+    <script>
+      $("button.btn_logout").on("click", function () {
+        location.href = "../admin/member/emplogin.html";
+      });
+    </script>
   </body>
 </html>

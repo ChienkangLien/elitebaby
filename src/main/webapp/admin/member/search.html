@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>會員資料查詢</title>
+    <!-- bootstrap引用cdn -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../../css/official.css" />
+    <link rel="stylesheet" href="../../css/front_navbar.css" />
+    <link rel="stylesheet" href="css/search.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>會員資料查詢</h1>
+      <!-- <div class="search-container">
+        <input type="text" id="search" placeholder="輸入姓名" />
+        <button type="button" class="search-btn">搜尋</button>
+      </div> -->
+      <table>
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>居住地址</th>
+            <th>電子信箱</th>
+            <th>手機</th>
+            <th>編輯</th>
+          </tr>
+        </thead>
+        <tbody class="all">
+          <tr id="1">
+            <td>張哲瑋</td>
+            <td>台北市大安區復興南路一段390號10樓</td>
+            <td>dattan.chen@gmail.com</td>
+            <td>0912345678</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary btn_edit"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+              >
+                編輯
+              </button>
+            </td>
+          </tr>
+          <tr id="2">
+            <td>連千港</td>
+            <td>台中市西屯區惠中路二段118號7樓</td>
+            <td>xmei.lin@hotmail.com</td>
+            <td>0923456789</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary btn_edit"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+              >
+                編輯
+              </button>
+            </td>
+          </tr>
+          <tr id="3">
+            <td>姜儼軒</td>
+            <td>高雄市左營區大中一路30號3樓</td>
+            <td>dm.wang@yahoo.com.tw</td>
+            <td>0934567890</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary btn_edit"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+              >
+                編輯
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <button type="button" class="btn_back">返回工作區</button>
+      </table>
+    </div>
+
+    <!-- 會員資料編輯彈跳視窗 -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">編輯員工資料</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control" id="name" />
+              </div>
+              <div class="form-group">
+                <label for="email">電子信箱</label>
+                <input type="text" class="form-control" id="email" />
+              </div>
+              <div class="form-group">
+                <label for="password">密碼</label>
+                <input type="text" class="form-control" id="password" />
+              </div>
+              <div class="form-group">
+                <label for="address">居住地址</label>
+                <input type="text" class="form-control" id="address" />
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">手機</label>
+                <input type="text" class="form-control" id="phoneNumber" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              取消
+            </button>
+            <button type="button" class="btn btn-primary btn_save">儲存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
+    <!-- bootstrap引用cdn -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 下載bootstrap引用 -->
+    <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
+    ></script> -->
+    <script src="../../js/front_navbar.js"></script>
+    <script>
+      let id;
+      $(document).on("click", "button.btn_edit", function () {
+        id = $(this).closest("tr").attr("id");
+
+        // 使用AJAX傳送表單數據
+        $.ajax({
+          url: `http://localhost:8080/elitebaby/member/Find?id=${id}`,
+          method: "GET",
+          dataType: "json",
+          contentType: "application/json",
+          success: function (response) {
+            $("#name").val(response.username);
+            $("#email").val(response.email);
+            $("#password").val(response.password);
+            $("#address").val(response.address);
+            $("#phoneNumber").val(response.phoneNumber);
+          },
+          error: function (error) {
+            alert("Error calling API:" + error);
+          },
+        });
+      });
+
+      function callAPI() {
+        let username = $("#name").val();
+        let email = $("#email").val();
+        let password = $("#password").val();
+        let address = $("#address").val();
+        let phoneNumber = $("#phoneNumber").val();
+        $.ajax({
+          url: `http://localhost:8080/elitebaby/member/change?id=${id}`,
+          method: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+            address: address,
+            phoneNumber: phoneNumber,
+          }),
+          success: function (response) {
+            alert(response.message);
+            if (response.message == "修改成功") {
+              $(location).attr(
+                "href",
+                "http://localhost:8080/elitebaby/admin/member/search.html"
+              );
+            }
+          },
+          error: function (error) {
+            alert("Error calling API:" + error);
+          },
+        });
+      }
+
+      function listAll() {
+        $.ajax({
+          url: `http://localhost:8080/elitebaby/member/listall`,
+          method: "GET",
+          dataType: "json",
+          success: function (data) {
+            let list_html = "";
+            $.each(data, function (index, item) {
+              list_html += `
+              <tr id=${item.id}>
+                <td>${item.username}</td>
+                <td>${item.address}</td>
+                <td>${item.email}</td>
+                <td>${item.phoneNumber}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn_edit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editModal"
+                  >
+                    編輯
+                  </button>
+                </td>
+              </tr>
+              `;
+              $("tbody.all").html(list_html);
+            });
+          },
+          error: function (error) {
+            alert("Error calling API:" + error);
+          },
+        });
+      }
+
+      $(function () {
+        listAll();
+        $("button.btn-primary.btn_save").on("click", function () {
+          callAPI();
+        });
+      });
+    </script>
+  </body>
+
+  <script>
+    const backButton = document.querySelector(".btn_back");
+    backButton.addEventListener("click", function () {
+      // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+      window.location.href =
+        "http://localhost:8080/elitebaby/member/background_nav.html";
+    });
+  </script>
+</html>

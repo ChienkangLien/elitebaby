@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>員工登入系統</title>
+    <link rel="stylesheet" href="./css/emplogin.css?ver=3" />
+  </head>
+
+  <script src="./vendors/jquery/jquery-3.6.3.min.js?ver=1"></script>
+
+  <body>
+    <div class="container">
+      <h1>員工登入系統</h1>
+      <div class="input-field">
+        <input type="text" id="empaccount" required />
+        <label for="empaccount">帳號Username</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="emppassword" required />
+        <label for="emppassword">密碼Password</label>
+      </div>
+      <button type="button" class="emplogin">登入/login</button>
+      <button type="button" class="empregister">註冊/register</button>
+
+      <!-- <button type="button" class="btn_login">登入</button>
+      <button type="button" class="btn_back">回到首頁</button> -->
+    </div>
+    <div class="background-image"></div>
+
+    <!-- <script src="login.js"></script> -->
+  </body>
+
+  <!-- 註冊按鈕點擊到註冊畫面 -->
+  <script>
+    $("button.empregister").on("click", function () {
+      location.href = "empregister.html";
+    });
+  </script>
+
+  <script>
+    function callAPI() {
+      $("button.emplogin").on("click", function () {
+        var empaccount = $("#empaccount");
+        var emppassword = $("#emppassword");
+        $.ajax({
+          url: "/elitebaby/member/emplogin",
+          method: "POST",
+          dataType: "json", // 預期從server接收的資料型態
+          contentType: "application/json", // 要送到server的資料型態
+          data: JSON.stringify({
+            empaccount: empaccount.val(),
+            emppassword: emppassword.val(),
+          }),
+
+          success: function (response) {
+            // 成功登入完後TODO
+            if (response.message == "登入成功") {
+              $(location).attr("href", "/elitebaby/member/background_nav.html");
+            }
+            alert(response.message);
+          },
+          error: function (error) {
+            alert("Error calling API: " + error.message);
+          },
+        });
+      });
+    }
+    $(function () {
+      callAPI();
+    });
+  </script>
+</html>

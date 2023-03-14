@@ -11,45 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.tibame.web.service.MemberService;
-import com.tibame.web.service.impl.MemberServiceImpl;
-import com.tibame.web.vo.MemberVO;
+import com.tibame.web.service.EmployeeService;
+import com.tibame.web.service.impl.EmployeeServiceImpl;
+import com.tibame.web.vo.EmployeeVO;
 
-@WebServlet("/member/change")
-public class MemberUpdateServlet extends HttpServlet {
+@WebServlet("/admin/member/update")
+public class EmployeeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-//	public MemberUpdateServlet() {
-//	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		MemberVO member = gson.fromJson(req.getReader(), MemberVO.class);
+		EmployeeVO employee = gson.fromJson(req.getReader(), EmployeeVO.class);
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject jsonObj = new JsonObject();
-
-//			Member seMember = (Member) req.getSession().getAttribute("memId");
-//		Member seMember = new Member();
-//		seMember.setId(9);
-
-		Integer id;
-		
+		Integer empid;
 		if(req.getParameter("id") == null) {
-			MemberVO memberLogin = (MemberVO) req.getSession().getAttribute("memberVO");
-			id = memberLogin.getId();			
+			EmployeeVO employeeLogin = (EmployeeVO) req.getSession().getAttribute("employeeVO");
+			empid = employeeLogin.getEmpid();
 		}else {
-			id = Integer.parseInt(req.getParameter("id"));
+			empid = Integer.parseInt(req.getParameter("id"));
 		}
 		
-		if (id == 0) {
+		
+		if (empid == 0) {
 			jsonObj.addProperty("message", "修改失敗");
 		} else {
-			MemberService service = new MemberServiceImpl();
-			member.setId(id);
-			service.update(member);
+			EmployeeService service = new EmployeeServiceImpl();
+			employee.setEmpid(empid);
+			service.update(employee);
 			jsonObj.addProperty("message", "修改成功");
 		}
 		resp.getWriter().append(jsonObj.toString());
 	}
+
 }

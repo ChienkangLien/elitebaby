@@ -1,89 +1,95 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>會員登入</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap引用cdn -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!-- 下載bootstrap引用 -->
+    <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/official.css" />
+    <link rel="stylesheet" href="css/front_navbar.css" />
 
-<head>
-  <title>會員登入</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <!-- bootstrap引用cdn -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-   integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
-<!-- 下載bootstrap引用 -->
-<!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
-<link rel="stylesheet" href="css/official.css">
-<link rel="stylesheet" href="css/front_navbar.css">
+    <!--有時候更新不到可加 ?ver=1來抓取更新資料  有夠爛 -->
+    <link rel="stylesheet" type="text/css" href="css/loginnav.css?ver=1" />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  </head>
 
-<!--有時候更新不到可加 ?ver=1來抓取更新資料  有夠爛 -->
- <link rel="stylesheet" type="text/css" href="css/loginnav.css?ver=1">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-
-
-<script src="vendors/jquery/jquery-3.6.3.min.js"></script>
-<script type="text/javascript">
+  <script src="../vendors/jquery/jquery-3.6.3.min.js?ver=1"></script>
+  <script type="text/javascript">
     //在js中引入
     $(document).ready(function () {
-        $('#nav_page').load('nav.html?ver=1');
+      $("#nav_page").load("nav.html?ver=2");
     });
-</script>
+  </script>
 
+  <body>
+    <!-- <nav id="nav_page"></nav> -->
+    <div id="blank_area">
+      <!-- 此處留空 -->
+    </div>
 
-<body>
- 
-<nav id="nav_page"></nav>
-<div id="blank_area">
-  <!-- 此處留空 -->
-</div>
+    <div class="login-container">
+      <h1>會員登入</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">帳號：</label>
+          <input type="text" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">密碼：</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="button" class="btn_login">登入</button>
+        <button type="button" class="btn_back">回到首頁</button>
+      </form>
+    </div>
+  </body>
 
+  <script>
+    const backButton = document.querySelector(".btn_back");
+    backButton.addEventListener("click", function () {
+      // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+      window.location.href = "homepage.html";
+    });
+  </script>
 
-  <div class="login-container">
-    <h1>會員登入</h1>
-    <form id="login-form">
-      <div class="form-group">
-        <label for="email">帳號：</label>
-        <input type="text" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">密碼：</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="button" class="btn_login">登入</button>
-    </form>
-  </div>
-</body>
+  <script>
+    function callAPI() {
+      $("button.btn_login").on("click", function () {
+        var email = $("#email");
+        var password = $("#password");
+        $.ajax({
+          url: "login",
+          method: "POST",
+          dataType: "json", // 預期從server接收的資料型態
+          contentType: "application/json", // 要送到server的資料型態
+          data: JSON.stringify({
+            email: email.val(),
+            password: password.val(),
+          }),
 
-<script>
-	function callAPI() {
-		$("button.btn_login").on("click", function(){
-			var email = $('#email');
-			var password = $('#password');
-			$.ajax({
-				url: "login",
-				method: "POST",
-				dataType : 'json', // 預期從server接收的資料型態
-	  			contentType : "application/json", // 要送到server的資料型態
-				data: JSON.stringify({
-					email:email.val(),
-					password:password.val()
-				}),
-        
-				success: function(response) {
-					// 成功登入完後TODO
-          if(response.message == "登入成功"){
-					
-          $(location).attr("href","homepage.html");
-				}
-					alert(response.message);
-				},
-				error: function(error) {
-					alert("Error calling API: " + error.message);
-				}
-			});
-		})
-		
-	}
-  $(function () {
-    callAPI();
-  })
-</script> 
+          success: function (response) {
+            // 成功登入完後TODO
+            if (response.message == "登入成功") {
+              $(location).attr("href", "homepage.html");
+            }
+            alert(response.message);
+          },
+          error: function (error) {
+            alert("Error calling API: " + error.message);
+          },
+        });
+      });
+    }
+    $(function () {
+      callAPI();
+    });
+  </script>
 </html>
