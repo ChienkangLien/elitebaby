@@ -33,7 +33,7 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 	private static final String SELECT_ONE_PHOTO = "SELECT RIMG_ID, AUTH_CODE, REPORT_IMG FROM REPORT_MAIL_IMG WHERE AUTH_CODE = ?;";
 	private static final String INSERT_ANSWER_PHOTO = "insert into `ANSWER_MAIL_IMG`(`AUTH_CODE`,`ANSWER_IMG`)values(?,?)";
 	private static final String SELECT_ONE_ANSWER_PHOTO = "SELECT AIMG_ID, AUTH_CODE, ANSWER_IMG FROM ANSWER_MAIL_IMG WHERE AUTH_CODE = ?;";
-	
+
 	@Override
 	public int insertPhoto(ReportImageVO reportImg) {
 		int rowsAffected = 0;
@@ -66,7 +66,6 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 		return rowsAffected;
 	}
 
-
 	@Override
 	public List<ReportImageVO> getOneAllPhoto(String authCode) {
 		List<ReportImageVO> imgList = new ArrayList<>();
@@ -80,9 +79,8 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 			pstmt.setString(1, authCode);
 			rs = pstmt.executeQuery();
 
-			
 			while (rs.next()) {
-				
+
 				ReportImageVO reportImageVO = new ReportImageVO();
 				reportImageVO.setRimgId(rs.getInt("RIMG_ID"));
 				reportImageVO.setAuthCode(rs.getString("AUTH_CODE"));
@@ -109,7 +107,6 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 
 		return imgList;
 	}
-
 
 	@Override
 	public int inserAnswerPhoto(AnswerImageVO answerImageVO) {
@@ -143,7 +140,6 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 		return rowsAffected;
 	}
 
-
 	@Override
 	public List<AnswerImageVO> getOneAllAnswerPhoto(String authCode) {
 		List<AnswerImageVO> imgList = new ArrayList<>();
@@ -157,9 +153,8 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 			pstmt.setString(1, authCode);
 			rs = pstmt.executeQuery();
 
-			
 			while (rs.next()) {
-				
+
 				AnswerImageVO answerImageVO = new AnswerImageVO();
 				answerImageVO.setRimgId(rs.getInt("AIMG_ID"));
 				answerImageVO.setAuthCode(rs.getString("AUTH_CODE"));
@@ -185,6 +180,70 @@ public class ReportImageDAOImpl implements ReportImageDAO {
 		}
 
 		return imgList;
+	}
+
+	@Override
+	public int deleteReportImg(String authCode) {
+		final String delete_report_img = "delete from REPORT_MAIL_IMG where AUTH_CODE = ? ;";
+		int rowsAffected = 0;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = ds.getConnection();
+			stmt = con.prepareStatement(delete_report_img);
+
+			stmt.setString(1, authCode);
+
+			rowsAffected = stmt.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return rowsAffected;
+	}
+
+	@Override
+	public int deleteAnswerImg(String authCode) {
+		final String delete_answer_img = "delete from ANSWER_MAIL_IMG where AUTH_CODE = ? ;";
+		int rowsAffected = 0;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = ds.getConnection();
+			stmt = con.prepareStatement(delete_answer_img);
+
+			stmt.setString(1, authCode);
+
+			rowsAffected = stmt.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return rowsAffected;
 	}
 
 }

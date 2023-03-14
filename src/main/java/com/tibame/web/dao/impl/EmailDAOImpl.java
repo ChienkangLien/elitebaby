@@ -12,14 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
 import com.tibame.web.dao.EmailDAO;
-import com.tibame.web.util.HibernateUtil;
+import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
-import com.tibame.web.vo.VisitVO;
+import com.tibame.web.vo.TestMemberVO;
 
 public class EmailDAOImpl implements EmailDAO {
 
@@ -37,12 +33,13 @@ public class EmailDAOImpl implements EmailDAO {
 	private static final String UPDATE_SQL = "UPDATE REPORT_MAIL SET ADMIN_ID = ?, ANSWER_CONTENT = ?, ANSWER_CREATE_TIME = ?, ANSWER_TITLE = ? WHERE MAIL_ID = ?";
 	private static final String UPDATE_FROM_USER = "UPDATE REPORT_MAIL SET  ANSWER_CONTENT = ?, ANSWER_CREATE_TIME = ?, ANSWER_TITLE = ? WHERE MAIL_ID = ?";
 	private static final String DELETE_SQL = "DELETE FROM REPORT_MAIL WHERE MAIL_ID = ?";
-	private static final String SELECT_SQL = "SELECT * FROM REPORT_MAIL WHERE MAIL_ID = ?";
+	private static final String SELECT_SQL = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY, se.CATEGORY_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,ANSWER_CREATE_TIME,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where MAIL_ID = ? ;";
 	private static final String SELECT_ALL_SQL = "SELECT * FROM REPORT_MAIL";
-	private static final String SELECT_BYONE_SQL = "SELECT * FROM REPORT_MAIL WHERE USER_ID = ?";
-	private static final String SELECT_ALL_BY_MEMBER = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '會員' order by MAIL_ID limit 5 offset ? ;";
-	private static final String SELECT_ALL_BY_ADMIN = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '後台' order by MAIL_ID limit 5 offset ? ;";
+	private static final String SELECT_BYONE_SQL = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where USER_ID = ? and DETERMINE = '後台' order by REPORT_CREATE_TIME desc;";
+	private static final String SELECT_ALL_BY_MEMBER = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '會員' order by REPORT_CREATE_TIME desc limit 5 offset ? ;";
+	private static final String SELECT_ALL_BY_ADMIN = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '後台' order by REPORT_CREATE_TIME desc limit 5 offset ? ;";
 	private static final String INSERT_FROMBACK = "INSERT INTO REPORT_MAIL ( USER_ID, CATEGORY_ID, ADMIN_ID, REPORT_TITLE, REPORT_CONTENT,AUTH_CODE,DETERMINE) VALUES (?, ?, ?, ?,?,?,?)";
+	private static final String GET_ALL_MEMBER = "SELECT USER_ID,USER_EMAIL,USER_NAME,PHONE_NUMBER FROM elitebaby.MEMBER;";
 
 	@Override
 	public int insert(EmailVO emailVO) {
@@ -124,7 +121,7 @@ public class EmailDAOImpl implements EmailDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		EmailVO emailVO = null;
+		EmailVO email = null;
 
 		try {
 			con = ds.getConnection();
@@ -133,19 +130,23 @@ public class EmailDAOImpl implements EmailDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				emailVO = new EmailVO();
-				emailVO.setMailId(rs.getInt("MAIL_ID"));
-				emailVO.setUserId(rs.getInt("USER_ID"));
-				emailVO.setCategoryId(rs.getInt("CATEGORY_ID"));
-				emailVO.setAdminId(rs.getInt("ADMIN_ID"));
-				emailVO.setReportTile(rs.getString("REPORT_TITLE"));
-				emailVO.setReportContent(rs.getString("REPORT_CONTENT"));
-				emailVO.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
-				emailVO.setAnswerContent(rs.getString("ANSWER_CONTENT"));
-				emailVO.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
-				emailVO.setAnswerTitle(rs.getString("ANSWER_TITLE"));
-				emailVO.setAuthCode(rs.getString("AUTH_CODE"));
-				emailVO.setDetermine(rs.getString("DETERMINE"));
+				email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setUserName(rs.getString("USER_NAME"));
+				email.setReportCategory(rs.getString("REPORT_CATEGORY"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setCategoryId(rs.getInt("CATEGORY_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrAnswerCreateTime(String.valueOf(rs.getTimestamp("ANSWER_CREATE_TIME")));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -165,7 +166,7 @@ public class EmailDAOImpl implements EmailDAO {
 			}
 		}
 
-		return emailVO;
+		return email;
 	}
 
 	@Override
@@ -224,30 +225,30 @@ public class EmailDAOImpl implements EmailDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		EmailVO emailVO = null;
 		List<EmailVO> list = new ArrayList<>();
-
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_BYONE_SQL);
 			pstmt.setInt(1, userId);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				emailVO = new EmailVO();
-				emailVO.setMailId(rs.getInt("MAIL_ID"));
-				emailVO.setUserId(rs.getInt("USER_ID"));
-				emailVO.setCategoryId(rs.getInt("CATEGORY_ID"));
-				emailVO.setAdminId(rs.getInt("ADMIN_ID"));
-				emailVO.setReportTile(rs.getString("REPORT_TITLE"));
-				emailVO.setReportContent(rs.getString("REPORT_CONTENT"));
-				emailVO.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
-				emailVO.setAnswerContent(rs.getString("ANSWER_CONTENT"));
-				emailVO.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
-				emailVO.setAnswerTitle(rs.getString("ANSWER_TITLE"));
-				emailVO.setAuthCode(rs.getString("AUTH_CODE"));
-				emailVO.setDetermine(rs.getString("DETERMINE"));
-				list.add(emailVO);
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setUserName(rs.getString("USER_NAME"));
+				email.setReportCategory(rs.getString("REPORT_CATEGORY"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				list.add(email);
 
 			}
 		} catch (SQLException e) {
@@ -432,6 +433,327 @@ public class EmailDAOImpl implements EmailDAO {
 		}
 
 		return emailList;
+	}
+
+	@Override
+	public List<TestMemberVO> getAllMember() {
+		List<TestMemberVO> list = new ArrayList<TestMemberVO>();
+		TestMemberVO membertVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_MEMBER);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				membertVO = new TestMemberVO();
+				membertVO.setUserId(rs.getInt("USER_ID"));
+				membertVO.setUserName(rs.getString("USER_NAME"));
+				membertVO.setUserEmail(rs.getString("USER_EMAIL"));
+				membertVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
+				list.add(membertVO);
+
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<EmailVO> serchInfo(EmailDTO dto) {
+		StringBuilder sql = new StringBuilder(
+				"SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '會員'");
+		final String category = dto.getCategory();
+		final String likesome = dto.getLikesome();
+		final Integer userId = dto.getUserId();
+
+		if (category != null && !category.isEmpty()) {
+			sql.append("and REPORT_CATEGORY = ? ;");
+		}
+		if (likesome != null && !likesome.isEmpty()) {
+			sql.append("and REPORT_TITLE like \"%\"?\"%\" ");
+		}
+		if (userId != null && userId != 0) {
+			sql.append("and USER_ID = ? ;");
+		}
+
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+			if (category != null && !category.isEmpty()) {
+				pstmt.setString(1, category);
+			}
+			if (likesome != null && !likesome.isEmpty()) {
+				pstmt.setString(1, likesome);
+			}
+			if (userId != null && userId != 0) {
+				pstmt.setInt(1, userId);
+			}
+			ResultSet rs = pstmt.executeQuery();
+			List<EmailVO> list = new ArrayList<EmailVO>();
+			while (rs.next()) {
+				
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setUserName(rs.getString("USER_NAME"));
+				email.setReportCategory(rs.getString("REPORT_CATEGORY"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				list.add(email);
+				
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<EmailVO> serchInfoAdmin(EmailDTO dto) {
+		StringBuilder sql = new StringBuilder(
+				"SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where  DETERMINE = '後台'");
+		final String category = dto.getCategory();
+		final String likesome = dto.getLikesome();
+		final Integer userId = dto.getUserId();
+
+		if (category != null && !category.isEmpty()) {
+			sql.append("and REPORT_CATEGORY = ? ;");
+		}
+		if (likesome != null && !likesome.isEmpty()) {
+			sql.append("and REPORT_TITLE like \"%\"?\"%\" ");
+		}
+		if (userId != null && userId != 0) {
+			sql.append("and USER_ID = ? ;");
+		}
+
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+			if (category != null && !category.isEmpty()) {
+				pstmt.setString(1, category);
+			}
+			if (likesome != null && !likesome.isEmpty()) {
+				pstmt.setString(1, likesome);
+			}
+			if (userId != null && userId != 0) {
+				pstmt.setInt(1, userId);
+			}
+			ResultSet rs = pstmt.executeQuery();
+			List<EmailVO> list = new ArrayList<EmailVO>();
+			while (rs.next()) {
+				
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setUserName(rs.getString("USER_NAME"));
+				email.setReportCategory(rs.getString("REPORT_CATEGORY"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				list.add(email);
+				
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<EmailVO> emailBillAdmin() {
+		final String SELECT_ALL_BILL_ADMIN = "SELECT * FROM elitebaby.REPORT_MAIL where USER_ID = 5 and ANSWER_CONTENT is  null and DETERMINE = '後台' ;";
+		List<EmailVO> emailList = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_BILL_ADMIN);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				emailList.add(email);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return emailList;
+	}
+
+	@Override
+	public List<EmailVO> emailBillMember() {
+		final String SELECT_ALL_BILL_MEMBER ="SELECT * FROM elitebaby.REPORT_MAIL where USER_ID = 5 and ANSWER_CONTENT is  null and DETERMINE = '後台' ;";
+		List<EmailVO> emailList = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_BILL_MEMBER);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				emailList.add(email);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return emailList;
+	}
+
+	@Override
+	public List<EmailVO> findByUserIdMember(Integer userId) {
+		final String SELECT_EMAIL_ALL_MEMBER = "SELECT MAIL_ID,USER_ID,USER_NAME,REPORT_CATEGORY,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE FROM (select USER_NAME,REPORT_MAIL.USER_ID,CATEGORY_ID,MAIL_ID,ADMIN_ID,REPORT_TITLE,REPORT_CONTENT,REPORT_CREATE_TIME,ANSWER_CONTENT,ANSWER_CREATE_TIME,ANSWER_TITLE,AUTH_CODE,DETERMINE from REPORT_MAIL join MEMBER on  REPORT_MAIL.USER_ID =  MEMBER.USER_ID) se join REPORT_CATEGORY  on  se.CATEGORY_ID = REPORT_CATEGORY.CATEGORY_ID  where USER_ID = ? and DETERMINE = '會員' order by REPORT_CREATE_TIME desc";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<EmailVO> list = new ArrayList<>();
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_EMAIL_ALL_MEMBER);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				EmailVO email = new EmailVO();
+				email.setMailId(rs.getInt("MAIL_ID"));
+				email.setUserId(rs.getInt("USER_ID"));
+				email.setUserName(rs.getString("USER_NAME"));
+				email.setReportCategory(rs.getString("REPORT_CATEGORY"));
+				email.setAdminId(rs.getInt("ADMIN_ID"));
+				email.setReportTile(rs.getString("REPORT_TITLE"));
+				email.setReportContent(rs.getString("REPORT_CONTENT"));
+				email.setPreportCreateTime(rs.getTimestamp("REPORT_CREATE_TIME"));
+				email.setAnswerContent(rs.getString("ANSWER_CONTENT"));
+				email.setAnsertCreateTime(rs.getTimestamp("ANSWER_CREATE_TIME"));
+				email.setAnswerTitle(rs.getString("ANSWER_TITLE"));
+				email.setAuthCode(rs.getString("AUTH_CODE"));
+				email.setDetermine(rs.getString("DETERMINE"));
+				email.setStrPreportCreateTime(String.valueOf(rs.getTimestamp("REPORT_CREATE_TIME")));
+				list.add(email);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 }

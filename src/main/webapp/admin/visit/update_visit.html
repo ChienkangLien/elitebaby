@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="../visit/css/sam_back_visit.css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!--stylesheet-css-->
+<link rel="stylesheet" href="./css/sweetalert2.css">
 <style>
 .test11111{
         display: inline-block;
@@ -39,113 +40,164 @@
 </head>
 
 <body class="c2">
-	<div class="flex-shrink-0 p-3 c1" id="navbar">
-		<a href="#"
-			class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-			<img src="../../images/logo.jpg" style="width: 30px" /> <span
-			class="fs-5 fw-semibold">菁英產後護理之家</span>
-		</a>
+  <div class="flex-shrink-0 p-3 c1" id="navbar">
+	<a
+	  href="#"
+	  class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
+	>
+	  <img src="../../images/logo.jpg" style="width: 30px" />
+	  <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+	</a>
 
-		<!-- =======按鍵======== -->
+	<!-- =======按鍵======== -->
 
-		<ul class="list-unstyled ps-0">
-			<li class="mb-1">
-				<button
-					class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-					data-bs-toggle="collapse" data-bs-target="#home-collapse"
-					aria-expanded="true">會員中心</button>
-				<div class="collapse" id="home-collapse">
-					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded">用戶資料管理</a></li>
-						<li><a href="#" class="link-dark rounded">查詢會員</a></li>
-						<li><a href="#" class="link-dark rounded">編輯會員資訊</a></li>
-					</ul>
-				</div>
+	<ul class="list-unstyled ps-0">
+	  <li class="mb-1">
+		<button
+		  class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#home-collapse"
+		  aria-expanded="true"
+		>
+		  會員中心
+		</button>
+		<div class="collapse" id="home-collapse">
+		  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+			<li>
+			  <a
+				href="/elitebaby/admin/member/management.html"
+				class="link-dark rounded"
+				>員工管理</a
+			  >
 			</li>
+			<li>
+			  <a
+				href="/elitebaby/admin/member/search.html"
+				class="link-dark rounded"
+				>會員管理</a
+			  >
+			</li>
+		  </ul>
+		</div>
+	  </li>
 
-			<!-- ================膳食管理============== -->
+	  <!-- ================膳食管理============== -->
 
-			<li class="mb-1">
-				<button
-					class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-					data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-					aria-expanded="false">膳食管理</button>
-				<div class="collapse" id="orders-collapse">
-					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded">訂餐管理</a></li>
-						<li><a href="#" class="link-dark rounded">預約試吃管理</a></li>
-						<li><a href="#" class="link-dark rounded">商品管理</a></li>
-						<li><a href="#" class="link-dark rounded">購物車</a></li>
-					</ul>
-				</div>
-			</li>
-			<!-- ===============房間管理============= -->
-			<li class="mb-1">
-				<button
-					class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-					data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-					aria-expanded="false">房間管理</button>
-				<div class="collapse" id="dashboard-collapse">
-					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="/admin/room/type.html" class="link-dark rounded">房型維護</a></li>
-						<li><a href="/admin/room/order.html" class="link-dark rounded">房間訂單</a></li>
-						<li><a href="/admin/room/condition/html" class="link-dark rounded">房況管理</a></li>
-					</ul>
-				</div>
-			</li>
-			<!-- =================討論區================ -->
-			<li class="mb-1">
-				<!-- <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#texts-collapse"
-            aria-expanded="false"
-          >
-            討論區
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="#"
-				class="btn bkbtn">討論區</a>
-			</li>
-			<!-- ================預約參觀============= -->
-			<li class="mb-1">
-				<!-- <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#orders-collapse1"
-            aria-expanded="false"
-          >
-            預約參觀
-          </button> --> <!-- 若沒有子元素，單純給一個a標籤即可 --> <a href="/admin/visit/getall_visit.html"
-				class="btn bkbtn">預約參觀</a>
-			</li>
-			<!-- =============最新消息============ -->
-			<li class="mb-1">
-				<button
-					class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-					data-bs-toggle="collapse" data-bs-target="#orders-collapse2"
-					aria-expanded="false">消息區管理</button>
-				<div class="collapse" id="orders-collapse2">
-					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="#" class="link-dark rounded">留言管理</a></li>
-						<li><a href="#" class="link-dark rounded">新增消息種類</a></li>
-						<li><a href="#" class="link-dark rounded">發佈消息</a></li>
-					</ul>
-				</div>
-			</li>
-			<!-- ===================問題回報================== -->
-			<li class="mb-1">
-				<button
-					class="btn bkbtn btn-toggle align-items-center rounded collapsed"
-					data-bs-toggle="collapse" data-bs-target="#account-collapse"
-					aria-expanded="false">問題回報</button>
-				<div class="collapse" id="account-collapse">
-					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="/admin/visit/getall_email.html" class="link-dark rounded">回報信件</a></li>
-						<li><a href="/admin/visit/report_to_member.html" class="link-dark rounded">發送信件</a></li>
-					</ul>
-				</div>
-			</li>
-		</ul>
+	  <li class="mb-1">
+		<button
+		  class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#orders-collapse"
+		  aria-expanded="false"
+		>
+		  膳食管理
+		</button>
+		<div class="collapse" id="orders-collapse">
+		  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+			<li><a href="/elitebaby/admin/meal/mealorder_background.html" class="link-dark rounded">訂餐管理</a></li>
+			<li><a href="/elitebaby/admin/meal/meal_background.html" class="link-dark rounded">商品管理</a></li>
+		  </ul>
+		</div>
+	  </li>
+	  <!-- ===============房間管理============= -->
+	  <li class="mb-1">
+		<button
+		  class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#dashboard-collapse"
+		  aria-expanded="false"
+		>
+		  房間管理
+		</button>
+		<div class="collapse" id="dashboard-collapse">
+		  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+			<li><a href="/elitebaby/admin/room/type.html" class="link-dark rounded">房型維護</a></li>
+			<li><a href="/elitebaby/admin/room/order.html" class="link-dark rounded">房間訂單</a></li>
+			<li><a href="/elitebaby/admin/room/condition/html" class="link-dark rounded">房況管理</a></li>
+		  </ul>
+		</div>
+	  </li>
+	  <!-- =================討論區================ -->
+	  <li class="mb-1">
+		<!-- <button
+		  class="btn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#texts-collapse"
+		  aria-expanded="false"
+		>
+		  討論區
+		</button> -->
+		<!-- 若沒有子元素，單純給一個a標籤即可 -->
+		<a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+	  </li>
+	  <!-- ================預約參觀============= -->
+	  <li class="mb-1">
+		<button
+			class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+			data-bs-toggle="collapse"
+			data-bs-target="#orders-collapse111"
+			aria-expanded="false"
+		  >
+			預約參觀
+		  </button> 
+	  <div class="collapse" id="orders-collapse111">
+	  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+		<li><a href="/elitebaby/admin/visit/getall_visit.html" class="link-dark rounded">預約參觀</a></li>
+		<li><a href="/elitebaby/admin/visit/getall_visit_history.html" class="link-dark rounded">歷史參訪</a></li>
+		<li><a href="/elitebaby/admin/visit/back_visit_callender.html"  class="link-dark rounded">預約參訪月曆表</a></li>
+	  </ul>
 	</div>
+  </li>
+	  <!-- =============最新消息============ -->
+	  <li class="mb-1">
+		<button
+		  class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#orders-collapse2"
+		  aria-expanded="false"
+		>
+		  消息區管理
+		</button>
+		<div class="collapse" id="orders-collapse2">
+		  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+			<li><a href="/elitebaby/admin/news/listAllNewsMessage.jsp" class="link-dark rounded">留言管理</a></li>
+			<li><a href="/elitebaby/admin/news/listAllNewsSort.jsp" class="link-dark rounded">消息種類管理</a></li>
+			<li><a href="/elitebaby/admin/news/listAllLatestNews.jsp" class="link-dark rounded">最新消息管理</a></li>
+		  </ul>
+		</div>
+	  </li>
+	  <!-- ===================問題回報================== -->
+	  <li class="mb-1">
+		<button
+		  class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+		  data-bs-toggle="collapse"
+		  data-bs-target="#account-collapse"
+		  aria-expanded="false"
+		>
+		問題回報
+	  </button>
+	  <div class="collapse" id="account-collapse">
+		<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+		  <li><a href="/elitebaby/admin/visit/getall_email.html" class="link-dark rounded">收信匣</a></li>
+		  <li><a href="/elitebaby/admin/visit/back_admin_mailbox.html" class="link-dark rounded">寄信匣</a></li>
+		  <li><a href="/elitebaby/admin/visit/report_to_member.html" class="link-dark rounded">發送信件</a></li>
+		</ul>
+	  </div>
+	</li>
+	<li>
+	  <!-- Button trigger modal -->
+	  <button
+		type="button"
+		id="logoutButton"
+		class="btn-logout"
+		data-bs-toggle="modal"
+		data-bs-target="#staticBackdrop"
+	  >
+		登出
+	  </button>
+	</li>
+  </ul>
+</div>
 	<div class="c1" id="header" style="z-index: 5">
 		<p class="t1">後台管理系統</p>
 	</div>
@@ -166,17 +218,17 @@
 				<form action="#" method="post">
 					<div class="w3l-user">
 						<label class="head">名字<span class="w3l-star"> * </span></label> <input
-							type="text" name="Username" placeholder="預設名字" class="visitname">
+							type="text" name="Username" placeholder="預設名字" class="visitname" onchange="validate(this)">
 					</div>
 					<div class="w3l-mail">
 						<label class="head">信箱<span class="w3l-star"> * </span></label> <input
-							type="email" name="email" placeholder="預設信箱" class="visitemail">
+							type="email" name="email" placeholder="預設信箱" class="visitemail" onchange="validateEmail()">
 					</div>
 					<div class="clear"></div>
 					<div class="w3l-details1">
 						<div class="w3l-num">
 							<label class="head">電話<span class="w3l-star"> * </span></label> <input
-								type="text" name="phone" placeholder="預設電話" class="visitphone">
+								type="number" name="phone" placeholder="預設電話" class="visitphone"  maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)" min="0">
 						</div>
 						<div class="w3l-date">
 							<label class="head">預約參訪時間<span class="w3l-star">
@@ -199,7 +251,7 @@
 						</div>
 						<div class="w3l-options2">
 							<label class="head">預產期<span class="w3l-star"> * </span></label>
-							<input class="duedate" type="date" name="duedate">
+							<input class="duedate" type="date" name="duedate" id="duedateId">
 						</div>
 						<div class="gender">
 							<label class="head">胎次<span class="w3l-star"> * </span></label> <select
@@ -239,14 +291,14 @@
 								<label class="w3l-set2">備註</label>
 								<textarea class="visitremark" name="remark"></textarea>
 							</div>
-							<div class="visitbutton">
+							<center><div class="visitbutton">
 								<button type="button" id="visitsubmit">確認更改</button>
 								<input type="hidden" name="action" value="update" id="update">
 								<input type="hidden" name="userid" value="" class="inputuserid">
 								<input type="hidden" name="visitid" value=""
 									class="inputvisitid">
 							</div>
-						</div>
+						</div></center>
 						<div class="clear"></div>
 				</form>
 			</div>
@@ -266,6 +318,8 @@
 		<!-- summernote引用 -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+			<script src="../../js/background_navbar.js"></script>
+			<script src="./js/sweetalert2.all.js"></script>	
 		<script src="js/sam_back_visit_getone.js"></script>
 </body>
 </html>

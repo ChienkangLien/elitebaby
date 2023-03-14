@@ -81,8 +81,10 @@ h1 {
     flex-basis: 300px;
     padding: 3em;
     justify-content: center;
-	background: rgba(14, 14, 14, 0.61);
+	background: #de6d9878;
 	box-shadow: 5px -5px #efece8;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 label.head {
     font-size: 15px;
@@ -93,7 +95,7 @@ label.head {
     padding: 2px;
 	margin: 2px;
     display: block;
-    color: #3ce0b4;
+    color: #000000;
 	font-family: 'Poppins', sans-serif;
 }
 span.title{
@@ -119,6 +121,7 @@ span.w3l-star {
     outline: none;
     margin: 0px auto 10px;
     color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 .w3l-mail input[type="email"] {
     font-size: 15px;
@@ -133,8 +136,9 @@ span.w3l-star {
     outline: none;
     margin: 0px auto 10px;
     color:#000000;
+    box-shadow: 2px 2px 4px #6e6969;
 }
-.w3l-num input[type="text"] {
+.w3l-num input[type="number"] {
     font-size: 15px;
     font-weight: 500;
     text-align: left;
@@ -147,6 +151,7 @@ span.w3l-star {
     width: 100%;
     margin: 0 auto 30px;
     color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 .w3l-date input.visitdate {
     font-size: 15px;
@@ -161,6 +166,7 @@ span.w3l-star {
     width: 100%;
     margin: 0px auto 11px;
     color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 select.kids {
 	font-size: 15px;
@@ -173,6 +179,7 @@ select.kids {
     border: none;
     outline: none;
 	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 .w3l-options1 .contacttime {
     font-size: 15px;
@@ -186,6 +193,7 @@ select.kids {
     border: none;
     outline: none;
 	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 .w3l-options2 .duedate {
     font-size: 15px;
@@ -199,6 +207,7 @@ select.kids {
     border: none;
     outline: none;
 	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 
 .w3l-num {
@@ -241,6 +250,7 @@ select.kids {
     margin: 0px auto 10px;
     color: #000000;
 	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 .w3l-right textarea {
     font-size: 15px;
@@ -257,6 +267,7 @@ select.kids {
     box-sizing: border-box;
     color: #000;
     font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 label.w3l-set {
     font-size: 15px;
@@ -266,6 +277,7 @@ label.w3l-set {
     padding: 2px;
     color: #3ce0b4;
 	cursor: pointer;
+    box-shadow: 2px 2px 4px #6e6969;
 }
 label.w3l-head2 {
     float: left;
@@ -281,7 +293,7 @@ label.w3l-set2 {
     text-align: left;
     text-transform: capitalize;
     letter-spacing: 2px;
-    color: #3ce0b4;
+    color: #000000;
     display: block;
 	margin-bottom: 10px;
 }
@@ -420,4 +432,15 @@ footer a:hover {
 } 
 .ui-datepicker table {
 	    background-color: #c74184 !important;
+}
+
+button#visitsubmit{
+    background-color: #3bf19fd1;
+    border-color: #3bf19fd1;
+    align-items: center;
+    height: 40px;
+    width: 100px;
+    font-size: small;
+    border-radius: 8px;
+    margin-top: 20px;
 }

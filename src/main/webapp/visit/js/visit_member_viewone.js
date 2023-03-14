@@ -1,11 +1,9 @@
-fetch("/elitebaby/visit/getOneUpdate",
+fetch("/elitebaby/visit/servlet?action=GET_ONE_VISIT_DATA",
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(visitone => {
 
 		document.querySelector(".visitname").value = visitone.userName;
-
-		document.querySelector(".userid").value = visitone.userId;
 
 		document.querySelector(".visitemail").value = visitone.email;
 
@@ -20,11 +18,40 @@ fetch("/elitebaby/visit/getOneUpdate",
 		document.querySelector(".kids").value = visitone.kids;
 
 		document.querySelector(".visitremark").value = visitone.remark;
+		
+		console.log(visitone.contactSatus)
 
-		document.querySelector(".inputuserid").value = visitone.userId;
-
-		document.querySelector(".inputvisitid").value = visitone.visitId;
-
-
+		if(visitone.contactSatus == '1'){
+			console.log(visitone.contactSatus)
+			getalert();
+		}
 
 	});
+
+
+
+
+
+function getalert(){
+	$(function() {
+		$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+		$(".dialog").css("display", "block"); // 顯示dialog。
+		
+		$(".dialog").animate({			   
+		  opacity: '1',
+		  top: '50px' // 決定對話框要滑到哪個位置停止。		   
+		}, 550);
+	  });
+	  
+	  $(".cancelBtn").click( function () {
+		$(".dialog").animate({			   
+		  opacity: '0',
+		  top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
+		}, 350, function () {
+		  // 此區塊為callback function，會在動畫結束時被呼叫。
+		  $(".modal").css("display", "none"); // 隱藏modal。
+		  $(".dialog").css("display", "none"); // 隱藏dialog。
+		});
+	  });	
+
+};

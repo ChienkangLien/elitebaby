@@ -34,28 +34,27 @@ function readURL(input) {
 
 
 $("#sam_btn_submit").on("click", function() {
-
+	var rstee = [];
 
 	const userid = document.querySelector(".userId");
-	//	if (userid.value == null) {
-	//		alert("請先登入");
-	//	}
+		if (userid.value == null || userid.value == 0 || userid.length == 0) {
+			rstee.push("請先登入\r");
+		}
 
 	const title = document.querySelector("#sam_input_emailtitle");
-	//	if (title.value == null || title.value.trim() == "") {
-	//		alert("請輸入標題");
-	//	}
+		if (title.value == null || title.value.trim() == "" || title.length == 0) {
+			rstee.push("請輸入標題\r");
+		}
 
 	const category = document.querySelector("#sam_input_emailcategory");
-	//	if (category.value == null || category.value.trim() == "" || category.value == 0) {
-	//		alert("請選擇類別");
-	//	}
+		if (category.value == null || category.value.trim() == "" || category.value == 0) {
+			rstee.push("請選擇類別\r");
+		}
 
 	const remark = document.querySelector(".visitremark");
-	//	if (remark.value == null || remark.value.trim() == "" ) {
-	//		alert("請輸入回報內容");
-	//	}
-
+		if (remark.value == null || remark.value.trim() == "" || remark.length == 0) {
+			rstee.push("請輸入回報內容\r");
+		}
 
 
 	var img_base64_el = document.querySelectorAll(".preview_img");
@@ -64,7 +63,8 @@ $("#sam_btn_submit").on("click", function() {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
 
-	fetch('/elitebaby/report/emailInsert?action=INSERT_FRONT', {
+if(rstee.length == 0){
+	fetch('/elitebaby/report/emailservlet?action=INSERT_FRONT', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -86,29 +86,48 @@ $("#sam_btn_submit").on("click", function() {
 				if (img_base64_el.length > 0) {
 					inserPhoto();
 				} else {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					
+					Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "ReportEmailFrontGetAll.html"
+					   });
+					
 				}
 
 			} else {
-				alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-				location.href = "ReportEmailFrontGetAll.html"
+				Swal.fire({
+					icon: 'error',
+					title: '寄出失敗',
+					text: '請檢查信件格式是否正確或是重新寄一次'
+				  })
 			}
 
 
 		});
 
+}
 
+	if(rstee!=null && rstee.length != 0 ){
+		var emtyarry = [];
+		Swal.fire({
+		icon: 'error',
+		title: '格式錯誤',
+		text: `${rstee}`
+	  })
+		rstee = emtyarry;
+	
+		}
 
-	function inserPhoto() {
+function inserPhoto() {
 
 		var dddasa = [];
 		for (var i = 0; i < img_base64_el.length; i++) {
 			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
-		fetch('/elitebaby/report/emailPhotoInsert?action=insert_reportphoto', {
+		fetch('/elitebaby/report/emailservlet?action=insert_reportphoto', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -122,14 +141,21 @@ $("#sam_btn_submit").on("click", function() {
 			.then(data => {
 				
 				if (data.successful) {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
 
+					  Swal.fire({
+						title:"成功寄出",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
 					location.href = "ReportEmailFrontGetAll.html"
-					
-				} else {					
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					   });				
+				} else {			
+
+					Swal.fire({
+						icon: 'error',
+						title: '圖片新增失敗',
+						text: '請檢查圖片格式是否正確'
+					  })
 
 				}
 
@@ -143,5 +169,23 @@ $("#sam_btn_submit").on("click", function() {
 
 
 
+
+$("#sam_btn_cancle").on("click", function() {
+
+	Swal.fire({
+		title: '確定取消?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確定',
+		cancelButtonText : '取消'
+	  }).then((result) => {
+
+		if (result.isConfirmed) {
+		location.href = "ReportEmailFrontRSMail.html"
+	}
+})
+})	
 
 

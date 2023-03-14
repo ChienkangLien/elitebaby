@@ -1,4 +1,5 @@
-fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
+
+fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(email => {
@@ -14,25 +15,24 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 
 		document.querySelector(".one_authcode").value = email.authCode;
 
-
-
+		document.querySelector(".userIdd").value = email.userId;
 
 		if (email.adminId != 0 && email.determine === "會員"  && typeof(email.answerContent) === "string") {
 
 			document.querySelector(".inserthere").innerHTML =
 				`
 			<div class="sam_div_emailtilte">
-					<label id="sam_label_emailtitle">標題:</label> <input type="text"
+					<label id="sam_label_emailtitle">回覆標題:</label> <input type="text"
 						id="sam_input_emailtitle_anwser" value="" disabled >
 				</div>
 
 				<div class="sam_div_adminId">
-					<label id="sam_label_emailtitle">後台管理員ID:</label> <input
+					<label id="sam_label_emailtitle">回覆時間</label> <input
 						type="text" class="sam_adminId_anwser" disabled>
 				</div>
 
 				<div id="sam_div_emailcontent">
-					<label id="sam_label_emailcontent">內容:</label>
+					<label id="sam_label_emailcontent">回覆內容:</label>
 					<textarea class="visitremark" name="remark"
 						id="sam_input_emailcontent_anwser" disabled></textarea>
 				</div>
@@ -45,7 +45,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 
 
 
-			document.querySelector(".sam_adminId_anwser").value = email.adminId;
+			document.querySelector(".sam_adminId_anwser").value = email.strAnswerCreateTime;
 
 			document.querySelector("#sam_input_emailtitle_anwser").value = email.answerTitle;
 
@@ -65,10 +65,16 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 						id="sam_input_emailtitle_anwser" value="" disabled >
 				</div>
 
-				<div class="sam_div_adminId">
-					<label id="sam_label_emailtitle">後台管理員ID:</label> <input
+				<div class="sam_div_adminId" style="display: inline-block;margin-left: 45px;">
+					<label id="sam_label_emailtitle">回覆用戶:</label> <input
 						type="text" class="sam_adminId_anwser" disabled>
 				</div>
+
+				<div class="sam_div_emailcategory"  style="display: inline-block;margin-left: 45px;">
+					<label id="sam_label_emailcategory">回覆時間</label> <input
+					type="text" id="sam_input_emailcategory" class="answertime"  disabled>
+				</div>
+
 
 				<div id="sam_div_emailcontent">
 					<label id="sam_label_emailcontent">內容:</label>
@@ -83,12 +89,13 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 		`;
 
 
+		document.querySelector("#sam_input_emailtitle_anwser").value = email.answerTitle;
 
-			document.querySelector(".sam_adminId_anwser").value = email.adminId;
+		document.querySelector(".sam_adminId_anwser").value = email.userName;
 
-			document.querySelector("#sam_input_emailtitle_anwser").value = email.answerTitle;
+		document.querySelector(".answertime").value = email.strAnswerCreateTime;
 
-			document.querySelector("#sam_input_emailcontent_anwser").value = email.answerContent;
+		document.querySelector("#sam_input_emailcontent_anwser").value = email.answerContent;
 				
 			getanswerphoto();
 		}
@@ -105,7 +112,8 @@ fetch(`/elitebaby/report/emailGetOne?action=getEmail`,
 	});
 
 
-fetch(`/elitebaby/report/emailGetOne?action=getPhoto`,
+
+fetch(`/elitebaby/report/emailservlet?action=getPhoto`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
 	.then(resp => resp.json())
 	.then(photo => {
@@ -132,7 +140,7 @@ fetch(`/elitebaby/report/emailGetOne?action=getPhoto`,
 function getanswerphoto() {
 	
 	const ansertauthcode = document.querySelector(".one_authcode").value;
-	     fetch(`/elitebaby/report/emailGetOne?action=get_answerphoto`,{
+	     fetch(`/elitebaby/report/emailservlet?action=get_answerphoto`,{
 		            method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -150,7 +158,7 @@ function getanswerphoto() {
 						for (var i = 0; i < base64.length; i++) {
 							var str = base64[i];
 							if (str != null) {
-								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_report' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
+								var img = `<div class='previewtest' style ='display: inline-block; min-height: 100px; width: 100px;'> <img class='preview_img_answer' style='display: inline-block;width: 100%;' src="data:image/*;base64,${str}" > </div>`;
 								$("#preview_back").append(img);
 							}
 						}
@@ -159,7 +167,6 @@ function getanswerphoto() {
 				});
 		
 }
-
 
 
 
@@ -212,9 +219,16 @@ function readURL(input) {
 
 $(document).on("click", "#sam_btn_submit", function() {
 
+	var rstee = [];
 	const adminId = document.querySelector(".sam_adminId_anwser");
 	const answer_title = document.querySelector("#sam_input_emailtitle_anwser");
+	if (answer_title.value == null || answer_title.value.trim() == "" || answer_title.length == 0) {
+		rstee.push("請輸入標題\r");
+	}
 	const answer_remark = document.querySelector("#sam_input_emailcontent_anwser");
+	if (answer_remark.value == null || answer_remark.value.trim() == "" || answer_remark.length == 0) {
+		rstee.push("請輸入回報內容\r");
+	}
 	const emailID = document.querySelector(".one_emailId");
 	
 	var img_base64_el = document.querySelectorAll(".preview_img_answer");
@@ -223,9 +237,23 @@ $(document).on("click", "#sam_btn_submit", function() {
 	for (var i = 0; i < img_base64_el.length; i++) {
 		var base64get = `${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`;
 	}
-	var result = confirm("確認修改");
-	if (result) {
-		fetch("/elitebaby/report/emailGetOne?action=get_one_answer", {
+
+if(rstee.length == 0){
+
+	Swal.fire({
+		title: '確定回覆?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確定',
+		cancelButtonText : '取消'
+	  }).then((result) => {
+
+		if (result.isConfirmed) {
+
+		sendMessage()
+		fetch("/elitebaby/report/emailservlet?action=get_one_answer", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -247,23 +275,43 @@ $(document).on("click", "#sam_btn_submit", function() {
 						inserPhoto()
 						
 					}else{
-						
-						alert(`successful: ${data.successful}
-                      message: ${data.message}`)
-					location.href = "getall_email.html"
+						Swal.fire({
+							title:"回覆成功",
+							text: '',
+							icon : 'success'
+					   }).then((result) => {
+						location.href = "getall_email.html"
+						   });
 					}
 
 				} else {
-						alert(`successful: ${data.successful}
-                      message: ${data.message}`)
 
+					Swal.fire({
+						icon: 'error',
+						title: '回覆失敗',
+						text: '請檢查信件格式是否正確或是重新寄一次'
+					  })
 				}
+
+
+
 			});
 
+	    }
+	})
+}
+
+if(rstee!=null && rstee.length > 0 ){
+	var emtyarry = [];
+
+	Swal.fire({
+		icon: 'error',
+		title: '以下格式錯誤',
+		text: `${rstee}`
+	  })
 	}
 
-
-
+	rstee = emtyarry;
 function inserPhoto() {
 
 const authcode = document.querySelector(".one_authcode").value;
@@ -271,7 +319,7 @@ const authcode = document.querySelector(".one_authcode").value;
 		for (var i = 0; i < img_base64_el.length; i++) {
 			dddasa.push(`${img_base64_el[i].getAttribute("src").replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "")}`);
 		}
-		fetch('/elitebaby/report/emailPhotoInsert?action=insert_answerphoto', {
+		fetch('/elitebaby/report/emailservlet?action=insert_answerphoto', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -285,14 +333,23 @@ const authcode = document.querySelector(".one_authcode").value;
 			.then(data => {
 				
 				if (data.successful) {
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
 
-					location.href = "getall_email.html"
 					
-				} else {					
-					alert(`successful: ${data.successful}
-                      message: ${data.message}`)
+					Swal.fire({
+						title:"回覆成功",
+						text: '',
+						icon : 'success'
+				   }).then((result) => {
+					location.href = "getall_email.html"
+					   });
+					
+				} else {		
+
+					Swal.fire({
+						icon: 'error',
+						title: '圖片新增失敗',
+						text: '請檢查圖片格式是否正確'
+					  })
 
 				}
 
@@ -302,8 +359,120 @@ const authcode = document.querySelector(".one_authcode").value;
 	}
 
 
-
+	function sendMessage() {
+		const useriddd = document.querySelector(".userIdd").value;
+		var MyPoint = `/emailBell/55688`;
+			var host = window.location.host;
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+			var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+				
+			var webSocket;
+			webSocket = new WebSocket(endPointURL);
+			
+			var jsonObj = {
+				"status": "unread",
+				"from"  : 'member',
+				"userId": useriddd,
+				"unreadCount" : 1
+				};
+			webSocket.onopen = function(event) {
+				console.log("Connect Success!");
+	
+				webSocket.send(JSON.stringify(jsonObj));
+			};
+	
+	
+		   
+			webSocket.onclose = function(event) {
+			console.log("Disconnected!");
+		  };
+		};
 
 
 
 })
+
+
+
+
+setTimeout(function() {
+	const imagesreport = document.querySelectorAll(".preview_img_report");
+	const imagesanswer = document.querySelectorAll(".preview_img_answer");
+	
+    $(function () {
+		imagesreport.forEach((imgess) => {
+		  imgess.addEventListener("click", (e) => {
+			  var imgsrc = $(e.target).attr("src");
+		   var large_image = `<img src="${imgsrc}"</img>`;
+		   console.log(large_image);
+		   getCurrentPhoto()
+		   $('#dialog_large_image_report').html($(large_image).animate({ height: '100%', width: '100%' }, 500));
+		  });
+		 });
+	  });
+  
+	  $(function () {
+		  imagesanswer.forEach((imgeyy) => {
+			  imgeyy.addEventListener("click", (e) => {
+			   var imgsrcss = $(e.target).attr("src");
+			   var large_image_ab = `<img src="${imgsrcss}"</img>`;
+			   console.log(large_image_ab);
+			   getCurrentPhoto()
+			   $('#dialog_large_image_report').html($(large_image_ab).animate({ height: '100%', width: '100%' }, 500));
+			  });
+			 });
+	  });
+  
+
+ 
+}, 750);
+
+
+
+
+function getCurrentPhoto(){
+	$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+	$(".dialog").css("display", "block"); // 顯示dialog。
+	
+	$(".dialog").animate({			   
+	  opacity: '1',
+	  top: '50px' // 決定對話框要滑到哪個位置停止。		   
+	}, 550);
+  };
+  
+  $(".modal").click( function () {
+	$(".dialog").animate({			   
+	  opacity: '0',
+	  top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
+	}, 350, function () {
+	  // 此區塊為callback function，會在動畫結束時被呼叫。
+	  $(".modal").css("display", "none"); // 隱藏modal。
+	  $(".dialog").css("display", "none"); // 隱藏dialog。
+	});
+  });	
+
+
+
+
+
+
+  $("#sam_btn_cancle").on("click", function() {
+
+	Swal.fire({
+		title: '確定取消?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '確定',
+		cancelButtonText : '取消'
+	  }).then((result) => {
+
+		if (result.isConfirmed) {
+			location.href = "back_admin_mailbox.html"
+	  }
+
+	 })
+	
+	})

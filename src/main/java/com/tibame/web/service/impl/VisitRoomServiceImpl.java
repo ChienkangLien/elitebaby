@@ -1,12 +1,12 @@
 package com.tibame.web.service.impl;
 
-import com.tibame.web.dao.impl.VisitDAO;
-
 import java.sql.Date;
 import java.util.List;
 
 import com.tibame.web.dao.VistDAO_interface;
+import com.tibame.web.dao.impl.VisitDAO;
 import com.tibame.web.service.VisitRoomService;
+import com.tibame.web.vo.TestMemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public class VisitRoomServiceImpl implements VisitRoomService {
@@ -21,22 +21,22 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 	public String visitReserve(VisitVO visitVO) {
 
 		final String username = visitVO.getUserName();
-		if (username == null || username.length() < 2 || username.length() > 50) {
+		if (username == null || username.length() == 0 || username.length() > 100) {
 			return "名稱不符規則";
 		}
 
 		final String email = visitVO.getEmail();
-		if (email == null || email.length() < 6 || email.length() > 20) {
+		if (email == null || email.length() == 0 || email.length() > 100) {
 			return "信箱不符規則";
 		}
 
 		final String phone = visitVO.getPhoneNumber();
-		if (phone == null || phone.length() < 1 || phone.length() > 10) {
+		if (phone == null || phone.length() < 10 || phone.length() > 10) {
 			return "電話不符規則";
 		}
 
 		final String remark = visitVO.getRemark();
-		if (remark.length() > 300) {
+		if (remark.length() >= 300) {
 			return "300字以內";
 		}
 
@@ -149,8 +149,20 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 
 	@Override
 	public List<VisitVO> getAllInfoPageHistory(Integer offset) {
-		// TODO Auto-generated method stub
+
 		return offset != null ? dao.getAllPageHistory(offset) : null;
+	}
+
+	@Override
+	public TestMemberVO getOneMemberInfo(Integer userId) {
+		
+		if (userId != null || userId != 0) {
+			
+			TestMemberVO memberVO = dao.getMemeberInfo(userId);
+			return memberVO != null ? memberVO : null;
+			
+		}
+		return null;
 	}
 
 }
