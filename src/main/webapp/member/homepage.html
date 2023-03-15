@@ -91,7 +91,7 @@
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge EmailBill;">3</span>
+                            <span class="badge badge-danger navbar-badge emailBill">3</span>
                         </button>
 
 
@@ -357,163 +357,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
-    <script src="js/front_navbar.js"></script>
+    <script src="../js/front_navbar.js"></script>
 
 </body>
 
-        <script>
-            $("button.btn_logout").on("click", function(){
-                location.href = "logout.html"
-            })
-        </script>
 
-<!-- 試試看還沒完成(登入按鈕) -->
-<script>
-
-    document.getElementById("loginButton").addEventListener("click", function() {
-        window.location.href = "login.html";
-    });
-
-</script>
-
-<script>
-  const register_btn = document.querySelector(".register_btn");
-  register_btn.addEventListener("click", function () {
-    // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
-    window.location.href = "register.html";
-  });
-</script>
-
-<script>
-    // 取得表單數據
-    $(function(){
-      function callAPI() {
-      var username =  $('#name').val();
-      var address =  $('#address').val();
-      var phoneNumber =  $('#phoneNumber').val();
-      var password =  $('#password').val();
-      var confirmpassword =  $('#confirmpassword').val();
-
-      var error = true;
-      if (password != confirmpassword ){
-        alert("密碼與確認密碼不一致，請重新輸入。")
-        error = false;
-      }
-      if(username == null || username == ""){
-        alert("名字不可為空白!")
-        error = false;
-      }
-      if (address == null || address == ""){
-        alert("地址不可為空白!")
-        error = false;
-      }
-      if(phoneNumber == null || phoneNumber == ""){
-        alert("手機不可為空白!")
-        error = false;
-      }
-      if(password == null || password == "" || confirmpassword == null || confirmpassword == "") {
-        alert("密碼或確認密碼不得為空!")
-        error = false; 
-      }
-
-      var check = true;
-      if (password == "") {
-          alert("請輸入密碼");
-          $("input#password").focus();
-          return (check = false);
-        } else {
-          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-          if (passwordRegxp.test(password) != true) {
-            alert("密碼格式錯誤");
-            alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
-            $("input#password").focus();
-            $("input#password").select();
-            return (check = false);
-          }
-        }
-
-        // 使用AJAX傳送表單數據
-        if(check){
-
-            $.ajax({
-              url: "change",
-              method: "POST",
-              dataType: 'json',
-              contentType:"application/json",
-              data: JSON.stringify({
-                      username:username,
-                      password:password,
-                      address:address,
-                      phoneNumber:phoneNumber
-            }),
-            success: function(response) {
-                alert(response.message);
-                if(response.message == "修改成功"){
-                  $(location).attr("href","homepage.html");
-                }
-            },
-            error: function(error) {
-              alert("Error calling API:" + error);
-            }
-          });
-        }
-
-      
-    }  
-    function getAPI(){
-      $.ajax({
-                url: "Find",
-                method: "GET",
-                dataType: 'json',
-                contentType:"application/json",
-                
-              success: function(response) {
-                $('#name').val(response.username);
-                $('#address').val(response.address);
-                $('#phoneNumber').val(response.phoneNumber);
-             
-              },
-              error: function(error) {
-                alert("Error calling API:" + error);
-              }
-            });
-    }
-    function checkLogin(){
-      $.ajax({
-      url: "check",           // 資料請求的網址
-      type: "GET",                  // GET | POST | PUT | DELETE | PATCH
-      // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
-      dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
-      success: function(resp){      // request 成功取得回應後執行
-        if(resp.message == "已登入"){
-            // console.log(resp);
-            console.log(resp.message);
-            var loginButton =  $('#loginButton');
-            loginButton.remove();
-            var registerButton = $('#registerButton');
-            registerButton.remove();
-
-          }else{ 
-            console.log(resp.message);
-            var member = $('.member');
-            member.remove();
-            var logoutButton = $("#logoutButton");
-            logoutButton.remove();
-          }
-      }
-    });
-      
-        
-    }
-    checkLogin();
-      $("button.btn-primary.btn_save").on("click", function(){
-        callAPI();
-      })
-      $("button.btn_edit").on("click", function(){
-        getAPI();
-      })
-})
-</script>
 
 
 </html>
