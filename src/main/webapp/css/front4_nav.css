@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+#nav {
+    opacity: 0.9;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+}
+
+#book_visit {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+.btn {
+    background-color: #ff8188;
+    color: white;
+}
+
+.z-index-1 {
+    z-index: -1;
+    margin-top: 50px;
+}
+
+ul.list {
+    list-style: none;
+    display: inline-block;
+    color: black;
+}
+
+div#login {
+    display: none;
+}
+
+span.badge {
+    background-color: red
+}
+
+div#book_visit>a>img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

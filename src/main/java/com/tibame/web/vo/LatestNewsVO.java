@@ -11,7 +11,6 @@ public class LatestNewsVO implements java.io.Serializable{
 	private Integer adminId;
 	private String newsIntro;
     private Date scheduledTime;
-//	private Date offShelfTime;
 	private String postTitle;
 	private byte[] newsPhoto;
 	
@@ -56,14 +55,6 @@ public class LatestNewsVO implements java.io.Serializable{
 		this.scheduledTime = scheduledTime;
 	}
 
-//	public Date getOffShelfTime() {
-//		return offShelfTime;
-//	}
-//
-//	public void setOffShelfTime(Date offShelfTime) {
-//		this.offShelfTime = offShelfTime;
-//	}
-
 	public String getPostTitle() {
 		return postTitle;
 	}
@@ -85,14 +76,6 @@ public class LatestNewsVO implements java.io.Serializable{
 				+ newsIntro + ", scheduledTime=" + scheduledTime + ", postTitle=" + postTitle + ", newsPhoto="
 				+ Arrays.toString(newsPhoto) + "]";
 	}
-
-//	@Override
-//	public String toString() {
-//		return "LatestNewsVO [newsId=" + newsId + ", sortId=" + sortId + ", adminId=" + adminId + ", newsIntro="
-//				+ newsIntro +  ", scheduledTime=" + scheduledTime + ", offShelfTime=" + offShelfTime
-//				+ ", postTitle=" + postTitle + ", newsPhoto=" + Arrays.toString(newsPhoto) + "]";
-//	}
-
 
 
 

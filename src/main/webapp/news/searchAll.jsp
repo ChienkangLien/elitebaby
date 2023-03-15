@@ -29,7 +29,7 @@ pageContext.setAttribute("list", list);
      <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/official.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_search.css">
    
-    <!-- FontAwesom 連結 -->
+     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <title>菁英產後護理之家</title>
@@ -52,7 +52,7 @@ pageContext.setAttribute("list", list);
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                                <li><a class="dropdown-item" href="/elitebaby/news/front_allnews.jsp">綜合</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
                                
@@ -63,16 +63,15 @@ pageContext.setAttribute("list", list);
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
                         <!-- ====================================會員中心================================================= -->
-                         <li class="nav-item dropdown member">
+                        <li class="nav-item dropdown member">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#editModal">
+                                <button type="button" class=" dropdown-item btn_edit"data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-
 
                                   <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
                                   <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
@@ -89,7 +88,47 @@ pageContext.setAttribute("list", list);
                         <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li>
                     </ul>
                 </div>
-
+<!-- 會員資料編輯彈跳視窗 -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="address">居住地址</label>
+              <input type="text" class="form-control" id="address">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">手機</label>
+              <input type="text" class="form-control" id="phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="password">密碼</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label for="confirmpassword">確認密碼</label>
+              <input type="password" class="form-control" id="confirmpassword">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary btn_save ">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
                 <!-- ==============================================按鈕觸發============================================ -->
                 <!-- ===============================================購物車============================================= -->
                 <div id="logout">

@@ -30,6 +30,8 @@ public class NewsMessageService {
 		return newsMessageVO;
 	}
 
+	
+	
 	// 預留給 Struts 2 或 Spring MVC 用
 	public void addNewsMessage(NewsMessageVO newsMessageVO) {
 		dao.insert(newsMessageVO);
@@ -66,4 +68,9 @@ public class NewsMessageService {
 	public List<NewsMessageVO> getAll() {
 		return dao.getAll();
 	}
+//另外新增
+//	public void insert(NewsMessageVO message) {
+//		dao.insert(message);
+//		
+//	}
 }
