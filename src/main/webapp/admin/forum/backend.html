@@ -22,12 +22,60 @@
     />
 
     <title>菁英後台管理系統</title>
+    <link type="text/css" rel="stylesheet" href="backend.css"/>
+    <template class="category-backend-template">
+        <section class="backend">
+            <div class="buttons">
+                <button class="add-button btn">新增話題</button>
+                <button class="search-button btn">分類搜索</button>
+            </div>
+            <div class="checkboxes"></div>
+        </section>
+    </template>
+    <template class="category-checkbox-template">
+        <div class="checkbox">
+            <input type="checkbox"/>
+            <div class="cdn-img"></div>
+            <div class="category-name"></div>
+        </div>
+    </template>
+    <template class="posts-template">
+        <div class="post-info">
+            <div class="user"></div>
+            <div class="category"></div>
+            <div class="topic"></div>
+            <div class="date"></div>
+            <button class="view btn">檢視</button>
+        </div>
+    </template>
+    <template class="post-template">
+        <div class="post-info">
+            <div class="user"></div>
+            <div class="category"></div>
+            <div class="topic"></div>
+            <div class="date"></div>
+        </div>
+        <p class="content"></p>
+        <div class="img"></div>
+        <button class="post-delete btn">刪除文章</button>
+    </template>
+    <template class="msg-template">
+        <div class="msg-info">
+            <input type="checkbox" class="checkbox-msg">
+            <div class="user"></div>
+            <div class="date"></div>
+            <div class="like"></div>
+        </div>
+        <p class="content"></p>
+        <div class="img"></div>
+    </template>
+
 </head>
 
 <body class="c2">
 <div class="flex-shrink-0 p-3 c1" id="navbar">
     <a
-            href="/elitebaby/admin/member/background_nav.html"
+            href="../../admin/member/background_nav.html"
             class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
     >
         <img src="../../images/logo.jpg" style="width: 30px" />
@@ -50,14 +98,14 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/member/management.html"
+                                href="../../admin/member/management.html"
                                 class="link-dark rounded"
                         >員工管理</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/member/search.html"
+                                href="../../admin/member/search.html"
                                 class="link-dark rounded"
                         >會員管理</a
                         >
@@ -81,14 +129,14 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/meal/mealorder_background.html"
+                                href="../../meal/mealorder_background.html"
                                 class="link-dark rounded"
                         >訂餐管理</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/meal/meal_background.html"
+                                href="../../meal/meal_background.html"
                                 class="link-dark rounded"
                         >商品管理</a
                         >
@@ -110,21 +158,21 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/room/type.html"
+                                href="../../room/type.html"
                                 class="link-dark rounded"
                         >房型維護</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/room/order.html"
+                                href="../../room/order.html"
                                 class="link-dark rounded"
                         >房間訂單</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/room/condition.html"
+                                href="../../room/condition.html"
                                 class="link-dark rounded"
                         >房況管理</a
                         >
@@ -143,7 +191,7 @@
               討論區
             </button> -->
             <!-- 若沒有子元素，單純給一個a標籤即可 -->
-            <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+            <a href="../../frontForum/backend.html" class="btn bkbtn">討論區</a>
         </li>
         <!-- ================預約參觀============= -->
         <li class="mb-1">
@@ -159,21 +207,21 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/getall_visit.html"
+                                href="../../visit/getall_visit.html"
                                 class="link-dark rounded"
                         >預約參觀</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/getall_visit_history.html"
+                                href="../../visit/getall_visit_history.html"
                                 class="link-dark rounded"
                         >歷史參訪</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/back_visit_callender.html"
+                                href="../../visit/back_visit_callender.html"
                                 class="link-dark rounded"
                         >預約參訪月曆表</a
                         >
@@ -195,21 +243,21 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/bgmessage.html"
+                                href="../../admin/bgmessage.html"
                                 class="link-dark rounded"
                         >留言管理</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/bgnewssort.html"
+                                href="../../admin/bgnewssort.html"
                                 class="link-dark rounded"
                         >消息種類管理</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/bglatestnews.html"
+                                href="../../admin/bglatestnews.html"
                                 class="link-dark rounded"
                         >最新消息管理</a
                         >
@@ -231,21 +279,21 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/getall_email.html"
+                                href="../../visit/getall_email.html"
                                 class="link-dark rounded"
                         >收信匣</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/back_admin_mailbox.html"
+                                href="../../visit/back_admin_mailbox.html"
                                 class="link-dark rounded"
                         >寄信匣</a
                         >
                     </li>
                     <li>
                         <a
-                                href="/elitebaby/admin/visit/report_to_member.html"
+                                href="../../visit/report_to_member.html"
                                 class="link-dark rounded"
                         >發送信件</a
                         >
@@ -258,7 +306,7 @@
             <button
                     type="button"
                     id="logoutButton"
-                    class="btn-logout"
+                    class="btn-logout btn"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
             >
@@ -272,7 +320,12 @@
 </div>
 <div id="main_div">
     <div id="blank_area">此處留空</div>
-
+    <main>
+        <div class="btns">
+            <button class="backend-btn">討論區管理</button>
+        </div>
+        <div class="panel"></div>
+    </main>
 </div>
 
 <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
@@ -285,4 +338,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="../../js/background_navbar.js"></script>
 </body>
+
+<script src="backend.js"></script>
 </html>

@@ -245,10 +245,10 @@
         %>
         歡迎 <span class="wel-user"><%=userName%></span>
     </div>
-    <div class="homepage button" style="display: none">首頁</div>
-    <div id="publish" class="button">我要發文</div>
-    <div class="loginforum button" style="display: none">登入</div>
-    <div class="logoutforum button" style="display: none">登出</div>
+    <div id="publish" class="button btn">我要發文</div>
+    <div class="homepage button btn" style="display: none">首頁</div>
+    <div class="loginforum button btn" style="display: none">登入</div>
+    <div class="logoutforum button btn" style="display: none">登出</div>
 </div>
 
 <% boolean order = (boolean) request.getAttribute("order");
@@ -266,7 +266,7 @@
                 <input class="input-text" type="text" placeholder="文字搜尋" name="topic"/>
                 <input type="hidden" name="order" value="<%=order%>">
                 <input type="hidden" name="categoryId" value="<%=categoryId%>">
-                <input type="submit" value="標題搜尋" class="button">
+                <input type="submit" value="標題搜尋" class="button btn">
             </form>
             <br/>
             <div class="category">
