@@ -19,6 +19,7 @@ document.querySelector(".sserchId").addEventListener("click",function(){
                 .then(data => {
             let resData = [];
             resData = data;
+        if( resData.length > 0 ){	
             for (let i = 0; i < resData.length; i++) {
                     
                 if (typeof (resData[i].answerContent) === "string" && resData[i].determine ==="後台") {
@@ -53,7 +54,16 @@ document.querySelector(".sserchId").addEventListener("click",function(){
                     
                 
                 
-    }
+             }
+         }else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: '目前您沒有任何信件',
+                    footer: '<a href="ReportEmailFrontInsert.html">有什麼問題想回報嗎?點我立即回報!</a>'
+                  })
+            
+            }	    
                     
                 });
                 

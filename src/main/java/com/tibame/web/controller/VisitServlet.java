@@ -151,6 +151,16 @@ public class VisitServlet extends HttpServlet {
 		if (action.equals("GET_MEMBER_INFO")) {
 
 			Gson gson = new Gson();
+//			HttpSession session = request.getSession();
+//			MemberVO memberVO =  session.getAttribute("MemberVO");
+//			Integer userId = memberVO.getUserId();
+//			if (userId > 0 && userId != null) {
+//				VisitRoomService service = new VisitRoomServiceImpl();
+//				memberVO = service.getOneMemberInfo(memberVO.getUserId());
+//				Writer writer = response.getWriter();
+//				writer.write(gson.toJson(memberVO));
+//			}
+			
 			TestMemberVO memberVO = gson.fromJson(request.getReader(), TestMemberVO.class);
 			if (memberVO.getUserId() > 0 || memberVO.getUserId() != null) {
 				VisitRoomService service = new VisitRoomServiceImpl();
@@ -209,6 +219,16 @@ public class VisitServlet extends HttpServlet {
 		if ("GET_ONE_MEMBER_VISIT".equals(action)) {
 			
 			Gson gson = new Gson();
+//			HttpSession session = request.getSession();
+//			MemberVO memberVO =  session.getAttribute("MemberVO");
+//			Integer userId = memberVO.getUserId();
+//			if (userId > 0 && userId != null) {
+//				VisitRoomService service = new VisitRoomServiceImpl();
+//				List<VisitVO> list = service.getOneAll(userId);
+//				Writer writer = response.getWriter();
+//				writer.write(gson.toJson(list));
+//		    }
+			
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
 			Integer userId = Integer.valueOf(visitVO.getUserId());
 			VisitRoomService service = new VisitRoomServiceImpl();

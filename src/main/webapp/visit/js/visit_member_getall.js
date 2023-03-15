@@ -19,6 +19,9 @@ fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
 			.then(data => {
 		let resData = [];
 		resData = data;
+		console.log(resData);
+		
+	if( resData.length > 0 ){	
 		for (let i = 0; i < resData.length; i++) {
 				
 				if ( resData[i].contactSatus == 0) {
@@ -33,10 +36,10 @@ fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
 					</tr>
 					`;
 					
-			}
+				}
 			
 			
-			if ( resData[i].contactSatus == 1) {
+				if ( resData[i].contactSatus == 1) {
 				document.querySelector(".getall_tb").innerHTML += `
 				    <tr onclick='trclickvisit(${resData[i].visitId});'>
                     <td>${resData[i].visitId}</td>
@@ -48,13 +51,19 @@ fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
 					</tr>
 					`;
 					
-			}
-			
-			
-			
-			
-}
-				
+				}
+	
+       	}
+
+	}else{
+
+		Swal.fire({
+			icon: 'error',
+			title: '目前您沒有預約',
+			footer: '<a href="VisitRoomFrontInsert.html">想要預約參觀嗎?點我立即預約</a>'
+		  })
+	
+	}	
 			});
 			
 			})
