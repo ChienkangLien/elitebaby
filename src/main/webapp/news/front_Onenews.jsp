@@ -42,7 +42,7 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
      <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
             <div class="container-fluid" >
-                <img src="../images/logo.jpg">
+                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -55,7 +55,7 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                                <li><a class="dropdown-item" href="/elitebaby/news/front_allnews.jsp">綜合</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
                                

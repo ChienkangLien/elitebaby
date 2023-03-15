@@ -224,7 +224,7 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 								
 				<tr>
 					<td>發佈日期:</td>
-					<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
+					<td><input name="scheduledTime" id="scheduledTime" type="date"/></td>
 
 
 				</tr>

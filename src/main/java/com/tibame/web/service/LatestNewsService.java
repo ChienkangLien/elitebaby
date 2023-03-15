@@ -17,9 +17,6 @@ public class LatestNewsService {
 		dao= new LatestNewsDAO();
 	}
 	
-//	public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
-//			java.sql.Date scheduledTime, java.sql.Date offShelfTime, String postTitle,byte[] newsPhoto) {
-
 		public LatestNewsVO addLatestNewsEmp(Integer sortId, Integer adminId,String newsIntro,
 				java.sql.Date scheduledTime, String postTitle,byte[] newsPhoto) {
 		
@@ -30,7 +27,6 @@ public class LatestNewsService {
 		latestNewsVO.setAdminId(adminId);
 		latestNewsVO.setNewsIntro(newsIntro);
 		latestNewsVO.setScheduledTime(scheduledTime);
-//		latestNewsVO.setOffShelfTime(offShelfTime);
 		latestNewsVO.setPostTitle(postTitle);
 		latestNewsVO.setNewsPhoto(newsPhoto);
 		dao.insert(latestNewsVO);
@@ -38,10 +34,7 @@ public class LatestNewsService {
 		return latestNewsVO;
 	}
 
-//	public LatestNewsVO updateLatestNews(Integer newsId, Integer sortId, Integer adminId,String newsIntro,
-//			java.sql.Date scheduledTime, java.sql.Date offShelfTime, String postTitle,byte[] newsPhoto) {
-
-		public LatestNewsVO addLatestNewsEmp(Integer newsId,Integer sortId, Integer adminId,String newsIntro,
+		public LatestNewsVO updateLatestNewsEmp(Integer newsId,Integer sortId, Integer adminId,String newsIntro,
 				java.sql.Date scheduledTime,  String postTitle,byte[] newsPhoto) {
 		
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
@@ -51,7 +44,6 @@ public class LatestNewsService {
 		latestNewsVO.setAdminId(adminId);
 		latestNewsVO.setNewsIntro(newsIntro);
 		latestNewsVO.setScheduledTime(scheduledTime);
-//		latestNewsVO.setOffShelfTime(offShelfTime);
 		latestNewsVO.setPostTitle(postTitle);
 		latestNewsVO.setNewsPhoto(newsPhoto);
 		dao.update(latestNewsVO);
@@ -69,9 +61,13 @@ public class LatestNewsService {
 	public LatestNewsVO getOneLatestNews(Integer newsId) {
 		return dao.findByPrimaryKey(newsId);
 	}
-
+	public LatestNewsVO getOneLatestNews1(Integer newsId) {
+		return dao.findByPrimaryKey1(newsId);
+	}
+	public LatestNewsVO getOneLatestNews2(Integer newsId) {
+		return dao.findByPrimaryKey1(newsId);
+	}
 	public List<LatestNewsVO> getAll() {
 		return dao.getAll();
 	}
-
 }

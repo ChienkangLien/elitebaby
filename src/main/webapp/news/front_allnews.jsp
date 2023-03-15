@@ -51,7 +51,7 @@ pageContext.setAttribute("list", list);
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                                <li><a class="dropdown-item" href="/elitebaby/news/front_allnews.jsp">綜合</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
                                
@@ -71,8 +71,6 @@ pageContext.setAttribute("list", list);
                                 <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-
-
                                   <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
                                   <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
                                   <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>

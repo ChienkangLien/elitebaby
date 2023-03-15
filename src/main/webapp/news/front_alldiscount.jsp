@@ -51,13 +51,12 @@ pageContext.setAttribute("list", list);
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                                <li><a class="dropdown-item" href="/elitebaby/news/front_allnews.jsp">綜合</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
                                 <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
                                
                             </ul>
-                        <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
-                       
+                        <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>                     
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>

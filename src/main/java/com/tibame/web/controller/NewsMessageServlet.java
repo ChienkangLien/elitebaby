@@ -1,7 +1,10 @@
 package com.tibame.web.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tibame.web.dao.LatestNewsDAO;
+import com.tibame.web.dao.NewsMessageDAO;
 import com.tibame.web.service.NewsMessageService;
 import com.tibame.web.service.NewsPhotoService;
+import com.tibame.web.vo.LatestNewsVO;
 import com.tibame.web.vo.NewsMessageVO;
 import com.tibame.web.vo.NewsPhotoVO;
 @WebServlet("/NewsMessage.do")
@@ -172,31 +178,29 @@ public class NewsMessageServlet extends HttpServlet{
 								
 				java.sql.Timestamp contentTime = null;
 				try {
-					contentTime = java.sql.Timestamp.valueOf(req.getParameter("contentTime").trim());
+					LocalDateTime now = LocalDateTime.now();
+			        contentTime = Timestamp.valueOf(now);
 				} catch (IllegalArgumentException e) {
 					errorMsgs.put("contentTime","請輸入日期時間");
 				}
 								
 				Integer newsId = Integer.valueOf(req.getParameter("newsId").trim());
 
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/admin/news/addNewsMessage.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
 				/***************************2.開始新增資料***************************************/
 				NewsMessageService messageSvc = new NewsMessageService();
-				messageSvc.addNewsMessage(userId,messageContent, contentTime, newsId);
+				messageSvc.addNewsMessage(userId, messageContent, contentTime, newsId);
 				
-				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/admin/news/listAllNewsMessage.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);				
-		}
-		
+				LatestNewsDAO count = new LatestNewsDAO();
+				LatestNewsVO sum = count.findByPrimaryKey1(newsId);
+				NewsMessageDAO aaa= new NewsMessageDAO();
+				List<NewsMessageVO>bbb=aaa.getMessage(newsId);
+				System.err.println(sum.toString());
+				req.setAttribute("Msgs1", bbb);
+				req.setAttribute("Msgs", sum);
+				RequestDispatcher successView = req.getRequestDispatcher("/news/front_Onenews.jsp");
+				successView.forward(req, res);
+        }
+        
 		
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp
 
@@ -215,6 +219,13 @@ public class NewsMessageServlet extends HttpServlet{
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+//	if ("FindBynewsId".equals(action)) { // 來自listAllEmp.jsp
+//			System.out.println("---------------------------");
+//			req.getParameter("comment_input");
+//			String context=req.getParameter("comment_input");
+//			NewsMessageDAO news= new NewsMessageDAO();
+//			news.insert(context);
+//		}
 	}
 
 }
