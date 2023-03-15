@@ -4,7 +4,6 @@
 
 a {
     text-decoration: none;
-    color:black;
 }
 
 #navbar {
@@ -33,7 +32,7 @@ a {
 }
 
 .t2 {
-    margin-left: 600px;
+    margin-left: 550px;
 }
 
 #blank_area {
@@ -44,37 +43,27 @@ a {
     padding: 10px 30px;
 }
 
-.ul  a{
-    background-color: #ff8188;
-    color: white;
-}
 /* 表格 */
 table {
-    width: 800px;
+    width: 1300px;
     border: 1px solid black;
-    margin-left: auto;
-      margin-right: auto;
+    margin-left: 45px;
+
 }
 
-/* table th, */
+table th,
 table td {
-
+ margin-left: 0;
     border: 1px solid black;
     padding: 20px;
     margin-right: 450px;
-    text-align: center;
+/*     text-align: center; */
+}
 
-}
-.container-filter{
-	margin-left:500px
-}
-.container-filter  btn a{
-	color:white;
-}
 /* 頁數 */
-/* * { */
-/*     box-sizing: border-box; */
-/* } */
+* {
+    box-sizing: border-box;
+}
 
 /* 數字 */
 div.pagination_block {
@@ -121,6 +110,12 @@ div.pagination_block ul.pagination>li>a:hover,
 iv.pagination_block ul.pagination>li>a.-on {
     background-color: #e9ecef;
     color: #0056b3;
+}
+table {
+    width: 1050px;
+    border: 1px solid black;
+    margin-left: 75px;
+
 }
 
 /* 時間 */

@@ -1,0 +1,92 @@
+* {
+    /* font-family: 'Noto Sans TC', sans-serif; */
+    font-family: Microsoft JhengHei;
+}
+
+body {
+    background-color: #ebebe8;
+}
+
+.c1 {
+    background-color: #FDFDFD;
+}
+
+.c2 {
+    background-color: #EBEBE8;
+}
+
+.c3 {
+    background-color: #FF8188;
+}
+
+.c4 {
+    background-color: #C68774;
+}
+
+.c5 {
+    background-color: #8B4513;
+}
+
+.f1 {
+    color: #333333;
+}
+
+.f2 {
+    color: #C68774;
+}
+
+.f3 {
+    color: #777777;
+}
+
+.f4 {
+    color: #FF8188;
+}
+
+.f5 {
+    color: #4A4A4A;
+}
+
+.f6 {
+    color: #FFFFFF;
+}
+
+
+.t1 {
+    color: #333333;
+    font-size: 28px;
+}
+
+.t2 {
+    color: #C68774;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.t3 {
+    color: #777777;
+    font-size: 16px;
+}
+
+.t4 {
+    color: #C68774;
+    font-size: 13px;
+}
+
+.w1 {
+    color: #FF5B51;
+}
+
+.btn:hover {
+    color: #8B4513;
+}
+
+.btn {
+    background-color: #ff8188;
+    color: white;
+}
+
+.bkbtn {
+    background-color: #FDFDFD;
+    color: #333333;
+}
