@@ -6,25 +6,25 @@ header {
   text-align: center;
   background-color: pink; }
 
-.button {
-  background-color: #4caf50;
-  /* Green */
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-right: 1rem;
-  transition-duration: 0.4s;
-  cursor: pointer; }
-  .button:hover {
-    background-color: #3e8e41; }
-  .button:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px); }
+/*.button {*/
+/*  background-color: #4caf50;*/
+/*  !* Green *!*/
+/*  border: none;*/
+/*  color: white;*/
+/*  padding: 0.5rem 1rem;*/
+/*  text-align: center;*/
+/*  text-decoration: none;*/
+/*  display: inline-block;*/
+/*  font-size: 16px;*/
+/*  margin-right: 1rem;*/
+/*  transition-duration: 0.4s;*/
+/*  cursor: pointer; }*/
+/*  .button:hover {*/
+/*    background-color: #3e8e41; }*/
+/*  .button:active {*/
+/*    background-color: #3e8e41;*/
+/*    box-shadow: 0 5px #666;*/
+/*    transform: translateY(4px); }*/
 
 a {
   text-decoration: none; }
@@ -34,7 +34,7 @@ a {
   flex-wrap: wrap; }
   .sticky .welcome {
     margin: 0 2rem;
-    width: 50%;
+    /*width: 50%;*/
     font-size: 20px; }
   .sticky .switch {
     width: 10%;
@@ -47,7 +47,7 @@ a {
 main {
   margin: 3rem 1rem;
   display: flex;
-  border: 1px dotted black; }
+}
   main section.left {
     margin: 0 1rem;
     background-color: antiquewhite;
