@@ -17,10 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.tibame.web.dao.LatestNewsDAO;
 import com.tibame.web.dao.NewsMessageDAO;
 import com.tibame.web.service.NewsMessageService;
-import com.tibame.web.service.NewsPhotoService;
 import com.tibame.web.vo.LatestNewsVO;
 import com.tibame.web.vo.NewsMessageVO;
-import com.tibame.web.vo.NewsPhotoVO;
 @WebServlet("/NewsMessage.do")
 public class NewsMessageServlet extends HttpServlet{
 

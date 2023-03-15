@@ -1,7 +1,6 @@
 package com.tibame.web.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,11 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import com.mysql.cj.protocol.Resultset;
-import com.tibame.web.dao.impl.LatestNewsJDBCDAO;
 import com.tibame.web.vo.LatestNewsVO;
-import com.tibame.web.vo.NewsPhotoVO;
 
 public class LatestNewsDAO implements LatestNewsDAO_interface {
 

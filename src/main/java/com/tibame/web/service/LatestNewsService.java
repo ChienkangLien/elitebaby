@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.tibame.web.dao.LatestNewsDAO;
 import com.tibame.web.dao.LatestNewsDAO_interface;
-import com.tibame.web.dao.impl.LatestNewsJDBCDAO;
 import com.tibame.web.vo.LatestNewsVO;
 
 public class LatestNewsService {
