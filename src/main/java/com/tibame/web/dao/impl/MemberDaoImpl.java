@@ -25,22 +25,28 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 
-	public List<MemberVO> selectAll() throws SQLException {
+	
+	public List<MemberVO> selectAll() {
 		List<MemberVO> members = new ArrayList<>();
-		String sql = "SELECT * FROM MEMBER";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		String GET_ALL = "SELECT * FROM MEMBER";
+		try (Connection conn = ds.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL);
 			ResultSet resultSet = pstmt.executeQuery();
+		) {
 			while (resultSet.next()) {
 				MemberVO member = new MemberVO();
-				resultSet.getInt("USER_ID");
-				resultSet.getString("USER_EMAIL");
-				resultSet.getString("USER_NAME");
-				resultSet.getString("USER_PASSWORD");
-				resultSet.getString("ADDRESS");
-				resultSet.getString("PHONE_NUMBER");
-				resultSet.getDate("BIRTHDAY");
+				member.setId(resultSet.getInt("USER_ID")); 
+				member.setUserName(resultSet.getString("USER_NAME"));
+				member.setEmail(resultSet.getString("USER_EMAIL"));
+				member.setPassword(resultSet.getString("USER_PASSWORD"));
+				member.setPhoneNumber(resultSet.getString("PHONE_NUMBER"));
+				member.setAddress(resultSet.getString("ADDRESS"));
+				
 				members.add(member);
 			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
 		}
 		return members;
 	}
@@ -83,7 +89,8 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberVO find(MemberVO memberCheck) {
 		        String sql = "SELECT * FROM MEMBER WHERE USER_EMAIL = ? and USER_PASSWORD = ?";
-		        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		        try (Connection conn = ds.getConnection(); 
+		        		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 		            pstmt.setString(1, memberCheck.getEmail());
 		            pstmt.setString(2, memberCheck.getPassword());
 		            try (ResultSet resultSet = pstmt.executeQuery()) {
@@ -120,7 +127,6 @@ public class MemberDaoImpl implements MemberDao {
 					member.setPassword(resultSet.getString("USER_PASSWORD"));
 					member.setAddress(resultSet.getString("ADDRESS"));
 					member.setPhoneNumber(resultSet.getString("PHONE_NUMBER"));
-					member.setBirthday(resultSet.getDate("BIRTHDAY"));
 					return member;
 				}
 			}

@@ -1,0 +1,65 @@
+
+/* 註冊頁面 */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(to bottom right, #0c3953, #34626c, #578b8e, #7cb0ae, #a2d5cb);
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+ 
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    /* 設置行與行之間的空間 */
+    margin-bottom: 0px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e8e8e8;
+  }
+  
+  button[type="button"] {
+    /* display: block; */
+    width: 50%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #ccd54a;
+  }
+
+  .button-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    }

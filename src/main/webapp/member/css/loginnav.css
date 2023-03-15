@@ -37,13 +37,9 @@
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   }
   
-  /* input[type="text"]:focus,
-  input[type="password"]:focus {
-    outline: none;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-  } */
   
   button[type="button"] {
+    margin-left: 25px;
     padding: 15px 30px;
     font-size: 18px;
     background-color: #e64c65;
@@ -54,21 +50,80 @@
     transition: all 0.2s ease-in-out;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
+
+  button[type="button"]:hover{
+    background-color: #ccd54a;
+  }
   
-  /* 一般版本按鈕
-  button[type="button"]:hover {
-    background-color: #c73c52;
-  } */
 
-  /* 一般無動態版本
-  .form-group input[type="text"],
-.form-group input[type="password"] {
-  transition: all 0.2s ease-in-out;
-} */
-
+  
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }
 
+
+/* 立即註冊為會員按鈕 */
+.signup {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 70px;
+}
+
+.notyet {
+  position: absolute;
+  text-align: center;
+}
+
+.forget{
+  
+}
+/* 立即註冊為會員按鈕 */
+
+
+
+
+/* 會員登入部分 */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-image: linear-gradient(to bottom right, #0c3953, #34626c, #578b8e, #7cb0ae, #a2d5cb);
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  /* 設置行與行之間的空間 */
+  margin-bottom: 0px;
+  border-radius: 5px;
+  border: none;
+  background-color: #e8e8e8;
+}

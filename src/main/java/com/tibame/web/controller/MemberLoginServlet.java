@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		MemberService service = new MemberServiceImpl();
 		member = service.login(member);
-//			System.out.println(resultStr);
 		resp.setContentType("application/json;charset=UTF-8");
 
 		JsonObject jsonObj = new JsonObject();
@@ -42,15 +40,11 @@ public class MemberLoginServlet extends HttpServlet {
 			if (req.getSession(false) != null) {
 				req.changeSessionId();
 			} // ←產生新的Session ID}
-
 			jsonObj.addProperty("message", "登入成功");
-			req.getSession().setAttribute("memId", member.getId());
 			req.getSession().setAttribute("memberVO", member);
-			Cookie cookie = new Cookie("username", member.getUserName());
-			cookie.setPath("/");
-			resp.addCookie(cookie);
-			System.out.println(req.getSession().getAttribute("memId"));
+			System.out.println(req.getSession().getAttribute("memberVO"));
 		}
 		resp.getWriter().write(jsonObj.toString());
+
 	}
  }
