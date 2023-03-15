@@ -1,9 +1,10 @@
 package forum.service;
 
 import forum.dao.*;
-import forum.pojo.*;
-import login.UserDao;
-
+import forum.pojo.Category;
+import forum.pojo.FormBean;
+import forum.pojo.Msg;
+import forum.pojo.Post;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,24 +12,24 @@ import java.util.ArrayList;
 public class PublishService {
     private CategoryDao categoryDao = new CategoryDao();
     private PostDao postDao = new PostDao();
-    private UserDao userDao = new UserDao();
+    private AccessDao accessDao = new AccessDao();
     private PostImgDao postImgDao = new PostImgDao();
     private MsgDao msgDao = new MsgDao();
-//    private MsgImgDao msgImgDao = new MsgImgDao();
+    private MsgImgDao msgImgDao = new MsgImgDao();
 
 
-    public FormBean getForm(int userId) {
+    public FormBean getFormBean(int userId) {
         ArrayList<Category> categories = categoryDao.selectAll();
         String[] categoryNames = new String[categories.size()];
         for (int i = 0; i < categories.size(); i++) {
             categoryNames[i] = categories.get(i).getCategory();
         }
         ;
-//        String name = userDao.userNameById(userId);
+        String name = accessDao.userNameById(userId);
 
         FormBean formBean = new FormBean();
         formBean.setCategoryNames(categoryNames);
-//        formBean.setUserName(name);
+        formBean.setUserName(name);
 
         return formBean;
     }
@@ -40,15 +41,13 @@ public class PublishService {
 
     public Msg insertMsg(Msg msg, ArrayList<InputStream> ins) {
         int msgId = msgDao.insert(msg);
-//        msgImgDao.insert(msgId,ins);
+        msgImgDao.insert(msgId, ins);
         msg = msgDao.selectById(msgId);
-//        msg = msgImgDao.selectById(msg);
-        System.out.println(msg);
+        msg = msgImgDao.selectById(msg);
         return msg;
     }
+
+    public void delete(int postId) {
+        postDao.deleteById(postId);
+    }
 }
-
-
-
-
-

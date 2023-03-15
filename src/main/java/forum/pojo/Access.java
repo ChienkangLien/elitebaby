@@ -1,14 +1,11 @@
-package login;
-import lombok.Data;
-@Data
-
-public class User {
+package forum.pojo;
+public class Access {
     private int userId;
     private String userName;
     private String password;
-    public User() {
+    public Access() {
     }
-    public User(int userId, String userName, String password) {
+    public Access(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;

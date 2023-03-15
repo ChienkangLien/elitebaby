@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box; }
+
+header {
+  font-size: 50px;
+  text-align: center;
+  background-color: pink; }
+
+.button {
+  background-color: #4caf50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 1rem;
+  transition-duration: 0.4s;
+  cursor: pointer; }
+  .button:hover {
+    background-color: #3e8e41; }
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px); }
+
+a {
+  text-decoration: none; }
+
+.sticky {
+  display: flex;
+  flex-wrap: wrap; }
+  .sticky .welcome {
+    margin: 0 2rem;
+    width: 50%;
+    font-size: 20px; }
+  .sticky .switch {
+    width: 10%;
+    border: 1px red solid; }
+  .sticky .post {
+    width: 10%; }
+  .sticky .follow {
+    width: 10%; }
+
+main {
+  margin: 3rem 1rem;
+  display: flex;
+  border: 1px dotted black; }
+  main section.left {
+    margin: 0 1rem;
+    background-color: antiquewhite;
+    width: 15%; }
+    main section.left .category {
+      border: 1px solid blue; }
+      main section.left .category .items {
+        border: 1px sandybrown solid;
+        padding: 1rem; }
+      main section.left .category .addCollections {
+        font-size: small;
+        float: right; }
+    main section.left div.search-text {
+      border: 1px solid red; }
+    main section.left ul li {
+      border: 1px solid red; }
+      main section.left ul li a {
+        text-decoration: none; }
+  main section.right {
+    background-color: antiquewhite;
+    margin: 0 1rem;
+    width: 80%; }
+    main section.right article {
+      border: 1px solid red;
+      margin: 1rem;
+      background-color: azure; }
+      main section.right article.msg-article {
+        background-color: #abf2f0; }
+      main section.right article .d1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem;
+        border: 1px dotted blue; }
+        main section.right article .d1 .user {
+          font-size: large; }
+      main section.right article .d2 {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem; }
+        main section.right article .d2 .category {
+          color: blue; }
+        main section.right article .d2 .topic {
+          color: blue; }
+        main section.right article .d2 .content {
+          border: 0.5px blue dotted;
+          width: 100%;
+          overflow: hidden;
+          max-height: 70px; }
+        main section.right article .d2 .form {
+          width: 100%; }
+          main section.right article .d2 .form .textarea {
+            width: 100%;
+            height: 200px; }
+      main section.right article .d3 {
+        padding: 0.5rem; }
+        main section.right article .d3 .post-img {
+          display: flex;
+          flex-wrap: wrap; }
+          main section.right article .d3 .post-img img {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            transition: all 0.5s; }
+            main section.right article .d3 .post-img img:hover {
+              transform: scale(5);
+              cursor: pointer; }
+        main section.right article .d3 .msg-img {
+          display: flex;
+          flex-wrap: wrap; }
+          main section.right article .d3 .msg-img img {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            transition: all 0.5s; }
+            main section.right article .d3 .msg-img img:hover {
+              transform: scale(5);
+              cursor: pointer; }
+
+/*# sourceMappingURL=forum.css.map */

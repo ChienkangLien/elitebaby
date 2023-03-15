@@ -9,12 +9,13 @@ import forum.pojo.PostBean;
 import java.util.ArrayList;
 
 public class PostService {
+    private AccessDao accessDao = new AccessDao();
     private CategoryDao categoryDao = new CategoryDao();
     private PostDao postDao = new PostDao();
     private PostLikeDao postLikeDao = new PostLikeDao();
     private PostImgDao postImgDao = new PostImgDao();
     private MsgDao msgDao = new MsgDao();
-//    private MsgImgDao msgImgDao = new MsgImgDao();
+    private MsgImgDao msgImgDao = new MsgImgDao();
 
     public ArrayList<Post> getAll(boolean order, String categoryId, String topic) {
         ArrayList<Post> posts = new ArrayList<>();
@@ -72,16 +73,30 @@ public class PostService {
         return postLikeDao.count(postId);
     }
 
-    public PostBean getPostBean(int postId) {
-        Post post = postDao.selectById(postId);
-        post = postImgDao.selectById(post);
-        ArrayList<Msg> msgs = msgDao.selectAll(postId);
-//        msgs = msgImgDao.selectAll(msgs);
-//        int length = msgs.size();
+    public boolean checkUserAndPostMatch(int userId, int postId) {
+        boolean b = postDao.selectByPostIdUserId(userId, postId);
+        return b;
+    }
+
+
+    public PostBean getPostBean(int postId, int userId) {
+        Post post = postDao.selectById(postId);//文章基本屬性
+        post = postImgDao.selectById(post);//文章圖片
+        ArrayList<Msg> msgs = msgDao.selectAll(postId);//全部留言
+        msgs = msgImgDao.selectAll(msgs);//留言圖片
+        int length = msgs.size();
+        String userName = accessDao.userNameById(userId);//登入者名稱
+
         PostBean postBean = new PostBean();
         postBean.setPost(post);
         postBean.setMsgs(msgs);
-//        postBean.setDataLength(length);
+        postBean.setDataLength(length);
+        postBean.setUserName(userName);
+
+        postBean.setUserId(userId);
+        if (checkUserAndPostMatch(userId, postId)) {
+            postBean.setEdit(true);
+        }
         return postBean;
     }
 
@@ -92,6 +107,14 @@ public class PostService {
             categoryName.add(c.getCategory());
         }
         postDao.postGenerator(categoryName);
+    }
+
+    public void deleteAll() {
+        postDao.deleteAll();
+    }
+
+    public boolean update(Post post) {
+        return postDao.update(post);
     }
 }
 
