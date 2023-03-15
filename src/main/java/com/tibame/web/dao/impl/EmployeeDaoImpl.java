@@ -67,13 +67,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int updateById(EmployeeVO employee) {
-		String sql = "UPDATE ADMINISTRATOR SET ADMIN_NAME=?, ADMIN_ACCOUNT=?, ADMIN_PASSWORD=?, ADMIN_PERMISSION=? " + "WHERE ADMIN_ID=?";
+		String sql = "UPDATE ADMINISTRATOR SET ADMIN_NAME=?, ADMIN_PASSWORD=?, ADMIN_PERMISSION=? WHERE ADMIN_ID=?";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, employee.getEmpname());
-			pstmt.setString(2, employee.getEmpaccount());
-			pstmt.setString(3, employee.getEmppassword());
-			pstmt.setString(4, employee.getEmppermission());
-			pstmt.setInt(5, employee.getEmpid());
+			pstmt.setString(2, employee.getEmppassword());
+			pstmt.setString(3, employee.getEmppermission());
+			pstmt.setInt(4, employee.getEmpid());
 
 			return pstmt.executeUpdate();
 		} catch (Exception e) {

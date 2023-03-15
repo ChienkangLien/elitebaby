@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.tibame.web.vo.MemberVO;
 
-@WebFilter(urlPatterns = { "" })
+@WebFilter(urlPatterns = { "/elitebaby/room/order.html","/elitebaby/meal/user_order.html","/elitebaby/visit/VisitRoomFrontGetAll.html","/elitebaby/visit/ReportEmailFrontGetAll.html","/elitebaby/visit/ReportEmailFrontRSMail.html","/elitebaby/visit/ReportEmailFrontInsert.html" })
 public class MemFilter implements Filter {
 
 	@Override

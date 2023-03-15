@@ -14,7 +14,7 @@
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
     <link rel="stylesheet" href="css/official.css" />
-    <link rel="stylesheet" href="css/front_navbar.css" />
+    <link rel="stylesheet" href="css/loginnav.css" />
 
     <!--有時候更新不到可加 ?ver=1來抓取更新資料  有夠爛 -->
     <link rel="stylesheet" type="text/css" href="css/loginnav.css?ver=1" />
@@ -48,8 +48,45 @@
         </div>
         <button type="button" class="btn_login">登入</button>
         <button type="button" class="btn_back">回到首頁</button>
+        <div class="signup">
+          <span>尚未成為會員</span>
+          <a href="register.html" type="button" class="notyet"> 立即加入 </a>
+          <!-- <button type="button" class=" dropdown-item btn_forget" data-toggle="modal" data-target="#editModal">
+            忘記密碼
+          </button> -->
+        </div>
       </form>
     </div>
+
+    <!-- 忘記密碼彈跳視窗Modal -->
+    <!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">你腦子什麼做的,這麼重要還會忘記?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="email">輸入你的Email</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">輸入你的手機</label>
+              <input type="text" class="form-control" id="phoneNumber">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary btn_send ">送出</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
   </body>
 
   <script>
