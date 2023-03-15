@@ -37,10 +37,8 @@
                                 <li><a class="dropdown-item" href="#">綜合</a></li>
                                 <li><a class="dropdown-item" href="#">優惠</a></li>
                                 <li><a class="dropdown-item" href="#">一般</a></li>
-                                <li><a class="dropdown-item" href="#">其他</a></li>
                             </ul>
                         <li class="nav-item"><a class="nav-link" href="#">關於我們</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">環境介紹</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">房型介紹</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">討論區</a></li>
@@ -53,23 +51,20 @@
                                 會員中心
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#editModal">
+                                <button type="button" class=" dropdown-item btn_edit" data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
                       
-                                <li><a class="dropdown-item" href="#">查詢房間訂單</a></li>
-                                <li><a class="dropdown-item" href="#">查詢膳食訂單</a></li>
-                                <li> <a class="dropdown-item" href="#">信箱</a> </li>
-                                <li> <a class="dropdown-item" href="#">問題回報</a> </li>
+                                  <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
+                                  <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
                             </ul>
                         </li>
                 </div>
-                <!-- <div id="login">
-                    <ul class="navbar-nav navbar-right">
-                        <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#">註冊</a></li>
-                    </ul>
-                </div> -->
+      
                 
                 <!-- ==============================================按鈕觸發============================================ -->
                 <!-- ===============================================購物車============================================= -->
@@ -93,7 +88,7 @@
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;">3</span>
+                            <span class="badge badge-danger navbar-badge EmailBill;">3</span>
                         </button>
 
 
@@ -102,34 +97,31 @@
                             登出
                         </button>
                         <button id="registerButton" class="register_btn">註冊</button>
-                        <!-- 試試看還沒完成(登入按鈕) -->
+                        <!-- 登入按鈕 -->
                         <button id="loginButton" class="login_btn">登入</button>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <div id="book_visit">
-        <a href="#">
-            <img class="img-responsive"
-                src="images/book_visit.png"
-                 />
-        </a>
-    </div>
-    <div id="blank_area">
 
 
-    </div>
     <div id="book_visit">
         <a href="#">
-            <img class="img-responsive"
-                src="images/book_visit.png"
-                 />
+            <img class="img-responsive" src="images/book_visit.png"/>
         </a>
     </div>
     <div id="blank_area">
         <!-- 此處留空 -->
     </div>
+  </div>
+  <div id="popupWrapper">
+      <p>信件通知</p>
+      <hr style="margin-top: 5px;">
+      <div id="popupContent" style="align-items: center;">
+
+      </div>
+</div>
     <!-- 滾動式圖片 -->
     <div>
         <div id="carouselExampleIndicators1" class="carousel slide room_type_img" data-bs-ride="carousel">
@@ -141,16 +133,16 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="images/原始人.jpg" class="d-block w-100">
+                <img src="images/homepage/交誼廳.jpg" class="d-block w-100">
               </div>
               <div class="carousel-item">
-                <img src="images/野外.jpg" class="d-block w-100">
+                <img src="images/homepage/菁英.jpg" class="d-block w-100">
               </div>
               <div class="carousel-item">
-                <img src="images/大象.jpg" class="d-block w-100">
+                <img src="images/homepage/育嬰室.jpg" class="d-block w-100">
               </div>
               <div class="carousel-item">
-                <img src="images/極光.jpg" class="d-block w-100">
+                <img src="images/homepage/洗澡.jpg" class="d-block w-100">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
@@ -251,10 +243,10 @@
                 
             </div>
             <div class="row">
-                <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor3.jpg" /></a></div></div>
+                <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/婦產科醫生.jpg" /></a></div></div>
                 <div class="col d-flex align-items-center doctextImage">
                   <div>
-                    <b>張哲瑋 婦產科主治醫生</b>
+                    <b>姚培藍 婦產科主治醫生</b>
                     <br>學經歷
                     <br>國立陽明大學醫學博士
                     <br>加州周產期醫學會理事
@@ -271,17 +263,25 @@
           </div>
         </div>
       </div>
-
+<br><br><br><br><br>
     
-    <div class="text-center">
-        <div class="contactus">聯絡我們</div> 
-        <p class="text-center">
-            10488 台北市中山區南京東路三段219號5樓｜TEL : 02-2712-0589｜FAX :
-            02-2794-0123｜E-mail : service@shinebc.com.tw
-        </p>
-    </div>
+  
+    <div class="row">
+     <div class="col"><div><a href=""><img src="images/homepage/請聽我說.jpg" /></a></div></div>
+     <div class="col d-flex align-items-center text-left"><div>
+     <h2>請聽我說</h2>
+     <div text-center>
+      從女孩成為女人這個特別時刻，我們TGA105第一組陪伴媽咪們一起走過最艱辛的路，回到最佳狀態，每位準媽咪能由內而外的蛻變翻轉，發揮自我的潛能，成為更加自信更加完整的自己，來迎接人生幸福的生命新階段。
+     </div>
+     <br><br><br><br><br><br>
+     <br>TEL : 02-2712-0589
+     <br>FAX :02-2794-0123
+     <br>E-mail : service@shinebc.com.tw
+     <br>服務時間：週一 - 週日: 0:00 - 24:00
+     <br>10488 台北市中山區南京東路三段219號5樓
+      </div></div> 
+  </div>
 
-    
   
   <!-- 登出彈跳視窗Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -354,9 +354,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
-    <!-- 下載bootstrap引用 -->
-    <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
-    ></script> -->
     <script src="js/front_navbar.js"></script>
 
 </body>

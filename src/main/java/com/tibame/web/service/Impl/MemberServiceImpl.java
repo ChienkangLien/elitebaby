@@ -1,5 +1,8 @@
 package com.tibame.web.service.impl;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.tibame.web.dao.MemberDao;
@@ -17,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 			return "使用者名稱不符合規則";
 		}
 		final String password = member.getPassword();
-		if (password == null || password.length() < 8 || password.length() > 20) {
+		if (password == null || password.length() < 8 ) {
 			return "密碼不符合規則";
 		}
 		final String email = member.getEmail();
@@ -36,21 +39,21 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	
-
 	@Override
 	public MemberVO login(MemberVO member) {
 		final String email = member.getEmail();
 		final String password = member.getPassword();
+		String secret = encryptPassword(password);
 		if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
 			return null;
 		}else {
+			member.setPassword(secret);
 			return dao.find(member);
 			
 		}
 
 	}
-	
-	
+		
 
 	@Override
 	public MemberVO update(MemberVO member) {
@@ -83,6 +86,24 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> findAll() {
 		return dao.selectAll();
 	}
+	
+	private String encryptPassword(String password) {
+        String encryptedPassword = null;
+        try {
+            // 使用SHA-256算法做加密
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+            // 將加密後的字節數組轉換成16進制字符串
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+            encryptedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return encryptedPassword;
+    }
 	
 	
 }
