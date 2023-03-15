@@ -128,7 +128,6 @@ $(document).on("click","input.last_page",function(){
 					`;	
 
 
-
 			}
 			console.log(page)
 			if( allcount > 5 ){

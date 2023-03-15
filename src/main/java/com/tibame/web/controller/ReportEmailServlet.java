@@ -53,12 +53,13 @@ public class ReportEmailServlet extends HttpServlet {
 			final String authCode = GetAuthCode.genAuthCode();
 			JsonObject respbody = new JsonObject();
 			HttpSession session = req.getSession();
+//			MemberVO memberVO = session.getAttribute("MemberVO");
 			session.setAttribute("authCode", authCode);
 			Gson gson = new Gson();
 
 			try {
 				EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-
+//				emailVO.setUserId(memberVO.getUserId());
 				final Integer userId = emailVO.getUserId();
 				if (userId == null) {
 					resultStr = "請先登入";
@@ -104,11 +105,14 @@ public class ReportEmailServlet extends HttpServlet {
 			JsonObject respbody = new JsonObject();
 			HttpSession session = req.getSession();
 			session.setAttribute("authCode", authCode);
+//			AdminVO adminVO = session.getAttribute("AdminVO");
+//			Integer adminId = memberVO.getUserId();
+//			if (adminId > 0 && adminId != null) {
 			Gson gson = new Gson();
 
 			try {
 				EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-
+//				emailVO.setAdminId(adminId);
 				final Integer userId = emailVO.getUserId();
 				if (userId == null) {
 					resultStr = "請先登入";
@@ -146,6 +150,12 @@ public class ReportEmailServlet extends HttpServlet {
 				resp.getWriter().append(respbody.toString());
 			}
 
+//		}else{
+
+//			resp.sendRedirect("/elitebaby/visit/ReportEmailFrontGetOne.html");
+
+//		}
+
 		}
 
 		if (action.equals("GET_MEMBER")) {
@@ -173,6 +183,9 @@ public class ReportEmailServlet extends HttpServlet {
 
 			Gson gson = new Gson();
 			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
+//			HttpSession session = req.getSession() ;
+//			MemberVO memberVO = (MemberVO)session.getAttribute("");
+//			emailVO.setUserId(memberVO.getUserId());
 			ReportEmailService service = new ReportEmailServiceImpl();
 			List<EmailVO> getOneList = service.getAllByUserId(emailVO.getUserId());
 			Writer writer = resp.getWriter();
@@ -181,12 +194,13 @@ public class ReportEmailServlet extends HttpServlet {
 		}
 
 		if (action.equals("get_byUserId_member")) {
-			
+
 //			HttpSession session = req.getSession() ;
 //			MemberVO memberVO = (MemberVO)session.getAttribute("");
 			
 			Gson gson = new Gson();
 			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
+//			emailVO.setUserId(memberVO.getUserId());
 			ReportEmailService service = new ReportEmailServiceImpl();
 			List<EmailVO> getOneList = service.getAllByUserIdMember(emailVO.getUserId());
 			Writer writer = resp.getWriter();
@@ -205,7 +219,7 @@ public class ReportEmailServlet extends HttpServlet {
 		}
 
 		if ("GETALL_EMAIL_ADMIN".equals(action)) {
-
+			
 			Integer offset = Integer.valueOf(req.getParameter("offset"));
 			ReportEmailService service = new ReportEmailServiceImpl();
 			List<EmailVO> list = service.getAllInfoByAdmin(offset);
@@ -479,16 +493,15 @@ public class ReportEmailServlet extends HttpServlet {
 			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
 			String authCode = emailVO.getAuthCode();
 			Integer mailId = emailVO.getMailId();
-			System.out.println(authCode+mailId);
+			System.out.println(authCode + mailId);
 			String result = "請確認信件是否存在";
 			if (authCode != null && !authCode.isEmpty() && mailId != null && mailId != 0) {
 				ReportEmailService service = new ReportEmailServiceImpl();
 				result = service.deleteAllEmailData(mailId, authCode);
-				
-					json.addProperty("successful", result.equals("刪除成功"));
-					json.addProperty("message", result);
-					resp.getWriter().append(json.toString());
-				
+
+				json.addProperty("successful", result.equals("刪除成功"));
+				json.addProperty("message", result);
+				resp.getWriter().append(json.toString());
 
 			} else {
 

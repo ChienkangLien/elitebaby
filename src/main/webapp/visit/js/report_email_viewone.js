@@ -3,6 +3,7 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	.then(resp => resp.json())
 	.then(email => {
 
+	if(email!=null){
 
 		document.querySelector(".one_emailId").value = email.mailId;
 
@@ -102,6 +103,17 @@ fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 		}
 
 	
+	}else{
+
+		Swal.fire({
+			icon: 'error',
+			title: '找不到信件',
+			text: '請檢查信件是否存在'
+		  }).then(result =>{
+			location.href = "ReportEmailFrontGetAll.html";
+		  })
+
+	}
 
 
 	});
