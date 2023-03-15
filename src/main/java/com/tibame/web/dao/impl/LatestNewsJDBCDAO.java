@@ -293,57 +293,56 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_interface {
 		LatestNewsJDBCDAO dao = new LatestNewsJDBCDAO();
 
 		// 新增
-		LatestNewsVO latestNewsVO1 = new LatestNewsVO();
-		latestNewsVO1.setSortId(1);
-		latestNewsVO1.setAdminId(1);
-		latestNewsVO1.setNewsIntro("一般");
-		latestNewsVO1.setPublishedTime(java.sql.Date.valueOf("2022-11-25"));
-		latestNewsVO1.setOnNews(java.sql.Date.valueOf("2023-05-18"));
-		latestNewsVO1.setOffNews(java.sql.Date.valueOf("2023-6-31"));
-		latestNewsVO1.setPostTitle("歡慶清明節");
-		dao.insert(latestNewsVO1);
+//		LatestNewsVO latestNewsVO1 = new LatestNewsVO();
+//		latestNewsVO1.setSortId(1);
+//		latestNewsVO1.setAdminId(1);
+//		latestNewsVO1.setNewsIntro("一般");
+//		latestNewsVO1.setPublishedTime(java.sql.Date.valueOf("2022-11-25"));
+//		latestNewsVO1.setOnNews(java.sql.Date.valueOf("2023-05-18"));
+//		latestNewsVO1.setOffNews(java.sql.Date.valueOf("2023-6-31"));
+//		latestNewsVO1.setPostTitle("歡慶清明節");
+//		dao.insert(latestNewsVO1);
 
 		// 修改
 //		LatestNewsVO latestNewsVO2 = new LatestNewsVO();
-//		latestNewsVO2.setNewsId(1);
+//		latestNewsVO2.setNewsId(17);
 //		latestNewsVO2.setSortId(1);
 //		latestNewsVO2.setAdminId(3);
 //		latestNewsVO2.setNewsIntro("其他");
 //		latestNewsVO2.setPublishedTime(java.sql.Date.valueOf("2022-04-30"));
 //		latestNewsVO2.setOnNews(java.sql.Date.valueOf("2022-07-31"));
 //		latestNewsVO2.setOffNews(java.sql.Date.valueOf("2022-08-31"));
-//		latestNewsVO2.setPostTitle("歡慶周年");
+//		latestNewsVO2.setPostTitle("歡慶周年xxx");
 //		dao.update(latestNewsVO2);
 
 		// 刪除
-//		dao.delete(4);
+//	dao.delete(4);
 		
 		
 		// 查詢一筆資料 ()裡指的是一筆資料
-//		LatestNewsVO latestNewsVO3 = dao.findByPrimaryKey(1);
-//		System.out.print(latestNewsVO3.getNewsId() + ",");
-//		System.out.print(latestNewsVO3.getSortId() + ",");
-//		System.out.print(latestNewsVO3.getAdminId() + ",");
-//		System.out.print(latestNewsVO3.getNewsIntro() + ",");
-//		System.out.print(latestNewsVO3.getPublishedTime() + ",");
-//		System.out.print(latestNewsVO3.getOnNews() + ",");
-//		System.out.print(latestNewsVO3.getOffNews() + ",");
-//		System.out.println(latestNewsVO3.getPostTitle());
-//		System.out.println("---------------------");
-//
-//		// 查詢一批資料
-//		List<LatestNewsVO> list = dao.getAll();
-//		for (LatestNewsVO aLatest : list) {
-//			System.out.print(latestNewsVO3.getNewsId() + ",");
-//			System.out.print(aLatest.getSortId() + ",");
-//			System.out.print(aLatest.getAdminId() + ",");
-//			System.out.print(aLatest.getNewsIntro() + ",");
-//			System.out.print(aLatest.getPublishedTime() + ",");
-//			System.out.print(aLatest.getOnNews() + ",");
-//			System.out.print(aLatest.getOffNews());
-//			System.out.print(aLatest.getPostTitle());
-//			System.out.println();
+	LatestNewsVO latestNewsVO3 = dao.findByPrimaryKey(1);
+		System.out.print(latestNewsVO3.getNewsId() + ",");
+		System.out.print(latestNewsVO3.getSortId() + ",");
+		System.out.print(latestNewsVO3.getAdminId() + ",");
+	System.out.print(latestNewsVO3.getNewsIntro() + ",");
+	System.out.print(latestNewsVO3.getPublishedTime() + ",");
+	System.out.print(latestNewsVO3.getOnNews() + ",");
+		System.out.print(latestNewsVO3.getOffNews() + ",");
+		System.out.println(latestNewsVO3.getPostTitle());
+		System.out.println("---------------------");
 
-//		}
+		// 查詢一批資料
+	List<LatestNewsVO> list = dao.getAll();
+	for (LatestNewsVO aLatest : list) {
+		System.out.print(latestNewsVO3.getNewsId() + ",");
+			System.out.print(aLatest.getSortId() + ",");
+			System.out.print(aLatest.getAdminId() + ",");
+		System.out.print(aLatest.getNewsIntro() + ",");
+			System.out.print(aLatest.getPublishedTime() + ",");
+			System.out.print(aLatest.getOnNews() + ",");
+			System.out.print(aLatest.getOffNews());
+			System.out.print(aLatest.getPostTitle());
+			System.out.println();
+		}
 	}
 }

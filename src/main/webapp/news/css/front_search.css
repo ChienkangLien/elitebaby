@@ -1,0 +1,205 @@
+ * {
+     box-sizing: border-box;
+ }
+
+ html {
+     font-size: 62.5%;
+     --page-width: 1200px;
+     --bg-color: #046f15;
+ }
+
+ a {
+     text-decoration: none;
+ }
+
+ body {
+     background-color: white;
+ }
+
+ #nav {
+     opacity: 0.9;
+     position: fixed;
+     top: 0px;
+     z-index: 1;
+     width: 100%;
+ }
+
+ #book_visit {
+     position: fixed;
+     bottom: 0;
+     right: 0;
+     opacity: 0.8;
+     z-index: 2;
+ }
+
+ .btn {
+     background-color: #ff8188;
+     color: white;
+ }
+
+ .z-index-1 {
+     z-index: -1;
+     margin-top: 50px;
+ }
+
+ ul.list {
+     list-style: none;
+     display: inline-block;
+     color: black;
+ }
+
+ div#login {
+     display: none;
+ }
+
+ span.badge {
+     background-color: red
+ }
+
+ div#book_visit>a>img {
+     max-width: 100%;
+     max-height: 100%;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+ }
+
+ /* ======================================== */
+ section.sec1 {
+     /* border: 1px solid red; */
+     min-width: var(--page-width);
+     padding: 50px 0;
+ }
+
+ section.sec1.-type1 {
+     background: linear-gradient(white, #ff8188);
+ }
+
+ section.sec1.-type2 {
+     background: linear-gradient(#ff8188, white);
+ }
+
+ section.sec1 div.flex_container {
+     /* border: 1px solid blue; */
+     width: var(--page-width);
+     margin: 0 auto;
+     display: flex;
+     align-items: center;
+ }
+
+ section.sec1 div.flex_container div.flex_items {
+     /* border: 1px solid green; */
+     flex-basis: 50%;
+ }
+
+ section.sec1 div.flex_container div.flex_items img {
+     width: 100%;
+ }
+
+ section.sec1 div.flex_container div.flex_items.-right {
+     padding: 50px;
+ }
+
+  a.title {
+     margin: 0;
+     font-size: 4rem;
+     margin-bottom:20px;
+ }
+
+  a.title {
+     text-align: center;
+ }
+
+  a.intro {
+     font-size: 3.8rem;
+     line-height: 4rem;
+ }
+
+  a.intro {
+     text-align: center;
+ }
+
+ .container-filter {
+     margin: 90px 0 0 0;
+     padding: 0 0 15px 0;
+     text-align: center;
+     background-color: white;
+ }
+
+ .container-filter li {
+     list-style: none;
+     display: inline-block;
+     margin: 0 0 20px 0;
+ }
+
+ .container-filter li a {
+     display: block;
+     margin-left: 10px;
+     margin-right: 10px;
+     padding: 10px 25px;
+     border-radius: 50em;
+     text-transform: uppercase;
+     font-size: 20px;
+     color: #ff8188;
+     background-color: lightyellow;
+
+ }
+ 
+
+ .container {
+     background-color: white;
+     /* 左右位置 */
+     text-align: right;
+     /* 調整高低 */
+     line-height: 20px;
+     width: 100%;
+ }
+
+ .bar {
+     border-radius: 13px;
+     border: 2px solid lightgray;
+     font-size: 20px;
+     padding-left: 10px;
+ }
+
+ .bar:hover {
+     box-shadow: 5px 5px 5px 5px rgb(134, 131, 131);
+     transition: 1s;
+ }
+
+ #search {
+     font-size: 20px;
+     width: 52px;
+     height: 32px;
+     margin-left: -50px;
+     background-color: lightgrey;
+     border-top-right-radius: 30px;
+     border-bottom-right-radius: 30px;
+     border: none;
+     cursor: pointer;
+ }
+
+ #search:hover {
+     background-color: bisque;
+     color: white;
+ }
+
+ /* 搜尋結果css */
+ .ui-weidget {
+     font-size: 20px;
+     list-style: none;
+     transition: 1s;
+     background-color: white;
+     width: 50%;
+     opacity: 0.5;
+     border-radius: 20px;
+ }
+
+ .ui-elper-hidden-accessible {
+     display: none;
+ }
+
+ .div {
+     background-color: lightgray;
+ }

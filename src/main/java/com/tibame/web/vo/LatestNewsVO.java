@@ -2,6 +2,7 @@ package com.tibame.web.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class LatestNewsVO implements java.io.Serializable{
 	//                                        interface 介面
@@ -9,11 +10,10 @@ public class LatestNewsVO implements java.io.Serializable{
 	private Integer sortId;
 	private Integer adminId;
 	private String newsIntro;
-	private Date publishedTime;
-	private Date onNews;
-	private Date offNews;
+    private Date scheduledTime;
+//	private Date offShelfTime;
 	private String postTitle;
-
+	private byte[] newsPhoto;
 	
 
 	public Integer getNewsId() {
@@ -48,29 +48,21 @@ public class LatestNewsVO implements java.io.Serializable{
 		this.newsIntro = newsIntro;
 	}
 
-	public Date getPublishedTime() {
-		return publishedTime;
+	public Date getScheduledTime() {
+		return scheduledTime;
 	}
 
-	public void setPublishedTime(Date publishedTime) {
-		this.publishedTime = publishedTime;
+	public void setScheduledTime(Date scheduledTime) {
+		this.scheduledTime = scheduledTime;
 	}
 
-	public Date getOnNews() {
-		return onNews;
-	}
-
-	public void setOnNews(Date onNews) {
-		this.onNews = onNews;
-	}
-
-	public Date getOffNews() {
-		return offNews;
-	}
-
-	public void setOffNews(Date offNews) {
-		this.offNews = offNews;
-	}
+//	public Date getOffShelfTime() {
+//		return offShelfTime;
+//	}
+//
+//	public void setOffShelfTime(Date offShelfTime) {
+//		this.offShelfTime = offShelfTime;
+//	}
 
 	public String getPostTitle() {
 		return postTitle;
@@ -80,11 +72,28 @@ public class LatestNewsVO implements java.io.Serializable{
 		this.postTitle = postTitle;
 	}
 
+	public byte[] getNewsPhoto() {
+		return newsPhoto;
+	}
+	public void setNewsPhoto(byte[] newsPhoto) {
+		this.newsPhoto = newsPhoto;
+	}
+
+	@Override
+	public String toString() {
+		return "LatestNewsVO [newsId=" + newsId + ", sortId=" + sortId + ", adminId=" + adminId + ", newsIntro="
+				+ newsIntro + ", scheduledTime=" + scheduledTime + ", postTitle=" + postTitle + ", newsPhoto="
+				+ Arrays.toString(newsPhoto) + "]";
+	}
+
 //	@Override
 //	public String toString() {
-//		return "LatestNewsVo [newsId=" + newsId + ", sortId=" + sortId + ", adminId=" + adminId + ", newsIntro="
-//				+ newsIntro + ", publishedTime=" + publishedTime + ", onNewsId=" + onNewsId + ", offNewsId=" + offNewsId
-//				+ ", postTitle=" + postTitle + "]";
+//		return "LatestNewsVO [newsId=" + newsId + ", sortId=" + sortId + ", adminId=" + adminId + ", newsIntro="
+//				+ newsIntro +  ", scheduledTime=" + scheduledTime + ", offShelfTime=" + offShelfTime
+//				+ ", postTitle=" + postTitle + ", newsPhoto=" + Arrays.toString(newsPhoto) + "]";
 //	}
+
+
+
 
 }
