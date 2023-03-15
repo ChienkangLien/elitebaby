@@ -2,6 +2,7 @@ let meals = [];
 let userId = 1;
 let total1 = null;
 let total2 = null;
+let select_id = null;
 
 //依使用者會員編號取得訂單詳細資料
 fetch("/elitebaby/MealOrder?name=getorder", {
@@ -212,6 +213,13 @@ $("tbody.getuserorder_tb").on("click", "button.btn_detail", function () {
                 console.log(error + "，回傳失敗");
             }
         });
+})
+
+//查詢按鈕
+$("button.btn_select").on("click", function () {
+    // console.log("1233123");
+    select_id = $("input#select_id").val();
+    console.log("select_id");
 })
 
 
