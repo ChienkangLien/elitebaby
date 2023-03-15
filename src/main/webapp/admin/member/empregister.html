@@ -90,7 +90,7 @@
         $("input#password").focus();
         return (check = false);
       } else {
-        var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
         if (passwordRegxp.test(password) != true) {
           alert("密碼格式錯誤");
           alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
