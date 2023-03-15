@@ -4,6 +4,7 @@
 
 a {
     text-decoration: none;
+    color:black;
 }
 
 #navbar {
@@ -43,25 +44,33 @@ a {
     padding: 10px 30px;
 }
 
+.ul  a{
+    background-color: #ff8188;
+    color: white;
+}
 /* 表格 */
-/* table { */
-/*     width: 800px; */
-/*     border: 1px solid black; */
-/*     margin-left: auto; */
-/*       margin-right: auto; */
-/* } */
+table {
+    width: 800px;
+    border: 1px solid black;
+    margin-left: auto;
+      margin-right: auto;
+}
 
 /* table th, */
-/* table td { */
+table td {
 
-/*     border: 1px solid black; */
-/*     padding: 20px; */
-    /* margin-right: 450px; */
-/*     text-align: center; */
+    border: 1px solid black;
+    padding: 20px;
+    margin-right: 450px;
+    text-align: center;
 
-/* } */
-
-
+}
+.container-filter{
+	margin-left:500px
+}
+.container-filter  btn a{
+	color:white;
+}
 /* 頁數 */
 /* * { */
 /*     box-sizing: border-box; */

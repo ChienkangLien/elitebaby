@@ -2,8 +2,8 @@
 .project
 .settings/
 target/
-src/main/java/com/tibame/web/common/testFilter.java
-src/main/java/com/tibame/web/controller/AdminLogin.java
-src/main/java/com/tibame/web/controller/MemberLogin.java
-src/main/java/com/tibame/web/vo/EmployeeVO.java
-src/main/java/com/tibame/web/vo/MemberVO.java
+
+src/main/webapp/META-INF/MANIFEST.MF
+src/main/webapp/WEB-INF/lib/mysql-connector-j-8.0.31.jar
+src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.26.jar
+
