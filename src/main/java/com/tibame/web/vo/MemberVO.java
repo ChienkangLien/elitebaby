@@ -13,7 +13,16 @@ public class MemberVO implements Serializable{
 	private String address;
 	private String phoneNumber;
 	private Date birthday;
+	private String login;
 	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public MemberVO(Integer id, String username, String password, String email, String address, String phoneNumber, Date birthday) {
 		super();
 		this.id = id;
@@ -22,7 +31,6 @@ public class MemberVO implements Serializable{
 		this.email = email;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.birthday = birthday;	
 	}
 		
 	public MemberVO() {

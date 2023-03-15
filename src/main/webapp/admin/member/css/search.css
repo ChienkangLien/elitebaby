@@ -1,0 +1,185 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+  
+  .search-container {
+    margin: 20px 0;
+  }
+  
+  #search {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+
+  /* 會員搜尋按鈕沒時間做現擺著 */
+  /* .search-btn {
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .search-btn:hover{
+    background-color: #3e8e41;
+  } */
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+
+
+  .edit-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
+  }
+
+  .edit-button:hover{
+    background-color: #006d9e;
+  }
+
+
+
+
+  /* 以下為我自己做的跳脫視窗CSS */
+
+  a{
+    text-decoration: none;
+    font-size: 30px;
+    color: #2196F3;
+    margin: 50px;
+  }
+
+  .modal-header h3{
+    font-size: 30px;
+    color: #3e8e41;
+    position: absolute;
+    top:7%;
+    left:50%;
+    transform: translate(-50%);
+  }
+
+  .modal-content{
+    background-color: ghostwhite;
+  }
+
+
+  .modal-body form .name, .modal-body form .address, .modal-body form .phonenumber{
+    margin: 30px;
+    width: 90%;
+    border-radius: 20px;
+  }
+
+  .remember{
+    margin-bottom: 20px;
+  }
+
+  .btn-update{
+    width:100% ;
+    font-size: 25px;
+    color: #ffffff;
+  }
+     /* 結束 */
+
+
+
+
+     .modal-header {
+      background-color: #f5f5f5;
+      border-bottom: none;
+    }
+    
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #444;
+    }
+    
+    .modal-content {
+      border: none;
+      border-radius: 0.25rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+      background-color: #d8c3a5;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #444;
+    }
+    
+    .form-control {
+      border-radius: 0.25rem;
+      border: none;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) inset;
+    }
+    
+    .btn-secondary {
+      color: #444;
+      background-color: #d8c3a5;
+      border: none;
+    }
+    
+    .btn-primary {
+      background-color: #f5af19;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background-color: #e39c14;
+    }
+    
+/* 返回工作區按鈕 */
+    .btn_back{
+      background-color: #008CBA;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  

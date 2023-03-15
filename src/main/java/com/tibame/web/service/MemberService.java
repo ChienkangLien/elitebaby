@@ -11,6 +11,7 @@ public interface MemberService {
 	MemberVO findById(MemberVO member);
 	MemberVO update(MemberVO member);
 	MemberVO findById(Integer id);
+	public List<MemberVO> findAll();
 
 }
 	

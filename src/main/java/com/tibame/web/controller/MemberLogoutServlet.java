@@ -7,24 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/Member/Logout")
+@WebServlet("/member/Logout")
 public class MemberLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public MemberLogoutServlet() {
-    }
 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			req.getSession().invalidate();
+			resp.sendRedirect(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
+					+ req.getContextPath() + "/member/homepage.html");
 
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			try {
-				req.getSession().invalidate();
-				resp.sendRedirect("logout.html");
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-
-
+}

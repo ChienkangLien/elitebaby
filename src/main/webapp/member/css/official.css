@@ -77,8 +77,10 @@ body {
     color: #FF5B51;
 }
 
-.btn:hover {
-    color: #8B4513;
-}
+
+
+.btn:hover {     color: #8B4513; }  
+.btn {     background-color: #ff8188;     color: white; } 
+ .bkbtn {     background-color: #FDFDFD;     color: #333333; }
 
 /* ================================ */

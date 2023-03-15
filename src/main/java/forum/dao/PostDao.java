@@ -24,15 +24,15 @@ public class PostDao extends DaoId {
             "看來她只想要我擔任司機就好，「不給跟」的意圖相當堅定。";
 
     public ArrayList<Post> selectAll() {
-        String sql = "select p.*, m.user_name, count(l.like_id) as plike\n" +
+        String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join member m on m.USER_ID = p.user_id\n" +
+                "         join access ac on ac.user_id = p.user_id\n" +
                 "group by p.post_id\n" +
                 "order by p.post_id desc";
         ArrayList<Post> posts = new ArrayList<>();
 
-        try (Connection connection =ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -55,15 +55,15 @@ public class PostDao extends DaoId {
     }
 
     public ArrayList<Post> selectPopular() {
-        String sql = "select p.*, m.user_name, count(l.like_id) as plike\n" +
+        String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join member m on m.USER_ID = p.user_id\n" +
+                "         join access ac on ac.user_id = p.user_id\n" +
                 "group by p.post_id\n" +
                 "order by plike desc;";
         ArrayList<Post> posts = new ArrayList<>();
 
-        try (Connection connection = ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -86,14 +86,14 @@ public class PostDao extends DaoId {
     }
 
     public Post selectById(int postId) {
-        String sql = "select p.*, m.user_name, count(l.like_id) as plike\n" +
+        String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join member m on m.USER_ID = p.user_id\n" +
+                "         join access ac on ac.user_id = p.user_id\n" +
                 "where p.post_id = ?\n" +
                 "group by l.post_id;";
         Post post = null;
-        try (Connection connection = ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, postId);
             ResultSet rs = ps.executeQuery();
@@ -115,10 +115,11 @@ public class PostDao extends DaoId {
         }
     }
 
+
     public int insert(Post post) {
         int key = -1;
         String sql = "insert into post(USER_ID, CATEGORY, TOPIC, CONTENT) values  (?,?,?,?);";
-        try (Connection connection =ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, post.getUserId());
             ps.setString(2, post.getCategory());
@@ -136,14 +137,31 @@ public class PostDao extends DaoId {
         }
     }
 
+    public boolean update(Post post) {
+        String sql = "update post\n" +
+                "set category = ?, topic = ?, content = ?\n" +
+                "where post_id = ?;";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, post.getCategory());
+            ps.setString(2, post.getTopic());
+            ps.setString(3, post.getContent());
+            ps.setInt(4, post.getPostId());
+            boolean execute = ps.execute();
+            return execute;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     //posts生成器
     public void postGenerator(ArrayList<String> categoryName) {
         String sql = "insert into post (user_id, category, topic, content) VALUES (?,?,?,?);";
-        try (Connection connection = ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             for (int c = 0; c < categoryName.size(); c++) {
-                for (int i = 1; i <= 1; i++) {
+                for (int i = 1; i <= 2; i++) {
                     ps.setInt(1, (int) (Math.random() * 5) + 1);
                     ps.setString(2, categoryName.get(c));
                     ps.setString(3, "第" + i + "篇" + categoryName.get(c) + "文章");
@@ -157,25 +175,145 @@ public class PostDao extends DaoId {
         }
     }
 
+    //刪除所有資料
+    public void deleteAll() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement("delete from post_imgs where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table post_imgs auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("delete from post_like where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table post_like auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("delete from msg_imgs where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table msg_imgs auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("delete from msg_like where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table msg_like auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("delete from msg where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table msg auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("delete from post where 1=1;");
+            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("alter table post auto_increment = 0;");
+            preparedStatement.executeUpdate();
+            connection.commit();
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean deleteById(int postId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement("delete from msg_like where msg_id in (select msg_id from msg where post_id = ?);");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("delete from msg_imgs where msg_id in (select msg_id from msg where post_id = ?);");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("delete from msg where post_id = ?;");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("delete from post_like where post_id = ?;");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("delete from post_imgs where post_id = ?;");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("delete from post where post_id = ?;");
+            preparedStatement.setInt(1, postId);
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     //取得所有Post的id
     public ArrayList<Integer> getPostIds() {
         ArrayList<Integer> ids = new ArrayList<>();
         String sql = "select post_id from post;";
-        try (Connection connection = ds.getConnection();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ids.add(rs.getInt("post_id"));
             }
-
-            for(int id:ids)
-            System.out.println(id);
-
             return ids;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public boolean selectByPostIdUserId(int userId, int postId) {
+        String sql = "select * from post where user_id = ? and post_id = ?;";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, postId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
