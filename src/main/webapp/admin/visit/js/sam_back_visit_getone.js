@@ -109,10 +109,17 @@ document.querySelector("#visitsubmit").addEventListener("click", function() {
 	if (duedate.value.trim() == "") {
 		rstee.push("預產期不可空白或空格\r")
 	}
-	console.log(rstee.length);
+	console.log(statusvalue);
+	console.log(statusvalue2);
 
 	if(rstee.length == 0){
-
+		if(statusvalue == 1 && statusvalue2 == 0){
+			Swal.fire({
+				icon: 'error',
+				title: '尚未接洽',
+				text: '接洽完成才能更改狀態成參訪完成'
+		   })
+		}else{
 		Swal.fire({
 			title: '確定修改?',
 			icon: 'warning',
@@ -175,9 +182,9 @@ document.querySelector("#visitsubmit").addEventListener("click", function() {
 
 
 	}
-
+	
 		  })	
-
+		}
 };
 
 
@@ -192,7 +199,7 @@ if(rstee !=null && rstee.length != 0 ){
 
 	rstee = emtyarry;
 
-	} 
+	}
 
 });
 
