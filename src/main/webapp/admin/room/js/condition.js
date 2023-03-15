@@ -115,7 +115,7 @@ $(document).ready(function () {
       .attr("readonly", false);
     const start = new Date($(this).val());
     const end = new Date(start);
-    end.setDate(end.getDate() + 1);
+    end.setDate(end.getDate());
     $(this)
       .closest("form")
       .find("input.order_end_date")
