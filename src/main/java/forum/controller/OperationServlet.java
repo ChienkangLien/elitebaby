@@ -1,6 +1,5 @@
 package forum.controller;
 
-import forum.service.CategoryService;
 import forum.service.MsgService;
 import forum.service.PostService;
 
@@ -10,40 +9,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/generator/*")
-public class GeneratorServlet extends BaseServlet {
-    private CategoryService categoryService = new CategoryService();
+@WebServlet("/operation/*")
+public class OperationServlet extends BaseServlet {
     private PostService postService = new PostService();
     private MsgService msgService = new MsgService();
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
+//    @Override
+//    public void init() throws ServletException {
+//        super.init();
+//
+//    }
+
+    public void create(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         postService.PostGenerator();
         postService.likeGenerator();
         msgService.MsgGenerator();
+        response.sendRedirect("../forum/home");
     }
 
-    public void HelloWorld(HttpServletRequest request, HttpServletResponse response) throws  IOException {
-        response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+        postService.deleteAll();
+        response.sendRedirect("../forum/home");
     }
     public void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         postService.PostGenerator();
-        response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
+        response.sendRedirect("../forum/home");
     }
     public void postlike(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         postService.likeGenerator();
-        response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
+        response.sendRedirect("../forum/home");
     }
 
     public void likeclean(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         postService.likeClean();
-        response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
+        response.sendRedirect("../forum/home");
     }
 
     public void msg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         msgService.MsgGenerator();
-        response.sendRedirect("http://localhost:8080/elitebaby/forum/home");
+        response.sendRedirect("../forum/home");
     }
 
 

@@ -1,10 +1,5 @@
 package forum.pojo;
-
-import lombok.Data;
-
 import java.util.ArrayList;
-
-@Data
 public class Msg {
     private int msgId;
     private int postId;

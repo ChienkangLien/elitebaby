@@ -1,15 +1,16 @@
 package forum.pojo;
-
-import lombok.Data;
-
 import java.util.ArrayList;
 
-@Data
 public class PostBean {
     private Post post;
     private ArrayList<Msg> msgs;
     private int dataLength;
     private int userId;
+    private String userName;
+    private boolean edit;
+
+    public PostBean() {
+    }
 
     public Post getPost() {
         return post;
@@ -41,5 +42,32 @@ public class PostBean {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
+
+    @Override
+    public String toString() {
+        return "PostBean{" +
+                "post=" + post +
+                ", msgs=" + msgs +
+                ", dataLength=" + dataLength +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }
