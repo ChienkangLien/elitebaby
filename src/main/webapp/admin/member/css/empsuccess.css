@@ -1,0 +1,30 @@
+body {
+	background-color: #f7f7f7;
+	font-family: Arial, sans-serif;
+}
+
+
+/* 有加入邊框元素 */
+.container {
+    width: 600px;
+    margin: 50px auto;
+    background-color: #f5f5f5;
+    border: 2px solid #ccc;
+    padding: 50px;
+    text-align: center;
+	background-color: rgb(181, 225, 172);
+  }
+
+
+h1 {
+	font-size: 36px;
+	margin-bottom: 20px;
+	color: #050505;
+}
+
+p {
+	font-size: 18px;
+	margin-bottom: 40px;
+	line-height: 1.5;
+	color: #050505;
+}

@@ -192,31 +192,49 @@
         let password = $("#password").val();
         let address = $("#address").val();
         let phoneNumber = $("#phoneNumber").val();
-        $.ajax({
-          url: `http://localhost:8080/elitebaby/member/change?id=${id}`,
-          method: "POST",
-          dataType: "json",
-          contentType: "application/json",
-          data: JSON.stringify({
-            username: username,
-            email: email,
-            password: password,
-            address: address,
-            phoneNumber: phoneNumber,
-          }),
-          success: function (response) {
-            alert(response.message);
-            if (response.message == "修改成功") {
-              $(location).attr(
-                "href",
-                "http://localhost:8080/elitebaby/admin/member/search.html"
-              );
-            }
-          },
-          error: function (error) {
-            alert("Error calling API:" + error);
-          },
-        });
+
+        var check = true;
+        if (password == "") {
+          alert("請輸入密碼");
+          $("input#password").focus();
+          return (check = false);
+        } else {
+          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+          if (passwordRegxp.test(password) != true) {
+            alert("密碼格式錯誤");
+            alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
+            $("input#password").focus();
+            $("input#password").select();
+            return (check = false);
+          }
+        }
+        if (check) {
+          $.ajax({
+            url: `http://localhost:8080/elitebaby/member/change?id=${id}`,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+              username: username,
+              email: email,
+              password: password,
+              address: address,
+              phoneNumber: phoneNumber,
+            }),
+            success: function (response) {
+              alert(response.message);
+              if (response.message == "修改成功") {
+                $(location).attr(
+                  "href",
+                  "http://localhost:8080/elitebaby/admin/member/search.html"
+                );
+              }
+            },
+            error: function (error) {
+              alert("Error calling API:" + error);
+            },
+          });
+        }
       }
 
       function listAll() {

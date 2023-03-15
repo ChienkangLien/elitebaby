@@ -1,6 +1,9 @@
 package com.tibame.web.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,9 +32,9 @@ public class MemberUpdateServlet extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject jsonObj = new JsonObject();
 
-//			Member seMember = (Member) req.getSession().getAttribute("memId");
-//		Member seMember = new Member();
-//		seMember.setId(9);
+		String secretPassword =encryptPassword(member.getPassword());
+		System.out.println(secretPassword.length());
+		member.setPassword(secretPassword);
 
 		Integer id;
 		
@@ -52,4 +55,23 @@ public class MemberUpdateServlet extends HttpServlet {
 		}
 		resp.getWriter().append(jsonObj.toString());
 	}
+	
+	private String encryptPassword(String password) {
+        String encryptedPassword = null;
+        try {
+            // 使用SHA-256算法做加密
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+            // 將加密後的字節數組轉換成16進制字符串
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+            encryptedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return encryptedPassword;
+    }
+
 }

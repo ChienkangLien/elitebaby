@@ -236,32 +236,48 @@
         let password = $("#password").val();
         let permission = $("#permission").val();
 
-        $.ajax({
-          url: `http://localhost:8080/elitebaby/admin/member/update?id=${id}`,
-          method: "POST",
-          dataType: "json",
-          contentType: "application/json",
-          data: JSON.stringify({
-            empname: username,
-            empaccount: email,
-            emppassword: password,
-            emppermission: permission,
-          }),
-          success: function (response) {
-            alert(response.message);
-            if (response.message == "修改成功") {
-              $(location).attr(
-                "href",
-                "http://localhost:8080/elitebaby/admin/member/management.html"
-              );
-            }
-          },
-          error: function (error) {
-            alert("Error calling API:" + error);
-          },
-        });
+        var check = true;
+        if (password == "") {
+          alert("請輸入密碼");
+          $("input#password").focus();
+          return (check = false);
+        } else {
+          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+          if (passwordRegxp.test(password) != true) {
+            alert("密碼格式錯誤");
+            alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
+            $("input#password").focus();
+            $("input#password").select();
+            return (check = false);
+          }
+        }
+        if (check) {
+          $.ajax({
+            url: `http://localhost:8080/elitebaby/admin/member/update?id=${id}`,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+              empname: username,
+              empaccount: email,
+              emppassword: password,
+              emppermission: permission,
+            }),
+            success: function (response) {
+              alert(response.message);
+              if (response.message == "修改成功") {
+                $(location).attr(
+                  "href",
+                  "http://localhost:8080/elitebaby/admin/member/management.html"
+                );
+              }
+            },
+            error: function (error) {
+              alert("Error calling API:" + error);
+            },
+          });
+        }
       }
-
       function listAll() {
         $.ajax({
           url: `http://localhost:8080/elitebaby/admin/member/listall`,
@@ -271,23 +287,23 @@
             let list_html = "";
             $.each(data, function (index, item) {
               list_html += `
-              <tr id=${item.empid}>
-                <td>${item.empname}</td>
-                <td>${item.empaccount}</td>
-                <td>${item.emppassword}</td>
-                <td>${item.emppermission}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn_edit"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editModal"
-                  >
-                    編輯
-                  </button>
-                </td>
-              </tr>
-              `;
+                    <tr id=${item.empid}>
+                      <td>${item.empname}</td>
+                      <td>${item.empaccount}</td>
+                      <td>${item.emppassword}</td>
+                      <td>${item.emppermission}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-primary btn_edit"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editModal"
+                        >
+                          編輯
+                        </button>
+                      </td>
+                    </tr>
+                    `;
             });
             $("tbody.all").html(list_html);
           },
