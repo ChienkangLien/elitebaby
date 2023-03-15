@@ -27,14 +27,14 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
    <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
-    <title>菁英產後護理之家</title>
+   <title>菁英產後護理之家</title>
 </head>
 
 <body class="c2">
   <div class="flex-shrink-0 p-3 c1" id="navbar">
-   <a href="/elitebaby/admin/news/listAllLatestNews.jsp">
+   <a href="/elitebaby/admin/member/background_nav.html">
    <img src="<%=request.getContextPath()%>/admin/news/images/logo.jpg" style="width: 30px" /> 
-   <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+   <span class="fs-5 fw-semibold" style="color:black">菁英產後護理之家</span>
 			 <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 		</a>
 
@@ -68,8 +68,8 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
         </button>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">訂餐管理</a></li>
-            <li><a href="#" class="link-dark rounded">商品管理</a></li>
+            <li><a href="/elitebaby/admin/meal/mealorder_background.html" class="link-dark rounded">訂餐管理</a></li>
+            <li><a href="/elitebaby/admin/meal/meal_background.html" class="link-dark rounded">商品管理</a></li>
            
           </ul>
         </div>
@@ -99,7 +99,7 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
             討論區
           </button> -->
         <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+        <a href="/elitebaby/admin/forum/backend.html" class="btn bkbtn">討論區</a>
       </li>
       <!-- ================預約參觀============= -->
       <li class="mb-1">
