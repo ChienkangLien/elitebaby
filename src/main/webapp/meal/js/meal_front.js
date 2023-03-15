@@ -132,6 +132,8 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
         });
 })
 
+
+//右上角購物車按鈕
 $("button#cart_btn").on("click", function () {
     // console.log("ttttt");
     fetch("/elitebaby/Cart?name=tocart", {
@@ -156,11 +158,11 @@ $("button#cart_btn").on("click", function () {
         .then((body) => {
             try {
                 if (body.msg == "為已登入狀態") {
-                    location.href = "../meal/cart.html";
+                    location.href = "/elitebaby/meal/cart.html";
                 } else {
                     alert("跳轉到登入頁面(未引入)");
                     // console.log("新增失敗");
-                    location.reload();
+                    location.href = "/elitebaby/member/login.html";
                 }
             } catch (error) {
                 alert("出現錯誤!!!!");

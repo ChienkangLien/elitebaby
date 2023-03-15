@@ -2,6 +2,11 @@ let meals = [];
 let userId = 1;
 let total = null;
 
+if (userId == null || userId == undefined) {
+    alert("尚未登入，將跳轉至登入頁面");
+    location.href = "/elitebaby/member/login.html";
+}
+
 //依使用者會員編號取得購物車內商品詳細資料
 fetch("/elitebaby/Cart?name=getall", {
     method: "POST",
@@ -23,6 +28,10 @@ fetch("/elitebaby/Cart?name=getall", {
         }
     })
     .then((body) => {
+        if (body.length == 0) {
+            // console.log("購物車內無商品");
+            let cart = `<a></a>`
+        }
         meals = body;
         try {
             if (body.length != null) {
@@ -284,7 +293,7 @@ $("div#checkout").on("click", "button#btn_tocheckout", function () {
                     if (body.msg == "success") {
                         alert("結帳成功!!返回訂單頁面!!");
                         // $("span#cartCount").html(body.cartcount);
-                        location.reload();
+                        location.href("user_order.html");
                     } else {
                         console.log("尚未登入");
                         alert(body.msg);
