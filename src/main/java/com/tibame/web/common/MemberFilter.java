@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(
-		urlPatterns={"/"},
+		urlPatterns={"/elitebaby/member/background_nav.html"},
 		initParams = {@WebInitParam(name="loginPath", value="/member/login.html")}
 	)
 	public class MemberFilter extends HttpFilter implements Filter {

@@ -14,7 +14,6 @@
     />
 
     <link rel="stylesheet" href="../../css/official.css" />
-    <link rel="stylesheet" href="../../css/front_navbar.css" />
     <link rel="stylesheet" href="css/search.css" />
   </head>
   <body>
@@ -43,7 +42,7 @@
             <td>
               <button
                 type="button"
-                class="btn btn-primary btn_edit"
+                class="btn btn_edit"
                 data-bs-toggle="modal"
                 data-bs-target="#editModal"
               >
@@ -59,7 +58,7 @@
             <td>
               <button
                 type="button"
-                class="btn btn-primary btn_edit"
+                class="btn btn_edit"
                 data-bs-toggle="modal"
                 data-bs-target="#editModal"
               >
@@ -75,7 +74,7 @@
             <td>
               <button
                 type="button"
-                class="btn btn-primary btn_edit"
+                class="btn btn_edit"
                 data-bs-toggle="modal"
                 data-bs-target="#editModal"
               >
@@ -134,14 +133,10 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn" data-bs-dismiss="modal">
               取消
             </button>
-            <button type="button" class="btn btn-primary btn_save">儲存</button>
+            <button type="button" class="btn btn_save">儲存</button>
           </div>
         </div>
       </div>
@@ -254,7 +249,7 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary btn_edit"
+                    class="btn btn_edit"
                     data-bs-toggle="modal"
                     data-bs-target="#editModal"
                   >
@@ -280,13 +275,4 @@
       });
     </script>
   </body>
-
-  <script>
-    const backButton = document.querySelector(".btn_back");
-    backButton.addEventListener("click", function () {
-      // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
-      window.location.href =
-        "http://localhost:8080/elitebaby/member/background_nav.html";
-    });
-  </script>
 </html>
