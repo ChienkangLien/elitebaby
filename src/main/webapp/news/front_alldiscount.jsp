@@ -39,7 +39,7 @@ pageContext.setAttribute("list", list);
      <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
             <div class="container-fluid" >
-                <img src="../images/logo.jpg">
+                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
