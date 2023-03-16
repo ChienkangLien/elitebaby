@@ -90,7 +90,63 @@ document.querySelector('#visitsubmit').addEventListener('click', () => {
 
 	if(rstee.length == 0){
 
-	fetch('/elitebaby/visit/servlet?action=MEMBER_INDERT_VISIT', {
+
+		fetch('/elitebaby/visit/servlet?action=CHECK_DOUBLE_VISIT', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userId: userid.value,
+			})
+		})
+			.then(resp => resp.json())
+			.then(data => { 
+				let cheackstatus = 1;
+			if(data.length != 0){	
+				for(let xx = 0 ; xx < data.length; xx++){
+                       if(data[xx].visitStatus == 0){
+						console.log(data[xx].visitStatus);
+						 cheackstatus = null ;
+					   }
+				}
+			}
+					console.log(cheackstatus);
+
+				 if(data.length > 0 && cheackstatus == null) {
+					
+					Swal.fire({
+						title: '確定要重複預約?',
+						text: "您已經預約參訪但還未參訪",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: '確定',
+						cancelButtonText : '取消',
+						footer: '<a href="ReportEmailFrontInsert.html">有什麼問題想回報嗎?點我立即回報!</a>'
+					  }).then((result) => {
+						if (result.isConfirmed) {
+							insertVistOK();
+						}
+					  })
+
+
+				 }else{
+
+					insertVistOK();
+
+				 }
+				
+
+			});
+
+
+
+
+	function insertVistOK(){
+
+		fetch('/elitebaby/visit/servlet?action=MEMBER_INDERT_VISIT', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -129,13 +185,16 @@ document.querySelector('#visitsubmit').addEventListener('click', () => {
 					Swal.fire({
 						icon: 'error',
 						title: '預約失敗',
-						text: '請重新預約'
+						text: `${data.message}`
 				   })
 				   
 				}
 
 
 			});
+
+	}
+
    }
 
    
