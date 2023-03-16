@@ -17,7 +17,7 @@ import redis.clients.jedis.Jedis;
 public class MyServletContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {
-		System.out.println("伺服器啟動成功，開始檢查Redis內的所有產品照片是否存在");	
+		System.out.println("伺服器啟動成功，開始檢查Redis內的所有產品照片是否存在");
 		Jedis jedis = new Jedis("localhost", 6379);
 		MealDAO dao = new MealDAOImpl();
 		// 在MealDAO寫一個取得商品個數的方法 (未寫)
@@ -29,25 +29,18 @@ public class MyServletContextListener implements ServletContextListener {
 			System.out.println(list);
 			for (int i = 0; i < list.size(); i++) {
 				if (jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic") == null) {
-					byte[] pic=dao.getpic(list.get(i).getMealId());
-					
-//					byte[] pic = list.get(i).getMealPic();
+					byte[] pic = dao.getpic(list.get(i).getMealId());
 					System.out.println(pic);
-					String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
-					jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPhoto);
-					System.out.println(jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic"));
+					if (pic != null) {
+						String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
+						jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPhoto);
+						System.out.println(jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic"));
+					}else {
+					System.out.println("資料庫內由沒有照片，請新增照片");
+					}
 				}
 			}
 		}
-//		if (list.size() != jedis.hlen("meal")) {
-//			for (int i = 0; i < list.size(); i++) {
-//				byte[] pic = list.get(i).getMealPic();
-//				String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
-//				jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPhoto);
-//				System.out.println(jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic"));
-//			}
-//			System.out.println("照片加入成功,關閉Jedis連線");	
-//		}
 		jedis.close();
 	}
 }
