@@ -36,8 +36,6 @@ public class VisitServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		response.setContentType("application/json");
 		request.setCharacterEncoding("UTF-8");
-		
-
 
 		final String action = request.getParameter("action");
 
@@ -160,7 +158,7 @@ public class VisitServlet extends HttpServlet {
 //				Writer writer = response.getWriter();
 //				writer.write(gson.toJson(memberVO));
 //			}
-			
+
 			TestMemberVO memberVO = gson.fromJson(request.getReader(), TestMemberVO.class);
 			if (memberVO.getUserId() > 0 || memberVO.getUserId() != null) {
 				VisitRoomService service = new VisitRoomServiceImpl();
@@ -214,10 +212,8 @@ public class VisitServlet extends HttpServlet {
 
 		}
 
-		
-		
 		if ("GET_ONE_MEMBER_VISIT".equals(action)) {
-			
+
 			Gson gson = new Gson();
 //			HttpSession session = request.getSession();
 //			MemberVO memberVO =  session.getAttribute("MemberVO");
@@ -228,7 +224,7 @@ public class VisitServlet extends HttpServlet {
 //				Writer writer = response.getWriter();
 //				writer.write(gson.toJson(list));
 //		    }
-			
+
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
 			Integer userId = Integer.valueOf(visitVO.getUserId());
 			VisitRoomService service = new VisitRoomServiceImpl();
@@ -238,10 +234,8 @@ public class VisitServlet extends HttpServlet {
 
 		}
 
-		
-
 		if ("DELETE_ONE_VISIT".equals(action)) {
-			
+
 			Gson gson = new Gson();
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
 			Integer visitid = visitVO.getVisitId();
@@ -253,9 +247,9 @@ public class VisitServlet extends HttpServlet {
 			respbody.addProperty("successful", resultStr.equals("刪除成功"));
 			respbody.addProperty("message", resultStr);
 			response.getWriter().append(respbody.toString());
-			
+
 		}
-		
+
 		if ("GET_ONE_VISIT_DATA".equals(action)) {
 
 			HttpSession session = request.getSession();
@@ -265,14 +259,36 @@ public class VisitServlet extends HttpServlet {
 			String strDueDate = dateFormat.format(visitVO.getDueDate());
 			String strVisitTime = dateFormat.format(visitVO.getVisitTime());
 			visitVO.setStrDueDate(strDueDate);
-			visitVO.setStrVisitTime(strVisitTime);	
+			visitVO.setStrVisitTime(strVisitTime);
 
 			Gson gson = new Gson();
 			Writer writer = response.getWriter();
 			writer.write(gson.toJson(visitVO));
-			
-			
+
 		}
+
+		if ("CHECK_DOUBLE_VISIT".equals(action)) {
+
+//			HttpSession session = request.getSession();
+//			MemberVO memberVO =  session.getAttribute("MemberVO");
+//			Integer userId = memberVO.getUserId();
+//			if (userId > 0 && userId != null) {
+
+//			}
+			Gson gson = new Gson();
+			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
+			Integer userid = visitVO.getUserId();
+
+			if (userid > 0 && userid != null) {
+				
+				VisitRoomService service = new VisitRoomServiceImpl();
+				List<VisitVO> list = service.getOneAll(userid);
+				Writer writer = response.getWriter();
+				writer.write(gson.toJson(list));
+
+			}
+		}
+
 	}
 
 }

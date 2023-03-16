@@ -238,13 +238,12 @@ $("input#serch").on("click", function() {
 	document.querySelector(".sprl").innerHTML = "";
 	document.querySelector(".sprn").innerHTML = "";
 	const serchdetile = document.querySelector(".selcet_email").value;
-	const serchvalue =  document.querySelector(".selcet_pk").value;
+	let serchvalue =  document.querySelector(".selcet_pk").value;
 	
 	if(serchdetile==="userId"){
 		console.log(typeof(serchvalue))
-		if(typeof(serchvalue)){
-
-		}
+	let reg = /[^0-9]/ig;
+	serchvalue =  document.querySelector(".selcet_pk").value.replace(reg,"");
 	}
 
 	if(serchvalue===""){
@@ -321,7 +320,9 @@ $("input#serch").on("click", function() {
 function emailcategoery (){
 	const serchdetile = document.querySelector(".selcet_email").value;
 	document.querySelector(".selcet_pk").value = "";
+	document.querySelector("#report_categoery").innerHTML = ``;
 	if(serchdetile === "category"){
+		document.querySelector(".selcet_pk").setAttribute("list","report_categoery")
 		document.querySelector("#report_categoery").innerHTML = `<option >訂房</option>
 		<option >參訪</option>
 		<option >訂餐</option>
@@ -330,15 +331,44 @@ function emailcategoery (){
 		<option >消息</option>
 		<option >會員</option>
 		<option >其他</option>`;
-	}else{
-		document.querySelector("#report_categoery").innerHTML = ""
 	}
-	if( serchdetile === "category" || serchdetile === "likesome"){
-		document.querySelector(".selcet_pk").removeAttribute("type");
-	}else{
-		document.querySelector(".selcet_pk").setAttribute("type","number");
+
+	if(serchdetile === "likesome"){
+		document.querySelector(".selcet_pk").removeAttribute("list");
 	}
+
+	if( serchdetile === "userId"){
+
+	document.querySelector(".selcet_pk").setAttribute("list","report_categoery")
+
+	fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(visit => {
+		let resData = [];
+		resData = visit;
+		for (let i = 0; i < resData.length; i++) {
+			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+		}
+	})
+
+	}
+
 }
+
+fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(visit => {
+		let resData = [];
+		resData = visit;
+		for (let i = 0; i < resData.length; i++) {
+			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+		}
+	})
+
+
+
 
 
 

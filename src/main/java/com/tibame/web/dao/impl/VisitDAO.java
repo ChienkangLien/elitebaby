@@ -315,6 +315,7 @@ public class VisitDAO implements VistDAO_interface {
 				visitVO.setStrVisitTime(String.valueOf(rs.getDate("VISIT_TIME")));
 				visitVO.setRemark(rs.getString("REMARK"));
 				visitVO.setContactSatus(rs.getInt("CONTACT_STATUS"));
+				visitVO.setVisitStatus(rs.getInt("VISIT_STATUS")); 
 				visitVO.setStrCreateTime(String.valueOf(rs.getDate("CREATE_TIME")));
 				list.add(visitVO);
 				

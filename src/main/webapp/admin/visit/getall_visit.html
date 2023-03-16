@@ -121,7 +121,7 @@
             討論區
           </button> -->
           <!-- 若沒有子元素，單純給一個a標籤即可 -->
-          <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+          <a href="/elitebaby/admin/forum/backend.html" class="btn bkbtn">討論區</a>
         </li>
         <!-- ================預約參觀============= -->
         <li class="mb-1">
@@ -197,6 +197,11 @@
     <div id="main_div">
       <div id="blank_area">此處留空</div>
       <center><div class="t2" id="title" style="margin-top:30px">預約參訪表單</div></center>
+      <input  class="selcet_pk" list="member_info" type="text" min="1" placeholder="會員" style="margin-left: 100px;">
+					<datalist id="member_info">
+
+					</datalist>
+      <input type="button" id="serch" value="搜尋">
         <hr>
         <table class="visit_table" >
         <thead>
