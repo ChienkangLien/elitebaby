@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
     <link rel="stylesheet" href="../css/official.css" />
     <link rel="stylesheet" href="../css/front_navbar.css">
+    <link rel="stylesheet" href="css/front_navbar.css">
 
 
     <title>菁英產後護理之家</title>
@@ -342,8 +343,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_save ">儲存</button>
+          <button type="button" class="btn" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn_save">儲存</button>
         </div>
       </div>
     </div>
@@ -367,7 +368,7 @@
 <script>
 
     document.getElementById("loginButton").addEventListener("click", function() {
-        window.location.href = "login.html";
+        window.location.href = "/elitebaby/member/login.html";
     });
 
 </script>
@@ -376,7 +377,7 @@
   const register_btn = document.querySelector(".register_btn");
   register_btn.addEventListener("click", function () {
     // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
-    window.location.href = "register.html";
+    window.location.href = "/elitebaby/member/register.html";
   });
 </script>
 

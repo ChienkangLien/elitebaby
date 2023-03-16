@@ -37,12 +37,12 @@ $(function () {
 
   // 登入按鈕
   document.getElementById("loginButton").addEventListener("click", function () {
-    window.location.href = "login.html";
+    window.location.href = "/elitebaby/member/login.html";
   });
   const register_btn = document.querySelector(".register_btn");
   register_btn.addEventListener("click", function () {
     // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
-    window.location.href = "register.html";
+    window.location.href = "/elitebaby/member/register.html";
   });
 
   // 取得表單數據
@@ -376,7 +376,7 @@ function callAPI() {
 
 
 
-$("button.btn-primary.btn_save").on("click", function () {
+$("button.btn_save").on("click", function () {
   callAPI();
 });
 $("button.btn_edit").on("click", function () {
