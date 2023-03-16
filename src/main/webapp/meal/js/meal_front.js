@@ -30,9 +30,9 @@ fetch(`/elitebaby/Meal?name=getall`)
                     li_str += `
                     <li class="meal_block_1" data-id="${body[i].mealId}">
                         ${img_str}
-                        <div class="meal_name" id="meal_name">${body[i].mealName}</div>
+                        <div class="t2 meal_name" id="meal_name">${body[i].mealName}</div>
                         <br>
-                        <div class="meal_info" style="height: 120px; margin-left: 5px; margin-right: 5px;">${body[i].mealInfo}</div>
+                        <div class="f5 meal_info" style="height: 120px; margin-left: 5px; margin-right: 5px;">${body[i].mealInfo}</div>
                         <div class="meal_price">每份價格 $${body[i].mealPrice}<button class="btn add_cart" style="margin-right: 12px;">加入購物車</button></div>
                     </li>`
                 }
@@ -135,41 +135,41 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
 })
 
 
-//右上角購物車按鈕
-$("button#cart_btn").on("click", function () {
-    // console.log("ttttt");
-    fetch("/elitebaby/Cart?name=tocart", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(
-            {
-                userId: userId,
-            }
-        ),
-    })
-        .then((resp) => {
-            if (resp.status === 204) {
-                console.log("resp.status===" + resp.status);
-            } else {
-                return resp.json();
-            }
-        })
-        .then((body) => {
-            try {
-                if (body.msg == "為已登入狀態") {
-                    location.href = "/elitebaby/meal/cart.html";
-                } else {
-                    alert("跳轉到登入頁面(未引入)");
-                    // console.log("新增失敗");
-                    location.href = "/elitebaby/member/login.html";
-                }
-            } catch (error) {
-                alert("出現錯誤!!!!");
-                // location.reload();
-                console.log(error + "，跳轉購物車頁面失敗");
-            }
-        });
-})
+// //右上角購物車按鈕
+// $("button#cart_btn").on("click", function () {
+//     // console.log("ttttt");
+//     fetch("/elitebaby/Cart?name=tocart", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json;charset=UTF-8",
+//             "Access-Control-Allow-Origin": "*",
+//         },
+//         body: JSON.stringify(
+//             {
+//                 userId: userId,
+//             }
+//         ),
+//     })
+//         .then((resp) => {
+//             if (resp.status === 204) {
+//                 console.log("resp.status===" + resp.status);
+//             } else {
+//                 return resp.json();
+//             }
+//         })
+//         .then((body) => {
+//             try {
+//                 if (body.msg == "為已登入狀態") {
+//                     location.href = "/elitebaby/meal/cart.html";
+//                 } else {
+//                     alert("跳轉到登入頁面(未引入)");
+//                     // console.log("新增失敗");
+//                     location.href = "/elitebaby/member/login.html";
+//                 }
+//             } catch (error) {
+//                 alert("出現錯誤!!!!");
+//                 // location.reload();
+//                 console.log(error + "，跳轉購物車頁面失敗");
+//             }
+//         });
+// })

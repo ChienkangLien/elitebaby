@@ -149,7 +149,7 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderVO cartObject = gson.fromJson(request.getReader(), MealOrderVO.class);
-			System.out.println(cartObject);
+//			System.out.println(cartObject);
 			Integer payment = cartObject.getOrderPayment();
 			Integer userId = cartObject.getUserId();
 			if (payment > 0 && userId > 0 && payment != null && userId != null) {

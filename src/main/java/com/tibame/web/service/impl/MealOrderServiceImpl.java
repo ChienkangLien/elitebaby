@@ -37,8 +37,10 @@ public class MealOrderServiceImpl implements MealOrderService {
 				list.get(i).setStrstatus("未付款");
 			} else if (list.get(i).getOrderStatus() == 1) {
 				list.get(i).setStrstatus("已付款");
-			} else {
+			} else if (list.get(i).getOrderStatus() == 2) {
 				list.get(i).setStrstatus("取消");
+			} else if (list.get(i).getOrderStatus() == 3) {
+				list.get(i).setStrstatus("已完成");
 			}
 			if (list.get(i).getOrderPayment() == 1) {
 				list.get(i).setStrPayment("現金");
@@ -56,7 +58,6 @@ public class MealOrderServiceImpl implements MealOrderService {
 		final String authCode = mealOrder.getAuthCode();
 		int udm = modao.insert(mealOrder);
 		if (udm > 0) {
-			Gson gson = new Gson();
 			Jedis jedis = new Jedis("localhost", 6379);
 			Set<String> set = jedis.keys("user" + mealOrder.getUserId() + "*");
 			int times = 0;
@@ -69,8 +70,10 @@ public class MealOrderServiceImpl implements MealOrderService {
 				for (String str : set) {
 					jedis.del(str);
 				}
+				jedis.close();
 				return 1;
 			} else {
+				jedis.close();
 				return -1;
 			}
 		}
@@ -83,6 +86,11 @@ public class MealOrderServiceImpl implements MealOrderService {
 			System.out.println("成功判斷Strstatus是未付款，設定order");
 			meal.setOrderStatus(2);
 		}
+		return modao.update(meal);
+	}
+
+	@Override
+	public int updateMealWithAddress(MealOrderVO meal) {
 		return modao.update(meal);
 	}
 
@@ -109,8 +117,10 @@ public class MealOrderServiceImpl implements MealOrderService {
 				li1.setStrstatus("未付款");
 			} else if (li1.getOrderStatus() == 1) {
 				li1.setStrstatus("已付款");
-			} else {
+			} else if (li1.getOrderStatus() == 2) {
 				li1.setStrstatus("取消");
+			} else if (li1.getOrderStatus() == 3) {
+				li1.setStrstatus("已完成");
 			}
 			List<MealOrderDetailVO> listmod = moddao.findByAuthCode(li1.getAuthCode());
 			for (MealOrderDetailVO li2 : listmod) {
@@ -138,8 +148,10 @@ public class MealOrderServiceImpl implements MealOrderService {
 				list.get(i).setStrstatus("未付款");
 			} else if (list.get(i).getOrderStatus() == 1) {
 				list.get(i).setStrstatus("已付款");
-			} else {
+			} else if (list.get(i).getOrderStatus() == 2) {
 				list.get(i).setStrstatus("取消");
+			} else if (list.get(i).getOrderStatus() == 3) {
+				list.get(i).setStrstatus("已完成");
 			}
 			if (list.get(i).getOrderPayment() == 1) {
 				list.get(i).setStrPayment("現金");
@@ -154,10 +166,7 @@ public class MealOrderServiceImpl implements MealOrderService {
 
 	@Override
 	public List<MealOrderVO> findByMealOrderwithuser(Integer userid, Integer orderid) {
-//		if (userid == null) {
-//			return null;
-//		}
-		System.out.println("userid!=null,進到service userid="+userid+" orderid="+orderid);
+//		System.out.println("userid!=null,進到service userid=" + userid + " orderid=" + orderid);
 		List<MealOrderVO> list = modao.findByMealOrderIdWithUser(userid, orderid);
 		for (int i = 0; i < list.size(); i++) {
 			int total = 0;
@@ -173,8 +182,10 @@ public class MealOrderServiceImpl implements MealOrderService {
 				list.get(i).setStrstatus("未付款");
 			} else if (list.get(i).getOrderStatus() == 1) {
 				list.get(i).setStrstatus("已付款");
-			} else {
+			} else if (list.get(i).getOrderStatus() == 2) {
 				list.get(i).setStrstatus("取消");
+			} else if (list.get(i).getOrderStatus() == 3) {
+				list.get(i).setStrstatus("已完成");
 			}
 			if (list.get(i).getOrderPayment() == 1) {
 				list.get(i).setStrPayment("現金");
@@ -186,5 +197,6 @@ public class MealOrderServiceImpl implements MealOrderService {
 		}
 		return list;
 	}
+
 
 }

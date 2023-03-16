@@ -19,8 +19,7 @@
 
 <body class="c2">
   <div class="flex-shrink-0 p-3 c1" id="navbar">
-    <a href="/elitebaby/admin/member/background_nav.html"
-      class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <img src="./img/logo.jpg" style="width: 30px" />
       <span class="fs-5 fw-semibold">菁英產後護理之家</span>
     </a>
@@ -35,9 +34,8 @@
         </button>
         <div class="collapse" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">用戶資料管理</a></li>
-            <li><a href="#" class="link-dark rounded">查詢會員</a></li>
-            <li><a href="#" class="link-dark rounded">編輯會員資訊</a></li>
+            <li><a href="/elitebaby/admin/meal/mealorder_background.html" class="link-dark rounded">訂餐管理</a></li>
+            <li><a href="/elitebaby/admin/meal/meal_background.html" class="link-dark rounded">商品管理</a></li>
           </ul>
         </div>
       </li>
@@ -81,7 +79,7 @@
             討論區
           </button> -->
         <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+        <a href="/elitebaby/admin/forum/backend.html" class="btn bkbtn">討論區</a>
       </li>
       <!-- ================預約參觀============= -->
       <li class="mb-1">
@@ -130,7 +128,7 @@
       </li>
       <li>
         <!-- Button trigger modal -->
-        <button type="button" id="logoutButton" class="btn btn-logout" data-bs-toggle="modal"
+        <button type="button" id="logoutButton" class="btn-logout" data-bs-toggle="modal"
           data-bs-target="#staticBackdrop">
           登出
         </button>
@@ -157,6 +155,7 @@
           <th>訂購日期</th>
           <th>訂單狀態</th>
           <th>總價</th>
+          <th>地址</th>
           <th>付款方式</th>
         </tr>
       </thead>
@@ -197,6 +196,53 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
             <!-- <button type="button" class="btn btn_insert">確定新增</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="order_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">修改訂單</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">訂單編號:</label>
+                <input type="text" class="form-control update_meal_id" id="recipient-name" readonly="true">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">訂購日期:</label>
+                <input type="text" class="form-control update_order_date" id="recipient-name" readonly="true">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label" style="margin-top: 10px;">訂單狀態:</label>
+                <select class="update_order_status">
+                  <option value="0">未付款</option>
+                  <option value="1">已付款</option>
+                  <option value="2">取消</option>
+                  <option value="3">已完成</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">總價:</label>
+                <input type="text" min="1" class="form-control update_total" id="recipient-name" readonly="true">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label meal_status">地址:</label>
+                <input type="text" class="form-control update_address" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">付款方式:</label>
+                <input type="text" class="form-control update_payment" id="recipient-name" readonly="true">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn_toupdate" id="btn_toupdate">確定修改</button>
           </div>
         </div>
       </div>

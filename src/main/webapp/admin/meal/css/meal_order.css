@@ -81,7 +81,7 @@ body {
 }
 
 table.meal_order {
-    width: 850px;
+    width: 950px;
     background-color: white;
     margin: 0 auto;
 }
@@ -100,7 +100,7 @@ td {
 }
 
 div.meal_order_search {
-    margin-right: 200px;
+    margin-right: 149px;
     float: right;
 }
 
@@ -120,7 +120,7 @@ p {
 }
 
 div#title {
-    margin-left: 13.5%;
+    margin-left: 9.5%;
 }
 
 

@@ -1,10 +1,10 @@
 table.cart_table {
     width: 850px;
     background-color: white;
-    margin-top: 5px;
+    /* margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 100px;
-    /* margin: auto; */
+    margin-left: 100px; */
+    margin: 0 auto;
 }
 
 table.cart_table,
@@ -27,7 +27,7 @@ img#mealPic {
 }
 
 h3 {
-    margin-left: 100px;
+    margin-left: 334px;
     margin-top: 30px;
     /* margin-bottom: 30px; */
     /* margin: auto; */
@@ -45,8 +45,9 @@ button#subtract {
 div.checkout {
     /* float: right; */
     /* text-align: center; */
-    margin-left: 100px;
-    width: 400px;
+    /* margin-left: 100px; */
+    width: 350px;
+    margin: 0 auto;
 }
 
 .display_block {
