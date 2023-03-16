@@ -3,7 +3,6 @@
  }
 
  html {
-     font-size: 62.5%;
      --page-width: 1200px;
      --bg-color: #046f15;
  }
@@ -98,12 +97,12 @@
  }
 
  section.sec1 div.flex_container div.flex_items.-right {
-     padding: 50px;
+     padding: 40px;
  }
 
  section.sec1 div.flex_container div.flex_items.-right h1.title1 {
      margin: 0;
-     font-size: 5rem;
+     font-size: 4rem;
       margin-bottom:20px;
  }
 
@@ -112,8 +111,8 @@
  }
 
  section.sec1 div.flex_container div.flex_items.-right p.para {
-     font-size: 3.8rem;
-     line-height: 3rem;
+     font-size: 1.8rem;
+     line-height: 4rem;
  }
  
 
