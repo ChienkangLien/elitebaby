@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		final String emppassword = employee.getEmppassword();
-		if (emppassword == null || emppassword.length() < 8) {
+		if (emppassword == null || emppassword.length() < 8 ) {
 			return "密碼不符合規則";
 		}
 		

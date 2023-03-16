@@ -23,10 +23,11 @@
   <body class="c2">
     <div class="flex-shrink-0 p-3 c1" id="navbar">
       <a
-        href="/elitebaby/admin/member/background_nav.html"
+        href="#"
         class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
       >
-        <img src="../../images/logo.jpg" style="width: 30px" />
+        <img src="../images/logo.jpg" style="width: 30px" />
+
         <span class="fs-5 fw-semibold">菁英產後護理之家</span>
       </a>
 
@@ -140,7 +141,10 @@
             討論區
           </button> -->
           <!-- 若沒有子元素，單純給一個a標籤即可 -->
-          <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+
+          <a href="/elitebaby/admin/forum/backend.html" class="btn bkbtn"
+            >討論區</a
+          >
         </li>
         <!-- ================預約參觀============= -->
         <li class="mb-1">
@@ -179,6 +183,7 @@
           </div>
         </li>
         <!-- =============最新消息============ -->
+
         <li class="mb-1">
           <button
             class="btn bkbtn btn-toggle align-items-center rounded collapsed"
@@ -291,7 +296,9 @@
             <button type="button" class="btn" data-bs-dismiss="modal">
               關閉
             </button>
-            <button type="button" class="btn btn_logout">登出</button>
+            <button type="button" id="logoutButton" class="btn btn_logout">
+              登出
+            </button>
           </div>
         </div>
       </div>
@@ -312,4 +319,33 @@
     </script>
     <script src="../js/background_navbar.js"></script>
   </body>
+
+  <script>
+    // 確認登入狀態
+    function checkLogin() {
+      let root = location.origin;
+      let check = "/elitebaby/employee/check";
+      $.ajax({
+        url: root + check,
+        type: "GET",
+        dataType: "json",
+        success: function (resp) {
+          if (resp.message == "已登入") {
+            console.log(resp.message);
+            var loginButton = $("#loginButton");
+            loginButton.remove();
+            var registerButton = $("#registerButton");
+            registerButton.remove();
+          } else {
+            console.log(resp.message);
+            var member = $(".member");
+            member.remove();
+            var logoutButton = $("#logoutButton");
+            logoutButton.remove();
+          }
+        },
+      });
+    }
+    checkLogin();
+  </script>
 </html>
