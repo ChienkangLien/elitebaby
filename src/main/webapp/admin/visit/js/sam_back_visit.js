@@ -1,8 +1,30 @@
 
+fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(visit => {
+		let resData = [];
+		resData = visit;
+		for (let i = 0; i < resData.length; i++) {
+			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+		}
+	})
+
+
+
+
+
+
 let page = 1;
 const pageSize = 5;
 let offset = (page - 1) * pageSize;
 var allcount
+
+
+
+
+
+
 
 
 		fetch(`/elitebaby/visit/servlet?action=GETALL_VISIT`,
@@ -296,3 +318,91 @@ function trclickvisit(visitIdlink){
  };
 
 
+ $("input#serch").on("click", function() {
+	document.querySelector(".getall_tb").innerHTML = "";
+	document.querySelector(".sprl").innerHTML = "";
+	document.querySelector(".sprn").innerHTML = "";
+
+	let reg = /[^0-9]/ig;
+	const serchvalue =  document.querySelector(".selcet_pk").value.replace(reg,"");
+
+	if(serchvalue===""){
+		Swal.fire({
+			icon: 'error',
+			title: '不會打字是不是',
+		  }).then((result) => {
+			location.reload();
+		  });
+	}else{
+	fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			userId:  serchvalue,
+		})
+	})
+		.then(resp => resp.json())
+		.then(data => {
+
+
+			
+		let resData = [];
+		resData = data;
+		if(resData.length == 0){
+
+			Swal.fire({
+				icon: 'error',
+				title: '查無資料',
+			  }).then((result) => {
+				location.reload();
+			  });	
+
+		}
+
+		for (let i = 0; i < resData.length ; i++) {
+			if( resData[i].contactSatus == 0 && resData[i].visitStatus == 0) {
+				document.querySelector(".getall_tb").innerHTML += `
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick="delete_visit(${resData[i].visitId})">   
+				     <svg style="height: 30px;"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>					
+				</td>
+				</tr>
+					`;
+			}else if(resData[i].contactSatus == 1 && resData[i].visitStatus == 0){
+
+				document.querySelector(".getall_tb").innerHTML += `
+				<tr onclick='trclickvisit(${resData[i].visitId});'>
+				<td>${resData[i].visitId}</td>
+				<td>${resData[i].strVisitTime}</td>
+				<td>[${resData[i].userId}]${resData[i].userName}</td>
+				<td>${resData[i].strCreateTime}</td>
+				<td><div class="contact_status" style="background-color:green"><input type="hidden" name="contact_status" id="status2" value=${resData[i].contactSatus}></div></td>
+				<td onclick="delete_visit(${resData[i].visitId})">      
+				     <svg style="height: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>					
+				</td>
+				</tr>
+					`;	
+			}
+
+		}
+
+
+		});
+	}
+
+	});		
+
+
+
+
+
+
+
+		
