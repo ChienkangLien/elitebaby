@@ -76,7 +76,6 @@ pageContext.setAttribute("list", list);
                                 <button type="button" class=" dropdown-item btn_edit"data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-
                                   <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
                                   <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
                                   <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>
@@ -181,8 +180,7 @@ pageContext.setAttribute("list", list);
         <li>
             <a class="categories" href="/elitebaby/news/front_alldiscount.jsp">優惠</a>
         </li>
-    </ul>
-   
+    </ul>   
 	<div class="container">
     	<form method="post" action="<%=request.getContextPath()%>/Latestnews.do">
             <input class="bar" id="tags" placeholder="搜尋..." name=select>

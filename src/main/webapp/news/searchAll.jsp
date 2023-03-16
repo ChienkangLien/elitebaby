@@ -40,7 +40,7 @@ pageContext.setAttribute("list", list);
      <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
             <div class="container-fluid" >
-               <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
+                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -73,7 +73,6 @@ pageContext.setAttribute("list", list);
                                 <button type="button" class=" dropdown-item btn_edit"data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-
                                   <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
                                   <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
                                   <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>

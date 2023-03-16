@@ -162,7 +162,7 @@ NewsSortVO newsSortVO = (NewsSortVO) request.getAttribute("newsSortVO");
   </div>
 	<div id="main_div">
 		<div id="blank_area">此處留空</div>
-		<div class="t2" id="title">最新消息管理</div>
+		<div class="t2" id="title">最新消息管理-新增</div>
 
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
