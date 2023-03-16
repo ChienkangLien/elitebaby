@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>員工管理</title>
-    <link rel="stylesheet" href="css/management.css" />
+    <!-- <link rel="stylesheet" href="css/management.css" /> -->
     <!-- bootstrap引用cdn -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
@@ -59,7 +59,7 @@
     <!-- aside -->
     <div class="flex-shrink-0 p-3 c1" id="navbar">
       <a
-        href="/elitebaby/admin/member/background_nav.html"
+        href="#"
         class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
       >
         <img src="../../images/logo.jpg" style="width: 30px" />
@@ -392,14 +392,10 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn" data-bs-dismiss="modal">
               取消
             </button>
-            <button type="button" class="btn btn-primary btn_save">儲存</button>
+            <button type="button" class="btn btn_save">儲存</button>
           </div>
         </div>
       </div>
@@ -480,7 +476,7 @@
           $("input#password").focus();
           return (check = false);
         } else {
-          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
           if (passwordRegxp.test(password) != true) {
             alert("密碼格式錯誤");
             alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
@@ -533,7 +529,7 @@
                       <td>
                         <button
                           type="button"
-                          class="btn btn-primary btn_edit"
+                          class="btn btn_edit"
                           data-bs-toggle="modal"
                           data-bs-target="#editModal"
                         >
@@ -553,7 +549,7 @@
 
       $(function () {
         listAll();
-        $("button.btn-primary.btn_save").on("click", function () {
+        $("button.btn_save").on("click", function () {
           callAPI();
         });
       });

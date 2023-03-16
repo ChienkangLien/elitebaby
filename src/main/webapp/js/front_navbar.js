@@ -37,12 +37,12 @@ $(function () {
 
   // 登入按鈕
   document.getElementById("loginButton").addEventListener("click", function () {
-    window.location.href = "login.html";
+    window.location.href = "/elitebaby/member/login.html";
   });
   const register_btn = document.querySelector(".register_btn");
   register_btn.addEventListener("click", function () {
     // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
-    window.location.href = "register.html";
+    window.location.href = "/elitebaby/member/register.html";
   });
 
   // 取得表單數據
@@ -204,6 +204,61 @@ document.querySelector(".bi-bell").addEventListener("click", function () {
       }
     });
 
+
+})
+
+
+// 確認登入狀態
+function checkLogin(){
+  let root = location.origin
+  let check = "/elitebaby/member/check"
+    $.ajax({
+    url: root + check,           // 資料請求的網址
+    type: "GET",                  // GET | POST | PUT | DELETE | PATCH
+    // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
+    dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+    success: function(resp){      // request 成功取得回應後執行
+      if(resp.message == "已登入"){
+          // console.log(resp);
+          console.log(resp.message);
+          var loginButton =  $('#loginButton');
+          loginButton.remove();
+          var registerButton = $('#registerButton');
+          registerButton.remove();
+
+        }else{ 
+          console.log(resp.message);
+          var member = $('.member');
+          member.remove();
+          var logoutButton = $("#logoutButton");
+          logoutButton.remove();
+        }
+    }
+  });  
+  }
+  checkLogin();
+
+
+//   彈跳視窗 會員資料編輯
+  function getAPI(){
+    $.ajax({
+              url: "Find",
+              method: "GET",
+              dataType: 'json',
+              contentType:"application/json",
+              
+            success: function(response) {
+              $('#name').val(response.username);
+              $('#address').val(response.address);
+              $('#phoneNumber').val(response.phoneNumber);
+           
+            },
+            error: function(error) {
+              alert("Error calling API:" + error);
+            }
+          });
+  }
+
   fetch(
     `/elitebaby/report/emailservlet?action=get_email_chang_status&userId=user${userId}`,
     {
@@ -215,7 +270,7 @@ document.querySelector(".bi-bell").addEventListener("click", function () {
   )
     .then((resp) => resp.json())
     .then((data) => {});
-});
+
 
 const bellbtn = document.querySelector(".bi-bell");
 const popupWrapper = document.getElementById("popupWrapper");
@@ -316,53 +371,12 @@ function callAPI() {
   }
 }
 
-function getAPI() {
-  $.ajax({
-    url: "Find",
-    method: "GET",
-    dataType: "json",
-    contentType: "application/json",
-
-    success: function (response) {
-      $("#name").val(response.username);
-      $("#address").val(response.address);
-      $("#phoneNumber").val(response.phoneNumber);
-    },
-    error: function (error) {
-      alert("Error calling API:" + error);
-    },
-  });
-}
 
 
-// 確認登入過後將註冊及登入按鈕隱藏!!!!!!!!!!!!!!!!!!!!!
-function checkLogin() {
-  $.ajax({
-    url: "check", // 資料請求的網址
-    type: "GET", // GET | POST | PUT | DELETE | PATCH
-    // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
-    dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
-    success: function (resp) {
-      // request 成功取得回應後執行
-      if (resp.message == "已登入") {
-        // console.log(resp);
-        console.log(resp.message);
-        var loginButton = $("#loginButton");
-        loginButton.remove();
-        var registerButton = $("#registerButton");
-        registerButton.remove();
-      } else {
-        console.log(resp.message);
-        var member = $(".member");
-        member.remove();
-        var logoutButton = $("#logoutButton");
-        logoutButton.remove();
-      }
-    },
-  });
-}
 
-$("button.btn-primary.btn_save").on("click", function () {
+
+
+$("button.btn_save").on("click", function () {
   callAPI();
 });
 $("button.btn_edit").on("click", function () {
@@ -371,3 +385,4 @@ $("button.btn_edit").on("click", function () {
 $("button.btn_logout").on("click", function () {
   location.href = "logout.html";
 });
+

@@ -10,7 +10,8 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="css/official.css" />
+    <link rel="stylesheet" href="../css/official.css" />
+    <link rel="stylesheet" href="../css/front_navbar.css">
     <link rel="stylesheet" href="css/front_navbar.css">
 
 
@@ -18,32 +19,31 @@
 </head>
 
 <body>
-  <div id="nav">
-      <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
-          <div class="container-fluid" >
-              <img src="../images/logo.jpg">
-              <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                  aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" style=" justify-content: space-between;" id="navbarNavDropdown">
-                  <ul class="navbar-nav">
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                              data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
-                          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
-                              <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
-                              <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
-                              
-                          </ul>
-                      <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
-                      
-                      <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
-                      <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
-                      <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
+
+    <div id="nav">
+        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
+            <div class="container-fluid" >
+                <img src="images/logo.jpg">
+                <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" style=" justify-content: space-between;" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                          <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
+                          <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
+                      </ul>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/meal/meal_front.html">月子膳食</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
 
                         
 
@@ -80,7 +80,7 @@
                                 <path
                                     d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;">5</span>
+                            <span class="badge badge-danger navbar-badge ;"></span>
                         </button>
 
                         <!-- ===================================鈴鐺==================================== -->
@@ -91,7 +91,9 @@
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge emailBill">3</span>
+
+                            <span class="badge badge-danger navbar-badge EmailBill"></span>
+
                         </button>
 
 
@@ -341,8 +343,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_save ">儲存</button>
+          <button type="button" class="btn" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn_save">儲存</button>
         </div>
       </div>
     </div>
@@ -362,6 +364,159 @@
 </body>
 
 
+<!-- 試試看還沒完成(登入按鈕) -->
+<script>
+
+    document.getElementById("loginButton").addEventListener("click", function() {
+        window.location.href = "/elitebaby/member/login.html";
+    });
+
+</script>
+
+<script>
+  const register_btn = document.querySelector(".register_btn");
+  register_btn.addEventListener("click", function () {
+    // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+    window.location.href = "/elitebaby/member/register.html";
+  });
+</script>
+
+<script>
+    // 取得表單數據
+    $(function(){
+      function callAPI() {
+      var username =  $('#name').val();
+      var address =  $('#address').val();
+      var phoneNumber =  $('#phoneNumber').val();
+      var password =  $('#password').val();
+      var confirmpassword =  $('#confirmpassword').val();
+
+      var error = true;
+      if (password != confirmpassword ){
+        alert("密碼與確認密碼不一致，請重新輸入。")
+        error = false;
+      }
+      if(username == null || username == ""){
+        alert("名字不可為空白!")
+        error = false;
+      }
+      if (address == null || address == ""){
+        alert("地址不可為空白!")
+        error = false;
+      }
+      if(phoneNumber == null || phoneNumber == ""){
+        alert("手機不可為空白!")
+        error = false;
+      }
+      if(password == null || password == "" || confirmpassword == null || confirmpassword == "") {
+        alert("密碼或確認密碼不得為空!")
+        error = false; 
+      }
+
+      var check = true;
+      if (password == "") {
+          alert("請輸入密碼");
+          $("input#password").focus();
+          return (check = false);
+        } else {
+          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+          if (passwordRegxp.test(password) != true) {
+            alert("密碼格式錯誤");
+            alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
+            $("input#password").focus();
+            $("input#password").select();
+            return (check = false);
+          }
+        }
+
+        // 使用AJAX傳送表單數據
+        if(check){
+
+            $.ajax({
+              url: "change",
+              method: "POST",
+              dataType: 'json',
+              contentType:"application/json",
+              data: JSON.stringify({
+                      username:username,
+                      password:password,
+                      address:address,
+                      phoneNumber:phoneNumber
+            }),
+            success: function(response) {
+                alert(response.message);
+                if(response.message == "修改成功"){
+                  $(location).attr("href","homepage.html");
+                }
+            },
+            error: function(error) {
+              alert("Error calling API:" + error);
+            }
+          });
+        }
+
+      
+    }  
+    function getAPI(){
+      $.ajax({
+                url: "Find",
+                method: "GET",
+                dataType: 'json',
+                contentType:"application/json",
+                
+              success: function(response) {
+                $('#name').val(response.username);
+                $('#address').val(response.address);
+                $('#phoneNumber').val(response.phoneNumber);
+             
+              },
+              error: function(error) {
+                alert("Error calling API:" + error);
+              }
+            });
+    }
+   // 確認登入狀態
+function checkLogin(){
+  let root = location.origin
+  let check = "/elitebaby/member/check"
+    $.ajax({
+    url: root + check,           
+    type: "GET",                              
+    dataType: "json",             
+    success: function(resp){      
+      if(resp.message == "已登入"){
+          console.log(resp.message);
+          var loginButton =  $('#loginButton');
+          loginButton.remove();
+          var registerButton = $('#registerButton');
+          registerButton.remove();
+
+        }else{ 
+          console.log(resp.message);
+          var member = $('.member');
+          member.remove();
+          var logoutButton = $("#logoutButton");
+          logoutButton.remove();
+        }
+    }
+  });  
+  }
+  checkLogin();
+
+
+      $("button.btn-primary.btn_save").on("click", function(){
+        callAPI();
+      })
+      $("button.btn_edit").on("click", function(){
+        getAPI();
+      })
+})
+</script>
+
+
 
 
 </html>
+
+
+
