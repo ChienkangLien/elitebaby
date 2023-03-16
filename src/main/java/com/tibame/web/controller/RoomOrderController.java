@@ -150,7 +150,7 @@ public class RoomOrderController extends HttpServlet {
 		String resultStr = null;
 		System.out.println("roomOrder==null:" + roomOrder == null);
 		if (roomOrder.getOrderResident() == null) { // 新增關房單
-			roomOrder.setAdminId(((EmployeeVO)request.getSession().getAttribute("employeeVO")).getId());
+			roomOrder.setAdminId(((EmployeeVO)request.getSession().getAttribute("employeeVO")).getEmpid());
 //			屆時登入功能完成要使用
 //			roomOrder.setAdminId(1);
 			resultStr = service.addOrder(roomOrder);
