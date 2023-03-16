@@ -11,6 +11,7 @@ public class AddMealPic {
 		MealDAO dao = new MealDAOImpl();
 		List<MealVO> meal = dao.getAll();
 		System.out.println(meal);
+		
 //		System.out.println(meal.get(0).getMealPic());
 	}
 }

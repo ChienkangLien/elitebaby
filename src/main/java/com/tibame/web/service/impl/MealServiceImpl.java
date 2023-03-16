@@ -66,7 +66,15 @@ public class MealServiceImpl implements MealService {
 	@Override
 	public MealVO findByPrimaryKey(int id) {
 		if (id >= 0) {
-			return dao.findByPrimaryKey(id);
+			Jedis jedis = new Jedis("localhost", 6379);
+			MealVO meal = dao.findByPrimaryKey(id);
+			if(meal == null) {
+				return null;
+			}
+			String mealPic = jedis.hget("meal:" + meal.getMealId() + ":pic", "pic");
+			meal.setBase64(mealPic);
+			jedis.close();
+			return meal;
 		}
 		return null;
 	}

@@ -33,7 +33,7 @@ public class MealDAOImpl implements MealDAO {
 
 	@Override
 	public int insert(MealVO meal) {
-		String sql = "insert into MEAL (MEAL_NAME, MEAL_PIC, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS) values (?,?,?,?,?);";
+		String sql = "insert into MEAL (MEAL_NAME, MEAL_PIC, MEAL_PRICE, MEAL_INFO, MEAL_STATUS) values (?,?,?,?,?);";
 //		Jedis jedis = new Jedis("localhost", 6379);
 		
 		
@@ -42,7 +42,7 @@ public class MealDAOImpl implements MealDAO {
 			ps.setString(1, meal.getMealName());
 			ps.setBytes(2, meal.getMealPic());
 			ps.setInt(3, meal.getMealPrice());
-			ps.setInt(4, meal.getReserverPrice());
+			ps.setString(4, meal.getMealInfo());
 			ps.setInt(5, meal.getMealStatus());
 			return ps.executeUpdate();
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class MealDAOImpl implements MealDAO {
 
 	@Override
 	public int update(MealVO meal) {
-		String sql = "UPDATE Meal set MEAl_NAME=?, MEAL_PIC=?, MEAL_PRICE=?, RESERVE_PRICE=?,MEAL_STATUS=?  where meal_Id = ?";
+		String sql = "UPDATE Meal set MEAl_NAME=?, MEAL_PIC=?, MEAL_PRICE=?, MEAL_INFO=?, MEAL_STATUS=?  where meal_Id = ?";
 
 		
 
@@ -64,7 +64,7 @@ public class MealDAOImpl implements MealDAO {
 			ps.setString(1, meal.getMealName());
 			ps.setBytes(2, meal.getMealPic());
 			ps.setInt(3, meal.getMealPrice());
-			ps.setInt(4, meal.getReserverPrice());
+			ps.setString(4, meal.getMealInfo());
 			ps.setInt(5, meal.getMealStatus());
 			ps.setInt(6, meal.getMealId());
 
@@ -94,7 +94,7 @@ public class MealDAOImpl implements MealDAO {
 
 	@Override
 	public MealVO findByPrimaryKey(Integer id) {
-		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PIC, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL WHERE MEAL_ID = ?;";
+		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PRICE, MEAL_INFO, MEAL_STATUS FROM MEAL WHERE MEAL_ID = ?;";
 
 
 		try (Connection con = ds.getConnection();
@@ -104,17 +104,15 @@ public class MealDAOImpl implements MealDAO {
 				if (rs.next()) {
 					Integer mealId = rs.getInt(1);
 					String mealname = rs.getString(2);
-					byte[] mealpic = rs.getBytes(3);
-					Integer mealprice = rs.getInt(4);
-					Integer reserverprice = rs.getInt(5);
-					Integer mealstatus = rs.getInt(6);
+					Integer mealprice = rs.getInt(3);
+					String mealinfo = rs.getString(4);
+					Integer mealstatus = rs.getInt(5);
 					
 					MealVO meal = new MealVO();
 					meal.setMealId(mealId);
 					meal.setMealName(mealname);
-					meal.setMealPic(mealpic);
 					meal.setMealPrice(mealprice);
-					meal.setReservePrivce(reserverprice);
+					meal.setMealInfo(mealinfo);
 					meal.setMealStatus(mealstatus);
 					System.out.println(meal);
 					return meal;
@@ -128,7 +126,7 @@ public class MealDAOImpl implements MealDAO {
 
 	@Override
 	public List<MealVO> getAll() {
-		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PRICE, RESERVE_PRICE, MEAL_STATUS FROM MEAL;";
+		String sql = "SELECT MEAL_ID, MEAL_NAME, MEAL_PRICE, MEAL_INFO, MEAL_STATUS FROM MEAL;";
 		List<MealVO> list = new ArrayList<MealVO>();
 		
 		try (Connection con = ds.getConnection();
@@ -140,14 +138,14 @@ public class MealDAOImpl implements MealDAO {
 					String mealname = rs.getString(2);
 //					byte[] mealpic = rs.getBytes(3);
 					Integer mealprice = rs.getInt(3);
-					Integer reserverprice = rs.getInt(4);
+					String mealInfo = rs.getString(4);
 					Integer mealstatus = rs.getInt(5);
 
 					meal.setMealId(mealId);
 					meal.setMealName(mealname);
 //					meal.setMealPic(mealpic);
 					meal.setMealPrice(mealprice);
-					meal.setReservePrivce(reserverprice);
+					meal.setMealInfo(mealInfo);;
 					meal.setMealStatus(mealstatus);
 					list.add(meal);
 				}
@@ -180,8 +178,8 @@ public class MealDAOImpl implements MealDAO {
 		String sql = "SELECT MEAL_PIC FROM MEAL WHERE MEAL_ID = ?;";
 		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, mealId);
 			try (ResultSet rs = ps.executeQuery()) {
-				ps.setInt(1, mealId);
 				if (rs.next()) {
 					byte[] pic = rs.getBytes(1);
 					return pic;

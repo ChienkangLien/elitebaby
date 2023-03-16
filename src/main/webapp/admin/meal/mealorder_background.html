@@ -19,7 +19,8 @@
 
 <body class="c2">
   <div class="flex-shrink-0 p-3 c1" id="navbar">
-    <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <a href="/elitebaby/admin/member/background_nav.html"
+      class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <img src="./img/logo.jpg" style="width: 30px" />
       <span class="fs-5 fw-semibold">菁英產後護理之家</span>
     </a>
@@ -50,8 +51,8 @@
         </button>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">訂餐管理</a></li>
-            <li><a href="./meal_background.html" class="link-dark rounded">商品管理</a></li>
+            <li><a href="/elitebaby/admin/meal/mealorder_background.html" class="link-dark rounded">訂餐管理</a></li>
+            <li><a href="/elitebaby/admin/meal/meal_background.html" class="link-dark rounded">商品管理</a></li>
           </ul>
         </div>
       </li>
@@ -63,9 +64,9 @@
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">房型維護</a></li>
-            <li><a href="#" class="link-dark rounded">房間訂單</a></li>
-            <li><a href="#" class="link-dark rounded">房況管理</a></li>
+            <li><a href="/elitebaby/admin/room/type.html" class="link-dark rounded">房型維護</a></li>
+            <li><a href="/elitebaby/admin/room/order.html" class="link-dark rounded">房間訂單</a></li>
+            <li><a href="/elitebaby/admin/room/condition/html" class="link-dark rounded">房況管理</a></li>
           </ul>
         </div>
       </li>
@@ -80,20 +81,21 @@
             討論區
           </button> -->
         <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="#" class="btn bkbtn">討論區</a>
+        <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
       </li>
       <!-- ================預約參觀============= -->
       <li class="mb-1">
-        <!-- <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#orders-collapse1"
-            aria-expanded="false"
-          >
-            預約參觀
-          </button> -->
-        <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="#" class="btn bkbtn">預約參觀</a>
+        <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+          data-bs-target="#orders-collapse111" aria-expanded="false">
+          預約參觀
+        </button>
+        <div class="collapse" id="orders-collapse111">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="/elitebaby/admin/visit/getall_visit.html" class="link-dark rounded">預約參觀</a></li>
+            <li><a href="/elitebaby/admin/visit/getall_visit_history.html" class="link-dark rounded">歷史參訪</a></li>
+            <li><a href="/elitebaby/admin/visit/back_visit_callender.html" class="link-dark rounded">預約參訪月曆表</a></li>
+          </ul>
+        </div>
       </li>
       <!-- =============最新消息============ -->
       <li class="mb-1">
@@ -144,8 +146,7 @@
       膳食訂單管理
     </div>
     <div class="meal_order_search">
-      請輸入要查詢的訂單編號
-      <input type="number" id="select_id" oninput="validity.valid||(value='')">
+      <input type="number" id="select_id" oninput="validity.valid||(value='')" placeholder="請輸入訂單編號">
       <button class="btn btn_select" id="btn_select">查詢</button>
     </div>
     <table class="meal_order">

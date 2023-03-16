@@ -30,32 +30,39 @@ fetch("/elitebaby/Cart?name=getall", {
     .then((body) => {
         if (body.length == 0) {
             // console.log("購物車內無商品");
-            let cart = `<a></a>`
-        }
-        meals = body;
-        try {
-            if (body.length != null) {
-                meals = body;
-                let td_str = "";
-                let img_str = "";
-                for (let i = 0; i < body.length; i++) {
-                    // let status = "";
-                    total += body[i].mealPrice * body[i].count;
-                    if (body[i].mealStatus == 0) {
-                        status = "下架";
-                    } else {
-                        status = "上架";
-                    }
-                    if (body[i].base64 == null || body[i] == "") {
-                        img_str = `<td><img src="" id="mealPic"></td>`
-                    } else {
-                        img_str = `<td><img src="data:image/png;base64,${body[i].base64}" id="mealPic"></td>`
-                    }
-                    td_str += `
+            let cart = `<div>
+            <div style="text-align:center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/3900/3900101.png" style="width: 200px ; height: 200px ;"
+                alt="Your Image">
+            <p style="font-size: 26px; font-weight: bold;">您的購物車還沒有任何商品</p>
+        </div>
+        </div>`
+            $("div.cart_table_block").html(cart);
+        } else {
+            meals = body;
+            try {
+                if (body.length != null) {
+                    meals = body;
+                    let td_str = "";
+                    let img_str = "";
+                    for (let i = 0; i < body.length; i++) {
+                        // let status = "";
+                        total += body[i].mealPrice * body[i].count;
+                        if (body[i].mealStatus == 0) {
+                            status = "下架";
+                        } else {
+                            status = "上架";
+                        }
+                        if (body[i].base64 == null || body[i] == "") {
+                            img_str = `<img src="" id="mealPic">`
+                        } else {
+                            img_str = `<img src="data:image/png;base64,${body[i].base64}" id="mealPic" style="border-radius: 5px;">`
+                        }
+                        td_str += `
                         <tr data-id="${body[i].mealId}">
                             <td>${body[i].mealId}</td>
                             <td>${body[i].mealName}</td>
-                            ${img_str}
+                            <td>${img_str}</td>
                             <td>$${body[i].mealPrice}</td>
                             <td>${body[i].count}</td>
                             <td>$${body[i].mealPrice * body[i].count}</td>
@@ -72,14 +79,15 @@ fetch("/elitebaby/Cart?name=getall", {
                             </td>
                         </tr>
                         `;
-                    // console.log(body[i].base64);
+                        // console.log(body[i].base64);
+                    }
+                    $("tbody.getcart_tb").html(td_str);
+                    $("div.total").html(total + " 元");
+                    // $("div.getall").html(body[0].mealId);
                 }
-                $("tbody.getcart_tb").html(td_str);
-                $("div.total").html(total + " 元");
-                // $("div.getall").html(body[0].mealId);
+            } catch (error) {
+                console.log(error + "，回傳失敗");
             }
-        } catch (error) {
-            console.log(error + "，回傳失敗");
         }
     });
 
@@ -293,7 +301,7 @@ $("div#checkout").on("click", "button#btn_tocheckout", function () {
                     if (body.msg == "success") {
                         alert("結帳成功!!返回訂單頁面!!");
                         // $("span#cartCount").html(body.cartcount);
-                        location.href("user_order.html");
+                        location.href("/elitebaby/meal/user_order.html");
                     } else {
                         console.log("尚未登入");
                         alert(body.msg);

@@ -94,9 +94,7 @@ body {
 table.visit_table {
     width: 850px;
     background-color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 100px;
+    margin: 0 auto;
 }
 
 table.visit_table,
@@ -187,8 +185,22 @@ div.btn_create {
 }
 
 button.btncreate {
+    margin-left: 198px;
+    /* float: right;
+    margin-right: 198px; */
+}
+
+button.mealselect {
     float: right;
     margin-right: 198px;
 }
+
+input.mealselect {
+    width: 133px;
+    margin-top: 3px;
+    margin-right: 5px;
+    float: right;
+}
+
 
 /* ================================ */

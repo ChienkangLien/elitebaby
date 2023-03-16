@@ -94,7 +94,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 					mealorder.setOrderStatus(orderStatus);
 					mealorder.setOrderDate(orderDate);
 					mealorder.setAuthCode(authCode);
-					System.out.println(mealorder);
+//					System.out.println(mealorder);
 					list.add(mealorder);
 				}
 				return list;
@@ -145,7 +145,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 	public List<MealOrderVO> findByMealOrderId(Integer id) {
 		String sql = "SELECT * FROM MEAL_ORDER WHERE MEAL_ORDER_ID = ?;";
 		List<MealOrderVO> list = new ArrayList<MealOrderVO>();
-		
+
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
@@ -165,7 +165,7 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 					mealorder.setOrderStatus(orderStatus);
 					mealorder.setOrderDate(orderDate);
 					mealorder.setAuthCode(authCode);
-					System.out.println(mealorder);
+//					System.out.println(mealorder);
 					list.add(mealorder);
 				}
 				return list;
@@ -173,6 +173,42 @@ public class MealOrderDAOImpl implements MealOrderDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public List<MealOrderVO> findByMealOrderIdWithUser(Integer userid, Integer orderId) {
+		String sql = "SELECT * FROM MEAL_ORDER WHERE MEAL_ORDER_ID = ? AND USER_ID = " + userid + ";";
+		List<MealOrderVO> list = new ArrayList<MealOrderVO>();
+		System.out.println("執行到使用者單筆訂單查詢 userID為"+userid+" 訂單ID為 "+orderId);
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, orderId);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					Integer mealOrderId = rs.getInt(1);
+					Integer userId = rs.getInt(2);
+					Integer orderPayment = rs.getInt(3);
+					Integer orderStatus = rs.getInt(4);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String orderDate = dateFormat.format(rs.getTimestamp(5));
+					String authCode = rs.getString(6);
+
+					MealOrderVO mealorder = new MealOrderVO();
+					mealorder.setMealOrderId(mealOrderId);
+					mealorder.setUserId(userId);
+					mealorder.setOrderPayment(orderPayment);
+					mealorder.setOrderStatus(orderStatus);
+					mealorder.setOrderDate(orderDate);
+					mealorder.setAuthCode(authCode);
+//					System.out.println(mealorder);
+					list.add(mealorder);
+				}
+				return list;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

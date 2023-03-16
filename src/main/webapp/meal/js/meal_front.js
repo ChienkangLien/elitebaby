@@ -18,6 +18,9 @@ fetch(`/elitebaby/Meal?name=getall`)
                 let li_str = "";
                 for (let i = 0; i < body.length; i++) {
                     // console.log("進入迴圈");
+                    if (body[i].mealStatus == 0) {
+                        continue;
+                    }
                     if (body[i].base64 == null || body[i] == "") {
                         img_str = `<img src="" id="meal_pic">`
                     } else {
@@ -28,10 +31,9 @@ fetch(`/elitebaby/Meal?name=getall`)
                     <li class="meal_block_1" data-id="${body[i].mealId}">
                         ${img_str}
                         <div class="meal_name" id="meal_name">${body[i].mealName}</div>
-                        <div class="meal_info">我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹</div>
-                        <div class="meal_price">${body[i].mealPrice}</div>
-                        <button class="btn add_cart">加入購物車</button>
-                        <button class="btn read_more">閱讀更多</button>
+                        <br>
+                        <div class="meal_info" style="height: 120px; margin-left: 5px; margin-right: 5px;">${body[i].mealInfo}</div>
+                        <div class="meal_price">每份價格 $${body[i].mealPrice}<button class="btn add_cart" style="margin-right: 12px;">加入購物車</button></div>
                     </li>`
                 }
                 $("ul.meal_block").html(li_str);
