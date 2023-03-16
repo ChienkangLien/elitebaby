@@ -80,14 +80,49 @@ body {
     color: #8B4513;
 }
 
-.btn {
-    background-color: #ff8188;
-    color: white;
+table.meal_order {
+    width: 850px;
+    background-color: white;
+    margin: 0 auto;
 }
 
-.bkbtn {
-    background-color: #FDFDFD;
-    color: #333333;
+table.meal_order,
+th,
+td {
+    border: 1px solid #CCCCFF;
 }
+
+table.meal_order,
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+div.meal_order_search {
+    margin-right: 200px;
+    float: right;
+}
+
+img#mealPic {
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 100px;
+}
+
+div.detail_total {
+    float: right;
+    margin-right: 3px;
+}
+
+p {
+    font-size: 28px;
+}
+
+div#title {
+    margin-left: 13.5%;
+}
+
+
 
 /* ================================ */

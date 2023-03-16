@@ -1,0 +1,58 @@
+table.cart_table {
+    width: 850px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 100px;
+    /* margin: auto; */
+}
+
+table.cart_table,
+th,
+td {
+    border: 1px solid #CCCCFF;
+}
+
+table.cart_table,
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+img#mealPic {
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 100px;
+}
+
+h3 {
+    margin-left: 100px;
+    margin-top: 30px;
+    /* margin-bottom: 30px; */
+    /* margin: auto; */
+    /* text-align: center; */
+    font-weight: bold;
+}
+
+/* button#add,
+button#subtract {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+} */
+
+div.checkout {
+    /* float: right; */
+    /* text-align: center; */
+    margin-left: 100px;
+    width: 400px;
+}
+
+.display_block {
+    display: block;
+}
+
+.display_none {
+    display: none;
+}

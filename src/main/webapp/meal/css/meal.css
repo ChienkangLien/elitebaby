@@ -84,11 +84,110 @@ body {
 .btn {
     background-color: #ff8188;
     color: white;
+    float: right;
+    margin-left: 10px;
 }
 
 .bkbtn {
     background-color: #FDFDFD;
     color: #333333;
 }
+
+div.footer {
+    /* position: absolute; */
+    /* 或 fixed */
+    bottom: 0;
+    width: 100%;
+    /* background-color: gray; */
+    /* color: white; */
+    text-align: center;
+    /* padding-top: 20px; */
+}
+
+div.meal {
+    /* position: absolute; */
+    /* width: 100%; */
+    /* border: 1px solid green; */
+    /* text-align: center; */
+    margin-top: 30px;
+}
+
+.meal_block {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30px; */
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.meal_block_1 {
+    /* border: 4px solid white; */
+    list-style: none;
+    flex-basis: calc(25% - 10px);
+    margin-bottom: 20px;
+    width: 360.2px;
+    height: 445px;
+    background-color: #fbf9ed;
+    border-radius: 10px;
+}
+
+.meal_pic {
+    /* border: 1px solid red; */
+    width: 360.2px;
+    height: 238.862px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.meal_info {
+    /* border: 1px solid blue; */
+}
+
+/* 4個一組，共2組 */
+li:nth-child(4n),
+li:nth-child(4n-1),
+li:nth-child(4n-2),
+li:nth-child(4n-3) {
+    margin-right: 0;
+}
+
+/* 當項目總數為7時，3個一組，共2組 */
+li:nth-child(3n+1):nth-last-child(-n+3),
+li:nth-child(3n+2):nth-last-child(-n+3),
+li:nth-child(3n):nth-last-child(-n+3) {
+    margin-right: 0;
+}
+
+/* 當項目總數為8時，4個一組，共2組 */
+li:nth-child(4n),
+li:nth-child(4n-1),
+li:nth-child(4n-2),
+li:nth-child(4n-3),
+li:nth-child(4n+1),
+li:nth-child(4n+2),
+li:nth-child(4n+3),
+li:nth-child(4n+4) {
+    margin-right: 0;
+}
+
+div#meal_name {
+    font-size: 24px;
+    font-weight: bold;
+    height: 12px;
+    margin-left: 5px;
+    margin-top: 5px;
+    /* float: left; */
+}
+
+div.meal_price {
+    color: #ff8188;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 
 /* ================================ */

@@ -1,0 +1,46 @@
+table.order_table {
+    width: 850px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 100px;
+    /* margin: auto; */
+}
+
+table.order_table,
+th,
+td {
+    border: 1px solid #CCCCFF;
+}
+
+table.order_table,
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+h3 {
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    /* margin: auto; */
+    /* text-align: center; */
+    font-weight: bold;
+}
+
+div.user_order_search {
+    margin-right: 585px;
+    float: right;
+}
+
+img#mealPic {
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 100px;
+}
+
+div.detail_total {
+    float: right;
+    font-size: 26px;
+}

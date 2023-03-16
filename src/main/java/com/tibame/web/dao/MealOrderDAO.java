@@ -6,9 +6,11 @@ import com.tibame.web.vo.MealOrderVO;
 
 public interface MealOrderDAO {
 
-	public void insert(MealOrderVO MealOrderVO);
-    public void update(MealOrderVO MealOrderVO);
-    public void delete(Integer mealOrderId);
-    public MealOrderVO findByPrimaryKey(Integer mealOrderId);
+	public int insert(MealOrderVO MealOrderVO);
+    public int update(MealOrderVO MealOrderVO);
+    public int delete(Integer mealOrderId);
+    public List<MealOrderVO> findByUserId(Integer userId);
+    public List<MealOrderVO> findByMealOrderId(Integer mealOrderId);
+    public List<MealOrderVO> findByMealOrderIdWithUser(Integer userid, Integer orderId);
     public List<MealOrderVO> getAll();
 }

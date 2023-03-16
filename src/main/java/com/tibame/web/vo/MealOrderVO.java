@@ -8,8 +8,13 @@ public class MealOrderVO {
 	private Integer userId;
 	private Integer orderPayment;
 	private Integer orderStatus;
-	private Timestamp orderDate;
+	private String orderDate;
 	private String orderNotes;
+	private String strPayment;
+	private String strStatus;
+	private Integer total;
+	private String authCode;
+
 
 	public Integer getMealOrderId() {
 		return mealOrderId;
@@ -43,11 +48,11 @@ public class MealOrderVO {
 		this.orderStatus = orderStatus;
 	}
 
-	public Timestamp getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Timestamp orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -58,4 +63,46 @@ public class MealOrderVO {
 	public void setOrderNotes(String orderNotes) {
 		this.orderNotes = orderNotes;
 	}
+
+	public String getStrPayment() {
+		return strPayment;
+	}
+
+	public void setStrPayment(String strPayment) {
+		this.strPayment = strPayment;
+	}
+
+	public String getStrstatus() {
+		return strStatus;
+	}
+
+	public void setStrstatus(String strstatus) {
+		this.strStatus = strstatus;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	@Override
+	public String toString() {
+		return "MealOrderVO [mealOrderId=" + mealOrderId + ", userId=" + userId + ", orderPayment=" + orderPayment
+				+ ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", orderNotes=" + orderNotes
+				+ ", strPayment=" + strPayment + ", strstatus=" + strStatus + ", total=" + total + ", authCode="
+				+ authCode + "]";
+	}
+
+
 }
