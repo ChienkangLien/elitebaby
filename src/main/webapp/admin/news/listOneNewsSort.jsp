@@ -24,8 +24,9 @@ pageContext.setAttribute("list", list);
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 <!-- css連結 -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/official.css" />
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundAll.css" />
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/background_navbar.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundOne.css"/>
    <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 

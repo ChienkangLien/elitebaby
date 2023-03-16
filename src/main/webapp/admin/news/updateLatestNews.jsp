@@ -22,8 +22,9 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 <!-- css連結 -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/official.css" />
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundOne.css" />
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/background_navbar.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundOne.css"/>
    <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
@@ -224,7 +225,7 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 								
 				<tr>
 					<td>發佈日期:</td>
-					<td><input name="scheduledTime" id="scheduledTime" type="date"/></td>
+					<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
 
 
 				</tr>
@@ -249,82 +250,24 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 <input type="hidden" name="newsId" value="${latestNewsVO.newsId}">
 <input type="submit" value="送出修改"></FORM>
 </body>
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${param.publishedTime}', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-        	<style>
-        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	           width:  300px;   /* width:  300px; */
-        	  }
-        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	           height: 151px;   /* height:  151px; */
-        	  }
-        	</style>
-        	<script>
-        	        $.datetimepicker.setLocale('zh');
-        	        $('#f_date1').datetimepicker({
-        	           theme: '',              //theme: 'dark',
-        	 	       timepicker:false,       //timepicker:true,
-        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	 		   value: '${param.onNews}', // value:   new Date(),
-        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	           //startDate:	            '2017/07/10',  // 起始日
-        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        });
-        	        
-        	        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-        	        	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-        	        	<style>
-        	        	  .xdsoft_datetimepicker .xdsoft_datepicker {
-        	        	           width:  300px;   /* width:  300px; */
-        	        	  }
-        	        	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-        	        	           height: 151px;   /* height:  151px; */
-        	        	  }
-        	        	</style>
-        	        	<script>
-        	        	        $.datetimepicker.setLocale('zh');
-        	        	        $('#f_date1').datetimepicker({
-        	        	           theme: '',              //theme: 'dark',
-        	        	 	       timepicker:false,       //timepicker:true,
-        	        	 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-        	        	 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-        	        	 		   value: '${param.offNews}', // value:   new Date(),
-        	        	           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-        	        	           //startDate:	            '2017/07/10',  // 起始日
-        	        	           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-        	        	           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        	        	        });
+<!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/news/css/jquery.datetimepicker.css" />
+	<script src="<%=request.getContextPath()%>/admin/news/css/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/admin/news/css/jquery.datetimepicker.full.js"></script>
+	<script>
+	         $.datetimepicker.setLocale('zh'); // kr ko ja en
+	         $('#scheduledTime').datetimepicker({
+	            theme: '',          //theme: 'dark',
+	            timepicker: false,   //timepicker: false,
+	            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+	 	       format: 'Y-m-d',
+	 	       value: new Date(),
+	            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+	            //startDate:	        '2022/07/10',  // 起始日
+	            minDate:           '-1970-01-01', // 去除今日(不含)之前
+	            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+	         });
+     </script>
         	        	    	<!-- 登出彈跳視窗Modal -->
         	        	        <div
         	        	          class="modal fade"
