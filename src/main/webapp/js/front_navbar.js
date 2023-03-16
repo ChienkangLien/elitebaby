@@ -382,7 +382,7 @@ $("button.btn_save").on("click", function () {
 $("button.btn_edit").on("click", function () {
   getAPI();
 });
-$("button.btn_logout").on("click", function () {
-  location.href = "logout.html";
+$("button#logoutButton").on("click", function () {
+  location.href = "/elitebaby/member/logout.html";
 });
 
