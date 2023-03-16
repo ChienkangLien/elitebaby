@@ -78,6 +78,23 @@ public class MealOrder extends HttpServlet {
 				response.getWriter().write(respbody.toString());
 			}
 		}
+		
+		if (str.equals("updateMealWithAddress")) {
+			Gson gson = new Gson();
+			response.setContentType("application/json");
+			MealOrderVO MealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+//			System.out.println(MealOrderObject.getStrstatus());
+			MealOrderService service = new MealOrderServiceImpl();
+			int udm = service.updateMealWithAddress(MealOrderObject);
+			JsonObject respbody = new JsonObject();
+			if (udm > 0) {
+				respbody.addProperty("msg", "success");
+				response.getWriter().write(respbody.toString());
+			} else {
+				respbody.addProperty("msg", "fail");
+				response.getWriter().write(respbody.toString());
+			}
+		}
 
 		if (str.equals("getorderdetail")) {
 			Gson gson = new Gson();
@@ -102,7 +119,6 @@ public class MealOrder extends HttpServlet {
 		}
 		
 		if(str.equals("getuserorderbyorderid")) {
-			System.out.println("進入getuserorderbyorderid處理流程");
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderVO MealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);

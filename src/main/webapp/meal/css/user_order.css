@@ -1,10 +1,10 @@
 table.order_table {
-    width: 850px;
+    width: 950px;
     background-color: white;
-    margin-top: 5px;
+    /* margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 100px;
-    /* margin: auto; */
+    margin-left: 100px; */
+    margin: 0 auto;
 }
 
 table.order_table,
@@ -21,16 +21,16 @@ td {
 }
 
 h3 {
-    margin-left: 100px;
+    margin-left: 287px;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     /* margin: auto; */
     /* text-align: center; */
     font-weight: bold;
 }
 
 div.user_order_search {
-    margin-right: 585px;
+    margin-right: 286px;
     float: right;
 }
 

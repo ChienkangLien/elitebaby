@@ -50,6 +50,7 @@ fetch("/elitebaby/MealOrder?name=getorder", {
                             <td>${body[i].total}</td>
                             <td>${body[i].strStatus}</td>
                             <td>${body[i].strPayment}</td>
+                            <td>${body[i].address}</td>
                             <td>
                                 <div>
                                     <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"
@@ -75,6 +76,7 @@ fetch("/elitebaby/MealOrder?name=getorder", {
 
 let data_id = null;
 let order_status = null;
+let address = null;
 
 //取消按鈕
 $("tbody.getuserorder_tb").on("click", "button.btn_cancel", function () {
@@ -85,6 +87,7 @@ $("tbody.getuserorder_tb").on("click", "button.btn_cancel", function () {
             console.log(meals[i].mealOrderId);
             console.log(meals[i].strStatus);
             order_status = meals[i].strStatus;
+            address = meals[i].address;
             if (order_status == "已付款") {
                 alert("此訂單已付款，無法取消");
                 location.reload();
@@ -93,7 +96,7 @@ $("tbody.getuserorder_tb").on("click", "button.btn_cancel", function () {
     }
 })
 
-//結帳按鈕
+//確定取消按鈕
 $("button.btn_tocheckout").on("click", function () {
     fetch("/elitebaby/MealOrder?name=update", {
         method: "POST",
@@ -104,7 +107,8 @@ $("button.btn_tocheckout").on("click", function () {
         body: JSON.stringify(
             {
                 mealOrderId: data_id,
-                strStatus: order_status
+                strStatus: order_status,
+                address: address
             }
         ),
     })
@@ -245,6 +249,7 @@ $("button.btn_select").on("click", function () {
                             <td>${body[i].total}</td>
                             <td>${body[i].strStatus}</td>
                             <td>${body[i].strPayment}</td>
+                            <td>${body[i].address}</td>
                             <td>
                                 <div>
                                     <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"

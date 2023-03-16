@@ -9,12 +9,11 @@ public class MealOrderVO {
 	private Integer orderPayment;
 	private Integer orderStatus;
 	private String orderDate;
-	private String orderNotes;
+	private String address;
 	private String strPayment;
 	private String strStatus;
 	private Integer total;
 	private String authCode;
-
 
 	public Integer getMealOrderId() {
 		return mealOrderId;
@@ -56,14 +55,6 @@ public class MealOrderVO {
 		this.orderDate = orderDate;
 	}
 
-	public String getOrderNotes() {
-		return orderNotes;
-	}
-
-	public void setOrderNotes(String orderNotes) {
-		this.orderNotes = orderNotes;
-	}
-
 	public String getStrPayment() {
 		return strPayment;
 	}
@@ -96,13 +87,19 @@ public class MealOrderVO {
 		this.authCode = authCode;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
 		return "MealOrderVO [mealOrderId=" + mealOrderId + ", userId=" + userId + ", orderPayment=" + orderPayment
-				+ ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", orderNotes=" + orderNotes
-				+ ", strPayment=" + strPayment + ", strstatus=" + strStatus + ", total=" + total + ", authCode="
-				+ authCode + "]";
+				+ ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", address=" + address + ", strPayment="
+				+ strPayment + ", strStatus=" + strStatus + ", total=" + total + ", authCode=" + authCode + "]";
 	}
-
 
 }

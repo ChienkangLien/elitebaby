@@ -30,12 +30,19 @@ fetch("/elitebaby/MealOrder?name=getall")
                             <td>${body[i].orderDate}</td>
                             <td>${body[i].strStatus}</td>
                             <td>$${body[i].total}</td>
+                            <td>${body[i].address}</td>
                             <td>${body[i].strPayment}</td>
                             <td>
-                            <div>
-                            <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"
-                               data-bs-whatever="@fat">查看明細</button>
-                        </div>
+                                <div>
+                                    <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"
+                                    data-bs-whatever="@fat">明細</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="button" class="btn btn_update" id="btn_update" data-bs-toggle="modal" data-bs-target="#order_update"
+                                    data-bs-whatever="@fat">修改</button>
+                                </div>
                             </td>
                         </tr>
                         `;
@@ -81,23 +88,10 @@ $("tbody.getall_tb").on("click", "button.btn_detail", function () {
             meals = body;
             try {
                 if (body.length != null) {
-                    // for (let i = 0; i < body.length; i++) {
-                    //     console.log(body[i].mealOrderDetailId);
-                    //     console.log(body[i].mealId);
-                    //     console.log(body[i].mealName);
-                    //     console.log(body[i].orderCount);
-                    //     console.log(body[i].mealPrice);
-                    // }
-                    // alert("查詢成功");
                     total2 = null;
                     let td_str = "";
                     let img_str = "";
                     for (let i = 0; i < body.length; i++) {
-                        // let status = "";
-                        // console.log(body[i].strStatus);
-                        // if (body[i].strStatus == "取消") {
-                        //     continue;
-                        // }
                         console.log(typeof (body[i].mealPrice));
                         console.log(typeof (body[i].orderCount));
                         total2 += body[i].mealPrice * body[i].orderCount;
@@ -117,14 +111,10 @@ $("tbody.getall_tb").on("click", "button.btn_detail", function () {
                                     <td>${body[i].mealPrice * body[i].orderCount}</td>
                                 </tr>
                                 `;
-                        // console.log(body[i].base64);
                     }
 
                     $("tbody.getuserorderdetail_tb").html(td_str);
                     $("span.detail_total").html("$" + total2);
-                    // console.log("123");
-                    // $("div.total").html(total + " 元");
-                    // $("div.getall").html(body[0].mealId);
                 }
             } catch (error) {
                 console.log(error + "，回傳失敗");
@@ -177,12 +167,19 @@ $("button#btn_select").on("click", function () {
                             <td>${body[i].orderDate}</td>
                             <td>${body[i].strStatus}</td>
                             <td>$${body[i].total}</td>
+                            <td>${body[i].address}</td>
                             <td>${body[i].strPayment}</td>
                             <td>
-                            <div>
-                            <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"
-                               data-bs-whatever="@fat">查看明細</button>
-                        </div>
+                                <div>
+                                    <button type="button" class="btn btn_detail" id="btn_detail" data-bs-toggle="modal" data-bs-target="#order_detail"
+                                    data-bs-whatever="@fat">明細</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="button" class="btn btn_update" id="btn_update" data-bs-toggle="modal" data-bs-target="#order_update"
+                                    data-bs-whatever="@fat">修改</button>
+                                </div>
                             </td>
                         </tr>
                         `;
@@ -196,6 +193,85 @@ $("button#btn_select").on("click", function () {
                 }
             } catch (error) {
                 console.log(error + "，回傳失敗");
+            }
+
+        });
+})
+
+let status = null;
+let address = null;
+
+//修改按鈕
+$("tbody.getall_tb").on("click", "button.btn_update", function () {
+    // console.log("111111");
+    data_id = Number($(this).closest("tr").attr("data-id"));
+    console.log(data_id);
+    for (let i = 0; i < meals.length; i++) {
+        if (data_id === meals[i].mealOrderId) {
+            if (meals[i].strStatus == "未付款") {
+                status = 0;
+            } else if (meals[i].strStatus == "已付款") {
+                status = 1;
+            } else if (meals[i].strStatus == "取消") {
+                status = 2;
+            } else if (meals[i].strStatus == "已完成") {
+                status = 3;
+            }
+            document.querySelector(".update_meal_id").value = meals[i].mealOrderId;
+            document.querySelector(".update_order_date").value = meals[i].orderDate;
+            document.querySelector(".update_order_status").value = status;
+            document.querySelector(".update_total").value = meals[i].total;
+            document.querySelector(".update_address").value = meals[i].address;
+            document.querySelector(".update_payment").value = meals[i].strPayment;
+            // address = meals[i].address;
+            break;
+        }
+    }
+})
+
+
+//確定修改按鈕
+$("button#btn_toupdate").on("click", function () {
+    address = document.querySelector(".update_address").value;
+    console.log(address);
+    // console.log("rrrrrr");
+    fetch("/elitebaby/MealOrder?name=updateMealWithAddress", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(
+            {
+                mealOrderId: data_id,
+                orderStatus: status,
+                address: address
+            }
+        ),
+    })
+        .then((resp) => {
+            if (resp.status === 204) {
+                console.log("resp.status===" + resp.status);
+            } else {
+                return resp.json();
+            }
+        })
+        .then((body) => {
+
+            try {
+                if (body != null) {
+                    if (body.msg == "success") {
+                        alert("修改成功!");
+                        data_id = null;
+                        location.reload();
+                    } else {
+                        console.log("修改失敗!");
+                        alert("修改失敗!");
+                    }
+                }
+
+            } catch (error) {
+                console.log(error + "，資料庫沒照片故後端沒回傳");
             }
 
         });

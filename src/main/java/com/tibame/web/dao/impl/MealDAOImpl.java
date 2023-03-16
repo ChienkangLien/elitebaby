@@ -34,8 +34,6 @@ public class MealDAOImpl implements MealDAO {
 	@Override
 	public int insert(MealVO meal) {
 		String sql = "insert into MEAL (MEAL_NAME, MEAL_PIC, MEAL_PRICE, MEAL_INFO, MEAL_STATUS) values (?,?,?,?,?);";
-//		Jedis jedis = new Jedis("localhost", 6379);
-		
 		
 		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {
