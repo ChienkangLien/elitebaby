@@ -32,7 +32,7 @@ a {
 }
 
 .t2 {
-    margin-left: 550px;
+    margin-left: 600px;
 }
 
 #blank_area {
@@ -45,9 +45,9 @@ a {
 
 /* 表格 */
 table {
-    width: 1300px;
+    width: 950px;
     border: 1px solid black;
-    margin-left: 45px;
+    margin-left: 175px;
 
 }
 
@@ -112,7 +112,7 @@ iv.pagination_block ul.pagination>li>a.-on {
     color: #0056b3;
 }
 table {
-    width: 1050px;
+    width: 1300px;
     border: 1px solid black;
     margin-left: 75px;
 

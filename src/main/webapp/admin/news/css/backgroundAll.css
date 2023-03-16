@@ -35,7 +35,7 @@ a.button {
 }
 
 .t2 {
-    margin-left: 550px;
+    margin-left: 600px;
 }
 
 .calendar {
@@ -217,9 +217,9 @@ a.button {
 
 /* 表格 */
 table {
-    width: 1050px;
+    width: 1200px;
     border: 1px solid black;
-    margin-left: 75px;
+    margin-left: 25px;
 
 }
 

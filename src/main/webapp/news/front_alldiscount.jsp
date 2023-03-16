@@ -25,8 +25,9 @@ pageContext.setAttribute("list", list);
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/official.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_all.css">
+     <link rel="stylesheet" href="/elitebaby/css/official.css"/>
+     <link rel="stylesheet" href="/elitebaby/css/front_navbar.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_all.css"/>
    
     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -71,7 +72,6 @@ pageContext.setAttribute("list", list);
                                 <button type="button" class=" dropdown-item btn_edit"data-toggle="modal" data-target="#editModal">
                                     編輯會員資料
                                   </button>
-
                                   <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
                                   <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
                                   <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>
@@ -200,7 +200,7 @@ pageContext.setAttribute("list", list);
             <a href="/elitebaby/LatestNewsServlet?action=FindBynewsId&&newsId=${latestNewsVO.newsId}">
             <h1 class="title1">${latestNewsVO.postTitle}</h1>
             <p class="para">${latestNewsVO.newsIntro}</p>
-                </a>
+           </a>
             </div>
         </div>
     </section>
@@ -213,10 +213,6 @@ pageContext.setAttribute("list", list);
             02-2794-0123
         </p>
     </div>
-   
-
-
-	
  <script src="<%=request.getContextPath()%>/news/vendors/jquery/jquery-3.6.3.min.js"></script>
   <!-- jquery ui連結-->
     <script src="<%=request.getContextPath()%>/news/js/jquery-ui.js"></script>
@@ -227,6 +223,5 @@ pageContext.setAttribute("list", list);
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->
-    <script src="<%=request.getContextPath()%>/news/js/front_navbar.js"></script>
 </body>
 </html>
