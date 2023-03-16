@@ -219,7 +219,7 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 								
 				<tr>
 					<td>發佈日期:</td>
-					<td><input name="scheduledTime" id="scheduledTime" type="date"/></td>
+					<td><input name="scheduledTime" id="scheduledTime" type="text"/></td>
 
 
 				</tr>
@@ -247,60 +247,25 @@ LatestNewsVO latestNewsVO = (LatestNewsVO) request.getAttribute("latestNewsVO");
 		</FORM>
 </body>
 
-<!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
-<link   rel="stylesheet" type="text/css" href="./css/jquery.datetimepicker.css" />
-<script src="./css/jquery.js"></script>
-<script src="./css/jquery.datetimepicker.full.js"></script>
 
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-<script>
 <!-- 參考網站: https://xdsoft.net/jqplugins/datetimepicker/ -->
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-	<script src="<%=request.getContextPath()%>/admin/news/css/datetimepicker/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/admin/news/css/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-	<style>
-	  .xdsoft_datetimepicker .xdsoft_datepicker {
-	           width:  300px;   /* width:  300px; */
-	  }
-	  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	           height: 151px;   /* height:  151px; */
-	  }
-	</style>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/news/css/jquery.datetimepicker.css" />
+	<script src="<%=request.getContextPath()%>/admin/news/css/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/admin/news/css/jquery.datetimepicker.full.js"></script>
 	<script>
-//	         $.datetimepicker.setLocale('zh'); // kr ko ja en
-//	         $('#f_date1').datetimepicker({
-//	            theme: '',          //theme: 'dark',
-//	            timepicker: true,   //timepicker: false,
-//	            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-//	 	       format: 'Y-m-d H:i:s',
-//	 	       value: new Date(),
-//	            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-//	            //startDate:	        '2022/07/10',  // 起始日
-//	            //minDate:           '-1970-01-01', // 去除今日(不含)之前
-//	            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-//	         });
-
-	$.datetimepicker.setLocale('zh'); // kr ko ja en
-	$(function(){
-		 $('#scheduledTime').datetimepicker({
-		  format:'Y-m-d',
-		  onShow:function(){
-		   this.setOptions({
-		    maxDate:$('#offShelfTime').val()?$('#offShelfTime').val():false
-		   })
-		  },
-		  timepicker:false
-		 });
-	});
-</script>
+	         $.datetimepicker.setLocale('zh'); // kr ko ja en
+	         $('#scheduledTime').datetimepicker({
+	            theme: '',          //theme: 'dark',
+	            timepicker: false,   //timepicker: false,
+	            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+	 	       format: 'Y-m-d',
+	 	       value: new Date(),
+	            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+	            //startDate:	        '2022/07/10',  // 起始日
+	            minDate:           '-1970-01-01', // 去除今日(不含)之前
+	            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+	         });
+     </script>
 	<!-- 登出彈跳視窗Modal -->
     <div
       class="modal fade"
