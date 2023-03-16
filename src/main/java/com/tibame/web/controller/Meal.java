@@ -39,6 +39,7 @@ public class Meal extends HttpServlet {
 			Gson gson = new Gson();
 			MealService service = new MealServiceImpl();
 			List<MealVO> list = service.getAllMeal();
+//			System.out.println(list);
 			if (list.size() == 0) {
 				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 			} else {
@@ -117,6 +118,16 @@ public class Meal extends HttpServlet {
 				response.setContentType("application/json");
 				response.getWriter().write(respbody.toString());
 			}
+		}
+
+		if (str.equals("getonemeal")) {
+			Gson gson = new Gson();
+			response.setContentType("application/json");
+			MealVO jsonObject = gson.fromJson(request.getReader(), MealVO.class);
+			System.out.println(jsonObject);
+			MealService service = new MealServiceImpl();
+			MealVO meal = service.findByPrimaryKey(jsonObject.getMealId());
+			response.getWriter().write(gson.toJson(meal));
 		}
 	}
 

@@ -1,37 +1,37 @@
 package com.tibame.web.vo;
 
+import java.util.Arrays;
+
 public class MealVO {
-	
+
 	private Integer mealId;
 	private String mealName;
 	private byte[] mealPic;
 	private Integer mealPrice;
-	private Integer reserverPrice;
+	private String mealInfo;
 	private Integer mealStatus;
 	private String base64;
 	private Integer count;
 	private Integer total;
 
+	public String getMealInfo() {
+		return mealInfo;
+	}
 
-	public MealVO() {	
+	public void setMealInfo(String mealInfo) {
+		this.mealInfo = mealInfo;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	public MealVO() {
 	};
-	
-	public MealVO(String mealName, Integer mealPrice, Integer reservePrivce) {
-		this.mealName = mealName;
-		this.mealPrice = mealPrice;
-		this.reserverPrice = reservePrivce;
-	}
-	
-	public MealVO(Integer mealId, String mealName, byte[] mealPic, Integer mealPrice, 
-			Integer reservePrivce, Integer mealStatus) {
-		super();
-		this.mealId = mealId;
-		this.mealName = mealName;
-		this.mealPic = mealPic;
-		this.mealPrice = mealPrice;
-		this.reserverPrice = reservePrivce;
-		this.mealStatus = mealStatus;
-	}
 
 	public Integer getMealId() {
 		return mealId;
@@ -65,14 +65,6 @@ public class MealVO {
 		this.mealPrice = mealPrice;
 	}
 
-	public Integer getReserverPrice() {
-		return reserverPrice;
-	}
-
-	public void setReservePrivce(Integer reservePrivce) {
-		this.reserverPrice = reservePrivce;
-	}
-
 	public Integer getMealStatus() {
 		return mealStatus;
 	}
@@ -80,7 +72,7 @@ public class MealVO {
 	public void setMealStatus(Integer mealStatus) {
 		this.mealStatus = mealStatus;
 	}
-	
+
 	public String getBase64() {
 		return base64;
 	}
@@ -99,8 +91,8 @@ public class MealVO {
 
 	@Override
 	public String toString() {
-		return "MealVO [mealId=" + mealId + ", mealname=" + mealName +", mealpic="+ mealPic
-				+", mealPrice="+ mealPrice +", reservePrivce="+reserverPrice+", mealStatus"+mealStatus+ "]";
+		return "MealVO [mealId=" + mealId + ", mealName=" + mealName + ", mealPic=" + Arrays.toString(mealPic)
+				+ ", mealPrice=" + mealPrice + ", mealInfo=" + mealInfo + ", mealStatus=" + mealStatus + ", count=" + count + ", total=" + total + "]";
 	}
 
 }

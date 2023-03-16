@@ -11,5 +11,6 @@ public interface MealOrderDAO {
     public int delete(Integer mealOrderId);
     public List<MealOrderVO> findByUserId(Integer userId);
     public List<MealOrderVO> findByMealOrderId(Integer mealOrderId);
+    public List<MealOrderVO> findByMealOrderIdWithUser(Integer userid, Integer orderId);
     public List<MealOrderVO> getAll();
 }

@@ -3,6 +3,7 @@
 let meals = [];
 // let select = null;
 let status = "";
+let select_id = null;
 
 fetch("/elitebaby/Meal?name=getall")
     .then((resp) => {
@@ -28,7 +29,7 @@ fetch("/elitebaby/Meal?name=getall")
                     if (body[i].base64 == null || body[i] == "") {
                         img_str = `<td><img src="" id="mealPic"></td>`
                     } else {
-                        img_str = `<td><img src="data:image/png;base64,${body[i].base64}" id="mealPic"></td>`
+                        img_str = `<td><img src="data:image/png;base64,${body[i].base64}" id="mealPic" style="border-radius: 5px;"></td>`
                     }
                     td_str += `
                         <tr data-id="${body[i].mealId}">
@@ -36,7 +37,7 @@ fetch("/elitebaby/Meal?name=getall")
                             <td>${body[i].mealName}</td>
                             ${img_str}
                             <td>${body[i].mealPrice}</td>
-                            <td>${body[i].reserverPrice}</td>
+                            <td style="width: 300px;">${body[i].mealInfo}</td>
                             <td>${status}</td>
                             <td>
                                 <div>
@@ -67,7 +68,7 @@ let mealpic = ""; // getall用照片
 let upmealpic = ""; // update用照片
 let upmealname = "";
 let upmealprice = "";
-let upmealreserverprice = "";
+let upmealmealinfo = "";
 let upmealstatus = "";
 let data_id = "";
 
@@ -105,35 +106,11 @@ $("table.visit_table").on("click", "button.btn_update", function () {
             document.querySelector(".update_meal_name").value = meals[i].mealName;
             document.querySelector("#update_mealpic").setAttribute("src", `data:image/png;base64,${meals[i].base64}`);
             document.querySelector(".update_meal_price").value = meals[i].mealPrice;
-            document.querySelector(".update_reserver_price").value = meals[i].reserverPrice;
+            document.querySelector(".update_meal_info").value = meals[i].mealInfo;
             document.querySelector(".update_meal_status").value = meals[i].mealStatus;
             break;
         }
     }
-    // // let upmealname = $("input.update_meal_name").val();
-    // let upmealname = $(this).find("input.update_meal_name").attr("value");
-    // let upmealprice = Number($("input.update_meal_price").val());
-    // let upmealreserverprice = Number($("input.update_reserver_price").val());
-    // let upmealstatus = Number($("select.update_meal_status").val());
-    // for (let i = 0; i < meals.length; i++) {
-    //     if (data_id === meals[i].mealId) {
-    //         // console.log(meals[i].mealId);
-    //         // upmealname = meals[i].mealName;
-    //         upmealname = $(this).closest("tr").find(".update_meal_name").attr("value");
-    //         upmealprice = Number($("input.update_meal_price").val());
-    //         upmealreserverprice = Number($("input.update_reserver_price").val());
-    //         upmealstatus = Number($("select.update_meal_status").val());
-    //         console.log(upmealname + " " + typeof (upmealname));
-    //         console.log(upmealprice + " " + typeof (upmealprice));
-    //         console.log(upmealreserverprice + " " + typeof (upmealreserverprice));
-    //         console.log(upmealstatus + " " + typeof (upmealstatus));
-    //         break;
-    //     }
-    // }
-    // console.log(upmealname + " " + typeof (upmealname));
-    // console.log(upmealprice + " " + typeof (upmealprice));
-    // console.log(upmealreserverprice + " " + typeof (upmealreserverprice));
-    // console.log(upmealstatus + " " + typeof (upmealstatus));
 })
 
 // 修改按鈕互動視窗-確定修改按鈕
@@ -155,14 +132,9 @@ $(".btn_toupdate").on("click", function (event) {
         }
     }
     upmealprice = Number($("input.update_meal_price").val());
-    upmealreserverprice = Number($("input.update_reserver_price").val());
+    upmealmealinfo = $("input.update_meal_info").val();
     upmealstatus = Number($("select.update_meal_status").val());
-    // console.log(upmealname + " " + typeof (upmealname));
-    // console.log(upmealpic + " " + typeof (upmealname));
-    // console.log(upmealprice + " " + typeof (upmealprice));
-    // console.log(upmealreserverprice + " " + typeof (upmealreserverprice));
-    // console.log(upmealstatus + " " + typeof (upmealstatus));
-    console.log(upmealpic);
+    console.log(upmealmealinfo);
     fetch("/elitebaby/Meal?name=update", {
         method: "POST",
         headers: {
@@ -175,7 +147,7 @@ $(".btn_toupdate").on("click", function (event) {
                 mealName: upmealname,
                 base64: upmealpic,
                 mealPrice: upmealprice,
-                reserverPrice: upmealreserverprice,
+                mealInfo: upmealmealinfo,
                 mealStatus: upmealstatus
             }
         ),
@@ -273,7 +245,7 @@ $("button#btncreate").on("click", function () {
     $("input.meal_name").val("");
     $("input.meal_pic").val("");
     $("input.meal_price").val("");
-    $("input.reserver_price").val("");
+    $("input.meal_info").val("");
 })
 
 // 新增商品互動視窗-取消按鈕
@@ -304,16 +276,13 @@ $("input.meal_pic").on("change", function (e) {
 
 // 新增商品互動視窗-確定新增按鈕
 $("button.btn_insert").on("click", function () {
-    // console.log("按了確定新增");
+    console.log("按了確定新增");
     let mealname = $("input.meal_name").val();
     console.log(mealname);
-    // let reader = new FileReader(); // 用來讀取檔案
-    // reader.readAsDataURL(file); // 讀取檔案
-    // console.log(reader.result);
     let mealprice = $("input.meal_price").val();
     console.log(mealprice);
-    let mealreserverprice = $("input.reserver_price").val();
-    console.log(mealreserverprice);
+    let mealinfo = $("input.meal_info").val();
+    console.log(mealinfo);
     let mealstatus = $("select.mealstatus").val();
     console.log(mealstatus);
     fetch("/elitebaby/Meal?name=insert", {
@@ -327,7 +296,7 @@ $("button.btn_insert").on("click", function () {
                 mealName: mealname,
                 base64: mealpic,
                 mealPrice: mealprice,
-                reserverPrice: mealreserverprice,
+                mealInfo: mealinfo,
                 mealStatus: mealstatus
             }
         ),
@@ -358,33 +327,74 @@ $("button.btn_insert").on("click", function () {
         });
 })
 
-
-// fetch("/elitebaby/MealSearch", {
-//     method: "POST",
-//     headers: {
-//         "Content-Type": "application/json;charset=UTF-8",
-//         "Access-Control-Allow-Origin": "*",
-//     },
-//     body: JSON.stringify(
-//         {
-//             id: 2,
-//         }
-//     ),
-// })
-//     .then((resp) => {
-//         if (resp.status === 204) {
-//             console.log("resp.status===" + resp.status);
-//         } else {
-//             return resp.json();
-//         }
-//     })
-//     .then((body) => {
-//         try {
-//             if (body.length != null) {
-//                 // let str = "";
-//                 $("p.getall").innerHtml(123);
-//             }
-//         } catch (error) {
-//             console.log(error + "，資料庫沒照片故後端沒回傳");
-//         }
-//     });
+$("div.btn_create").on("click", "button.mealselect", function () {
+    // console.log("qqqqq");
+    select_id = $("input.mealselect").val();
+    console.log(select_id);
+    fetch("/elitebaby/Meal?name=getonemeal", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(
+            {
+                mealId: select_id,
+            }
+        ),
+    })
+        .then((resp) => {
+            if (resp.status === 204) {
+                console.log("resp.status===" + resp.status);
+            } else {
+                return resp.json();
+            }
+        })
+        .then((body) => {
+            let td_str = "";
+            try {
+                if (body != null) {
+                    let img_str = "";
+                    if (body.mealStatus == 0) {
+                        status = "下架";
+                    } else {
+                        status = "上架";
+                    }
+                    if (body.base64 == null || body == "") {
+                        img_str = `<td><img src="" id="mealPic"></td>`
+                    } else {
+                        img_str = `<td><img src="data:image/png;base64,${body.base64}" id="mealPic" style="border-radius: 5px;"></td>`
+                    }
+                    td_str += `
+                        <tr data-id="${body.mealId}">
+                            <td>${body.mealId}</td>
+                            <td>${body.mealName}</td>
+                            ${img_str}
+                            <td>${body.mealPrice}</td>
+                            <td style="width: 300px;">${body.mealInfo}</td>
+                            <td>${status}</td>
+                            <td>
+                                <div>
+                                    <button type="button" class="btn btn_update" id="btn_update" data-bs-toggle="modal" data-bs-target="#update"
+                                       data-bs-whatever="@fat">修改</button>
+                                </div>
+                                <br>
+                                    <div>
+                                    <button type="button" class="btn btn_delete" id="btncreate" data-bs-toggle="modal" data-bs-target="#delete"
+                                       data-bs-whatever="@fat">刪除</button>
+                                    </div>
+                            </td>
+                        </tr>
+                        `;
+                    $("tbody.getall_tb").html(td_str);
+                    $("table.visit_table").css("margin", "0 auto");
+                    $("table.visit_table").css("width", "850px");
+                } else {
+                    alert("查無此商品，請重新輸入");
+                    location.reload();
+                }
+            } catch (error) {
+                console.log(error + "，資料庫沒照片故後端沒回傳");
+            }
+        });
+})

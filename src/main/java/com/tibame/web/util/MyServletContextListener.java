@@ -1,4 +1,4 @@
-package com.tibame.web;
+package com.tibame.web.util;
 
 import java.util.Base64;
 import java.util.List;
@@ -21,12 +21,17 @@ public class MyServletContextListener implements ServletContextListener {
 		Jedis jedis = new Jedis("localhost", 6379);
 		MealDAO dao = new MealDAOImpl();
 		// 在MealDAO寫一個取得商品個數的方法 (未寫)
+		System.out.println(dao.getlength());
+		System.out.println(jedis.keys("meal*").size());
 		if (dao.getlength() != jedis.keys("meal*").size()) {
 			List<MealVO> list = dao.getAll();
 			System.out.println(list.size());
+			System.out.println(list);
 			for (int i = 0; i < list.size(); i++) {
 				if (jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic") == null) {
-					byte[] pic = list.get(i).getMealPic();
+					byte[] pic=dao.getpic(list.get(i).getMealId());
+					
+//					byte[] pic = list.get(i).getMealPic();
 					System.out.println(pic);
 					String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
 					jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPhoto);

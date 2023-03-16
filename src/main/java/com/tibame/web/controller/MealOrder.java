@@ -97,7 +97,17 @@ public class MealOrder extends HttpServlet {
 			MealOrderDetailVO MealOrderDetailObject = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
 			MealOrderService moService = new MealOrderServiceImpl();
 			List<MealOrderVO> list = moService.findByMealOrder(MealOrderDetailObject.getMealOrderId());
-			System.out.println(list);
+//			System.out.println(list);
+			response.getWriter().write(gson.toJson(list));
+		}
+		
+		if(str.equals("getuserorderbyorderid")) {
+			System.out.println("進入getuserorderbyorderid處理流程");
+			Gson gson = new Gson();
+			response.setContentType("application/json");
+			MealOrderVO MealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+			MealOrderService moService = new MealOrderServiceImpl();
+			List<MealOrderVO> list = moService.findByMealOrderwithuser(MealOrderObject.getUserId(), MealOrderObject.getMealOrderId());
 			response.getWriter().write(gson.toJson(list));
 		}
 	}

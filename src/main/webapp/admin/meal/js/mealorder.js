@@ -132,6 +132,7 @@ $("tbody.getall_tb").on("click", "button.btn_detail", function () {
         });
 })
 
+//單筆訂單查詢按鈕
 $("button#btn_select").on("click", function () {
     // console.log("qweqwe");
     select_id = $("input#select_id").val();
