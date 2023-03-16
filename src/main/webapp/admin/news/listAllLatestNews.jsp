@@ -23,14 +23,14 @@ pageContext.setAttribute("list", list);
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 <!-- css連結 -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/official.css" />
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundAll.css" />
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/background_navbar.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/admin/news/css/backgroundAll.css"/>
    <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <title>菁英產後護理之家</title>
 </head>
-
 <body class="c2">
   <div class="flex-shrink-0 p-3 c1" id="navbar">
    <a href="/elitebaby/admin/member/background_nav.html">

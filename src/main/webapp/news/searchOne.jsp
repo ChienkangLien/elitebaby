@@ -29,8 +29,9 @@ pageContext.setAttribute("list", list);
 
 
     <!-- css連結 -->
-     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/official.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_One.css"/>
+     <link rel="stylesheet" href="/elitebaby/css/official.css"/>
+     <link rel="stylesheet" href="/elitebaby/css/front_navbar.css"/>
+     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_One.css"/>
    
     <!-- FontAwesom 連結 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -42,7 +43,7 @@ pageContext.setAttribute("list", list);
      <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
             <div class="container-fluid" >
-                <img src="../images/logo.jpg">
+                <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
