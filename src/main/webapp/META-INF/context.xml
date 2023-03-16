@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 
-	<Resource name="jdbc/example" type="javax.sql.DataSource"
-		driverClassName="com.mysql.cj.jdbc.Driver"
-		jdbcUrl="jdbc:mysql://localhost:3306/elitebaby" username="root"
-		password="password" factory="com.zaxxer.hikari.HikariJNDIFactory"
-		dataSource.cachePrepStmts="true" dataSource.prepStmtCacheSize="250"
-		dataSource.prepStmtCacheSqlLimit="2048" />
+    <Resource name="jdbc/example" type="javax.sql.DataSource"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        jdbcUrl="jdbc:mysql://localhost:3306/elitebaby" username="root"
+        password="password" factory="com.zaxxer.hikari.HikariJNDIFactory"
+        dataSource.cachePrepStmts="true" dataSource.prepStmtCacheSize="250"
+        dataSource.prepStmtCacheSqlLimit="2048" />
 
 </Context>

@@ -1,0 +1,446 @@
+/*
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+*/
+/*--Reset code--*/
+/* body{
+	background-size: cover;
+	background-position: center;
+}
+body a{
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+	font-weight:400;
+} */
+input[type="button"],input[type="submit"],input[type="text"],input[type="email"]{
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+	font-family: 'Poppins', sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;	
+	font-weight:400;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+	font-family: 'Raleway', sans-serif;
+}
+.clear {
+	clear:both;
+}
+p{
+	margin:0;
+}
+
+ul{
+	margin:0;
+	padding:0;
+}
+
+label{
+	margin:0;
+	font-family: 'Poppins', sans-serif;
+}
+textarea{
+	font-family: 'Poppins', sans-serif;
+}
+
+footer{
+	font-family: 'Raleway', sans-serif;
+}
+footer a {
+	font-family: 'Raleway', sans-serif;
+}
+
+/*--/Reset code--*/
+h1 {
+    font-size: 45px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    margin: 40px 0 40px 0;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+.w3l-main{
+	width:650px;
+	margin: 0 auto;
+}
+.w3l-from {
+    flex-basis: 300px;
+    padding: 3em;
+    justify-content: center;
+	background: #de6d9878;
+	box-shadow: 5px -5px #efece8;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+label.head {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    padding: 2px;
+	margin: 2px;
+    display: block;
+    color: #000000;
+	font-family: 'Poppins', sans-serif;
+}
+span.title{
+	color: #ca5c93;
+}
+span.w3l-star {
+    font-size: 20px;
+    vertical-align: middle;
+    color: #c74184;
+    line-height: 1;
+}
+.w3l-user input[type="text"] {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    margin: 0px auto 10px;
+    color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-mail input[type="email"] {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    margin: 0px auto 10px;
+    color:#000000;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-num input[type="number"] {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    margin: 0 auto 30px;
+    color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-date input.visitdate {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    margin: 0px auto 11px;
+    color: #000000;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+select.kids {
+	font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 10px;
+    width: 100%;  
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-options1 .contacttime {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 10px;
+    width: 100%;
+    margin: 0 auto 10px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-options2 .duedate {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 10px;
+    width: 100%;
+    margin: 0  auto 10px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+
+.w3l-num {
+    float: left;
+    width: 48%;
+}
+.w3l-date {
+    float: left;
+    width: 48%;
+    margin-left: 4%;
+}
+.w3l-options1 {
+    float: left;
+    width: 48%;
+}
+.w3l-options2 {
+    float: right;
+    width: 48%;
+}
+.gender {
+    width: 48%;
+    display: inline-block;
+}
+.w3l-sym {
+    float: right;
+    width: 48%;
+    margin-left: 4%;
+}
+.w3l-sym input[type="text"] {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    margin: 0px auto 10px;
+    color: #000000;
+	font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+.w3l-right textarea {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: capitalize;
+    width: 100%;
+    padding: 10px;
+    resize: none;
+    min-height: 100px;
+    border: 1px solid #fff;
+    outline: none;
+    background: #fff;
+    box-sizing: border-box;
+    color: #000;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+label.w3l-set {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 2px;
+    color: #3ce0b4;
+	cursor: pointer;
+    box-shadow: 2px 2px 4px #6e6969;
+}
+label.w3l-head2 {
+    float: left;
+    margin-right: 20px;
+    letter-spacing: 1px;
+}
+.w3l-left1 {
+    margin-top: 25px;
+}
+
+label.w3l-set2 {
+    font-size: 15px;
+    text-align: left;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    color: #000000;
+    display: block;
+	margin-bottom: 10px;
+}
+
+label.w3l-head2 {
+    font-size: 15px;
+    text-transform: capitalize;
+    text-align: center;
+	margin-bottom: 20px;
+	color: #3ce0b4;
+    font-family: 'Poppins', sans-serif;
+}
+.btn input[type="submit"] {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    width: 50%;
+    margin: 20px auto 0px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    outline: none;
+	cursor: pointer;
+    display: block;
+	color: #fff;
+	background: #c74184;
+	font-family: 'Poppins', sans-serif;
+}
+.btn input[type="submit"]:hover{
+	background-color: #3ce0b4;
+}
+footer {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    margin: 20px 0 0 0;
+	color: #fff;
+}
+footer a {
+    font-size: 15px;
+    font-weight: 500;
+	text-transform: uppercase;
+    text-decoration: none;
+	color: #fff;
+}
+footer a:hover {
+	color: #3bf1c0;
+}
+/*-- input-effect --*/
+.styled-input.agile-styled-input-top {
+    margin-top: 0;
+} 
+.styled-input input:focus ~ label, .styled-input input:valid ~ label,.styled-input textarea:focus ~ label ,.styled-input textarea:valid ~ label{
+    font-size: .9em;
+    color: #fff;
+    top: -1.5em;
+    -webkit-transition: all 0.125s;
+	-moz-transition: all 0.125s; 
+	-o-transition: all 0.125s;
+	-ms-transition: all 0.125s;
+    transition: all 0.125s;
+}
+.styled-input {
+	width: 100%;
+    position: relative;
+    margin: 0 0 1.6em;
+    color: #fff;
+}
+.styled-input:nth-child(1),.styled-input:nth-child(3){
+	margin-left:0;
+}
+.textarea-grid{
+	float:none !important;
+	width:100% !important;
+	margin-left:0 !important;
+}
+.styled-input label {
+	color: #8c8c8c;
+    color: #bfbfbf;
+    padding: 0.5em .9em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    pointer-events: none;
+    font-weight: 400;
+    font-size: .9em;
+    display: block;
+    line-height: 1em;
+	color:#fff;
+	font-family: 'Poppins', sans-serif;
+}
+.styled-input input ~ span,.styled-input textarea ~ span {
+	display: block;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: all 0.125s;
+    -moz-transition: all 0.125s;
+    transition: all 0.125s;
+}
+.styled-input textarea ~ span { 
+    bottom: 5px; 
+}
+.styled-input input:focus.styled-input textarea:focus { 
+	outline: 0; 
+} 
+.styled-input input:focus ~ span,.styled-input textarea:focus ~ span {
+	width: 100%;
+	-webkit-transition: all 0.075s;
+	-moz-transition: all 0.075s;  
+	transition: all 0.075s; 
+}
+.ui-datepicker .ui-datepicker-prev {
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    background: url(../images/img-sp1.png) no-repeat 0px 0px;
+    cursor: pointer;
+}
+.ui-datepicker .ui-datepicker-next {
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: url(../images/img-sp.png) no-repeat 0px 0px;
+    cursor: pointer;
+} 
+.ui-datepicker table {
+	    background-color: #c74184 !important;
+}
+
+button#visitsubmit{
+    background-color: #3bf19fd1;
+    border-color: #3bf19fd1;
+    align-items: center;
+    height: 40px;
+    width: 100px;
+    font-size: small;
+    border-radius: 8px;
+    margin-top: 20px;
+}

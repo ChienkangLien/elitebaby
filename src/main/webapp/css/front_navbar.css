@@ -53,6 +53,7 @@ div#book_visit>a>img{
 
 
 
+
 /* 髮療按摩瑜珈圖片 */
 .homeImage{
     width: 552px;
@@ -195,4 +196,22 @@ form {
     border-radius: 5px;
     border: none;
     background-color: #e8e8e8;
+  }
+
+#popupWrapper {
+    display: none;
+    position: fixed;
+    opacity: 0.9;
+    top: 80px;
+    margin-left: 1000px;
+    width: 250px;
+    height: 150px;
+    bottom: 0;
+    right: 25px;
+    border: 1px solid #000000;
+    background-color: rgba(243, 244, 244, 0.849);
+    padding: 10px;
+    z-index: 1;
+    box-shadow: 2px 2px 4px #6e6969;
+    border-radius: 8px;
   }

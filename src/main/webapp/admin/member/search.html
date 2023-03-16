@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>會員資料查詢</title>
+    <title>會員管理</title>
+    <link rel="stylesheet" href="css/management.css" />
     <!-- bootstrap引用cdn -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
@@ -12,18 +11,310 @@
       integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
       crossorigin="anonymous"
     />
-
     <link rel="stylesheet" href="../../css/official.css" />
+
     <link rel="stylesheet" href="css/search.css" />
-  </head>
+  
+
+    <link rel="stylesheet" href="../../css/background_navbar.css" />
+
+     <!-- 這裡是背景顏色 -->
+     <style>
+      body {
+        background-color: #e7b5a9;
+      }
+    </style>
+
+    <!-- 這裡是彈跳視窗設計 -->
+    <style>
+      .modal-content {
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-header {
+        background-color: #f8d7da;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .modal-title {
+        font-weight: bold;
+      }
+
+      .modal-footer {
+        background-color: #f8d7da;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      .btn_save {
+        background-color: #008cba;
+        color: white;
+      }
+
+      .btn_save:hover {
+        background-color: #006d9e;
+        color: white;
+      }
+    </style>
+</head>
   <body>
-    <div class="container">
-      <h1>會員資料查詢</h1>
-      <!-- <div class="search-container">
-        <input type="text" id="search" placeholder="輸入姓名" />
-        <button type="button" class="search-btn">搜尋</button>
-      </div> -->
-      <table>
+    <body class="c2">
+      <!-- aside -->
+      <div class="flex-shrink-0 p-3 c1" id="navbar">
+        <a
+          href="/elitebaby/admin/member/background_nav.html"
+          class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
+        >
+          <img src="../../images/logo.jpg" style="width: 30px" />
+          <span class="fs-5 fw-semibold">菁英產後護理之家</span>
+        </a>
+  
+        <!-- =======按鍵======== -->
+  
+        <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#home-collapse"
+              aria-expanded="true"
+            >
+              會員中心
+            </button>
+            <div class="collapse" id="home-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/member/management.html"
+                    class="link-dark rounded"
+                    >員工管理</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/member/search.html"
+                    class="link-dark rounded"
+                    >會員管理</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+  
+          <!-- ================膳食管理============== -->
+  
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#orders-collapse"
+              aria-expanded="false"
+            >
+              膳食管理
+            </button>
+            <div class="collapse" id="orders-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/meal/mealorder_background.html"
+                    class="link-dark rounded"
+                    >訂餐管理</a
+                  >
+                </li>
+  
+                <li>
+                  <a
+                    href="/elitebaby/admin/meal/meal_background.html"
+                    class="link-dark rounded"
+                    >商品管理</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- ===============房間管理============= -->
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#dashboard-collapse"
+              aria-expanded="false"
+            >
+              房間管理
+            </button>
+            <div class="collapse" id="dashboard-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/room/type.html"
+                    class="link-dark rounded"
+                    >房型維護</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/room/order.html"
+                    class="link-dark rounded"
+                    >房間訂單</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/room/condition.html"
+                    class="link-dark rounded"
+                    >房況管理</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- =================討論區================ -->
+          <li class="mb-1">
+            <!-- <button
+                class="btn btn-toggle align-items-center rounded collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#texts-collapse"
+                aria-expanded="false"
+              >
+                討論區
+              </button> -->
+            <!-- 若沒有子元素，單純給一個a標籤即可 -->
+            <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
+          </li>
+          <!-- ================預約參觀============= -->
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#orders-collapse111"
+              aria-expanded="false"
+            >
+              預約參觀
+            </button>
+            <div class="collapse" id="orders-collapse111">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/getall_visit.html"
+                    class="link-dark rounded"
+                    >預約參觀</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/getall_visit_history.html"
+                    class="link-dark rounded"
+                    >歷史參訪</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/back_visit_callender.html"
+                    class="link-dark rounded"
+                    >預約參訪月曆表</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- =============最新消息============ -->
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#orders-collapse2"
+              aria-expanded="false"
+            >
+              消息區管理
+            </button>
+            <div class="collapse" id="orders-collapse2">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/news/listAllNewsMessage.jsp"
+                    class="link-dark rounded"
+                    >留言管理</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/news/listAllNewsSort.jsp"
+                    class="link-dark rounded"
+                    >消息種類管理</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/news/listAllLatestNews.jsp"
+                    class="link-dark rounded"
+                    >最新消息管理</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- ===================問題回報================== -->
+          <li class="mb-1">
+            <button
+              class="btn bkbtn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#account-collapse"
+              aria-expanded="false"
+            >
+              問題回報
+            </button>
+            <div class="collapse" id="account-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/getall_email.html"
+                    class="link-dark rounded"
+                    >收信匣</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/back_admin_mailbox.html"
+                    class="link-dark rounded"
+                    >寄信匣</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/elitebaby/admin/visit/report_to_member.html"
+                    class="link-dark rounded"
+                    >發送信件</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              id="logoutButton"
+              class="btn-logout"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              登出
+            </button>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- 右邊內容顯示 -->
+      <div class="c1" id="header" style="z-index: 5">
+        <p class="t1">後台管理系統</p>
+      </div>
+      <div id="main_div">
+        <div id="blank_area">此處留空</div>
+        <div class="container" id="container">
+          <div class="t2" id="title">會員管理</div>
+          <table class="table table-bordered align-middle table-striped">
         <thead>
           <tr>
             <th>姓名</th>
@@ -50,43 +341,11 @@
               </button>
             </td>
           </tr>
-          <tr id="2">
-            <td>連千港</td>
-            <td>台中市西屯區惠中路二段118號7樓</td>
-            <td>xmei.lin@hotmail.com</td>
-            <td>0923456789</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn_edit"
-                data-bs-toggle="modal"
-                data-bs-target="#editModal"
-              >
-                編輯
-              </button>
-            </td>
-          </tr>
-          <tr id="3">
-            <td>姜儼軒</td>
-            <td>高雄市左營區大中一路30號3樓</td>
-            <td>dm.wang@yahoo.com.tw</td>
-            <td>0934567890</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn_edit"
-                data-bs-toggle="modal"
-                data-bs-target="#editModal"
-              >
-                編輯
-              </button>
-            </td>
-          </tr>
+
         </tbody>
-        <button type="button" class="btn_back">返回工作區</button>
       </table>
     </div>
-
+  </div>
     <!-- 會員資料編輯彈跳視窗 -->
     <div
       class="modal fade"
@@ -142,25 +401,50 @@
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- 登出彈跳視窗Modal -->
+    <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">確定要登出嗎?</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">點擊下面的按鈕以登出</div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">
+            關閉
+          </button>
+          <button type="button" class="btn btn_logout">登出</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
     <!-- bootstrap引用cdn -->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"
-    ></script>
-    <!-- 下載bootstrap引用 -->
-    <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
-    ></script> -->
-    <script src="../../js/front_navbar.js"></script>
-    <script>
-      let id;
-      $(document).on("click", "button.btn_edit", function () {
-        id = $(this).closest("tr").attr("id");
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"
+  ></script>
+  <script src="vendors/jquery/jquery-3.6.3.min.js"></script>
+  <script src="../../js/background_navbar.js"></script>
+  <script>
+    let id;
+    $(document).on("click", "button.btn_edit", function () {
+      id = $(this).closest("tr").attr("id");
 
         // 使用AJAX傳送表單數據
         $.ajax({
@@ -275,4 +559,5 @@
       });
     </script>
   </body>
+
 </html>

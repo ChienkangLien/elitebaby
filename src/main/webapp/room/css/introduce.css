@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+.room_type_img {
+  width: 40%;
+  margin: 0 auto;
+}
+.title,
+.room_type_para {
+  margin-left: 20%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+.find_room_type {
+  margin-left: 70%;
+  margin-bottom: 1%;
+}
+
+img.d-block {
+  max-width: 100%;
+  max-height: 100%;
+  width: 530px;
+  height: 300px;
+  object-fit: fill;
+}

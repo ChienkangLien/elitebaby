@@ -1,0 +1,206 @@
+* {
+    /* font-family: 'Noto Sans TC', sans-serif; */
+    font-family: Microsoft JhengHei;
+}
+
+body {
+    background-color: #ebebe8;
+}
+
+.c1 {
+    background-color: #FDFDFD;
+}
+
+.c2 {
+    background-color: #EBEBE8;
+}
+
+.c3 {
+    background-color: #FF8188;
+}
+
+.c4 {
+    background-color: #C68774;
+}
+
+.c5 {
+    background-color: #8B4513;
+}
+
+.f1 {
+    color: #333333;
+}
+
+.f2 {
+    color: #C68774;
+}
+
+.f3 {
+    color: #777777;
+}
+
+.f4 {
+    color: #FF8188;
+}
+
+.f5 {
+    color: #4A4A4A;
+}
+
+.f6 {
+    color: #FFFFFF;
+}
+
+
+.t1 {
+    color: #333333;
+    font-size: 28px;
+}
+
+.t2 {
+    color: #C68774;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.t3 {
+    color: #777777;
+    font-size: 16px;
+}
+
+.t4 {
+    color: #C68774;
+    font-size: 13px;
+}
+
+.w1 {
+    color: #FF5B51;
+}
+
+.btn:hover {
+    color: #8B4513;
+}
+
+.btn {
+    background-color: #ff8188;
+    color: white;
+}
+
+.bkbtn {
+    background-color: #FDFDFD;
+    color: #333333;
+}
+
+table.visit_table {
+    width: 850px;
+    background-color: white;
+    margin: 0 auto;
+}
+
+table.visit_table,
+th,
+td {
+    border: 1px solid #CCCCFF;
+}
+
+table.visit_table,
+th,
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+img#mealPic {
+    /* border: 1px solid red; */
+    width: 120px;
+    height: 100px;
+}
+
+img.update_preview_img {
+    width: 120px;
+    height: 100px;
+}
+
+#preview {
+    border: 1px solid lightgray;
+    display: inline-block;
+    width: 250px;
+    min-height: 150px;
+    position: relative;
+}
+
+#preview span.text {
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    color: lightgray;
+}
+
+#preview img.preview_img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+#uppreview {
+    border: 1px solid lightgray;
+    display: inline-block;
+    width: 250px;
+    min-height: 150px;
+    position: relative;
+}
+
+#uppreview img.preview_img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.update_preview_img {
+    border: 1px solid lightgray;
+    display: inline-block;
+    width: 250px;
+    min-height: 150px;
+    position: relative;
+}
+
+#uppreview img.update_preview_img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+div#title {
+    margin-left: 13.5%;
+}
+
+div.btn_create {
+    width: 100%;
+    height: 37.6px;
+    /* float: right; */
+    margin-right: 300px;
+}
+
+button.btncreate {
+    margin-left: 198px;
+    /* float: right;
+    margin-right: 198px; */
+}
+
+button.mealselect {
+    float: right;
+    margin-right: 198px;
+}
+
+input.mealselect {
+    width: 133px;
+    margin-top: 3px;
+    margin-right: 5px;
+    float: right;
+}
+
+
+/* ================================ */

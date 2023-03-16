@@ -15,11 +15,6 @@
     <!-- <link rel="stylesheet" href="../../vendors/bootstrap/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="../../css/official.css" />
     <link rel="stylesheet" href="../../css/background_navbar.css" />
-    <!-- datatable引用 -->
-    <link
-      rel="stylesheet"
-      href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
-    />
     <!-- summernote引用 -->
     <link
       href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
@@ -33,7 +28,7 @@
   <body class="c2">
     <div class="flex-shrink-0 p-3 c1" id="navbar">
       <a
-        href="#"
+        href="/elitebaby/admin/member/background_nav.html"
         class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
       >
         <img src="../../images/logo.jpg" style="width: 30px" />
@@ -54,9 +49,20 @@
           </button>
           <div class="collapse" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">用戶資料管理</a></li>
-              <li><a href="#" class="link-dark rounded">查詢會員</a></li>
-              <li><a href="#" class="link-dark rounded">編輯會員資訊</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/member/management.html"
+                  class="link-dark rounded"
+                  >員工管理</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/member/search.html"
+                  class="link-dark rounded"
+                  >會員管理</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -74,10 +80,20 @@
           </button>
           <div class="collapse" id="orders-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">訂餐管理</a></li>
-              <li><a href="#" class="link-dark rounded">預約試吃管理</a></li>
-              <li><a href="#" class="link-dark rounded">商品管理</a></li>
-              <li><a href="#" class="link-dark rounded">購物車</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/meal/mealorder_background.html"
+                  class="link-dark rounded"
+                  >訂餐管理</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/meal/meal_background.html"
+                  class="link-dark rounded"
+                  >商品管理</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -93,9 +109,27 @@
           </button>
           <div class="collapse" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">房型維護</a></li>
-              <li><a href="#" class="link-dark rounded">房間訂單</a></li>
-              <li><a href="#" class="link-dark rounded">房況管理</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/room/type.html"
+                  class="link-dark rounded"
+                  >房型維護</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/room/order.html"
+                  class="link-dark rounded"
+                  >房間訂單</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/room/condition.html"
+                  class="link-dark rounded"
+                  >房況管理</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -110,20 +144,43 @@
             討論區
           </button> -->
           <!-- 若沒有子元素，單純給一個a標籤即可 -->
-          <a href="#" class="btn bkbtn">討論區</a>
+          <a href="../frontForum/backend.html" class="btn bkbtn">討論區</a>
         </li>
         <!-- ================預約參觀============= -->
         <li class="mb-1">
-          <!-- <button
-            class="btn btn-toggle align-items-center rounded collapsed"
+          <button
+            class="btn bkbtn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
-            data-bs-target="#orders-collapse1"
+            data-bs-target="#orders-collapse111"
             aria-expanded="false"
           >
             預約參觀
-          </button> -->
-          <!-- 若沒有子元素，單純給一個a標籤即可 -->
-          <a href="#" class="btn bkbtn">預約參觀</a>
+          </button>
+          <div class="collapse" id="orders-collapse111">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/getall_visit.html"
+                  class="link-dark rounded"
+                  >預約參觀</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/getall_visit_history.html"
+                  class="link-dark rounded"
+                  >歷史參訪</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/back_visit_callender.html"
+                  class="link-dark rounded"
+                  >預約參訪月曆表</a
+                >
+              </li>
+            </ul>
+          </div>
         </li>
         <!-- =============最新消息============ -->
         <li class="mb-1">
@@ -137,9 +194,27 @@
           </button>
           <div class="collapse" id="orders-collapse2">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">留言管理</a></li>
-              <li><a href="#" class="link-dark rounded">新增消息種類</a></li>
-              <li><a href="#" class="link-dark rounded">發佈消息</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/news/listAllNewsMessage.jsp"
+                  class="link-dark rounded"
+                  >留言管理</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/news/listAllNewsSort.jsp"
+                  class="link-dark rounded"
+                  >消息種類管理</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/news/listAllLatestNews.jsp"
+                  class="link-dark rounded"
+                  >最新消息管理</a
+                >
+              </li>
             </ul>
           </div>
         </li>
@@ -155,10 +230,41 @@
           </button>
           <div class="collapse" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">回報信件</a></li>
-              <li><a href="#" class="link-dark rounded">發送信件</a></li>
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/getall_email.html"
+                  class="link-dark rounded"
+                  >收信匣</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/back_admin_mailbox.html"
+                  class="link-dark rounded"
+                  >寄信匣</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/elitebaby/admin/visit/report_to_member.html"
+                  class="link-dark rounded"
+                  >發送信件</a
+                >
+              </li>
             </ul>
           </div>
+        </li>
+        <li>
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            id="logoutButton"
+            class="btn-logout"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            登出
+          </button>
         </li>
       </ul>
     </div>
@@ -167,8 +273,8 @@
     </div>
     <div id="main_div">
       <div id="blank_area">此處留空</div>
-      <div class="t2" id="title">房型維護</div>
       <div class="container">
+        <div class="t2" id="title">房型維護</div>
         <button
           class="btn"
           style="margin-bottom: 1%"
@@ -199,47 +305,37 @@
               <div class="modal-body">
                 <form>
                   <div class="mb-3">
-                    <label for="roomTypeName" class="col-form-label"
+                    <label for="createRoomTypeName" class="col-form-label"
                       >房型名稱</label
                     >
                     <input
                       type="text"
                       class="form-control"
                       name="roomTypeName"
-                      id="roomTypeName"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="roomQuantity" class="col-form-label"
-                      >房數</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="roomQuantity"
-                      id="roomQuantity"
-                      min="1"
+                      id="createRoomTypeName"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomPrice" class="col-form-label"
+                    <label for="createRoomPrice" class="col-form-label"
                       >房間單價</label
                     >
                     <input
                       type="number"
                       class="form-control"
                       name="roomPrice"
-                      id="roomPrice"
+                      id="createRoomPrice"
                       min="1"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <label for="roomStatus" class="col-form-label">狀態</label>
-                    <select name="roomStatus" id="roomStatus">
-                      <option value="上架">上架</option>
+                    <label for="createRoomStatus" class="col-form-label"
+                      >狀態</label
+                    >
+                    <select name="roomStatus" id="createRoomStatus">
                       <option value="下架">下架</option>
+                      <!-- <option value="上架">上架</option> -->
                     </select>
                   </div>
 
@@ -251,191 +347,91 @@
                       type="file"
                       class="form-control"
                       name="roomPhoto"
-                      id="roomPhoto"
+                      id="createRoomPhoto"
                       multiple
                       accept="image/*"
                     />
                   </div>
+                  <ul class="picture_list"></ul>
 
                   <div class="mb-3">
-                    <label for="roomDescription" class="col-form-label"
+                    <label for="createRoomDescription" class="col-form-label"
                       >房型描述</label
                     >
-                    <textarea
+                    <div
                       class="form-control remark"
-                      id="roomDescription"
+                      id="createRoomDescription"
                       name="roomDescription"
-                    ></textarea>
+                    ></div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn"
+                  data-bs-dismiss="modal"
+                  id="cancel"
+                >
                   取消
                 </button>
-                <button type="button" class="btn" data-bs-dismiss="modal">
+                <button type="button" class="btn" id="createRoomType">
                   確定
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <table id="table_id" class="display">
+        <table class="table table-bordered align-middle table-striped">
           <thead>
             <tr>
-              <th>房型名稱</th>
-              <th>房數</th>
-              <th>房間單價</th>
-              <th>房型描述</th>
-              <th>房型建立時間</th>
-              <th>房型修改時間</th>
-              <th>房型狀態</th>
-              <th>照片</th>
-              <th>編輯</th>
+              <th scope="col">名稱</th>
+              <th scope="col">房數</th>
+              <th scope="col">單價</th>
+              <th scope="col">房型描述</th>
+              <th scope="col">房型建立時間</th>
+              <th scope="col">房型修改時間</th>
+              <th scope="col">狀態</th>
+              <th scope="col">照片</th>
+              <th scope="col">房型修改</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>尊爵房</td>
-              <td>5</td>
-              <td>3000</td>
-              <td>
-                <p>后樂大VIP房 / 親子房 / 18坪</p>
-                <p>一房一廳設計 / 雙玄關設計 / 送餐檯與送餐燈</p>
-                <p>QUEEN SIZE獨立筒舒適乳膠床墊 / 防螨抗菌寢具組</p>
-                <p>TOTO衛浴設備 / 五合一暖風機 / 乾濕分離淋浴間</p>
-                <p>大金全熱交換系統 / 獨立變頻冷暖空調</p>
-                <p>雙人哺乳型沙發 / COTEX哺乳枕</p>
-                <p>奶瓶蒸氣烘乾消毒鍋 / 雙邊電動吸乳器(AVENT、貝瑞克、美樂)</p>
-                <p>全館UV過濾殺菌淨水設備</p>
-                <p>
-                  100%純棉哺乳衣 / 歐洲進口齊葉雅天然橄欖沐浴膠、洗髮精組 /
-                  白因子潔手慕斯
-                </p>
-                <p>LG大白智能空氣清淨機。</p>
-                <p>親子遊樂設施、兒童餐具、兒童床、安全床圍、浴室防滑凳</p>
-              </td>
-              <td>2023-01-30</td>
-              <td>null</td>
-              <td>上架</td>
-              <td>3</td>
-              <td>
-                <button
-                  class="btn editBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal2"
-                >
-                  編輯
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="target"></tbody>
         </table>
-        <div
-          class="modal fade"
-          id="exampleModal2"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">編輯房型</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="mb-3">
-                    <label for="roomTypeName" class="col-form-label"
-                      >房型名稱</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="roomTypeName"
-                      id="roomTypeName"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="roomQuantity" class="col-form-label"
-                      >房數</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control editRoomQuantity"
-                      name="roomQuantity"
-                      id="roomQuantity"
-                      min="1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="roomPrice" class="col-form-label"
-                      >房間單價</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="roomPrice"
-                      id="roomPrice"
-                      min="1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="roomStatus" class="col-form-label">狀態</label>
-                    <select name="roomStatus" id="roomStatus">
-                      <option value="上架">上架</option>
-                      <option value="下架">下架</option>
-                    </select>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="roomPhoto" class="col-form-label"
-                      >房型照片</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      name="roomPhoto"
-                      id="roomPhoto"
-                      multiple
-                      accept="image/*"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="roomDescription" class="col-form-label"
-                      >房型描述</label
-                    >
-                    <textarea
-                      class="form-control remark"
-                      id="roomDescription"
-                      name="roomDescription"
-                    ></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">
-                  取消
-                </button>
-                <button type="button" class="btn" data-bs-dismiss="modal">
-                  確定
-                </button>
-              </div>
-            </div>
+      </div>
+      <div id="container2"></div>
+    </div>
+    <!-- 登出彈跳視窗Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">確定要登出嗎?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">點擊下面的按鈕以登出</div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">
+              關閉
+            </button>
+            <button type="button" class="btn btn_logout">登出</button>
           </div>
         </div>
       </div>
     </div>
-
     <script src="../../vendors/jquery/jquery-3.6.3.min.js"></script>
     <!-- bootstrap引用cdn -->
     <script
@@ -446,9 +442,10 @@
     <!-- 下載bootstrap引用 -->
     <!-- <script src="../../vendors/bootstrap/bootstrap.bundle.min.js"></script> -->
     <!-- datatable引用 -->
-    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
     <!-- summernote引用 -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="js/type.js"></script>
+    <script src="./js/type.js"></script>
+    <script src="../../js/background_navbar.js"></script>
   </body>
 </html>

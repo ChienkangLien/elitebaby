@@ -1,0 +1,298 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+a.button {
+  color: white;
+}
+
+#navbar {
+    width: 18%;
+    height: 100vh;
+    position: fixed;
+    box-shadow: 3px 0px 2px rgb(41, 26, 26, 0.1);
+    z-index: 1;
+}
+
+#header {
+    height: 60px;
+    position: fixed;
+    width: 82%;
+    margin-left: 18%;
+}
+
+#header>p {
+    margin-left: 45%;
+    line-height: 60px;
+}
+
+#main_div {
+    width: 82%;
+    margin-left: 18%;
+}
+
+.t2 {
+    margin-left: 600px;
+}
+
+.calendar {
+    height: 500px;
+    width: 500px;
+    background: rgb(116, 116, 116)
+        /* border-radius: 10px;
+    padding: 20px;
+    position: relative overflow:hidden; */
+}
+
+.month {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.year-picker {
+    display: flex;
+    align-items: center;
+}
+
+.year-change {
+    width: 200px;
+    border-radius: 50%;
+    display: grid;
+    place-items: ceneter;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.calendar-week-day {
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
+}
+
+.calendar-week-day div {
+    display: grid;
+    place-items: center;
+    color: rgb(255, 255, 255);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+}
+
+.calendar-days div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    position: relative;
+    cursor: pointer;
+    animation: to-top 1s forwards;
+    border-radius: 50%;
+}
+
+.calendar-days div:hover span {
+    transition: 0.5s ease-in-out;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 234, 0);
+}
+
+.calendar-days div span {
+    position: absolute;
+}
+
+.calendar-days div.curr-date,
+.calendar-days div.curr-date:hover {
+    background-color: rgb(17, 112, 255);
+/*     color: white; */
+    border-radius: 50%;
+}
+
+.month-list {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    font-size: 25px;
+/*     text-align: center; */
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+
+    transform: scale(1.5);
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.month-list.show {
+    transform: scale();
+    visibility: visible;
+    pointer-events: visible;
+    transition: all 0.2 ease-in-out;
+}
+
+
+#blank_area {
+    height: 60px;
+}
+
+#title {
+    padding: 10px 30px;
+}
+
+/* body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: rgb(225, 225, 225)
+} */
+
+.container {
+/*     background-color: white; */
+    /* 左右位置 */
+    text-align: right;
+    /* 調整高低 */
+    line-height: 20px;
+    width: 100%;
+}
+
+.bar {
+    border-radius: 13px;
+    border: 2px solid lightgray;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.bar:hover {
+    box-shadow: 5px 5px 5px 5px rgb(134, 131, 131);
+    transition: 1s;
+}
+
+#search {
+    font-size: 20px;
+    width: 52px;
+    height: 32px;
+    margin-left: -50px;
+    background-color: lightgrey;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+#search:hover {
+    background-color: bisque;
+    color: white;
+}
+
+/* 搜尋結果css */
+.ui-weidget {
+    font-size: 20px;
+    list-style: none;
+    transition: 1s;
+/*     background-color: white; */
+    width: 50%;
+    opacity: 0.5;
+    border-radius: 20px;
+}
+
+.ui-elper-hidden-accessible {
+    display: none;
+}
+
+.div {
+    background-color: lightgray;
+}
+
+/* 表格 */
+table {
+    width: 1200px;
+    border: 1px solid black;
+    margin-left: 25px;
+
+}
+
+table th,
+table td {
+
+    border: 1px solid black;
+    padding: 20px;
+/*     margin-right: 450px; */
+    text-align: center;
+}
+
+
+/* 頁數 */
+* {
+    box-sizing: border-box;
+   
+}
+
+/* 數字 */
+div.pagination_block {
+    /* border: 1px solid black; */
+    display: inline-block;
+    margin-left: 450px;
+
+}
+
+div.pagination_block ul.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid green; */
+    font-size: 0;
+}
+
+div.pagination_block ul.pagination>li {
+    /* border: 1px solid red; */
+    display: inline-block;
+}
+
+div.pagination_block ul.pagination>li>a {
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    padding: 5px 10px;
+    /* text-aglign:center; */
+}
+
+div.pagination_block ul.pagination>li:first-child>a {
+    /* border-left: 1px solid black; */
+    border-radius: 5px 0 0 5px;
+}
+
+div.pagination_block ul.pagination>li:first-child>a {
+    border-radius: 0 5px 5px 0;
+}
+
+div.pagination_block ul.pagination>li>a:hover,
+iv.pagination_block ul.pagination>li>a.-on {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+/* 時間 */
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: 0.4rem 0;
+}
