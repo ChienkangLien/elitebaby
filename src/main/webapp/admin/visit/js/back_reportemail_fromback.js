@@ -5,9 +5,9 @@ fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
 		let resData = [];
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
-			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].id}${resData[i].username}">`
 		}
-	})
+})
 
 
 
@@ -39,6 +39,12 @@ function readURL(input) {
 
 //===============================================================================
 
+fetch(`/elitebaby/report/emailservlet?action=GET_ADMIN`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(admin => {
+		document.querySelector(".admintest").value = admin.empid;
+})
 
 
 

@@ -26,8 +26,9 @@ import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailBellBean;
 import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.EmployeeVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.ReportImageVO;
-import com.tibame.web.vo.TestMemberVO;
 
 /**
  * Servlet implementation class ReportEmailServlet
@@ -53,13 +54,11 @@ public class ReportEmailServlet extends HttpServlet {
 			final String authCode = GetAuthCode.genAuthCode();
 			JsonObject respbody = new JsonObject();
 			HttpSession session = req.getSession();
-//			MemberVO memberVO = session.getAttribute("MemberVO");
 			session.setAttribute("authCode", authCode);
 			Gson gson = new Gson();
 
 			try {
 				EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-//				emailVO.setUserId(memberVO.getUserId());
 				final Integer userId = emailVO.getUserId();
 				if (userId == null) {
 					resultStr = "請先登入";
@@ -105,14 +104,10 @@ public class ReportEmailServlet extends HttpServlet {
 			JsonObject respbody = new JsonObject();
 			HttpSession session = req.getSession();
 			session.setAttribute("authCode", authCode);
-//			AdminVO adminVO = session.getAttribute("AdminVO");
-//			Integer adminId = memberVO.getUserId();
-//			if (adminId > 0 && adminId != null) {
 			Gson gson = new Gson();
 
 			try {
 				EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-//				emailVO.setAdminId(adminId);
 				final Integer userId = emailVO.getUserId();
 				if (userId == null) {
 					resultStr = "請先登入";
@@ -150,21 +145,25 @@ public class ReportEmailServlet extends HttpServlet {
 				resp.getWriter().append(respbody.toString());
 			}
 
-//		}else{
-
-//			resp.sendRedirect("/elitebaby/visit/ReportEmailFrontGetOne.html");
-
-//		}
-
 		}
 
 		if (action.equals("GET_MEMBER")) {
 
 			ReportEmailService service = new ReportEmailServiceImpl();
-			List<TestMemberVO> list = service.getAllMemberInfo();
+			List<MemberVO> list = service.getAllMemberInfo();
 			Gson gson = new Gson();
 			Writer writer = resp.getWriter();
 			writer.write(gson.toJson(list));
+
+		}
+
+		if (action.equals("GET_ADMIN")) {
+
+			HttpSession session = req.getSession();
+			EmployeeVO empVO = (EmployeeVO) session.getAttribute("employeeVO");
+			Gson gson = new Gson();
+			Writer writer = resp.getWriter();
+			writer.write(gson.toJson(empVO));
 
 		}
 
@@ -182,12 +181,10 @@ public class ReportEmailServlet extends HttpServlet {
 		if (action.equals("get_byUserId_admin")) {
 
 			Gson gson = new Gson();
-			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-//			HttpSession session = req.getSession() ;
-//			MemberVO memberVO = (MemberVO)session.getAttribute("");
-//			emailVO.setUserId(memberVO.getUserId());
+			HttpSession session = req.getSession();
+			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 			ReportEmailService service = new ReportEmailServiceImpl();
-			List<EmailVO> getOneList = service.getAllByUserId(emailVO.getUserId());
+			List<EmailVO> getOneList = service.getAllByUserId(memberVO.getId());
 			Writer writer = resp.getWriter();
 			writer.write(gson.toJson(getOneList));
 
@@ -195,14 +192,11 @@ public class ReportEmailServlet extends HttpServlet {
 
 		if (action.equals("get_byUserId_member")) {
 
-//			HttpSession session = req.getSession() ;
-//			MemberVO memberVO = (MemberVO)session.getAttribute("");
-			
+			HttpSession session = req.getSession();
 			Gson gson = new Gson();
-			EmailVO emailVO = gson.fromJson(req.getReader(), EmailVO.class);
-//			emailVO.setUserId(memberVO.getUserId());
+			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 			ReportEmailService service = new ReportEmailServiceImpl();
-			List<EmailVO> getOneList = service.getAllByUserIdMember(emailVO.getUserId());
+			List<EmailVO> getOneList = service.getAllByUserIdMember(memberVO.getId());
 			Writer writer = resp.getWriter();
 			writer.write(gson.toJson(getOneList));
 
@@ -219,7 +213,7 @@ public class ReportEmailServlet extends HttpServlet {
 		}
 
 		if ("GETALL_EMAIL_ADMIN".equals(action)) {
-			
+
 			Integer offset = Integer.valueOf(req.getParameter("offset"));
 			ReportEmailService service = new ReportEmailServiceImpl();
 			List<EmailVO> list = service.getAllInfoByAdmin(offset);

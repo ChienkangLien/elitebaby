@@ -5,8 +5,8 @@ import java.util.List;
 import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.ReportImageVO;
-import com.tibame.web.vo.TestMemberVO;
 
 public interface ReportEmailService {
 
@@ -38,7 +38,7 @@ public interface ReportEmailService {
 
 	String insertEamilFromBack(EmailVO emailVO);
 
-	List<TestMemberVO> getAllMemberInfo();
+	List<MemberVO> getAllMemberInfo();
 
 	public List<EmailVO> serchInfoMember(EmailDTO dto);
 

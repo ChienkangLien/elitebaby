@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 
 
 public interface EmailDAO {
@@ -33,7 +33,7 @@ public interface EmailDAO {
 
 	public int insertFromBack(EmailVO emailVO);
 	
-	public List<TestMemberVO> getAllMember();
+	public List<MemberVO> getAllMember();
 	 
 	public List<EmailVO> serchInfo(EmailDTO dto);
 	

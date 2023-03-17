@@ -1,9 +1,7 @@
 package com.tibame.web.dao.impl;
 
-import java.io.Writer;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.google.gson.Gson;
 import com.tibame.web.dao.VistDAO_interface;
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public class VisitDAO implements VistDAO_interface {
@@ -531,8 +528,8 @@ public class VisitDAO implements VistDAO_interface {
 	    return list;
 	}
 	@Override
-	public TestMemberVO getMemeberInfo(Integer userId) {
-		TestMemberVO memberVO = null;
+	public MemberVO getMemeberInfo(Integer userId) {
+		MemberVO memberVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -547,11 +544,11 @@ public class VisitDAO implements VistDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				memberVO = new TestMemberVO();
-				memberVO.setUserId(rs.getInt("USER_ID"));
+				memberVO = new MemberVO();
+				memberVO.setId(rs.getInt("USER_ID"));
 				memberVO.setUserName(rs.getString("USER_NAME"));
 				memberVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
-				memberVO.setUserEmail(rs.getString("USER_EMAIL"));
+				memberVO.setEmail(rs.getString("USER_EMAIL"));
 
 			}
 

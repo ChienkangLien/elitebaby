@@ -6,7 +6,7 @@ import java.util.List;
 import com.tibame.web.dao.VistDAO_interface;
 import com.tibame.web.dao.impl.VisitDAO;
 import com.tibame.web.service.VisitRoomService;
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public class VisitRoomServiceImpl implements VisitRoomService {
@@ -154,11 +154,11 @@ public class VisitRoomServiceImpl implements VisitRoomService {
 	}
 
 	@Override
-	public TestMemberVO getOneMemberInfo(Integer userId) {
+	public MemberVO getOneMemberInfo(Integer userId) {
 		
-		if (userId != null || userId != 0) {
+		if (userId != null && userId != 0) {
 			
-			TestMemberVO memberVO = dao.getMemeberInfo(userId);
+			MemberVO memberVO = dao.getMemeberInfo(userId);
 			return memberVO != null ? memberVO : null;
 			
 		}

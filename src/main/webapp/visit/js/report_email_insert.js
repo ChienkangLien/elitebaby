@@ -28,8 +28,18 @@ function readURL(input) {
 //===============================================================================
 
 
+fetch('/elitebaby/visit/servlet?action=GET_MEMBER_INFO', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json'
+	},
+})
+	.then(resp => resp.json())
+	.then(data => { 
+		
+		document.querySelector(".userId").value = data.id;
 
-
+	});
 
 
 

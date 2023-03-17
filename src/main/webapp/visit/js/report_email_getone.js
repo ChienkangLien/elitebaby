@@ -1,19 +1,15 @@
 
-document.querySelector(".sserchId").addEventListener("click",function(){
+
 
 document.querySelector(".getall_tb").innerHTML = ""	;
-const userid = document.querySelector(".userIdTest")
+
 
 
 fetch('/elitebaby/report/emailservlet?action=get_byUserId_member', {
-			method: 'POST',
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				userId: userid.value,
-			
-			})
 		})
 			.then(resp => resp.json())
 			.then(data => {
@@ -69,7 +65,7 @@ fetch('/elitebaby/report/emailservlet?action=get_byUserId_member', {
 				
 			});
 			
-})
+
 
 
 

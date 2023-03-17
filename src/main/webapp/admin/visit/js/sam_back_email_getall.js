@@ -344,7 +344,7 @@ function emailcategoery (){
 		let resData = [];
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
-			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].id}${resData[i].username}">`
 		}
 	})
 
@@ -359,7 +359,7 @@ fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
 		let resData = [];
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
-			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+			document.querySelector("#report_categoery").innerHTML += `<option value="${resData[i].id}${resData[i].username}">`
 		}
 	})
 
