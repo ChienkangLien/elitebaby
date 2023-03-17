@@ -1,5 +1,4 @@
 $(function () {
-
   const navlink = document.querySelectorAll(".nav-link");
   navlink.forEach(function (e) {
     e.addEventListener("mouseenter", function () {
@@ -204,59 +203,54 @@ document.querySelector(".bi-bell").addEventListener("click", function () {
         document.querySelector("#popupContent").innerHTML = compelt;
       }
     });
-
-
-})
-
+});
 
 // 確認登入狀態
 function checkLogin() {
-  let root = location.origin
-  let check = "/elitebaby/member/check"
+  let root = location.origin;
+  let check = "/elitebaby/member/check";
   $.ajax({
-    url: root + check,           // 資料請求的網址
-    type: "GET",                  // GET | POST | PUT | DELETE | PATCH
+    url: root + check, // 資料請求的網址
+    type: "GET", // GET | POST | PUT | DELETE | PATCH
     // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
-    dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
-    success: function (resp) {      // request 成功取得回應後執行
+    dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
+    success: function (resp) {
+      // request 成功取得回應後執行
       if (resp.message == "已登入") {
         // console.log(resp);
         console.log(resp.message);
-        var loginButton = $('#loginButton');
+        var loginButton = $("#loginButton");
         loginButton.remove();
-        var registerButton = $('#registerButton');
+        var registerButton = $("#registerButton");
         registerButton.remove();
-
       } else {
         console.log(resp.message);
-        var member = $('.member');
+        var member = $(".member");
         member.remove();
         var logoutButton = $("#logoutButton");
         logoutButton.remove();
       }
-    }
+    },
   });
 }
 checkLogin();
-
 
 //   彈跳視窗 會員資料編輯
 function getAPI() {
   $.ajax({
     url: "Find",
     method: "GET",
-    dataType: 'json',
+    dataType: "json",
     contentType: "application/json",
 
     success: function (response) {
-      $('#name').val(response.username);
-      $('#address').val(response.address);
-      $('#phoneNumber').val(response.phoneNumber);
-
+      $("#name").val(response.username);
+      $("#address").val(response.address);
+      $("#phoneNumber").val(response.phoneNumber);
     },
     error: function (error) {
       alert("Error calling API:" + error);
-    }
+    },
   });
 }
 
@@ -270,8 +264,7 @@ fetch(
   }
 )
   .then((resp) => resp.json())
-  .then((data) => { });
-
+  .then((data) => {});
 
 const bellbtn = document.querySelector(".bi-bell");
 const popupWrapper = document.getElementById("popupWrapper");
@@ -372,11 +365,6 @@ function callAPI() {
   }
 }
 
-
-
-
-
-
 $("button.btn_save").on("click", function () {
   callAPI();
 });
@@ -386,19 +374,17 @@ $("button.btn_edit").on("click", function () {
 $("button#logoutButton").on("click", function () {
   location.href = "/elitebaby/member/logout.html";
 });
-// ======================購物車按鈕觸發=========================== 
-$("button#cart_btn").on("click", function () {
+// ======================購物車按鈕觸發===========================
+$("button#cart_btn:first").on("click", function () {
   fetch("/elitebaby/Cart?name=tocart", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(
-      {
-        userId: userId,
-      }
-    ),
+    body: JSON.stringify({
+      userId: userId,
+    }),
   })
     .then((resp) => {
       if (resp.status === 204) {
@@ -422,4 +408,4 @@ $("button#cart_btn").on("click", function () {
         console.log(error + "，跳轉購物車頁面失敗");
       }
     });
-})
+});
