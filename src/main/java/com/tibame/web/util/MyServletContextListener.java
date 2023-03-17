@@ -35,8 +35,8 @@ public class MyServletContextListener implements ServletContextListener {
 						String mealPhoto = Base64.getMimeEncoder().encodeToString(pic);
 						jedis.hset("meal:" + list.get(i).getMealId() + ":pic", "pic", mealPhoto);
 						System.out.println(jedis.hget("meal:" + list.get(i).getMealId() + ":pic", "pic"));
-					}else {
-					System.out.println("資料庫內由沒有照片，請新增照片");
+					} else {
+						System.out.println("資料庫內由沒有照片，請新增照片");
 					}
 				}
 			}
