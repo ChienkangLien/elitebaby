@@ -202,20 +202,13 @@
                     </svg>
                         <span class="badge badge-danger navbar-badge emailBill;"></span>
                     </button>
-
-<%--下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動--%>
-   <%--下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動下面不要動--%>
-
-<%--                    <button type="button" id="logoutButton logout-forum" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">--%>
-<%--                        登出--%>
-<%--                    </button>--%>
-                    <button type="button" class="btn btn-primary logoutforum" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <!-- Button trigger modal -->
+                    <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         登出
                     </button>
-                    <button id="registerButton" class="register_btn ">註冊</button>
+                    <button id="registerButton" class="register_btn">註冊</button>
                     <!-- 登入按鈕 -->
-<%--                    <button id="loginButton" class="login_btn">登入</button>--%>
-                    <button class="loginforum">登入</button>
+                    <button id="loginButton" class="login_btn">登入</button>
                 </ul>
             </div>
         </div>
@@ -224,14 +217,13 @@
 <div id="book_visit">
     <a href="/elitebaby/visit/VisitRoomFrontInsert.html">
         <img class="img-responsive"
-             src="../images/book_visit.png"
+             src="./images/book_visit.png"
         />
     </a>
 </div>
 <div id="blank_area">
     <!-- 此處留空 -->
 </div>
-
 <%--團隊引入結束--%>
 <% Access access = (Access) session.getAttribute("access");%>
 <%--<header>Header</header>--%>
