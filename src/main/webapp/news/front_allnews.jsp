@@ -63,8 +63,8 @@ pageContext.setAttribute("list", list);
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown member">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        <li class="nav-item dropdown member display-none">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
                             </a>
@@ -81,12 +81,12 @@ pageContext.setAttribute("list", list);
                             </ul>
                         </li>
                 </div>
-                <div id="login">
-                    <ul class="navbar-nav navbar-right">
-                        <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li>
-                        <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li>
-                    </ul>
-                </div>
+<!--                 <div id="login"> -->
+<!--                     <ul class="navbar-nav navbar-right display-none"> -->
+<!--                         <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li> -->
+<!--                         <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li> -->
+<!--                     </ul> -->
+<!--                 </div> -->
 <!-- 會員資料編輯彈跳視窗 -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
