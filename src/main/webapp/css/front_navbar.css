@@ -1,173 +1,167 @@
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #nav {
-    opacity: 0.9;
-    position: fixed;
-    top: 0px;
-    z-index: 1;
-    width: 100%;
+  opacity: 0.9;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
 }
 
 #book_visit {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    opacity: 0.8;
-    z-index: 2;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.8;
+  z-index: 2;
 }
 
 .btn {
-    background-color: #ff8188;
-    color: white;
+  background-color: #ff8188;
+  color: white;
 }
 
 .z-index-1 {
-    z-index: -1;
-    margin-top: 50px;
+  z-index: -1;
+  margin-top: 50px;
 }
 
 ul.list {
-    list-style: none;
-    display: inline-block;
-    color: black;
+  list-style: none;
+  display: inline-block;
+  color: black;
 }
 
-div#login {
-    display: none;
+span.badge {
+  background-color: red;
 }
 
-span.badge{
-    background-color: red
+div#book_visit > a > img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
-div#book_visit>a>img{
-    max-width:100%;max-height: 100%;position: absolute;
-                top: 50%; left: 50%;
-                transform: translate(-50%, -50%);
-}
-
-
-
 
 /* 髮療按摩瑜珈圖片 */
-.homeImage{
-    width: 552px;
-    height: 350px;
+.homeImage {
+  width: 552px;
+  height: 350px;
 }
 
 /* 髮療按摩瑜珈圖片文字介紹 */
-.textImage{
-    background-color:cadetblue ;
-    color: white;
+.textImage {
+  background-color: cadetblue;
+  color: white;
 }
 
 /* 服務內容 */
-.service{
-    margin: 30px 0px 20px 0px;
-    font-size: 30px;
-    font-weight: bold;
-    color: cadetblue;
+.service {
+  margin: 30px 0px 20px 0px;
+  font-size: 30px;
+  font-weight: bold;
+  color: cadetblue;
 }
 
 /* 滾滾動式圖片大小(還在想有沒有別種方法) */
-.carousel-item img{
-    height: 600px;
+.carousel-item img {
+  height: 600px;
 }
 
 /* 聯絡我們 */
-.contactus{
-    margin: 30px 0px 30px 0px;
-    font-size: 30px;
-    font-weight: bold;
-    color:cadetblue;
+.contactus {
+  margin: 30px 0px 30px 0px;
+  font-size: 30px;
+  font-weight: bold;
+  color: cadetblue;
 }
 
 /* 專業團隊 */
-.doctorteam{
-    margin: 30px 0px 20px 0px;
-    font-size: 30px;
-    font-weight: bold;
-    color: cadetblue;
+.doctorteam {
+  margin: 30px 0px 20px 0px;
+  font-size: 30px;
+  font-weight: bold;
+  color: cadetblue;
 }
 
 /* 醫師照片 */
-.doctorImage{
-    border-radius: 50%;
-    width: 350px;
-    height: 350px;
-    margin: 10px 0px 10px 150px;
+.doctorImage {
+  border-radius: 50%;
+  width: 350px;
+  height: 350px;
+  margin: 10px 0px 10px 150px;
 }
 
 /* 地址電話訊息 */
 
-
 /* 返回首頁 */
-  .btn_back {
-    width: 50%;
-    padding: 10px;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  .btn_back:hover {
-    background-color: #ccd54a;
-  }
+.btn_back {
+  width: 50%;
+  padding: 10px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn_back:hover {
+  background-color: #ccd54a;
+}
 
+.login_btn {
+  color: #fff;
+  background-color: #ff8188;
+  border-radius: 5px;
+  padding: 8px;
+  border: #7cb0ae;
+  margin-left: 10px;
+}
 
-
-  .login_btn{
-
-    color: #fff;
-    background-color: #ff8188;
-    border-radius: 5px;
-    padding: 8px;
-    border: #7cb0ae;
-    margin-left: 10px;
-    
-  }
-
-  .login_btn:hover {
-    background-color: rgb(70, 131, 228);
-  }
-
+.login_btn:hover {
+  background-color: rgb(70, 131, 228);
+}
 
 .register_btn {
-    color: #fff;
-    background-color: #ff8188;
-    border-radius: 5px;
-    padding: 8px;
-    border: #7cb0ae;
-    margin-left: 10px;
+  color: #fff;
+  background-color: #ff8188;
+  border-radius: 5px;
+  padding: 8px;
+  border: #7cb0ae;
+  margin-left: 10px;
 }
 
 .register_btn:hover {
-    background-color: rgb(70, 131, 228);
-  }
-
+  background-color: rgb(70, 131, 228);
+}
 
 #popupWrapper {
-    display: none;
-    position: fixed;
-    opacity: 0.9;
-    top: 80px;
-    margin-left: 1000px;
-    width: 250px;
-    height: 150px;
-    bottom: 0;
-    right: 25px;
-    border: 1px solid #000000;
-    background-color: rgba(243, 244, 244, 0.849);
-    padding: 10px;
-    z-index: 1;
-    box-shadow: 2px 2px 4px #6e6969;
-    border-radius: 8px;
-  }
+  display: none;
+  position: fixed;
+  opacity: 0.9;
+  top: 80px;
+  margin-left: 1000px;
+  width: 250px;
+  height: 150px;
+  bottom: 0;
+  right: 25px;
+  border: 1px solid #000000;
+  background-color: rgba(243, 244, 244, 0.849);
+  padding: 10px;
+  z-index: 1;
+  box-shadow: 2px 2px 4px #6e6969;
+  border-radius: 8px;
+}
+
+.checkIfIn,
+.checkIfOut {
+  display: none;
+}
