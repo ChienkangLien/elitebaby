@@ -18,24 +18,20 @@ const visitremark = document.querySelector(".visitremark");
 
 
 
-document.querySelector('.getmember').addEventListener('click', () => {
 
 	fetch('/elitebaby/visit/servlet?action=GET_MEMBER_INFO', {
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({
-			userId:  userid.value,
-		})
 	})
 		.then(resp => resp.json())
 		.then(data => {
 
 			if(data != null){
-
-				name.value = data.userName;
-				email.value = data.userEmail;
+				userid.value = data.id;
+				name.value = data.username;
+				email.value = data.email;
 				phone.value = data.phoneNumber;
 
 			}else{
@@ -45,7 +41,6 @@ document.querySelector('.getmember').addEventListener('click', () => {
 		})
 
 
-})
 
 
 function validateEmail() {

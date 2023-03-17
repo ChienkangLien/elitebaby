@@ -6,7 +6,7 @@ fetch(`/elitebaby/report/emailservlet?action=GET_MEMBER`,
 		let resData = [];
 		resData = visit;
 		for (let i = 0; i < resData.length; i++) {
-			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].userId}${resData[i].userName}">`
+			document.querySelector("#member_info").innerHTML += `<option value="${resData[i].id}${resData[i].username}">`
 		}
 	})
 
@@ -334,7 +334,7 @@ function trclickvisit(visitIdlink){
 			location.reload();
 		  });
 	}else{
-	fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
+	fetch('/elitebaby/visit/servlet?action=SERCH_ONE_MEMBER_VISIT', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -350,7 +350,26 @@ function trclickvisit(visitIdlink){
 			
 		let resData = [];
 		resData = data;
-		if(resData.length == 0){
+		let cheackstatus = 0;
+			if(data.length != 0){	
+				for(let xx = 0 ; xx < data.length; xx++){
+                       if(data[xx].visitStatus == 0){	
+							 cheackstatus = 1 ;
+					   }
+				}
+			}
+
+		if(data.length==0){
+			Swal.fire({
+				icon: 'error',
+				title: '查無資料',
+			  }).then((result) => {
+				location.reload();
+			  });	
+
+		}
+
+		if(cheackstatus==0){
 
 			Swal.fire({
 				icon: 'error',

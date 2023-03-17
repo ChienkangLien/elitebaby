@@ -1,8 +1,7 @@
 
-document.querySelector(".sserchId").addEventListener("click",function(){
 
 document.querySelector(".getall_tb").innerHTML = ""	;
-const userid = document.querySelector(".userIdTest")
+
 
 
 fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
@@ -10,10 +9,6 @@ fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				userId: userid.value,
-			
-			})
 		})
 			.then(resp => resp.json())
 			.then(data => {
@@ -66,7 +61,7 @@ fetch('/elitebaby/visit/servlet?action=GET_ONE_MEMBER_VISIT', {
 	}	
 			});
 			
-			})
+	
 
 
 

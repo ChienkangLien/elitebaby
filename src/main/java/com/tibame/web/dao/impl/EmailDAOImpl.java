@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import com.tibame.web.dao.EmailDAO;
 import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 
 public class EmailDAOImpl implements EmailDAO {
 
@@ -436,9 +436,9 @@ public class EmailDAOImpl implements EmailDAO {
 	}
 
 	@Override
-	public List<TestMemberVO> getAllMember() {
-		List<TestMemberVO> list = new ArrayList<TestMemberVO>();
-		TestMemberVO membertVO = null;
+	public List<MemberVO> getAllMember() {
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		MemberVO membertVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -451,10 +451,10 @@ public class EmailDAOImpl implements EmailDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				membertVO = new TestMemberVO();
-				membertVO.setUserId(rs.getInt("USER_ID"));
+				membertVO = new MemberVO();
+				membertVO.setId(rs.getInt("USER_ID"));
 				membertVO.setUserName(rs.getString("USER_NAME"));
-				membertVO.setUserEmail(rs.getString("USER_EMAIL"));
+				membertVO.setEmail(rs.getString("USER_EMAIL"));
 				membertVO.setPhoneNumber(rs.getString("PHONE_NUMBER"));
 				list.add(membertVO);
 

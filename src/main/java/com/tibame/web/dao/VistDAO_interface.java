@@ -2,7 +2,7 @@ package com.tibame.web.dao;
 
 import java.util.List;
 
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.VisitVO;
 
 public interface VistDAO_interface {
@@ -15,7 +15,7 @@ public interface VistDAO_interface {
 
 	public VisitVO findByPrimaryKey(Integer empno);
 	
-	TestMemberVO getMemeberInfo (Integer userId);
+	MemberVO getMemeberInfo (Integer userId);
 
 	public List<VisitVO> getAll();
 

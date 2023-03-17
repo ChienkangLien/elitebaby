@@ -51,8 +51,24 @@ $(function () {
   checkLogin();
 });
 
-// ======================鈴鐺===========================
-var userId = 4;
+//===============================================鈴鐺==============================================
+
+
+
+fetch('/elitebaby/visit/servlet?action=GET_MEMBER_INFO', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json'
+	},
+})
+	.then(resp => resp.json())
+	.then(data => { 
+		
+		 var userId  = data.id;
+
+
+
+console.log(userId);
 
 var MyPoint = `/emailBell/${userId}`;
 var host = window.location.host;
@@ -203,7 +219,52 @@ document.querySelector(".bi-bell").addEventListener("click", function () {
         document.querySelector("#popupContent").innerHTML = compelt;
       }
     });
+
+
+    fetch(
+      `/elitebaby/report/emailservlet?action=get_email_chang_status&userId=user${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((resp) => resp.json())
+      .then((data) => {});
+    
+
+
+
 });
+
+
+const bellbtn = document.querySelector(".bi-bell");
+const popupWrapper = document.getElementById("popupWrapper");
+document.querySelector(".bi-bell").onclick = function () {
+  // 顯示小小的視窗
+  if (popupWrapper.style.display === "block") {
+    popupWrapper.style.display = "none";
+  } else {
+    popupWrapper.style.display = "block";
+  }
+};
+
+document.addEventListener("click", function (event) {
+  if (event.target !== popupWrapper && bellbtn !== event.target) {
+    popupWrapper.style.display = "none";
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    popupWrapper.style.display = "none";
+  }
+});
+
+
+});
+// ================================================================================================
 
 // 確認登入狀態
 function checkLogin() {
@@ -254,40 +315,9 @@ function getAPI() {
   });
 }
 
-fetch(
-  `/elitebaby/report/emailservlet?action=get_email_chang_status&userId=user${userId}`,
-  {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }
-)
-  .then((resp) => resp.json())
-  .then((data) => {});
 
-const bellbtn = document.querySelector(".bi-bell");
-const popupWrapper = document.getElementById("popupWrapper");
-document.querySelector(".bi-bell").onclick = function () {
-  // 顯示小小的視窗
-  if (popupWrapper.style.display === "block") {
-    popupWrapper.style.display = "none";
-  } else {
-    popupWrapper.style.display = "block";
-  }
-};
 
-document.addEventListener("click", function (event) {
-  if (event.target !== popupWrapper && bellbtn !== event.target) {
-    popupWrapper.style.display = "none";
-  }
-});
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    popupWrapper.style.display = "none";
-  }
-});
 
 // --------- 會員首頁js --------------
 function callAPI() {

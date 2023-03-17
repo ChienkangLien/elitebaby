@@ -8,12 +8,11 @@ import com.tibame.web.dao.ReportImageDAO;
 import com.tibame.web.dao.impl.EmailDAOImpl;
 import com.tibame.web.dao.impl.ReportImageDAOImpl;
 import com.tibame.web.service.ReportEmailService;
-
 import com.tibame.web.vo.AnswerImageVO;
 import com.tibame.web.vo.EmailDTO;
 import com.tibame.web.vo.EmailVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.ReportImageVO;
-import com.tibame.web.vo.TestMemberVO;
 
 public class ReportEmailServiceImpl implements ReportEmailService {
 
@@ -159,8 +158,8 @@ public class ReportEmailServiceImpl implements ReportEmailService {
 	}
 
 	@Override
-	public List<TestMemberVO> getAllMemberInfo() {
-		List<TestMemberVO> list = dao.getAllMember();
+	public List<MemberVO> getAllMemberInfo() {
+		List<MemberVO> list = dao.getAllMember();
 		return list != null ? list : null;
 	}
 

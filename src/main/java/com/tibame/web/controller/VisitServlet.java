@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.function.Function;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.tibame.web.service.VisitRoomService;
 import com.tibame.web.service.impl.VisitRoomServiceImpl;
-import com.tibame.web.vo.TestMemberVO;
+import com.tibame.web.vo.MemberVO;
 import com.tibame.web.vo.VisitVO;
 
 /**
@@ -149,20 +148,12 @@ public class VisitServlet extends HttpServlet {
 		if (action.equals("GET_MEMBER_INFO")) {
 
 			Gson gson = new Gson();
-//			HttpSession session = request.getSession();
-//			MemberVO memberVO =  session.getAttribute("MemberVO");
-//			Integer userId = memberVO.getUserId();
-//			if (userId > 0 && userId != null) {
-//				VisitRoomService service = new VisitRoomServiceImpl();
-//				memberVO = service.getOneMemberInfo(memberVO.getUserId());
-//				Writer writer = response.getWriter();
-//				writer.write(gson.toJson(memberVO));
-//			}
-
-			TestMemberVO memberVO = gson.fromJson(request.getReader(), TestMemberVO.class);
-			if (memberVO.getUserId() > 0 || memberVO.getUserId() != null) {
+			HttpSession session = request.getSession();
+			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+			Integer userId = memberVO.getId();
+			if (userId > 0 && userId != null) {
 				VisitRoomService service = new VisitRoomServiceImpl();
-				memberVO = service.getOneMemberInfo(memberVO.getUserId());
+				memberVO = service.getOneMemberInfo(userId);
 				Writer writer = response.getWriter();
 				writer.write(gson.toJson(memberVO));
 			}
@@ -215,22 +206,15 @@ public class VisitServlet extends HttpServlet {
 		if ("GET_ONE_MEMBER_VISIT".equals(action)) {
 
 			Gson gson = new Gson();
-//			HttpSession session = request.getSession();
-//			MemberVO memberVO =  session.getAttribute("MemberVO");
-//			Integer userId = memberVO.getUserId();
-//			if (userId > 0 && userId != null) {
-//				VisitRoomService service = new VisitRoomServiceImpl();
-//				List<VisitVO> list = service.getOneAll(userId);
-//				Writer writer = response.getWriter();
-//				writer.write(gson.toJson(list));
-//		    }
-
-			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
-			Integer userId = Integer.valueOf(visitVO.getUserId());
-			VisitRoomService service = new VisitRoomServiceImpl();
-			List<VisitVO> list = service.getOneAll(userId);
-			Writer writer = response.getWriter();
-			writer.write(gson.toJson(list));
+			HttpSession session = request.getSession();
+			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+			Integer userId = memberVO.getId();
+			if (userId > 0 && userId != null) {
+				VisitRoomService service = new VisitRoomServiceImpl();
+				List<VisitVO> list = service.getOneAll(userId);
+				Writer writer = response.getWriter();
+				writer.write(gson.toJson(list));
+			}
 
 		}
 
@@ -269,24 +253,32 @@ public class VisitServlet extends HttpServlet {
 
 		if ("CHECK_DOUBLE_VISIT".equals(action)) {
 
-//			HttpSession session = request.getSession();
-//			MemberVO memberVO =  session.getAttribute("MemberVO");
-//			Integer userId = memberVO.getUserId();
-//			if (userId > 0 && userId != null) {
-
-//			}
 			Gson gson = new Gson();
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
 			Integer userid = visitVO.getUserId();
 
 			if (userid > 0 && userid != null) {
-				
+
 				VisitRoomService service = new VisitRoomServiceImpl();
 				List<VisitVO> list = service.getOneAll(userid);
 				Writer writer = response.getWriter();
 				writer.write(gson.toJson(list));
 
 			}
+		}
+		
+		
+		
+		if ("SERCH_ONE_MEMBER_VISIT".equals(action)) {
+			
+			Gson gson = new Gson();
+			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
+			VisitRoomService service = new VisitRoomServiceImpl();
+			List<VisitVO> list = service.getOneAll(visitVO.getUserId());
+			Writer writer = response.getWriter();
+			writer.write(gson.toJson(list));
+			
+			
 		}
 
 	}

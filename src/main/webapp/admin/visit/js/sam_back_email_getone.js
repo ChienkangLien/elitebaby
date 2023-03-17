@@ -1,3 +1,12 @@
+fetch(`/elitebaby/report/emailservlet?action=GET_ADMIN`,
+	{ header: ("Content-type:application/json;charset=utf-8") })
+	.then(resp => resp.json())
+	.then(admin => {
+		document.querySelector(".sam_adminId_anwser").value = admin.empid;
+})
+
+
+
 
 fetch(`/elitebaby/report/emailservlet?action=getEmail`,
 	{ header: ("Content-type:application/json;charset=utf-8") })
