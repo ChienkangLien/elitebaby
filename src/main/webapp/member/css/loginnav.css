@@ -65,7 +65,7 @@
 
 
 /* 立即註冊為會員按鈕 */
-/* .button-wrapper {
+.button-wrapper {
   display: flex;
   justify-content: space-between;
 }
@@ -77,7 +77,7 @@
 
 .button-wrapper a {
   margin: 0 10px;
-} */
+}
 
 /* 立即註冊為會員按鈕 */
 

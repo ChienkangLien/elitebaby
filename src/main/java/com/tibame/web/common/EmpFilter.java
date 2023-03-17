@@ -16,10 +16,12 @@ import javax.servlet.http.HttpSession;
 import com.tibame.web.vo.EmployeeVO;
 
 
-@WebFilter(urlPatterns = {"/elitebaby/member/background_nav.html", "/admin/forum/*", "/admin/meal/*", "/admin/member/management.html"
+@WebFilter(urlPatterns = {"/member/background_nav.html", "/admin/forum/*", "/admin/meal/*", "/admin/member/management.html"
 		, "/admin/member/search.html", "/admin/news/*", "/admin/room/*", "/admin/visit/*"})
 public class EmpFilter extends HttpFilter implements Filter {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

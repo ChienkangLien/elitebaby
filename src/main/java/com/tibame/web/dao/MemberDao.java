@@ -14,5 +14,7 @@ int insert(MemberVO member);
 	
 	MemberVO selectById(int id);
 	List<MemberVO> selectAll();
+	
+	MemberVO selectByEmail(String email);
 
 }

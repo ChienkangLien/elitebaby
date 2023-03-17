@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>忘記密碼</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
+    <!-- bootstrap引用cdn -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="../js/front_navbar.js"></script> -->
+
+    <style>
+      .columns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .section {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+      }
+
+      .section h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+      }
+
+      .box p.msg {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #d32f2f;
+      }
+
+      .label {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .input {
+        border: none;
+        border-bottom: 2px solid #757575;
+        font-size: 1.2rem;
+        padding: 5px;
+        margin-bottom: 30px;
+      }
+
+      .input:focus {
+        border-color: #0d47a1;
+      }
+
+      .button {
+        background-color: #0d47a1;
+        color: white;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        padding: 10px 20px;
+        transition: all 0.2s ease;
+      }
+
+      .button:hover {
+        background-color: #1e88e5;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header-component></header-component>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-half">
+        <section class="section">
+          <!-- 標題 -->
+          <div class="content has-text-centered">
+            <h1>忘記密碼</h1>
+          </div>
+
+          <!-- 表單 -->
+          <form class="box" action="SendEmail" method="post" id="form-reset-ps">
+            <div class="content msg">
+              <p>請輸入您註冊的帳號(電子郵件)，我們將產生新的密碼給您!</p>
+            </div>
+            <p class="msg"></p>
+            <div class="field">
+              <label class="label" for="input-email">電子郵件</label>
+              <div class="control has-icons-left">
+                <input
+                  class="input"
+                  type="text"
+                  name="email"
+                  placeholder="電子郵件"
+                  id="input-email"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+
+            <!-- 表單按鈕 -->
+            <div class="field is-grouped">
+              <div class="control">
+                <button
+                  class="button is-primary has-text-centered"
+                  type="button"
+                  id="btn-SendEmail"
+                >
+                  發送
+                </button>
+                <button
+                  class="button is-primary has-text-centered"
+                  type="button"
+                  id="btn_back"
+                >
+                  取消
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+      <div class="column"></div>
+    </div>
+
+    <footer-component></footer-component>
+
+    <script>
+      $(function () {
+        const email = $("input#input-email");
+        $("button#btn-SendEmail").on("click", function () {
+          let check = true;
+          if (email.val() == "") {
+            $("p.msg").text("欄位不能為空");
+            $("p.msg").css("color", "red");
+            check = false;
+            return check;
+          }
+          if (check) {
+            fetch("forgetps", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email.val(),
+              }),
+            })
+              .then((resp) => {
+                if (resp.redirected) {
+                  location.href = resp.url;
+                } else {
+                  resp.json().then((body) => {
+                    $("p.msg").text(body.msg);
+                    $("p.msg").css("color", "red");
+                    // alert(`errorMsg: ${body.errorMessage}`);
+                  });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+
+        $("#form-reset-ps").on("keydown", function (e) {
+          if (e.keyCode == 13) {
+            e.preventDefault();
+            $("button#btn-SendEmail").click();
+          }
+        });
+      });
+    </script>
+  </body>
+  <script>
+    const backButton = document.querySelector("#btn_back");
+    backButton.addEventListener("click", function () {
+      // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+      window.location.href = "/elitebaby/member/login.html";
+    });
+  </script>
+</html>

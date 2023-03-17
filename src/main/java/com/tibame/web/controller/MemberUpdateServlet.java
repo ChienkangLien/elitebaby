@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.tibame.web.common.SecretPassword;
 import com.tibame.web.service.MemberService;
 import com.tibame.web.service.impl.MemberServiceImpl;
 import com.tibame.web.vo.MemberVO;
@@ -32,8 +33,8 @@ public class MemberUpdateServlet extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject jsonObj = new JsonObject();
 
-		String secretPassword =encryptPassword(member.getPassword());
-		System.out.println(secretPassword.length());
+		String secretPassword = SecretPassword.encryptPassword(member.getPassword());
+//		System.out.println(secretPassword.length());
 		member.setPassword(secretPassword);
 
 		Integer id;
@@ -56,22 +57,22 @@ public class MemberUpdateServlet extends HttpServlet {
 		resp.getWriter().append(jsonObj.toString());
 	}
 	
-	private String encryptPassword(String password) {
-        String encryptedPassword = null;
-        try {
-            // 使用SHA-256算法做加密
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
-            // 將加密後的字節數組轉換成16進制字符串
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes) {
-                sb.append(String.format("%02x", b));
-            }
-            encryptedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return encryptedPassword;
-    }
+//	private String encryptPassword(String password) {
+//        String encryptedPassword = null;
+//        try {
+//            // 使用SHA-256算法做加密
+//            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+//            byte[] bytes = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+//            // 將加密後的字節數組轉換成16進制字符串
+//            StringBuilder sb = new StringBuilder();
+//            for (byte b : bytes) {
+//                sb.append(String.format("%02x", b));
+//            }
+//            encryptedPassword = sb.toString();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//        return encryptedPassword;
+//    }
 
 }
