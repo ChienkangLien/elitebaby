@@ -7,9 +7,8 @@ import javax.mail.internet.*;
 
 public class SendEmail {
 	
-	public static void main(String[] args) {
-
-        String to = "eric543029@gmail.com";
+	public static void sendEmail(String to, String subject,String text) {
+//		String to = "eric543029@gmail.com";
         String from = "eric543029@gmail.com";
         String host = "smtp.gmail.com";
 
@@ -38,5 +37,10 @@ public class SendEmail {
         }catch (MessagingException mex) {
             mex.printStackTrace();
         }
+	}
+	
+	public static void main(String[] args) {
+
+        
     }
 }

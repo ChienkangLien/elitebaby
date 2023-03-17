@@ -65,21 +65,20 @@
 
 
 /* 立即註冊為會員按鈕 */
-.signup {
-  position: relative;
-  text-align: center;
-  margin-top: 20px;
-  margin-left: 70px;
+/* .button-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
-.notyet {
-  position: absolute;
-  text-align: center;
+.button-wrapper span {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.forget{
-  
-}
+.button-wrapper a {
+  margin: 0 10px;
+} */
+
 /* 立即註冊為會員按鈕 */
 
 

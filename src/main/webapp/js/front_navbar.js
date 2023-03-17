@@ -213,27 +213,33 @@ function checkLogin() {
     url: root + check, // 資料請求的網址
     type: "GET", // GET | POST | PUT | DELETE | PATCH
     // data: 物件資料,             // 將物件資料(不用雙引號) 傳送到指定的 url
-    dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
-    success: function (resp) {
-      // request 成功取得回應後執行
-      if (resp.message == "已登入") {
-        // console.log(resp);
-        console.log(resp.message);
-        var loginButton = $("#loginButton");
-        loginButton.remove();
-        var registerButton = $("#registerButton");
-        registerButton.remove();
-      } else {
-        console.log(resp.message);
-        var member = $(".member");
-        member.remove();
-        var logoutButton = $("#logoutButton");
-        logoutButton.remove();
-      }
-    },
-  });
-}
-checkLogin();
+    dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+    success: function(resp){      // request 成功取得回應後執行
+      if(resp.message == "已登入"){
+          // console.log(resp);
+          console.log(resp.message);
+          var loginButton =  $('#loginButton');
+          loginButton.remove();
+          var registerButton = $('#registerButton');
+          registerButton.remove();
+
+        }else{ 
+          console.log(resp.message);
+          var member = $('.member');
+          member.remove();
+          var logoutButton = $("#logoutButton");
+          logoutButton.remove();
+          const cartButtons = document.querySelectorAll('button#cart_btn');
+
+cartButtons.forEach((button) => {
+  button.remove();
+});
+        }
+    }
+  });  
+  }
+  checkLogin();
+
 
 //   彈跳視窗 會員資料編輯
 function getAPI() {
