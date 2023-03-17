@@ -232,6 +232,11 @@ function checkLogin(){
           member.remove();
           var logoutButton = $("#logoutButton");
           logoutButton.remove();
+          const cartButtons = document.querySelectorAll('button#cart_btn');
+
+cartButtons.forEach((button) => {
+  button.remove();
+});
         }
     }
   });  
