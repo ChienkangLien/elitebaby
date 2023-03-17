@@ -1,5 +1,5 @@
 let meal = [];
-let userId = 1;
+let userId1 = 1;
 
 fetch(`/elitebaby/Meal?name=getall`)
     .then((resp) => {
@@ -52,7 +52,7 @@ fetch("/elitebaby/Cart?name=getcart", {
     },
     body: JSON.stringify(
         {
-            userId: userId,
+            userId: userId1,
         }
     ),
 })
@@ -98,7 +98,7 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                userId: userId1,
                 mealId: data_id,
                 count: 1
             }
