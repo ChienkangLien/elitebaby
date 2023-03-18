@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.tibame.web.vo.MemberVO;
 
-@WebFilter(urlPatterns = { "/room/order.html","/meal/user_order.html","/visit/VisitRoomFrontGetAll.html","/visit/ReportEmailFrontGetAll.html","/visit/ReportEmailFrontRSMail.html","/visit/ReportEmailFrontInsert.html","/visit/VisitRoomFrontInsert.html"})
+@WebFilter(urlPatterns = { "/room/order.html","/meal/user_order.html","/visit/VisitRoomFrontGetAll.html","/visit/ReportEmailFrontGetAll.html","/visit/ReportEmailFrontRSMail.html","/visit/ReportEmailFrontInsert.html","/visit/VisitRoomFrontInsert.html", "/meal/cart.html"})
 public class MemFilter extends HttpFilter{
 	private static final long serialVersionUID = 1L;
 
