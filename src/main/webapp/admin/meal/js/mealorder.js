@@ -206,7 +206,7 @@ $("tbody.getall_tb").on("click", "button.btn_update", function () {
     data_id = Number($(this).closest("tr").attr("data-id"));
     console.log(data_id);
     for (let i = 0; i < meals.length; i++) {
-        if (data_id === meals[i].mealOrderId) {
+        if (data_id == meals[i].mealOrderId) {
             if (meals[i].strStatus == "未付款") {
                 status = 0;
             } else if (meals[i].strStatus == "已付款") {
@@ -232,6 +232,7 @@ $("tbody.getall_tb").on("click", "button.btn_update", function () {
 //確定修改按鈕
 $("button#btn_toupdate").on("click", function () {
     address = document.querySelector(".update_address").value;
+    status = document.querySelector(".update_order_status").value;
     console.log(address);
     // console.log("rrrrrr");
     fetch("/elitebaby/MealOrder?name=updateMealWithAddress", {

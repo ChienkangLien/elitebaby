@@ -123,15 +123,18 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
                     // document.querySelector("#cartCount").innerHTML(body.cartcount);
                     data_id = "";
                     // location.reload();
-                } else {
-                    alert("修改失敗!!!!");
+                } else if (body.msg === "fail") {
+                    alert("無法新增商品至購物車");
                     // console.log("新增失敗");
-                    // location.reload();
+                    location.reload();
+                } else {
+                    alert("請登入會員!!");
+                    location.href = "/elitebaby/member/login.html";
                 }
             } catch (error) {
                 alert("出現錯誤!!!!");
                 // location.reload();
-                console.log(error + "，修改失敗");
+                console.log(error + "，新增商品至購物車有錯誤!");
             }
         });
 })
