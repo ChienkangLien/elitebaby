@@ -31,6 +31,9 @@ fetch("/elitebaby/Cart?name=getall"
         }
     })
     .then((body) => {
+        if (body == null) {
+            location.href = "/elitebaby/member/login.html";
+        }
         if (body.length == 0) {
             // console.log("購物車內無商品");
             let cart = `<div>
@@ -100,20 +103,7 @@ fetch("/elitebaby/Cart?name=getall"
     });
 
 // 取得購物車資料筆數
-fetch("/elitebaby/Cart?name=getcart"
-    // , {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json;charset=UTF-8",
-    //         "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify(
-    //         {
-    //             userId: userId1,
-    //         }
-    //     ),
-    // }
-)
+fetch("/elitebaby/Cart?name=getcart")
     .then(resp => {
         if (resp.status === 204) {
             console.log("resp.status===" + resp.status);

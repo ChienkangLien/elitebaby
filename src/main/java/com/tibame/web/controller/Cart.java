@@ -46,19 +46,25 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			Jedis jedis = new Jedis("localhost", 6379);
-			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
-			cartObject.setUserId(userId);
-			CartService carts = new CartServiceImpl();
-			int udm = carts.insertMeal(cartObject);
+			MemberVO membervo = ((MemberVO) request.getSession().getAttribute("memberVO"));
 			JsonObject respbody = new JsonObject();
-			int cartCount = carts.findByPrimaryKey(cartObject.getUserId()).size();
-			if (udm > 0 && cartCount > 0) {
-				respbody.addProperty("msg", "success");
-				respbody.addProperty("cartcount", cartCount);
-				response.getWriter().write(respbody.toString());
+			if (membervo != null) {
+				CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+				Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
+				cartObject.setUserId(userId);
+				CartService carts = new CartServiceImpl();
+				int udm = carts.insertMeal(cartObject);
+				int cartCount = carts.findByPrimaryKey(cartObject.getUserId()).size();
+				if (udm > 0 && cartCount > 0) {
+					respbody.addProperty("msg", "success");
+					respbody.addProperty("cartcount", cartCount);
+					response.getWriter().write(respbody.toString());
+				} else {
+					respbody.addProperty("msg", "fail");
+					response.getWriter().write(respbody.toString());
+				}
 			} else {
-				respbody.addProperty("msg", "fail");
+				respbody.addProperty("msg", "notlogin");
 				response.getWriter().write(respbody.toString());
 			}
 			jedis.close();
@@ -69,20 +75,20 @@ public class Cart extends HttpServlet {
 			response.setContentType("application/json");
 			JsonObject respbody = new JsonObject();
 //			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			MemberVO membervo = ((MemberVO) request.getSession().getAttribute("memberVO"));
+			if (membervo != null) {
+				Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 //			Integer userId = cartObject.getUserId();
 //			System.out.println(userId);
-			CartService carts = new CartServiceImpl();
-			Set<String> set = carts.findByPrimaryKey(userId);
-			int count = set.size();
-			if (userId != null) {
+				CartService carts = new CartServiceImpl();
+				Set<String> set = carts.findByPrimaryKey(userId);
+				int count = set.size();
 				respbody.addProperty("msg", "為已登入狀態");
 				respbody.addProperty("cartcount", count);
 				response.getWriter().write(respbody.toString());
 			} else {
 				respbody.addProperty("msg", "為未登入狀態");
 				response.getWriter().write(respbody.toString());
-
 			}
 
 		}
@@ -92,7 +98,7 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderDetailVO meal = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 //			Integer userId = meal.getUserId();
 //			session.setAttribute("userId", userId);
 			meal.setUserId(userId);
@@ -111,12 +117,17 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 //			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			if ((MemberVO) request.getSession().getAttribute("memberVO") == null) {
+				response.getWriter().write(gson.toJson(null));
+			} else {
+				System.out.println("123");
+				Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 //			Integer userId = cartObject.getUserId();
-			CartService carts = new CartServiceImpl();
-			List<MealVO> mealList = carts.getAllMeal(userId);
-			if (mealList != null) {
-				response.getWriter().write(gson.toJson(mealList));
+				CartService carts = new CartServiceImpl();
+				List<MealVO> mealList = carts.getAllMeal(userId);
+				if (mealList != null) {
+					response.getWriter().write(gson.toJson(mealList));
+				}
 			}
 		}
 
@@ -124,7 +135,7 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 			cartObject.setUserId(userId);
 			CartService carts = new CartServiceImpl();
 			int udm = carts.updateMeal(cartObject);
@@ -142,7 +153,7 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 			cartObject.setUserId(userId);
 			CartService carts = new CartServiceImpl();
 			int udm = carts.deleteMeal(cartObject);
@@ -160,7 +171,7 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderVO cartObject = gson.fromJson(request.getReader(), MealOrderVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			Integer userId = ((MemberVO) request.getSession().getAttribute("memberVO")).getId();
 			cartObject.setUserId(userId);
 //			System.out.println(cartObject);
 			Integer payment = cartObject.getOrderPayment();
@@ -170,18 +181,16 @@ public class Cart extends HttpServlet {
 				cartObject.setAuthCode(GetAuthCode.genAuthCode());
 				int udm = mealorder.insertMeal(cartObject);
 				JsonObject respbody = new JsonObject();
-				if(udm>0) {
+				if (udm > 0) {
 					respbody.addProperty("msg", "success");
 					response.getWriter().write(respbody.toString());
-				}else {
+				} else {
 					respbody.addProperty("msg", "fail");
 					response.getWriter().write(respbody.toString());
 				}
-				}
 			}
 		}
-
-	
+	}
 
 	public Cart() {
 		super();

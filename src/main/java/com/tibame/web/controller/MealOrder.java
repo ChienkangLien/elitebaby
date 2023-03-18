@@ -40,11 +40,12 @@ public class MealOrder extends HttpServlet {
 		if (str.equals("getorder")) {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
-			MealOrderVO mealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+//			MealOrderVO mealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+//			MemberVO membervo = ((MemberVO)request.getSession().getAttribute("memberVO"));
 			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
-			mealOrderObject.setUserId(userId);
+//			mealOrderObject.setUserId(userId);
 			MealOrderService mealOrderService = new MealOrderServiceImpl();
-			List<MealOrderVO> list = mealOrderService.findByPrimaryKey(mealOrderObject.getUserId());
+			List<MealOrderVO> list = mealOrderService.findByPrimaryKey(userId);
 //			int cartCount = carts.findByPrimaryKey(cartObject.getUserId()).size();
 			if (list != null) {
 				response.getWriter().write(gson.toJson(list));
@@ -103,8 +104,9 @@ public class MealOrder extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderDetailVO MealOrderDetailObject = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
-			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
-			MealOrderDetailObject.setUserId(userId);
+//			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+//			System.out.println(userId);
+//			MealOrderDetailObject.setUserId(userId);
 			MealOrderService moService = new MealOrderServiceImpl();
 			MealOrderDetailService modsService = new MealOrderDetailServiceImpl();
 			List<MealOrderVO> list1 = moService.findByMealOrder(MealOrderDetailObject.getMealOrderId());

@@ -432,3 +432,30 @@ $("button#cart_btn:first").on("click", function () {
     //         }
     //     });
 });
+
+// ======================購物車商品筆數請求===========================
+fetch("/elitebaby/Cart?name=getcart")
+    .then(resp => {
+        if (resp.status === 204) {
+            console.log("resp.status===" + resp.status);
+        } else {
+            return resp.json();
+        }
+    })
+    .then((body) => {
+        try {
+            if (body != null) {
+                if (body.msg == "為已登入狀態") {
+                    console.log("已登入並取得購物車內數量");
+                    $("span#cartCount").html(body.cartcount);
+                } else {
+                    console.log("尚未登入");
+                }
+                // console.log("ttttt");
+                // $("ul.meal_block").html(li_str);
+            }
+
+        } catch (error) {
+            console.log(error + "，資料庫沒照片故後端沒回傳");
+        }
+    });
