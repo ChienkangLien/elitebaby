@@ -72,6 +72,8 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	
+	
 
 
 	@Override
@@ -104,6 +106,13 @@ public class MemberServiceImpl implements MemberService{
         }
         return encryptedPassword;
     }
+
+
+	@Override
+	public MemberVO findByEmail(MemberVO member) {
+		String email = member.getEmail();
+		return email != null ? dao.selectByEmail(email) : null;
+	}
 	
 	
 }
