@@ -29,8 +29,8 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-     <link rel="stylesheet" href="/elitebaby/css/official.css"/>
-     <link rel="stylesheet" href="/elitebaby/css/front_navbar.css"/>
+     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
+     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front_navbar.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_One.css">
    
      <!-- FontAwesom 連結 -->
