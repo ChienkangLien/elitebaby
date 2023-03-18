@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- bootstrap引用cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <!-- 下載bootstrap引用 -->
+    <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../css/official.css" />
+    <link rel="stylesheet" href="../css/front_navbar.css">
+    <link rel="stylesheet" href="css/front_navbar.css">
+
+
+    <title>菁英產後護理之家</title>
+</head>
+
+<body>
+
+    <div id="nav">
+        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
+            <div class="container-fluid" >
+                <img src="images/logo.jpg">
+                <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" style=" justify-content: space-between;" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                          <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
+                          <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
+                      </ul>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/elitebaby/meal/meal_front.html">月子膳食</a></li>
+                  <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
+
+                        
+
+                        <!-- ====================================會員中心================================================= -->
+                        <li class="nav-item dropdown member">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                會員中心
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <button type="button" class=" dropdown-item btn_edit" data-toggle="modal" data-target="#editModal">
+                                    編輯會員資料
+                                  </button>
+                      
+                                  <li><a class="dropdown-item" href="/elitebaby/room/order.html">房型訂單</a></li>
+                                  <li><a class="dropdown-item" href="/elitebaby/meal/user_order.html">商品訂單</a></li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/VisitRoomFrontGetAll.html">預約訂單</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontGetAll.html">寄信匣</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontRSMail.html">收信匣</a> </li>
+                                  <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
+                            </ul>
+                        </li>
+                </div>
+      
+                
+                <!-- ==============================================按鈕觸發============================================ -->
+                <!-- ===============================================購物車============================================= -->
+                <div id="logout">
+                    <ul class="navbar-nav navbar-right">
+                        <button id="cart_btn"
+                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-cart2" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                            </svg>
+                            <span class="badge badge-danger navbar-badge ;"></span>
+                        </button>
+
+                        <!-- ===================================鈴鐺==================================== -->
+                        <button id="cart_btn"
+                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-bell" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                            </svg>
+
+                            <span class="badge badge-danger navbar-badge emailBill"></span>
+
+                        </button>
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            登出
+                        </button>
+                        <button id="registerButton" class="register_btn">註冊</button>
+                        <!-- 登入按鈕 -->
+                        <button id="loginButton" class="login_btn">登入</button>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div id="book_visit">
+        <a href="#">
+            <img class="img-responsive" src="images/book_visit.png"/>
+        </a>
+    </div>
+    <div id="blank_area">
+        <!-- 此處留空 -->
+    </div>
+  </div>
+  <div id="popupWrapper">
+      <p>信件通知</p>
+      <hr style="margin-top: 5px;">
+      <div id="popupContent" style="align-items: center;">
+
+      </div>
+</div>
+    <!-- 滾動式圖片 -->
+    <div>
+        <div id="carouselExampleIndicators1" class="carousel slide room_type_img" data-bs-ride="carousel">
+            <div class="carousel-indicators ">
+              <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/homepage/交誼廳.jpg" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="images/homepage/菁英.jpg" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="images/homepage/育嬰室.jpg" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="images/homepage/洗澡.jpg" class="d-block w-100">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- 服務內容 -->
+        <div class="text-center">
+            <div class="service">服務內容</div>
+                <p class="text-center">
+                    坐月子是人生健康轉折的重要歷程<br>
+                    孕育生命的甜蜜旅程 讓菁英陪伴您!
+                </p>
+                <!--還不知道怎麼解決不用BR標籤就可以加長與下一物件的距離-->
+                <br>
+            </div>
+        </div>
+            
+            <!-- Container: In boostrap, container is a class that you can add to div tags to give it special abilites
+            https://getbootstrap.com/docs/5.0/layout/grid/
+            -->
+            <div class="container"> 
+                <div class="row">
+                    <div class="col"><div><a href=""><img class="homeImage" src="images/homepage/massage1.jpg" /></a></div></div>
+                    <div class="col d-flex align-items-center text-center textImage"><div><b>紓壓修護SPA</b><br>在這一個月的黃金期，給予產後媽咪適度的修復與照護，掃除身體囤積的疲勞。
+                        利用專業的按摩手技，針對僵硬酸痛的部位，深層紓壓放鬆。讓身心靈擁有煥然一新的舒適感受。
+                    </div></div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex align-items-center text-center textImage"><div><b>髮療服務</b><br>使用薑汁洗髮對坐月子的媽咪好處多多，用熱薑汁水清洗頭髮，可有效清潔毛孔，防治頭皮屑掉落，還能去寒暖胃，促進血液循環，排除身體濕氣，預防偏頭痛。
+                        若能堅持一段時間，也可舒緩產後脫髮症狀，刺激囊包生長促進新的頭髮長出來。
+                    </div></div>
+                    <div class="col"><div><a href=""><img class="homeImage" src="images/homepage/shampoo1.jpg" /></a></div></div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col"><div><a href=""><img class="homeImage" src="images/homepage/yoga3.jpg" /></a></div></div>
+                    <div class="col d-flex align-items-center text-center textImage"><div><b>產後瑜珈/體適能</b><br>懷胎十月順利生產及母嬰健康平安，是每位準媽媽衷心的期望。
+                        哺育照顧寶貝的同時，我們也鼓勵媽媽聆聽自己身體的聲音，透過小班制的教學，引導媽媽和緩的呼吸練習，喚回平靜的心靈，讓產後的媽咪情緒更穩定。
+                    </div></div>
+                </div>
+            </div>
+          </div>
+          
+
+          <!-- 醫生團隊 -->
+          <div class="text-center">
+            <div class="doctorteam">專業團隊</div>
+            <p class="text-center">
+                新生命的誕生，帶給每個家庭喜悅與希望，我們以最高規格照護您珍愛的寶貝，國泰醫院、雙和醫院合作，<br>醫療轉介制度完善；
+                婦產科、小兒科、感染科主治醫師定期巡診；全數護理人員均有專業執照，提供媽媽和寶寶最完整的照顧。
+            </p>
+            <!--還不知道怎麼解決不用BR標籤就可以加長與下一物件的距離-->
+            <br>
+          </div>
+
+          <div class="container"> 
+            <div class="row">
+                <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor1.jpg" /></a></div></div>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>蔡瑞雪 小兒科主治醫師</b>
+                    <br>學經歷
+                    <br>輔仁大學醫學系
+                    <br>輔大醫院兒科主治醫師
+                    <br>榮總醫院小兒科主治醫師
+                    <br>小兒科臨床研究員
+                    <br>台大兒童醫院小兒心臟科代訓醫師
+                    <br>日本大阪高槻醫院新生兒科進修醫師
+                    <br>
+                    <br>醫務專長
+                    小兒心臟、新生兒及早產兒照護、小兒胸腔暨重症照護、一般兒科常見疾病
+                  </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/doctor2.jpg" /></a></div></div>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>施明德 感染科主治醫師</b>
+                    <br>學經歷
+                    <br>高雄醫學院醫學系
+                    <br>聯合醫院內科主治醫師
+                    <br>哈佛醫院感染科主治醫師
+                    <br>台北榮總感染科總醫師
+                    <br>
+                    <br>醫務專長
+                    臨床感染症、醫院感染管制、一般兒科常見疾病、新生兒及早產兒照護、小兒胸腔暨重症照護。
+                  </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col"><div><a href=""><img class="doctorImage" src="images/doctor/婦產科醫生.jpg" /></a></div></div>
+                <div class="col d-flex align-items-center doctextImage">
+                  <div>
+                    <b>姚培藍 婦產科主治醫生</b>
+                    <br>學經歷
+                    <br>國立陽明大學醫學博士
+                    <br>加州周產期醫學會理事
+                    <br>德州母胎醫學會理事
+                    <br>國立台灣大學部定副教授
+                    <br>國泰醫院婦產科主治醫師
+                    <br>慈濟醫院婦產科住院醫師
+                    <br>
+                    <br>醫務專長
+                    婦科腹腔繞手術、一般產科、高危險妊娠、高層次超音波、分子生物學研究、多囊性卵巢症候群、胎兒異常產前診斷、婦科良性子宮或卵巢腫瘤腹腔鏡手術
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<br><br><br><br><br>
+    
+  
+    <div class="row">
+     <div class="col"><div><a href=""><img src="images/homepage/請聽我說.jpg" /></a></div></div>
+     <div class="col d-flex align-items-center text-left"><div>
+     <h2>請聽我說</h2>
+     <div text-center>
+      從女孩成為女人這個特別時刻，我們TGA105第一組陪伴媽咪們一起走過最艱辛的路，回到最佳狀態，每位準媽咪能由內而外的蛻變翻轉，發揮自我的潛能，成為更加自信更加完整的自己，來迎接人生幸福的生命新階段。
+     </div>
+     <br><br><br><br><br><br>
+     <br>TEL : 02-2712-0589
+     <br>FAX :02-2794-0123
+     <br>E-mail : service@shinebc.com.tw
+     <br>服務時間：週一 - 週日: 0:00 - 24:00
+     <br>10488 台北市中山區南京東路三段219號5樓
+      </div></div> 
+  </div>
+
+  
+  <!-- 登出彈跳視窗Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">確定要登出嗎?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            點擊下面的按鈕以登出
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+          <button type="button" class="btn btn-primary btn_logout">登出</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 會員資料編輯彈跳視窗 -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="address">居住地址</label>
+              <input type="text" class="form-control" id="address">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">手機</label>
+              <input type="text" class="form-control" id="phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="password">更新密碼</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label for="confirmpassword">確認密碼</label>
+              <input type="password" class="form-control" id="confirmpassword">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn_save">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
+    <!-- bootstrap引用cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+        </script>
+    <script src="../js/front_navbar.js"></script>
+
+</body>
+
+
+<!-- 試試看還沒完成(登入按鈕) -->
+<script>
+
+    document.getElementById("loginButton").addEventListener("click", function() {
+        window.location.href = "/elitebaby/member/login.html";
+    });
+
+</script>
+
+<script>
+  const register_btn = document.querySelector(".register_btn");
+  register_btn.addEventListener("click", function () {
+    // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
+    window.location.href = "/elitebaby/member/register.html";
+  });
+</script>
+
+<script>
+    // 取得表單數據
+    $(function(){
+      function callAPI() {
+      var username =  $('#name').val();
+      var address =  $('#address').val();
+      var phoneNumber =  $('#phoneNumber').val();
+      var password =  $('#password').val();
+      var confirmpassword =  $('#confirmpassword').val();
+
+      var error = true;
+      if (password != confirmpassword ){
+        alert("密碼與確認密碼不一致，請重新輸入。")
+        error = false;
+      }
+      if(username == null || username == ""){
+        alert("名字不可為空白!")
+        error = false;
+      }
+      if (address == null || address == ""){
+        alert("地址不可為空白!")
+        error = false;
+      }
+      if(phoneNumber == null || phoneNumber == ""){
+        alert("手機不可為空白!")
+        error = false;
+      }
+      if(password == null || password == "" || confirmpassword == null || confirmpassword == "") {
+        alert("密碼或確認密碼不得為空!")
+        error = false; 
+      }
+
+      var check = true;
+      if (password == "") {
+          alert("請輸入密碼");
+          $("input#password").focus();
+          return (check = false);
+        } else {
+          var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+          if (passwordRegxp.test(password) != true) {
+            alert("密碼格式錯誤");
+            alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
+            $("input#password").focus();
+            $("input#password").select();
+            return (check = false);
+          }
+        }
+
+        // 使用AJAX傳送表單數據
+        if(check){
+
+            $.ajax({
+              url: "change",
+              method: "POST",
+              dataType: 'json',
+              contentType:"application/json",
+              data: JSON.stringify({
+                      username:username,
+                      password:password,
+                      address:address,
+                      phoneNumber:phoneNumber
+            }),
+            success: function(response) {
+                alert(response.message);
+                if(response.message == "修改成功"){
+                  $(location).attr("href","homepage.html");
+                }
+            },
+            error: function(error) {
+              alert("Error calling API:" + error);
+            }
+          });
+        }
+
+      
+    }  
+    function getAPI(){
+      $.ajax({
+                url: "Find",
+                method: "GET",
+                dataType: 'json',
+                contentType:"application/json",
+                
+              success: function(response) {
+                $('#name').val(response.username);
+                $('#address').val(response.address);
+                $('#phoneNumber').val(response.phoneNumber);
+             
+              },
+              error: function(error) {
+                alert("Error calling API:" + error);
+              }
+            });
+    }
+   // 確認登入狀態
+function checkLogin(){
+  let root = location.origin
+  let check = "/elitebaby/member/check"
+    $.ajax({
+    url: root + check,           
+    type: "GET",                              
+    dataType: "json",             
+    success: function(resp){      
+      if(resp.message == "已登入"){
+          console.log(resp.message);
+          var loginButton =  $('#loginButton');
+          loginButton.remove();
+          var registerButton = $('#registerButton');
+          registerButton.remove();
+
+        }else{ 
+          console.log(resp.message);
+          var member = $('.member');
+          member.remove();
+          var logoutButton = $("#logoutButton");
+          logoutButton.remove();
+        }
+    }
+  });  
+  }
+  checkLogin();
+
+
+      $("button.btn-primary.btn_save").on("click", function(){
+        callAPI();
+      })
+      $("button.btn_edit").on("click", function(){
+        getAPI();
+      })
+})
+</script>
+
+
+
+
+</html>
+
+
+

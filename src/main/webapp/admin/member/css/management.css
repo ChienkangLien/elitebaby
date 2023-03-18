@@ -1,0 +1,93 @@
+/* 容器 */
+.container {
+  max-width: 1200px;
+  margin: 30px;
+  padding: 20px;
+}
+
+/* 標題 */
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 表頭 */
+thead {
+  background-color: #f5f5f5;
+}
+
+/* 表頭列 */
+thead th {
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 表身 */
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+/* 表身列 */
+tbody td {
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 16px;
+  color: #666;
+}
+
+/* 鼠標懸停 */
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* 編輯按鈕 */
+.edit {
+  background-color: #008CBA;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 編輯按鈕懸停 */
+.edit:hover {
+  background-color: #006d9e;
+}
+
+
+
+/* 間格色 */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+.btn_back{
+  background-color: #008CBA;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+

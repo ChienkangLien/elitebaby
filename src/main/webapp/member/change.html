@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>會員資料編輯彈跳視窗</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <button
+      type="button"
+      class="btn btn-primary btn_open"
+      data-toggle="modal"
+      data-target="#editModal"
+    >
+      編輯會員資料
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control" id="name" />
+              </div>
+              <div class="form-group">
+                <label for="address">居住地址</label>
+                <input type="text" class="form-control" id="address" />
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">手機</label>
+                <input type="text" class="form-control" id="phoneNumber" />
+              </div>
+              <div class="form-group">
+                <label for="password">密碼</label>
+                <input type="password" class="form-control" id="password" />
+              </div>
+              <div class="form-group">
+                <label for="confirmpassword">確認密碼</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmpassword"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              取消
+            </button>
+            <button type="button" class="btn btn-primary btn_save">儲存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+
+  <script>
+    // 取得表單數據
+    $(function () {
+      function callAPI() {
+        var username = $("#name").val();
+        var address = $("#address").val();
+        var phoneNumber = $("#phoneNumber").val();
+        var password = $("#password").val();
+        var confirmpassword = $("#confirmpassword").val();
+
+        var error = true;
+        if (password != confirmpassword) {
+          alert("密碼與確認密碼不一致，請重新輸入。");
+          error = false;
+        }
+        if (username == null || username == "") {
+          alert("名字不可為空白!");
+          error = false;
+        }
+        if (address == null || address == "") {
+          alert("地址不可為空白!");
+          error = false;
+        }
+        if (phoneNumber == null || phoneNumber == "") {
+          alert("手機不可為空白!");
+          error = false;
+        }
+        if (
+          password == null ||
+          password == "" ||
+          confirmpassword == null ||
+          confirmpassword == ""
+        ) {
+          alert("密碼或確認密碼不得為空!");
+          error = false;
+        }
+
+        // 使用AJAX傳送表單數據
+        if (error) {
+          $.ajax({
+            url: "change",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+              username: username,
+              password: password,
+              address: address,
+              phoneNumber: phoneNumber,
+            }),
+            success: function (response) {
+              alert(response.message);
+              if (response.message == "修改成功") {
+                $(location).attr("href", "homepage.html");
+              }
+            },
+            error: function (error) {
+              alert("Error calling API:" + error);
+            },
+          });
+        }
+        // alert("編輯成功!");
+        // $(location).attr("href", "homepage.html");
+      }
+      // OK?
+      $("button.btn-primary.btn_save").on("click", function () {
+        callAPI();
+      });
+    });
+  </script>
+</html>

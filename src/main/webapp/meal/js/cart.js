@@ -1,9 +1,9 @@
 let meals = [];
-let userId = 1;
+let userId1 = 1;
 let total = null;
 let address = null;
 
-if (userId == null || userId == undefined) {
+if (userId1 == null || userId1 == undefined) {
     alert("尚未登入，將跳轉至登入頁面");
     location.href = "/elitebaby/member/login.html";
 }
@@ -17,7 +17,7 @@ fetch("/elitebaby/Cart?name=getall", {
     },
     body: JSON.stringify(
         {
-            userId: userId,
+            userId: userId1,
         }
     ),
 })
@@ -106,7 +106,7 @@ fetch("/elitebaby/Cart?name=getcart", {
     },
     body: JSON.stringify(
         {
-            userId: userId,
+            userId: userId1,
         }
     ),
 })
@@ -166,7 +166,7 @@ $("button.btn_toupdate").on("click", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                userId: userId1,
                 mealId: mealid,
                 count: mealcount
             }
@@ -219,7 +219,7 @@ $("div#delete").on("click", "button.btn_todelete", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                userId: userId1,
                 mealId: data_id
             }
         ),
@@ -321,7 +321,7 @@ $("div#checkout").on("click", "button#btn_tocheckout", function () {
             },
             body: JSON.stringify(
                 {
-                    userId: userId,
+                    userId: userId1,
                     orderPayment: payment,
                     address: address
                 }
