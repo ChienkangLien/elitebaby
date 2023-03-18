@@ -13,7 +13,6 @@ pageContext.setAttribute("list", list);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
  <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,9 +39,7 @@ pageContext.setAttribute("list", list);
    <span class="fs-5 fw-semibold" style="color:black">菁英產後護理之家</span>
 			 <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 		</a>
-
     <!-- =======按鍵======== -->
-
     <ul class="list-unstyled ps-0">
       <li class="mb-1">
         <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
@@ -106,17 +103,27 @@ pageContext.setAttribute("list", list);
       </li>
       <!-- ================預約參觀============= -->
       <li class="mb-1">
-        <!-- <button
-            class="btn btn-toggle align-items-center rounded collapsed"
+         <button
+            class="btn bkbtn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
-            data-bs-target="#orders-collapse1"
-            aria-expanded="false"
-          >
+ data-bs-target="#orders-collapse111"
+            aria-expanded="false">
             預約參觀
-          </button> -->
-        <!-- 若沒有子元素，單純給一個a標籤即可 -->
-        <a href="#" class="btn bkbtn">預約參觀</a>
-      </li>
+          </button>
+          <div class="collapse" id="orders-collapse111">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="/elitebaby/admin/visit/getall_visit.html" class="link-dark rounded">預約參觀</a>
+              </li>
+              <li>
+                <a href="/elitebaby/admin/visit/getall_visit_history.html" class="link-dark rounded">歷史參訪</a>
+              </li>
+              <li>
+                <a href="/elitebaby/admin/visit/back_visit_callender.html" class="link-dark rounded" >預約參訪月曆表</a>
+              </li>
+            </ul>
+          </div>
+        </li>
       <!-- =============最新消息============ -->
       <li class="mb-1">
         <button class="btn bkbtn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
@@ -152,14 +159,13 @@ pageContext.setAttribute("list", list);
             id="logoutButton"
             class="btn-logout"
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
+            data-bs-target="#staticBackdrop">
             登出
           </button>
         </li>
       </ul>
     </div>
-  <div class="c1" id="header">
+  <div class="c1" id="header" style="z-index: 5"> 
     <p class="t1">後台管理系統</p>
   </div>
   <div id="main_div">
@@ -215,8 +221,5 @@ pageContext.setAttribute("list", list);
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->
-    <script src="<%=request.getContextPath()%>/admin/news/js/front_navbar.js"></script>
-	<script src="<%=request.getContextPath()%>/admin/news/js/background_navbar.js"></script>
-
 </body>
 </html>

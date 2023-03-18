@@ -37,9 +37,9 @@ pageContext.setAttribute("list", list);
 
 <body>
      <div id="nav">
-        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
+        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold ">
             <div class="container-fluid" >
-                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
+                <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -81,57 +81,9 @@ pageContext.setAttribute("list", list);
                             </ul>
                         </li>
                 </div>
-                <div id="login">
-                    <ul class="navbar-nav navbar-right">
-                        <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li>
-                        <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li>
-                    </ul>
-                </div>
-<!-- 會員資料編輯彈跳視窗 -->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="name">姓名</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-            <div class="form-group">
-              <label for="address">居住地址</label>
-              <input type="text" class="form-control" id="address">
-            </div>
-            <div class="form-group">
-              <label for="phoneNumber">手機</label>
-              <input type="text" class="form-control" id="phoneNumber">
-            </div>
-            <div class="form-group">
-              <label for="password">密碼</label>
-              <input type="password" class="form-control" id="password">
-            </div>
-            <div class="form-group">
-              <label for="confirmpassword">確認密碼</label>
-              <input type="password" class="form-control" id="confirmpassword">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_save ">儲存</button>
-        </div>
-      </div>
-    </div>
-  </div>
-                <!-- ==============================================按鈕觸發============================================ -->
                 <!-- ===============================================購物車============================================= -->
                 <div id="logout">
-                    <ul class="navbar-nav navbar-right">
+                    <ul class="navbar-nav navbar-right display-none">
                         <button id="cart_btn"
                             style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -195,13 +147,12 @@ pageContext.setAttribute("list", list);
         <div class="flex_container">
             <div class="flex_items -left">
             <img class="figure-img img-fluid rounded" src="<%=request.getContextPath()%>/LatestNewsServlet?action=get_photo&&newsId=${latestNewsVO.newsId}">
-            </a>
             </div>
             <div class="flex_items -right">
             <a href="/elitebaby/LatestNewsServlet?action=FindBynewsId&&newsId=${latestNewsVO.newsId}">
             <h1 class="title1">${latestNewsVO.postTitle}</h1>
             <p class="para">${latestNewsVO.newsIntro}</p>
-                </a>
+           </a>
             </div>
         </div>
     </section>
@@ -211,9 +162,50 @@ pageContext.setAttribute("list", list);
     <div>
         <p class="text-center">
             10488 台北市中山區南京東路三段219號5樓｜TEL : 02-2712-0589｜FAX :
-            02-2794-0123｜E-mail : service@shinebc.com.tw
+            02-2794-0123
         </p>
     </div>
+   <!-- 會員資料編輯彈跳視窗 -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="address">居住地址</label>
+              <input type="text" class="form-control" id="address">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">手機</label>
+              <input type="text" class="form-control" id="phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="password">密碼</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label for="confirmpassword">確認密碼</label>
+              <input type="password" class="form-control" id="confirmpassword">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary btn_save ">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
  <script src="<%=request.getContextPath()%>/news/vendors/jquery/jquery-3.6.3.min.js"></script>
   <!-- jquery ui連結-->
     <script src="<%=request.getContextPath()%>/news/js/jquery-ui.js"></script>

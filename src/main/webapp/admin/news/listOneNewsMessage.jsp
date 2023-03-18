@@ -242,8 +242,5 @@ NewsMessageService messageSvc = new NewsMessageService();
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->
-    <script src="<%=request.getContextPath()%>/admin/news/js/front_navbar.js"></script>
-	<script src="<%=request.getContextPath()%>/admin/news/js/background_navbar.js"></script>
-
 </body>
 </html>

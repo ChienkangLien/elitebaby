@@ -37,7 +37,7 @@ pageContext.setAttribute("list", list);
 
 <body>
      <div id="nav">
-        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
+        <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold ">
             <div class="container-fluid" >
                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
                 <a class="navbar-brand" href="/elitebaby/member/homepage.html" id="home">菁英產後護理之家</a>
@@ -63,8 +63,8 @@ pageContext.setAttribute("list", list);
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown member display-none">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button"
+                        <li class="nav-item dropdown member">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
                             </a>
@@ -81,57 +81,9 @@ pageContext.setAttribute("list", list);
                             </ul>
                         </li>
                 </div>
-<!--                 <div id="login"> -->
-<!--                     <ul class="navbar-nav navbar-right display-none"> -->
-<!--                         <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li> -->
-<!--                         <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li> -->
-<!--                     </ul> -->
-<!--                 </div> -->
-<!-- 會員資料編輯彈跳視窗 -->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="name">姓名</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-            <div class="form-group">
-              <label for="address">居住地址</label>
-              <input type="text" class="form-control" id="address">
-            </div>
-            <div class="form-group">
-              <label for="phoneNumber">手機</label>
-              <input type="text" class="form-control" id="phoneNumber">
-            </div>
-            <div class="form-group">
-              <label for="password">密碼</label>
-              <input type="password" class="form-control" id="password">
-            </div>
-            <div class="form-group">
-              <label for="confirmpassword">確認密碼</label>
-              <input type="password" class="form-control" id="confirmpassword">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_save ">儲存</button>
-        </div>
-      </div>
-    </div>
-  </div>
-          <!-- ==============================================按鈕觸發============================================ -->
                 <!-- ===============================================購物車============================================= -->
                 <div id="logout">
-                    <ul class="navbar-nav navbar-right">
+                    <ul class="navbar-nav navbar-right display-none">
                         <button id="cart_btn"
                             style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -213,10 +165,47 @@ pageContext.setAttribute("list", list);
             02-2794-0123
         </p>
     </div>
-   
-
-
-	
+   <!-- 會員資料編輯彈跳視窗 -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">編輯會員資料</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="address">居住地址</label>
+              <input type="text" class="form-control" id="address">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">手機</label>
+              <input type="text" class="form-control" id="phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="password">密碼</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label for="confirmpassword">確認密碼</label>
+              <input type="password" class="form-control" id="confirmpassword">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary btn_save ">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
  <script src="<%=request.getContextPath()%>/news/vendors/jquery/jquery-3.6.3.min.js"></script>
   <!-- jquery ui連結-->
     <script src="<%=request.getContextPath()%>/news/js/jquery-ui.js"></script>
