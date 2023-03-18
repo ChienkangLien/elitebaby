@@ -314,21 +314,22 @@ checkLogin();
 
 //   彈跳視窗 會員資料編輯
 function getAPI() {
-    $.ajax({
-        url: "Find",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json",
-
-        success: function (response) {
-            $("#name").val(response.username);
-            $("#address").val(response.address);
-            $("#phoneNumber").val(response.phoneNumber);
-        },
-        error: function (error) {
-            alert("Error calling API:" + error);
-        },
-    });
+  $.ajax({
+    url:"/elitebaby/member/Find",
+    method: "GET",
+    dataType: 'json',
+    contentType:"application/json",
+    
+  success: function(response) {
+    $('#name').val(response.username);
+    $('#address').val(response.address);
+    $('#phoneNumber').val(response.phoneNumber);
+ 
+  },
+  error: function(error) {
+    alert("Error calling API:" + error);
+  }
+});
 }
 
 // --------- 會員首頁js --------------
