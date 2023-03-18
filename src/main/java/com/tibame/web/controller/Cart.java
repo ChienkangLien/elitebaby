@@ -22,6 +22,7 @@ import com.tibame.web.vo.CartVO;
 import com.tibame.web.vo.MealOrderDetailVO;
 import com.tibame.web.vo.MealOrderVO;
 import com.tibame.web.vo.MealVO;
+import com.tibame.web.vo.MemberVO;
 
 import redis.clients.jedis.Jedis;
 
@@ -46,6 +47,8 @@ public class Cart extends HttpServlet {
 			response.setContentType("application/json");
 			Jedis jedis = new Jedis("localhost", 6379);
 			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			cartObject.setUserId(userId);
 			CartService carts = new CartServiceImpl();
 			int udm = carts.insertMeal(cartObject);
 			JsonObject respbody = new JsonObject();
@@ -65,8 +68,9 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			JsonObject respbody = new JsonObject();
-			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = cartObject.getUserId();
+//			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+//			Integer userId = cartObject.getUserId();
 //			System.out.println(userId);
 			CartService carts = new CartServiceImpl();
 			Set<String> set = carts.findByPrimaryKey(userId);
@@ -88,8 +92,10 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderDetailVO meal = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
-			Integer userId = meal.getUserId();
-			session.setAttribute("userId", userId);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+//			Integer userId = meal.getUserId();
+//			session.setAttribute("userId", userId);
+			meal.setUserId(userId);
 //			System.out.println(session.getAttribute("userId"));
 			JsonObject respbody = new JsonObject();
 			if (session.getAttribute("userId") != null) {
@@ -104,8 +110,9 @@ public class Cart extends HttpServlet {
 		if (str.equals("getall")) {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
-			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
-			Integer userId = cartObject.getUserId();
+//			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+//			Integer userId = cartObject.getUserId();
 			CartService carts = new CartServiceImpl();
 			List<MealVO> mealList = carts.getAllMeal(userId);
 			if (mealList != null) {
@@ -117,6 +124,8 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			cartObject.setUserId(userId);
 			CartService carts = new CartServiceImpl();
 			int udm = carts.updateMeal(cartObject);
 			JsonObject respbody = new JsonObject();
@@ -133,6 +142,8 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			CartVO cartObject = gson.fromJson(request.getReader(), CartVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			cartObject.setUserId(userId);
 			CartService carts = new CartServiceImpl();
 			int udm = carts.deleteMeal(cartObject);
 			JsonObject respbody = new JsonObject();
@@ -149,9 +160,11 @@ public class Cart extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderVO cartObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			cartObject.setUserId(userId);
 //			System.out.println(cartObject);
 			Integer payment = cartObject.getOrderPayment();
-			Integer userId = cartObject.getUserId();
+//			Integer userId = cartObject.getUserId();
 			if (payment > 0 && userId > 0 && payment != null && userId != null) {
 				MealOrderService mealorder = new MealOrderServiceImpl();
 				cartObject.setAuthCode(GetAuthCode.genAuthCode());

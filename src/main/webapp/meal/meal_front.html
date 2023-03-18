@@ -10,7 +10,7 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
     <!-- 下載bootstrap引用 -->
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="./css/front_navbar.css">
+    <link rel="stylesheet" href="../css/front_navbar.css">
     <link rel="stylesheet" href="./css/meal.css">
     <link rel="stylesheet" href="./css/official.css">
 
@@ -46,7 +46,7 @@
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
 
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown member">
+                        <li class="nav-item dropdown member checkIfIn">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
@@ -70,27 +70,21 @@
                             </ul>
                         </li>
                 </div>
-                <div id="login">
-                    <ul class="navbar-nav navbar-right">
-                        <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li>
-                        <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li>
-                    </ul>
-                </div>
                 <!-- ==============================================按鈕觸發============================================ -->
                 <!-- ===============================================購物車============================================= -->
                 <div id="logout">
                     <ul class="navbar-nav navbar-right">
-                        <button id="cart_btn" style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                class="bi bi-cart2" viewBox="0 0 16 16">
+                        <button id="cart_btn" style="border: 0px; margin-right: 10px;margin-top: 5px; "
+                            class="c1 checkIfIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                                 <path
                                     d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;" id="cartCount"></span>
+                            <span class="badge badge-danger navbar-badge;" id="cartCount"></span>
                         </button>
 
                         <!-- ===================================鈴鐺==================================== -->
-                        <button style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1"><svg
+                        <button style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-bell" viewBox="0 0 16 16">
                                 <path
@@ -100,13 +94,13 @@
                         </button>
 
                         <!-- Button trigger modal -->
-                        <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" id="logoutButton" class="btn btn-primary checkIfIn" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             登出
                         </button>
-                        <button id="registerButton" class="register_btn">註冊</button>
+                        <button id="registerButton" class="register_btn checkIfOut">註冊</button>
                         <!-- 登入按鈕 -->
-                        <button id="loginButton" class="login_btn">登入</button>
+                        <button id="loginButton" class="login_btn checkIfOut">登入</button>
                     </ul>
                 </div>
             </div>
@@ -171,7 +165,7 @@
         <div id="popupContent" style="align-items: center;">
         </div>
     </div>
-    <div class="footer">
+    <div>
         <p class="text-center">
             10488 台北市中山區南京東路三段219號5樓｜TEL : 02-2712-0589｜FAX :
             02-2794-0123
@@ -183,12 +177,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>
-    <script src="./js/meal_front.js"></script>
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
-    ></script> -->
+        ></script> -->
     <script src="../js/front_navbar.js"></script>
-
+    <script src="./js/meal_front.js"></script>
+    <!-- 引入編輯會員資料用的bootstrap資源 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 

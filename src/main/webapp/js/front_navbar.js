@@ -396,36 +396,39 @@ $("button#logoutButton").on("click", function () {
 });
 // ======================購物車按鈕觸發===========================
 $("button#cart_btn:first").on("click", function () {
-    fetch("/elitebaby/Cart?name=tocart", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-            userId: userId,
-        }),
-    })
-        .then((resp) => {
-            if (resp.status === 204) {
-                console.log("resp.status===" + resp.status);
-            } else {
-                return resp.json();
-            }
-        })
-        .then((body) => {
-            try {
-                if (body.msg == "為已登入狀態") {
-                    location.href = "/elitebaby/meal/cart.html";
-                } else {
-                    alert("跳轉到登入頁面(未引入)");
-                    // console.log("新增失敗");
-                    location.href = "/elitebaby/member/login.html";
-                }
-            } catch (error) {
-                alert("出現錯誤!!!!");
-                // location.reload();
-                console.log(error + "，跳轉購物車頁面失敗");
-            }
-        });
+
+    location.href = "/elitebaby/meal/cart.html";
+
+    // fetch("/elitebaby/Cart?name=tocart", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    //     body: JSON.stringify({
+    //         userId: userId,
+    //     }),
+    // })
+    //     .then((resp) => {
+    //         if (resp.status === 204) {
+    //             console.log("resp.status===" + resp.status);
+    //         } else {
+    //             return resp.json();
+    //         }
+    //     })
+    //     .then((body) => {
+    //         try {
+    //             if (body.msg == "為已登入狀態") {
+    //                 location.href = "/elitebaby/meal/cart.html";
+    //             } else {
+    //                 alert("跳轉到登入頁面(未引入)");
+    //                 // console.log("新增失敗");
+    //                 location.href = "/elitebaby/member/login.html";
+    //             }
+    //         } catch (error) {
+    //             alert("出現錯誤!!!!");
+    //             // location.reload();
+    //             console.log(error + "，跳轉購物車頁面失敗");
+    //         }
+    //     });
 });

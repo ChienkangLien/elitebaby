@@ -17,6 +17,7 @@ import com.tibame.web.service.impl.MealOrderDetailServiceImpl;
 import com.tibame.web.service.impl.MealOrderServiceImpl;
 import com.tibame.web.vo.MealOrderDetailVO;
 import com.tibame.web.vo.MealOrderVO;
+import com.tibame.web.vo.MemberVO;
 
 /**
  * Servlet implementation class MealOrder
@@ -40,6 +41,8 @@ public class MealOrder extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderVO mealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			mealOrderObject.setUserId(userId);
 			MealOrderService mealOrderService = new MealOrderServiceImpl();
 			List<MealOrderVO> list = mealOrderService.findByPrimaryKey(mealOrderObject.getUserId());
 //			int cartCount = carts.findByPrimaryKey(cartObject.getUserId()).size();
@@ -100,6 +103,8 @@ public class MealOrder extends HttpServlet {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 			MealOrderDetailVO MealOrderDetailObject = gson.fromJson(request.getReader(), MealOrderDetailVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			MealOrderDetailObject.setUserId(userId);
 			MealOrderService moService = new MealOrderServiceImpl();
 			MealOrderDetailService modsService = new MealOrderDetailServiceImpl();
 			List<MealOrderVO> list1 = moService.findByMealOrder(MealOrderDetailObject.getMealOrderId());
@@ -121,9 +126,11 @@ public class MealOrder extends HttpServlet {
 		if(str.equals("getuserorderbyorderid")) {
 			Gson gson = new Gson();
 			response.setContentType("application/json");
-			MealOrderVO MealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+			MealOrderVO mealOrderObject = gson.fromJson(request.getReader(), MealOrderVO.class);
+			Integer userId = ((MemberVO)request.getSession().getAttribute("memberVO")).getId();
+			mealOrderObject.setUserId(userId);
 			MealOrderService moService = new MealOrderServiceImpl();
-			List<MealOrderVO> list = moService.findByMealOrderwithuser(MealOrderObject.getUserId(), MealOrderObject.getMealOrderId());
+			List<MealOrderVO> list = moService.findByMealOrderwithuser(mealOrderObject.getUserId(), mealOrderObject.getMealOrderId());
 			response.getWriter().write(gson.toJson(list));
 		}
 	}

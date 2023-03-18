@@ -1,7 +1,6 @@
 // 一進到商品管理頁面自動傳送GET請求取得所有商品並show在頁面上
 
 let meals = [];
-// let select = null;
 let status = "";
 let select_id = null;
 
@@ -278,13 +277,13 @@ $("input.meal_pic").on("change", function (e) {
 $("button.btn_insert").on("click", function () {
     console.log("按了確定新增");
     let mealname = $("input.meal_name").val();
-    console.log(mealname);
+    // console.log(mealname);
     let mealprice = $("input.meal_price").val();
-    console.log(mealprice);
+    // console.log(mealprice);
     let mealinfo = $("input.meal_info").val();
-    console.log(mealinfo);
+    // console.log(mealinfo);
     let mealstatus = $("select.mealstatus").val();
-    console.log(mealstatus);
+    // console.log(mealstatus);
     fetch("/elitebaby/Meal?name=insert", {
         method: "POST",
         headers: {
@@ -330,7 +329,7 @@ $("button.btn_insert").on("click", function () {
 $("div.btn_create").on("click", "button.mealselect", function () {
     // console.log("qqqqq");
     select_id = $("input.mealselect").val();
-    console.log(select_id);
+    // console.log(select_id);
     fetch("/elitebaby/Meal?name=getonemeal", {
         method: "POST",
         headers: {

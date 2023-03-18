@@ -1,26 +1,28 @@
 let meals = [];
-let userId1 = 1;
+// let userId1 = 1;
 let total = null;
 let address = null;
 
-if (userId1 == null || userId1 == undefined) {
-    alert("尚未登入，將跳轉至登入頁面");
-    location.href = "/elitebaby/member/login.html";
-}
+// if (userId1 == null || userId1 == undefined) {
+//     alert("尚未登入，將跳轉至登入頁面");
+//     location.href = "/elitebaby/member/login.html";
+// }
 
 //依使用者會員編號取得購物車內商品詳細資料
-fetch("/elitebaby/Cart?name=getall", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(
-        {
-            userId: userId1,
-        }
-    ),
-})
+fetch("/elitebaby/Cart?name=getall"
+    // , {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    //     body: JSON.stringify(
+    //         {
+    //             userId: userId1,
+    //         }
+    //     ),
+    // }
+)
     .then((resp) => {
         if (resp.status === 204) {
             console.log("resp.status===" + resp.status);
@@ -98,18 +100,20 @@ fetch("/elitebaby/Cart?name=getall", {
     });
 
 // 取得購物車資料筆數
-fetch("/elitebaby/Cart?name=getcart", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(
-        {
-            userId: userId1,
-        }
-    ),
-})
+fetch("/elitebaby/Cart?name=getcart"
+    // , {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    //     body: JSON.stringify(
+    //         {
+    //             userId: userId1,
+    //         }
+    //     ),
+    // }
+)
     .then(resp => {
         if (resp.status === 204) {
             console.log("resp.status===" + resp.status);
@@ -166,7 +170,7 @@ $("button.btn_toupdate").on("click", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId1,
+                // userId: userId1,
                 mealId: mealid,
                 count: mealcount
             }
@@ -219,7 +223,7 @@ $("div#delete").on("click", "button.btn_todelete", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId1,
+                // userId: userId1,
                 mealId: data_id
             }
         ),
@@ -321,7 +325,7 @@ $("div#checkout").on("click", "button#btn_tocheckout", function () {
             },
             body: JSON.stringify(
                 {
-                    userId: userId1,
+                    // userId: userId1,
                     orderPayment: payment,
                     address: address
                 }

@@ -1,5 +1,4 @@
 let meals = [];
-let userId = null;
 let total2 = null;
 let select_id = null
 
@@ -63,7 +62,7 @@ $("tbody.getall_tb").on("click", "button.btn_detail", function () {
     // console.log("rtyrty");
     data_id = Number($(this).closest("tr").attr("data-id"));
     console.log(data_id);
-    userId = Number($(this).closest("tr").attr("user-id"));
+    // userId = Number($(this).closest("tr").attr("user-id"));
     fetch("/elitebaby/MealOrder?name=getorderdetail", {
         method: "POST",
         headers: {
@@ -72,7 +71,7 @@ $("tbody.getall_tb").on("click", "button.btn_detail", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                // userId: userId,
                 mealOrderId: data_id
             }
         ),
