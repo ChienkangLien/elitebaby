@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SecretPassword {
 	
-	private String encryptPassword(String password) {
+	public static String encryptPassword(String password) {
         String encryptedPassword = null;
         try {
             // 使用SHA-256算法做加密

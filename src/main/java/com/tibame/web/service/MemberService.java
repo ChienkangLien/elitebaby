@@ -12,6 +12,7 @@ public interface MemberService {
 	MemberVO update(MemberVO member);
 	MemberVO findById(Integer id);
 	public List<MemberVO> findAll();
+	MemberVO findByEmail(MemberVO member);
 
 }
 	

@@ -135,4 +135,30 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return null;
 	}
+
+
+	@Override
+	public MemberVO selectByEmail(String email) {
+		String sql = "SELECT * FROM MEMBER WHERE USER_EMAIL=?";
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, email);
+			try (ResultSet resultSet = pstmt.executeQuery()) {
+				if (resultSet.next()) {
+					MemberVO member = new MemberVO();
+					member.setId(resultSet.getInt("USER_ID"));
+					member.setEmail(resultSet.getString("USER_EMAIL"));
+					member.setUserName(resultSet.getString("USER_NAME"));
+					member.setPassword(resultSet.getString("USER_PASSWORD"));
+					member.setAddress(resultSet.getString("ADDRESS"));
+					member.setPhoneNumber(resultSet.getString("PHONE_NUMBER"));
+					return member;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 }
