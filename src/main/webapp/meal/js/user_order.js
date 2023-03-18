@@ -1,5 +1,5 @@
 let meals = [];
-let userId = 1;
+let userId1 = 1;
 let total1 = null;
 let total2 = null;
 let select_id = null;
@@ -13,7 +13,7 @@ fetch("/elitebaby/MealOrder?name=getorder", {
     },
     body: JSON.stringify(
         {
-            userId: userId,
+            userId: userId1,
         }
     ),
 })
@@ -151,7 +151,7 @@ $("tbody.getuserorder_tb").on("click", "button.btn_detail", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                userId: userId1,
                 mealOrderId: data_id
             }
         ),
@@ -219,7 +219,7 @@ $("button.btn_select").on("click", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId,
+                userId: userId1,
                 mealOrderId: select_id
             }
         ),
