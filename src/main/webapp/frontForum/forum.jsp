@@ -124,7 +124,6 @@
     <link type="text/css" rel="stylesheet" href="../frontForum/css/forum.css"/>
 </head>
 <body>
-<%--團隊引入開始--%>
 <div id="nav">
     <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
         <div class="container-fluid" >
@@ -141,7 +140,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">最新消息 </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/elitebabynews/front_allnews.jsp">綜合</a></li>
+                            <li><a class="dropdown-item" href="/elitebaby/news/front_allnews.jsp">綜合</a></li>
                             <li><a class="dropdown-item" href="/elitebaby/news/front_alldiscount.jsp">優惠</a></li>
                             <li><a class="dropdown-item" href="/elitebaby/news/front_allnormal.jsp">一般</a></li>
 
@@ -153,13 +152,13 @@
                     <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
 
                     <!-- ====================================會員中心================================================= -->
-                    <li class="nav-item dropdown member">
+                    <li class="nav-item dropdown member checkIfIn">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             會員中心
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#editModal">
+                            <button type="button" class=" dropdown-item btn_edit" data-toggle="modal" data-target="#editModal">
                                 編輯會員資料
                             </button>
 
@@ -171,44 +170,41 @@
                             <li> <a class="dropdown-item" href="/elitebaby/visit/ReportEmailFrontInsert.html">問題回報</a> </li>
                         </ul>
                     </li>
-            </div>
-            <div id="login">
-                <ul class="navbar-nav navbar-right">
-                    <li class="nav-item"><a class="nav-link " id="login_btn">登入</a></li>
-                    <li class="nav-item"><a class="nav-link " href="/elitebaby/member/register.html">註冊</a></li>
-                </ul>
+
             </div>
             <!-- ==============================================按鈕觸發============================================ -->
             <!-- ===============================================購物車============================================= -->
             <div id="logout">
                 <ul class="navbar-nav navbar-right">
                     <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
+                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1 checkIfIn"><svg
                             xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-cart2" viewBox="0 0 16 16">
                         <path
                                 d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                     </svg>
-                        <span class="badge badge-danger navbar-badge ;"></span>
+                        <span class="badge badge-danger navbar-badge ;" id="cartCount"></span>
                     </button>
 
                     <!-- ===================================鈴鐺==================================== -->
                     <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1"><svg
+                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1 checkIfIn"><svg
                             xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-bell" viewBox="0 0 16 16">
                         <path
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                     </svg>
-                        <span class="badge badge-danger navbar-badge emailBill;"></span>
+                        <span class="badge badge-danger navbar-badge emailBill"></span>
                     </button>
+
+
                     <!-- Button trigger modal -->
-                    <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" id="logoutButton" class="btn btn-primary checkIfIn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         登出
                     </button>
-                    <button id="registerButton" class="register_btn">註冊</button>
+                    <button id="registerButton" class="register_btn checkIfOut">註冊</button>
                     <!-- 登入按鈕 -->
-                    <button id="loginButton" class="login_btn">登入</button>
+                    <button id="loginButton" class="login_btn checkIfOut">登入</button>
                 </ul>
             </div>
         </div>
@@ -217,7 +213,7 @@
 <div id="book_visit">
     <a href="/elitebaby/visit/VisitRoomFrontInsert.html">
         <img class="img-responsive"
-             src="./images/book_visit.png"
+             src="../images/book_visit.png"
         />
     </a>
 </div>

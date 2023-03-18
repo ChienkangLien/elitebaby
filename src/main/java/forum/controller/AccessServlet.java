@@ -18,7 +18,6 @@ public class AccessServlet extends BaseServlet {
 
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        System.out.println("AccessServlet: "+userName + "," + password);
         Access access = accessService.login(userName, password);
         if (access != null) {
             HttpSession session = request.getSession();

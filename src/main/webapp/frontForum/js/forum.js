@@ -9,7 +9,7 @@ function likeListener() {
                 .then(text => JSON.parse(text))
                 .then(data => {
                     if (data === "login") {
-                        window.location.href = "../frontForum/login.html";
+                        window.location.href = "../member/login.html";
                     }
                     if (typeof data === "number") {
                         showLike.innerText = data;
@@ -32,7 +32,7 @@ function likeMsgListener() {
                 .then(text => JSON.parse(text))
                 .then(data => {
                     if (data === "login") {
-                        window.location.href = "../frontForum/login.html";
+                        window.location.href = "../member/login.html";
                     }
                     if (typeof data === "number") {
                         showLike.innerText = data;
@@ -54,7 +54,7 @@ function categoryCollectedListener() {
                 .then(data => {
                     // console.log(data);
                     if (data === "login") {
-                        window.location.href = "../frontForum/login.html";
+                        window.location.href = "../member/login.html";
                     }
                     if (data === true) {
                         //產生收藏文章 clone
@@ -231,7 +231,7 @@ function getPublishForm() {
         .then((text) => JSON.parse(text))
         .then((data) => {
             if (data === "login") {
-                window.location.href = "../frontForum/login.html";
+                window.location.href = "../member/login.html";
             }
             panel.innerText = '';
             const postForm = fillPostFormTemplate(data, postFormTemplate);
@@ -250,7 +250,7 @@ function editListener(post) {
             .then((text) => JSON.parse(text))
             .then((data) => {
                 if (data === "login") {
-                    window.location.href = "../frontForum/login.html";
+                    window.location.href = "../member/login.html";
                 }
                 panel.innerText = '';
                 const postForm = fillPostFormTemplate(data, postFormTemplate);//填入部分資料
@@ -281,7 +281,7 @@ function deleteListener(post) {
 const login = document.querySelector(".loginforum");
 console.log(login)
 login.addEventListener("click", () => {
-    window.location.href = "../frontForum/login.html";
+    window.location.href = "../member/login.html";
 });
 
 //登出

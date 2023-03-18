@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.tibame.web.service.MemberService;
 import com.tibame.web.service.impl.MemberServiceImpl;
 import com.tibame.web.vo.MemberVO;
+import forum.pojo.Access;
 
 
 @WebServlet("/member/login")
@@ -42,6 +43,12 @@ public class MemberLoginServlet extends HttpServlet {
 			} // ←產生新的Session ID}
 			jsonObj.addProperty("message", "登入成功");
 			req.getSession().setAttribute("memberVO", member);
+			//昱安
+			Access access = new Access();
+			access.setUserId(member.getId());
+			access.setUserName(member.getUserName());
+			req.getSession().setAttribute("access", access);
+			//昱安結束
 			System.out.println(req.getSession().getAttribute("memberVO"));
 		}
 		resp.getWriter().write(jsonObj.toString());

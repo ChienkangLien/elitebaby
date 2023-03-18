@@ -27,7 +27,7 @@ public class PostDao extends DaoId {
         String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join access ac on ac.user_id = p.user_id\n" +
+                "         join member ac on ac.user_id = p.user_id\n" +
                 "group by p.post_id\n" +
                 "order by p.post_id desc";
         ArrayList<Post> posts = new ArrayList<>();
@@ -58,7 +58,7 @@ public class PostDao extends DaoId {
         String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join access ac on ac.user_id = p.user_id\n" +
+                "         join member ac on ac.user_id = p.user_id\n" +
                 "group by p.post_id\n" +
                 "order by plike desc;";
         ArrayList<Post> posts = new ArrayList<>();
@@ -89,7 +89,7 @@ public class PostDao extends DaoId {
         String sql = "select p.*, ac.user_name, count(l.like_id) as plike\n" +
                 "from post p\n" +
                 "         left join post_like l on p.post_id = l.post_id\n" +
-                "         join access ac on ac.user_id = p.user_id\n" +
+                "         join member ac on ac.user_id = p.user_id\n" +
                 "where p.post_id = ?\n" +
                 "group by l.post_id;";
         Post post = null;

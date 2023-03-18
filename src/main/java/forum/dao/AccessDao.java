@@ -5,9 +5,9 @@ import forum.pojo.Access;
 import java.sql.*;
 
 public class AccessDao extends DaoId {
-    
+
     public Access login(String userName, String password) {
-        String sql = "select * from access where user_name = ? and password = ?;";
+        String sql = "select * from member where user_name = ? and user_password = ?;";
         Access access = null;
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -28,7 +28,7 @@ public class AccessDao extends DaoId {
 
     public String userNameById(int userId) {
         String userName = null;
-        String sql = "select user_name from access where user_id = ?;";
+        String sql = "select user_name from member where user_id = ?;";
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
