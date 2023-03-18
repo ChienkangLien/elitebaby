@@ -45,7 +45,7 @@ public class ForgetPS extends HttpServlet{
 			
 			req.getSession().setAttribute("forgetMemId", membervo.getId());
 
-			String toEmail = "kevin543029@gmail.com";
+			String toEmail = membervo.getEmail();
 			String subject = "寄送驗證碼";
 			String text = "您想要修改密碼，請輸入以下的驗證碼來修改您的密碼 ，" + "驗證碼: " + code;
 			
