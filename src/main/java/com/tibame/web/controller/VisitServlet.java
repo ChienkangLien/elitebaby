@@ -150,12 +150,16 @@ public class VisitServlet extends HttpServlet {
 			Gson gson = new Gson();
 			HttpSession session = request.getSession();
 			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-			Integer userId = memberVO.getId();
-			if (userId > 0 && userId != null) {
-				VisitRoomService service = new VisitRoomServiceImpl();
-				memberVO = service.getOneMemberInfo(userId);
-				Writer writer = response.getWriter();
-				writer.write(gson.toJson(memberVO));
+			if (memberVO != null) {
+				Integer userId = memberVO.getId();
+				if (userId > 0 && userId != null) {
+					VisitRoomService service = new VisitRoomServiceImpl();
+					memberVO = service.getOneMemberInfo(userId);
+					Writer writer = response.getWriter();
+					writer.write(gson.toJson(memberVO));
+				}
+			} else {
+				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 			}
 
 		}
@@ -208,17 +212,25 @@ public class VisitServlet extends HttpServlet {
 			Gson gson = new Gson();
 			HttpSession session = request.getSession();
 			MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-			Integer userId = memberVO.getId();
-			if (userId > 0 && userId != null) {
-				VisitRoomService service = new VisitRoomServiceImpl();
-				List<VisitVO> list = service.getOneAll(userId);
-				Writer writer = response.getWriter();
-				writer.write(gson.toJson(list));
+			if (memberVO != null) {
+				Integer userId = memberVO.getId();
+
+				if (userId > 0 && userId != null) {
+					VisitRoomService service = new VisitRoomServiceImpl();
+					List<VisitVO> list = service.getOneAll(userId);
+					Writer writer = response.getWriter();
+					writer.write(gson.toJson(list));
+				}
+
+			} else {
+				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 			}
 
 		}
 
-		if ("DELETE_ONE_VISIT".equals(action)) {
+		if ("DELETE_ONE_VISIT".equals(action))
+
+		{
 
 			Gson gson = new Gson();
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
@@ -266,19 +278,16 @@ public class VisitServlet extends HttpServlet {
 
 			}
 		}
-		
-		
-		
+
 		if ("SERCH_ONE_MEMBER_VISIT".equals(action)) {
-			
+
 			Gson gson = new Gson();
 			VisitVO visitVO = gson.fromJson(request.getReader(), VisitVO.class);
 			VisitRoomService service = new VisitRoomServiceImpl();
 			List<VisitVO> list = service.getOneAll(visitVO.getUserId());
 			Writer writer = response.getWriter();
 			writer.write(gson.toJson(list));
-			
-			
+
 		}
 
 	}

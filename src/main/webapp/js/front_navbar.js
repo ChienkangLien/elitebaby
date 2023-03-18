@@ -59,8 +59,25 @@ fetch("/elitebaby/visit/servlet?action=GET_MEMBER_INFO", {
         "Content-Type": "application/json",
     },
 })
-    .then((resp) => resp.json())
+    .then((resp) => {
+		
+		if(resp.status === 204){
+
+		   console.log("未登入")
+		   		   
+		}
+		
+		if(resp.status === 200){
+			
+			return resp.json();
+			
+		}
+			
+	
+	})
     .then((data) => {
+
+      try{
         var userId = data.id;
 
         console.log(userId);
@@ -250,6 +267,11 @@ fetch("/elitebaby/visit/servlet?action=GET_MEMBER_INFO", {
                 popupWrapper.style.display = "none";
             }
         });
+
+
+    }catch{
+        
+    }
     });
 // ================================================================================================
 
