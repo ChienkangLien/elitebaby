@@ -72,11 +72,11 @@
  }
 
  section.sec1.-type1 {
-     background: linear-gradient(white, #ff8188);
+     background: linear-gradient( white,#ebebe8);
  }
 
  section.sec1.-type2 {
-     background: linear-gradient(#ff8188, white);
+     background: linear-gradient(#ebebe8, white);
  }
 
  section.sec1 div.flex_container {
@@ -102,7 +102,7 @@
 
   a.title {
      margin: 0;
-     font-size: 4rem;
+     font-size: 44px;
      margin-bottom:20px;
  }
 
@@ -111,7 +111,7 @@
  }
 
   a.intro {
-     font-size: 1.8rem;
+     font-size: 22px;
      line-height: 4rem;
  }
 

@@ -30,7 +30,14 @@ a {
   z-index: -1;
   margin-top: 50px;
 }
+.display-none {
+  display: none;
+        }
 
+.display-block {
+  display: block;
+        }
+        
 ul.list {
   list-style: none;
   display: inline-block;
