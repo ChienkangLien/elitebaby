@@ -1,22 +1,24 @@
 let meals = [];
-let userId1 = 1;
+// let userId1 = 1;
 let total1 = null;
 let total2 = null;
 let select_id = null;
 
 //依使用者會員編號取得訂單詳細資料
-fetch("/elitebaby/MealOrder?name=getorder", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(
-        {
-            userId: userId1,
-        }
-    ),
-})
+fetch("/elitebaby/MealOrder?name=getorder"
+    // , {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    //     body: JSON.stringify(
+    //         {
+    //             userId: userId1,
+    //         }
+    //     ),
+    // }
+)
     .then((resp) => {
         if (resp.status === 204) {
             console.log("resp.status===" + resp.status);
@@ -151,7 +153,7 @@ $("tbody.getuserorder_tb").on("click", "button.btn_detail", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId1,
+                // userId: userId1,
                 mealOrderId: data_id
             }
         ),
@@ -219,7 +221,7 @@ $("button.btn_select").on("click", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId1,
+                // userId: userId1,
                 mealOrderId: select_id
             }
         ),

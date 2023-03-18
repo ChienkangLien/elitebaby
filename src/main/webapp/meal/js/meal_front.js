@@ -1,5 +1,5 @@
 let meal = [];
-let userId1 = 1;
+// let userId1 = 1;
 
 fetch(`/elitebaby/Meal?name=getall`)
     .then((resp) => {
@@ -44,18 +44,20 @@ fetch(`/elitebaby/Meal?name=getall`)
         }
     });
 
-fetch("/elitebaby/Cart?name=getcart", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(
-        {
-            userId: userId1,
-        }
-    ),
-})
+fetch("/elitebaby/Cart?name=getcart"
+    // , {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    //     body: JSON.stringify(
+    //         {
+    //             userId: userId1,
+    //         }
+    //     ),
+    // }
+)
     .then(resp => {
         if (resp.status === 204) {
             console.log("resp.status===" + resp.status);
@@ -98,7 +100,7 @@ $("ul.meal_block").on("click", "button.add_cart", function () {
         },
         body: JSON.stringify(
             {
-                userId: userId1,
+                // userId: userId1,
                 mealId: data_id,
                 count: 1
             }
