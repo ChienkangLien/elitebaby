@@ -19,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String register(EmployeeVO employee) {
 		final String empname = employee.getEmpname();
 		if (empname == null || empname.length() < 1 || empname.length() > 4) {
-			return "使用者名稱不符合規則";
+			return "使用者名稱不合規則";
 		}
 		
 		final String empaccount = employee.getEmpaccount();
