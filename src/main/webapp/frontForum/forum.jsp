@@ -124,6 +124,13 @@
     <link type="text/css" rel="stylesheet" href="../frontForum/css/forum.css"/>
 </head>
 <body>
+    <div id="popupWrapper">
+        <p>信件通知</p>
+      <hr style="margin-top: 5px;">
+     <div id="popupContent" style="align-items: center;">
+       
+     </div>
+    </div>
 <div id="nav">
     <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
         <div class="container-fluid" >
