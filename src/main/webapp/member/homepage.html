@@ -48,7 +48,7 @@
                         
 
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown member">
+                        <li class="nav-item dropdown member checkIfIn">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
@@ -74,7 +74,7 @@
                 <div id="logout">
                     <ul class="navbar-nav navbar-right">
                         <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
+                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-cart2" viewBox="0 0 16 16">
                                 <path
@@ -85,7 +85,7 @@
 
                         <!-- ===================================鈴鐺==================================== -->
                         <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1"><svg
+                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-bell" viewBox="0 0 16 16">
                                 <path
@@ -98,12 +98,12 @@
 
 
                         <!-- Button trigger modal -->
-                        <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" id="logoutButton" class="btn btn-primary checkIfIn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             登出
                         </button>
-                        <button id="registerButton" class="register_btn">註冊</button>
+                        <button id="registerButton" class="register_btn checkIfOut">註冊</button>
                         <!-- 登入按鈕 -->
-                        <button id="loginButton" class="login_btn">登入</button>
+                        <button id="loginButton" class="login_btn checkIfOut">登入</button>
                     </ul>
                 </div>
             </div>
@@ -281,7 +281,6 @@
      <br><br><br><br><br><br>
      <br>TEL : 02-2712-0589
      <br>FAX :02-2794-0123
-     <br>E-mail : service@shinebc.com.tw
      <br>服務時間：週一 - 週日: 0:00 - 24:00
      <br>10488 台北市中山區南京東路三段219號5樓
       </div></div> 
@@ -458,8 +457,10 @@
       
     }  
     function getAPI(){
+      let root = location.origin
+  let check = "/elitebaby/member/Find"
       $.ajax({
-                url: "Find",
+                url: root + Find,
                 method: "GET",
                 dataType: 'json',
                 contentType:"application/json",
