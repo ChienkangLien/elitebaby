@@ -40,7 +40,7 @@ pageContext.setAttribute("list", list);
 </head>
 
 <body>
-     <div id="nav">
+      <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold ">
             <div class="container-fluid" >
                 <img src="<%=request.getContextPath()%>/news/images/logo.jpg">
@@ -62,7 +62,6 @@ pageContext.setAttribute("list", list);
                                
                             </ul>
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
-                       
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
@@ -89,17 +88,17 @@ pageContext.setAttribute("list", list);
                 <div id="logout">
                     <ul class="navbar-nav navbar-right display-none">
                         <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1"><svg
+                            style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-cart2" viewBox="0 0 16 16">
                                 <path
                                     d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                             </svg>
-                            <span class="badge badge-danger navbar-badge ;"></span>
+                            <span class="badge badge-danger navbar-badge ;" id="cartCount"></span>
                         </button>
                        <!-- ===================================鈴鐺==================================== -->
                        <button id="cart_btn"
-                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1"><svg
+                            style="border: 0px; margin-right: 10px; margin-top: 5px;" class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-bell" viewBox="0 0 16 16">
                                 <path
@@ -108,12 +107,12 @@ pageContext.setAttribute("list", list);
                             <span class="badge badge-danger navbar-badge emailBill;"></span>
                         </button>
                         <!-- Button trigger modal -->
-                        <button type="button" id="logoutButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" id="logoutButton" class="btn btn-primary checkIfIn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             登出
                         </button>
-                        <button id="registerButton" class="register_btn">註冊</button>
+                        <button id="registerButton" class="register_btn checkIfOut">註冊</button>
                         <!-- 登入按鈕 -->
-                        <button id="loginButton" class="login_btn">登入</button>
+                        <button id="loginButton" class="login_btn checkIfOut">登入</button>
                     </ul>
                 </div>
             </div>
@@ -242,6 +241,6 @@ pageContext.setAttribute("list", list);
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->
-    <script src="<%=request.getContextPath()%>/news/js/front_navbar.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
