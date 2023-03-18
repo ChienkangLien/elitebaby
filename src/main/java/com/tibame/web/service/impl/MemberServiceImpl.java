@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService{
 	public String register(MemberVO member) {
 		final String username = member.getUserName();
 		if (username == null || username.length() < 1 || username.length() > 20) {
-			return "使用者名稱不符合規則";
+			return "使用者名稱不合規則";
 		}
 		final String password = member.getPassword();
 		if (password == null || password.length() < 8 ) {
