@@ -82,7 +82,7 @@ pageContext.setAttribute("list", list);
                 </div>
                 <!-- ===============================================購物車============================================= -->
                 <div id="logout">
-                    <ul class="navbar-nav navbar-right display-none">
+                    <ul class="navbar-nav navbar-right ">
                         <button id="cart_btn"
                             style="border: 0px; margin-right: 10px;margin-top: 5px; " class="c1 checkIfIn"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
