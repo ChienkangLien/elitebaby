@@ -59,7 +59,7 @@ public class MealOrderServiceImpl implements MealOrderService {
 		int udm = modao.insert(mealOrder);
 		if (udm > 0) {
 			Jedis jedis = new Jedis("localhost", 6379);
-			Set<String> set = jedis.keys("user" + mealOrder.getUserId() + "*");
+			Set<String> set = jedis.keys("user" + mealOrder.getUserId() + ":*");
 			int times = 0;
 			for (String str : set) {
 				System.out.println(str);
