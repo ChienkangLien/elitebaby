@@ -25,8 +25,8 @@ pageContext.setAttribute("list", list);
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-    <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/official.css"/>
-     <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/front_navbar.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front_navbar.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_all.css"/>
    
     <!-- FontAwesom 連結 -->
