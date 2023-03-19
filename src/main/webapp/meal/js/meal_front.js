@@ -44,44 +44,31 @@ fetch(`/elitebaby/Meal?name=getall`)
         }
     });
 
-fetch("/elitebaby/Cart?name=getcart"
-    // , {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json;charset=UTF-8",
-    //         "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify(
-    //         {
-    //             userId: userId1,
-    //         }
-    //     ),
-    // }
-)
-    .then(resp => {
-        if (resp.status === 204) {
-            console.log("resp.status===" + resp.status);
-        } else {
-            return resp.json();
-        }
-    })
-    .then((body) => {
-        try {
-            if (body != null) {
-                if (body.msg == "為已登入狀態") {
-                    console.log("已登入並取得購物車內數量");
-                    $("span#cartCount").html(body.cartcount);
-                } else {
-                    console.log("尚未登入");
-                }
-                // console.log("ttttt");
-                // $("ul.meal_block").html(li_str);
-            }
+// fetch("/elitebaby/Cart?name=getcart")
+//     .then(resp => {
+//         if (resp.status === 204) {
+//             console.log("resp.status===" + resp.status);
+//         } else {
+//             return resp.json();
+//         }
+//     })
+//     .then((body) => {
+//         try {
+//             if (body != null) {
+//                 if (body.msg == "為已登入狀態") {
+//                     console.log("已登入並取得購物車內數量");
+//                     $("span#cartCount").html(body.cartcount);
+//                 } else {
+//                     console.log("尚未登入");
+//                 }
+//                 // console.log("ttttt");
+//                 // $("ul.meal_block").html(li_str);
+//             }
 
-        } catch (error) {
-            console.log(error + "，資料庫沒照片故後端沒回傳");
-        }
-    });
+//         } catch (error) {
+//             console.log(error + "，資料庫沒照片故後端沒回傳");
+//         }
+//     });
 
 // =============== 宣告 ===============
 let data_id = "";

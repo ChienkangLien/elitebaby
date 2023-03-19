@@ -234,45 +234,52 @@ $("button#btn_toupdate").on("click", function () {
     address = document.querySelector(".update_address").value;
     status = document.querySelector(".update_order_status").value;
     console.log(address);
+    let check = 0;
+    if (address == null || address == "") {
+        check += 1;
+        alert("請輸入地址");
+    }
     // console.log("rrrrrr");
-    fetch("/elitebaby/MealOrder?name=updateMealWithAddress", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(
-            {
-                mealOrderId: data_id,
-                orderStatus: status,
-                address: address
-            }
-        ),
-    })
-        .then((resp) => {
-            if (resp.status === 204) {
-                console.log("resp.status===" + resp.status);
-            } else {
-                return resp.json();
-            }
+    if (check == 0) {
+        fetch("/elitebaby/MealOrder?name=updateMealWithAddress", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(
+                {
+                    mealOrderId: data_id,
+                    orderStatus: status,
+                    address: address
+                }
+            ),
         })
-        .then((body) => {
+            .then((resp) => {
+                if (resp.status === 204) {
+                    console.log("resp.status===" + resp.status);
+                } else {
+                    return resp.json();
+                }
+            })
+            .then((body) => {
 
-            try {
-                if (body != null) {
-                    if (body.msg == "success") {
-                        alert("修改成功!");
-                        data_id = null;
-                        location.reload();
-                    } else {
-                        console.log("修改失敗!");
-                        alert("修改失敗!");
+                try {
+                    if (body != null) {
+                        if (body.msg == "success") {
+                            alert("修改成功!");
+                            data_id = null;
+                            location.reload();
+                        } else {
+                            console.log("修改失敗!");
+                            alert("修改失敗!");
+                        }
                     }
+
+                } catch (error) {
+                    console.log(error + "，資料庫沒照片故後端沒回傳");
                 }
 
-            } catch (error) {
-                console.log(error + "，資料庫沒照片故後端沒回傳");
-            }
-
-        });
+            });
+    }
 })
