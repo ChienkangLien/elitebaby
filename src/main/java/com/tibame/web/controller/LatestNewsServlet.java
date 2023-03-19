@@ -346,7 +346,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse res) throws Servle
 			LatestNewsDAO count = new LatestNewsDAO();
 			List<LatestNewsVO> sum = count.findByWords(name);
 //			System.out.println(sum.toString());
-			
+		
 			req.setAttribute("Msgs", sum);
 			RequestDispatcher successView = req.getRequestDispatcher("/news/searchOne.jsp");
 			successView.forward(req, res);

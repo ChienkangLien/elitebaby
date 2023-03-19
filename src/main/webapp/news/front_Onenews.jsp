@@ -29,8 +29,8 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-     <link rel="stylesheet" href="/elitebaby/css/official.css"/>
-     <link rel="stylesheet" href="/elitebaby/css/front_navbar.css"/>
+     <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/official.css"/>
+     <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/front_navbar.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_One.css">
    
      <!-- FontAwesom 連結 -->
@@ -236,7 +236,7 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
 <script src="<%=request.getContextPath()%>/news/vendors/jquery/jquery-3.6.3.min.js"></script>
   <!-- jquery ui連結-->
     <script src="<%=request.getContextPath()%>/news/js/jquery-ui.js"></script>
-            <script src="<%=request.getContextPath()%>/js/front_navbar.js"></script>
+    <script src="<%=request.getContextPath()%>/js/front_navbar.js"></script>
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
