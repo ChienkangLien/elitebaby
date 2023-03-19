@@ -94,7 +94,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public Set<String> findByPrimaryKey(Integer id) {
 		Jedis jedis = new Jedis("localhost", 6379);
-		Set<String> set = jedis.keys("user" + id + "*");
+		Set<String> set = jedis.keys("user" + id + ":*");
 		jedis.close();
 		return set != null ? set : null;
 	}
