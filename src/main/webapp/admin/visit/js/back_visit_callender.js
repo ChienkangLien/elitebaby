@@ -56,12 +56,25 @@ $(document).ready(function() {
       .then(data => {
         let events = [];
         data.forEach(event => {
+
+          if(event.contactSatus == 0){
           events.push({
             id: event.visitId,
             title: event.userName,
             start: event.strVisitTime,
-            end: event.strVisitTime
+            end: event.strVisitTime,
+            color: 'red'
           });
+        }else{
+          events.push({
+            id: event.visitId,
+            title: event.userName,
+            start: event.strVisitTime,
+            end: event.strVisitTime,
+            color: 'green'
+          });
+
+        }
         });
         $('#calendar').fullCalendar('addEventSource', events); // 將事件資料加入 events 陣列
       });
