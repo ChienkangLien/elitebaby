@@ -103,7 +103,7 @@ public class CartDAOImpl implements CartDAO {
 	public List<MealVO> getAll(Integer id) {
 		StringBuilder sb = new StringBuilder("SELECT MEAL_ID, MEAL_NAME, MEAL_PRICE FROM MEAL WHERE MEAL_ID = ");
 		Jedis jedis = new Jedis("localhost", 6379);
-		Set<String> data = jedis.keys("user" + id + "*");
+		Set<String> data = jedis.keys("user" + id + ":*");
 		Iterator<String> iterator = data.iterator();
 		ArrayList<String> list = new ArrayList<String>();
 		HashMap<String, String> hm = new HashMap<String, String>();
