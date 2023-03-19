@@ -25,8 +25,8 @@ pageContext.setAttribute("list", list);
     <!-- <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css"> -->
 
     <!-- css連結 -->
-     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/official.css"/>
-     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front_navbar.css"/>
+     <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/official.css"/>
+     <link rel="stylesheet" href="/elitebaby/src/main/webapp/css/front_navbar.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/news/css/front_all.css"/>
    
     <!-- FontAwesom 連結 -->
@@ -212,7 +212,7 @@ pageContext.setAttribute("list", list);
     <!-- bootstrap引用cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
-        </script>
+    </script>
     <!-- 下載bootstrap引用 -->
     <!-- <script src="./vendors/bootstrap/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
     ></script> -->
