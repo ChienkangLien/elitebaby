@@ -133,49 +133,63 @@ $(".btn_toupdate").on("click", function (event) {
     upmealprice = Number($("input.update_meal_price").val());
     upmealmealinfo = $("input.update_meal_info").val();
     upmealstatus = Number($("select.update_meal_status").val());
-    console.log(upmealmealinfo);
-    fetch("/elitebaby/Meal?name=update", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(
-            {
-                mealId: data_id,
-                mealName: upmealname,
-                base64: upmealpic,
-                mealPrice: upmealprice,
-                mealInfo: upmealmealinfo,
-                mealStatus: upmealstatus
-            }
-        ),
-    })
-        .then((resp) => {
-            if (resp.status === 204) {
-                console.log("resp.status===" + resp.status);
-            } else {
-                return resp.json();
-            }
-        })
-        .then((body) => {
-            try {
-                if (body.msg === "success") {
-                    // let str = "";
-                    alert("修改成功!!!!");
-                    data_id = "";
-                    location.reload();
-                } else {
-                    alert("修改失敗!!!!");
-                    // console.log("新增失敗");
-                    // location.reload();
+    let check = 0;
+    if (upmealname == null || upmealname == "") {
+        check += 1;
+        alert("請輸入商品名稱");
+    }
+    if (upmealprice == null || upmealprice == "" || upmealprice == 0) {
+        check += 1;
+        alert("請輸入商品價格");
+    }
+    if (upmealmealinfo == null || upmealmealinfo == "") {
+        check += 1;
+        alert("請輸入商品介紹");
+    }
+    if (check == 0) {
+        fetch("/elitebaby/Meal?name=update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(
+                {
+                    mealId: data_id,
+                    mealName: upmealname,
+                    base64: upmealpic,
+                    mealPrice: upmealprice,
+                    mealInfo: upmealmealinfo,
+                    mealStatus: upmealstatus
                 }
-            } catch (error) {
-                alert("出現錯誤!!!!");
-                location.reload();
-                console.log(error + "，修改失敗");
-            }
-        });
+            ),
+        })
+            .then((resp) => {
+                if (resp.status === 204) {
+                    console.log("resp.status===" + resp.status);
+                } else {
+                    return resp.json();
+                }
+            })
+            .then((body) => {
+                try {
+                    if (body.msg === "success") {
+                        // let str = "";
+                        alert("修改成功!!!!");
+                        data_id = "";
+                        location.reload();
+                    } else {
+                        alert("修改失敗!!!!");
+                        // console.log("新增失敗");
+                        // location.reload();
+                    }
+                } catch (error) {
+                    alert("出現錯誤!!!!");
+                    location.reload();
+                    console.log(error + "，修改失敗");
+                }
+            });
+    }
 })
 
 // 修改商品互動視窗-商品照片change事件
@@ -284,46 +298,65 @@ $("button.btn_insert").on("click", function () {
     // console.log(mealinfo);
     let mealstatus = $("select.mealstatus").val();
     // console.log(mealstatus);
-    fetch("/elitebaby/Meal?name=insert", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(
-            {
-                mealName: mealname,
-                base64: mealpic,
-                mealPrice: mealprice,
-                mealInfo: mealinfo,
-                mealStatus: mealstatus
-            }
-        ),
-    })
-        .then((resp) => {
-            if (resp.status === 204) {
-                console.log("resp.status===" + resp.status);
-            } else {
-                return resp.json();
-            }
-        })
-        .then((body) => {
-            try {
-                if (body.msg === "success") {
-                    // let str = "";
-                    alert("新增成功!!!!");
-                    location.reload();
-                } else {
-                    alert("新增失敗!!!!");
-                    console.log("新增失敗");
-                    location.reload();
+    let check = 0;
+    if (mealname == null || mealname == "") {
+        check += 1;
+        alert("請輸入商品名稱");
+    }
+    if (mealpic == null || mealpic == "") {
+        check += 1;
+        alert("請選擇照片");
+    }
+    if (mealprice == null || mealprice == "") {
+        check += 1;
+        alert("請輸入價格");
+    }
+    if (mealinfo == null || mealinfo == "") {
+        check += 1;
+        alert("請輸入商品介紹");
+    }
+    if (check == 0) {
+        fetch("/elitebaby/Meal?name=insert", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(
+                {
+                    mealName: mealname,
+                    base64: mealpic,
+                    mealPrice: mealprice,
+                    mealInfo: mealinfo,
+                    mealStatus: mealstatus
                 }
-            } catch (error) {
-                alert("出現錯誤!!!!");
-                location.reload();
-                console.log(error + "，新增失敗");
-            }
-        });
+            ),
+        })
+            .then((resp) => {
+                if (resp.status === 204) {
+                    console.log("resp.status===" + resp.status);
+                } else {
+                    return resp.json();
+                }
+            })
+            .then((body) => {
+                try {
+                    if (body.msg === "success") {
+                        // let str = "";
+                        alert("新增成功!!!!");
+                        location.reload();
+                    } else {
+                        alert("新增失敗!!!!");
+                        console.log("新增失敗");
+                        location.reload();
+                    }
+                } catch (error) {
+                    alert("出現錯誤!!!!");
+                    location.reload();
+                    console.log(error + "，新增失敗");
+                }
+            });
+    }
 })
 
 $("div.btn_create").on("click", "button.mealselect", function () {

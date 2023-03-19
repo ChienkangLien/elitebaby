@@ -43,10 +43,11 @@ fetch("/elitebaby/Cart?name=getall"
                     <p style="font-size: 26px; font-weight: bold; margin-top: 10px; margin-left: 35px;">您的購物車還沒有任何商品</p>
                 </div>
                 <div style="margin: 0 auto; width: 250px; margin-left: 680px; margin-top: 20px;">
-                    <button class="btn">返回首頁</button>
-                    <button class="btn" style="margin-left: 20px">前往選購</button>
+                    <a href="/elitebaby/member/homepage.html"><button class="btn">返回首頁</button></a>
+                    <a href="/elitebaby/meal/meal_front.html"><button class="btn" style="margin-left: 20px">前往選購</button></a>
                 </div>
-            </div>`
+            </div>
+            <div style="height: 50px;"></div>`
             $("div.cart_table_block").html(cart);
             $("h3.title").css("display", "none");
         } else {
@@ -349,4 +350,3 @@ $("div#checkout").on("click", "button#btn_tocheckout", function () {
             });
     }
 })
-
