@@ -63,10 +63,10 @@ pageContext.setAttribute("list", list);
                             </ul>
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/about.html">關於我們</a></li>
                         <li class="nav-item"><a class="nav-link" href="/elitebaby/room/introduce.html">房型介紹</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/elitebaby/mea/meal_front.html">月子膳食</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/elitebaby/meal/meal_front.html">月子膳食</a></li>
                         <li class="nav-item"><a class="nav-link" href="../forum/home">討論區</a></li>
                         <!-- ====================================會員中心================================================= -->
-                        <li class="nav-item dropdown member">
+                        <li class="nav-item dropdown member checkIfIn">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 會員中心
