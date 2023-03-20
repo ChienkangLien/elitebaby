@@ -458,16 +458,16 @@ button#visitsubmit{
     padding: 0;
   }
   
-  .modal {
-    position: absolute;	
+  .modalnotice {
+    position: fixed;	
     z-index: 10;		
     display: none;
     width: 100%;
-    height: 1280px;
+    height: 100vh;
     background: #6a6a6aa6;			
   }
   
-  .dialog {		
+  .dialognotice {		
     position: absolute;
     z-index: 11;
     /* 將對話框水平置中。 */
@@ -484,7 +484,7 @@ button#visitsubmit{
     position: fixed;
   }
   
-  .title {
+  .titlenotice {
     text-align: center;
     padding: 8px;
     font-size: 20px;
@@ -496,7 +496,7 @@ button#visitsubmit{
     box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 15%);
   }
   
-  .content {
+  .contentnotice {
     padding: 4px 8px;
   }
   

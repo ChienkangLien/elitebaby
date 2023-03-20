@@ -453,23 +453,23 @@ setTimeout(function() {
 
 
 function getCurrentPhoto(){
-	$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
-	$(".dialog").css("display", "block"); // 顯示dialog。
+	$(".modalimg").css("display", "block"); // 顯示modal，遮住畫面背景。
+	$(".dialogimg").css("display", "block"); // 顯示dialog。
 	
-	$(".dialog").animate({			   
+	$(".dialogimg").animate({			   
 	  opacity: '1',
 	  top: '50px' // 決定對話框要滑到哪個位置停止。		   
 	}, 550);
   };
   
-  $(".modal").click( function () {
-	$(".dialog").animate({			   
+  $(".modalimg").click( function () {
+	$(".dialogimg").animate({			   
 	  opacity: '0',
 	  top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
 	}, 350, function () {
 	  // 此區塊為callback function，會在動畫結束時被呼叫。
-	  $(".modal").css("display", "none"); // 隱藏modal。
-	  $(".dialog").css("display", "none"); // 隱藏dialog。
+	  $(".modalimg").css("display", "none"); // 隱藏modal。
+	  $(".dialogimg").css("display", "none"); // 隱藏dialog。
 	});
   });	
 
