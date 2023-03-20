@@ -118,6 +118,12 @@ pageContext.setAttribute("list", request.getAttribute("Msgs1"));
             </div>
         </nav>
     </div>
+    <div id="popupWrapper">
+            <p>信件通知</p>
+          <hr style="margin-top: 5px;">
+         <div id="popupContent" style="align-items: center;">     
+         </div>
+        </div>
     <div id="blank_area">
         <!-- 此處留空 -->
     </div>
