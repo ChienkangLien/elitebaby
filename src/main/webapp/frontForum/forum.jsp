@@ -8,12 +8,10 @@
     <meta charset="UTF-8"/>
     <title>菁英產後護理之家</title>
 <%--團隊引入開始--%>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/official.css" />
     <link rel="stylesheet" href="../css/front_navbar.css">
-
 <%--團隊引入結束--%>
     <link
             rel="stylesheet"
@@ -124,13 +122,6 @@
     <link type="text/css" rel="stylesheet" href="../frontForum/css/forum.css"/>
 </head>
 <body>
-    <div id="popupWrapper">
-        <p>信件通知</p>
-      <hr style="margin-top: 5px;">
-     <div id="popupContent" style="align-items: center;">
-       
-     </div>
-    </div>
 <div id="nav">
     <nav class="navbar navbar-expand-lg navbar-light c1 fw-bold  ">
         <div class="container-fluid" >
@@ -393,11 +384,14 @@
 </div>
 </body>
 <%--團隊引入開始--%>
+
 <script src="../vendors/jquery/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
 </script>
 <script src="../js/front_navbar.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <%--團隊引入結束--%>
 
 <script src="../frontForum/js/forum.js"></script>
