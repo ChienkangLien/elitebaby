@@ -214,8 +214,8 @@ NewsSortVO newsSortVO = (NewsSortVO) request.getAttribute("newsSortVO");
           </div>
           <div class="modal-body">點擊下面的按鈕以登出</div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" > 關閉 </button>
-            <button type="button" class="btn btn-primary btn_logout"> 登出</button>
+            <button type="button" class="btn" data-bs-dismiss="modal" > 關閉 </button>
+            <button type="button" class="btn btn_logout"> 登出</button>
           </div>
         </div>
       </div>
