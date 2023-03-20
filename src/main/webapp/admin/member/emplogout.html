@@ -15,7 +15,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("Logout", {
+      fetch("emplogout", {
         headers: {
           "Content-type": "application/json",
         },
@@ -23,7 +23,7 @@
         .then((resp) => {
           setTimeout(() => {
             console.log("Delayed for 3 second.");
-            location.href = "/elitebaby/admin/member/emplogin.html";
+            location.href = resp.url;
           }, 3000);
         })
         .catch((error) => {
