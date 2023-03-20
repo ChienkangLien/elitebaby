@@ -28,21 +28,21 @@
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
       }
 
-      .modal-header {
+      /* .modal-header {
         background-color: #f8d7da;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-      }
+      } */
 
       .modal-title {
         font-weight: bold;
       }
 
-      .modal-footer {
+      /* .modal-footer {
         background-color: #f8d7da;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-      }
+      } */
 
       .btn_save {
         background-color: #008cba;
@@ -448,7 +448,7 @@
 
         // 使用AJAX傳送表單數據
         $.ajax({
-          url: `http://localhost:8080/elitebaby/admin/member/find?id=${id}`,
+          url: `/elitebaby/admin/member/find?id=${id}`,
           method: "GET",
           dataType: "json",
           contentType: "application/json",
@@ -487,7 +487,7 @@
         }
         if (check) {
           $.ajax({
-            url: `http://localhost:8080/elitebaby/admin/member/update?id=${id}`,
+            url: `/elitebaby/admin/member/update?id=${id}`,
             method: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -502,7 +502,7 @@
               if (response.message == "修改成功") {
                 $(location).attr(
                   "href",
-                  "http://localhost:8080/elitebaby/admin/member/management.html"
+                  "/elitebaby/admin/member/management.html"
                 );
               }
             },
@@ -514,7 +514,7 @@
       }
       function listAll() {
         $.ajax({
-          url: `http://localhost:8080/elitebaby/admin/member/listall`,
+          url: `/elitebaby/admin/member/listall`,
           method: "GET",
           dataType: "json",
           success: function (data) {
@@ -561,7 +561,7 @@
     // backButton.addEventListener("click", function () {
     //   // 在這裡編寫按鈕點擊後的處理邏輯，比如返回上一頁
     //   window.location.href =
-    //     "http://localhost:8080/elitebaby/member/background_nav.html";
+    //     "/elitebaby/member/background_nav.html";
     // });
   </script>
 </html>

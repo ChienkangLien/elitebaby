@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/employee/emplogout")
+@WebServlet("/admin/member/emplogout")
 public class EmployeeLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,8 @@ public class EmployeeLogoutServlet extends HttpServlet {
 		try {
 			req.getSession().invalidate();
 			resp.sendRedirect(req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
-					+ req.getContextPath() + "/elitebaby/admin/member/emplogin.html");
+					+ req.getContextPath()  + "/admin/member/emplogin.html");
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

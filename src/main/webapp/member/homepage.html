@@ -391,32 +391,42 @@
       var confirmpassword =  $('#confirmpassword').val();
 
       var error = true;
-      if (password != confirmpassword ){
-        alert("密碼與確認密碼不一致，請重新輸入。")
-        error = false;
-      }
-      if(username == null || username == ""){
-        alert("名字不可為空白!")
-        error = false;
-      }
-      if (address == null || address == ""){
-        alert("地址不可為空白!")
-        error = false;
-      }
-      if(phoneNumber == null || phoneNumber == ""){
-        alert("手機不可為空白!")
-        error = false;
-      }
-      if(password == null || password == "" || confirmpassword == null || confirmpassword == "") {
-        alert("密碼或確認密碼不得為空!")
-        error = false; 
-      }
+        var remind = [];
+        if (password != confirmpassword) {
+          remind.push("密碼與確認密碼不一致，請重新輸入。");
+          error = false;
+        }
+        if (username == null || username == "") {
+          remind.push("名字不可為空白!");
+          error = false;
+        }
+        if (address == null || address == "") {
+          remind.push("地址不可為空白!");
+          error = false;
+        }
+        if (phoneNumber == null || phoneNumber == "") {
+          remind.push("手機不可為空白!");
+          error = false;
+        }
+        if (
+          password == null ||
+          password == "" ||
+          confirmpassword == null ||
+          confirmpassword == ""
+        ) {
+          remind.push("密碼或確認密碼不得為空!");
+          error = false;
+        }
+        if (remind.length != 0) {
+          alert(remind);
+          remind = [];
+        }
 
-      var check = true;
+      var error = true;
       if (password == "") {
           alert("請輸入密碼");
           $("input#password").focus();
-          return (check = false);
+          return (error = false);
         } else {
           var passwordRegxp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
           if (passwordRegxp.test(password) != true) {
@@ -424,12 +434,12 @@
             alert("密碼必須包含至少一個字母和一個數字，長度至少為8位");
             $("input#password").focus();
             $("input#password").select();
-            return (check = false);
+            return (error = false);
           }
         }
 
         // 使用AJAX傳送表單數據
-        if(check){
+        if(error){
 
             $.ajax({
               url: "/elitebaby/member/change",
@@ -501,8 +511,8 @@ function checkLogin(){
         }
     }
   });  
-  }
-  checkLogin();
+}
+checkLogin();
 
 
       $("button.btn-primary.btn_save").on("click", function(){
