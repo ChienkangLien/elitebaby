@@ -118,6 +118,12 @@ pageContext.setAttribute("list", list);
             </div>
         </nav>
     </div>
+    <div id="popupWrapper">
+            <p>信件通知</p>
+          <hr style="margin-top: 5px;">
+         <div id="popupContent" style="align-items: center;">           
+         </div>
+        </div>    
     <div id="blank_area">
         <!-- 此處留空 -->
     </div>
@@ -166,7 +172,6 @@ pageContext.setAttribute("list", list);
          </c:if> 
       </c:forEach>
      </div> 
-
 <!--     留言輸入區塊 -->
     <div class="BH-1box GN-1box1" id="comment">
     <div class="comment-input">
