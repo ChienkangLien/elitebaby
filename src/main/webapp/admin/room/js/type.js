@@ -321,10 +321,10 @@ $(document).on("click", ".editPhotoBtn", function () {
     .then((body) => {
       try {
         if (body.length != null) {
-          $(`ul[data-id='ori_${body[0].roomTypeId}'`).empty();
+          $(`ul[data-id='ori_${body[0].roomTypeId}']`).empty();
           for (let i = 0; i < body.length; i++) {
             let li_str = `<li><img src="data:image/*;base64,${body[i].roomPhoto}" class='preview fromDatabase' roomPhotoId="${body[i].roomPhotoId}"></li>`;
-            $(`ul[data-id='ori_${body[i].roomTypeId}'`).append(li_str);
+            $(`ul[data-id='ori_${body[i].roomTypeId}']`).append(li_str);
           }
         }
       } catch (error) {

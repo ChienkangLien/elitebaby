@@ -65,7 +65,7 @@ public class RoomDAOImpl implements RoomDAO {
 		} catch (SQLException e) {
 			if (con != null) {
 				try {
-					con.rollback(); // 若有利外即rollback
+					con.rollback(); // 若有例外即rollback
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -175,7 +175,7 @@ public class RoomDAOImpl implements RoomDAO {
 		}
 
 		// 利用stream處理串流，篩選掉衝突房間id
-		allRooms = allRooms.stream().filter(room -> !unavaSet.contains(room)).collect(Collectors.toList());
+//		allRooms = allRooms.stream().filter(room -> !unavaSet.contains(room)).collect(Collectors.toList());
 		return allRooms;
 	}
 

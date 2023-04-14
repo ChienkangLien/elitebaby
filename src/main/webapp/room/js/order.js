@@ -106,12 +106,12 @@ $(document).on("click", "button.editBtn", function () {
         if (body != null) {
           if (body.orderStatus == "完成單") {
             alert("此訂單已完成、無法編輯");
-            $(`form[data-id='${orderId}'`)
+            $(`form[data-id='${orderId}']`)
               .closest("div.modal-content")
               .find("button.confirmEdit")
               .remove();
           }
-          $(`form[data-id='${orderId}'`).empty();
+          $(`form[data-id='${orderId}']`).empty();
           let html = `<div class="mb-3 orderStatus">
             <label for="orderStartDate" class="col-form-label">入住日</label>
             <input type="date" data-date='${formatStartDate(
@@ -153,9 +153,9 @@ $(document).on("click", "button.editBtn", function () {
             body.orderRemark == undefined ? "" : body.orderRemark
           }</textarea>
         </div>`;
-          $(`form[data-id='${orderId}'`).append(html);
+          $(`form[data-id='${orderId}']`).append(html);
 
-          $(`form[data-id='${orderId}'`)
+          $(`form[data-id='${orderId}']`)
             .closest("div.modal-content")
             .find(".orderPrice")
             .text(`時段金額為NT$${body.orderPrice}`);
